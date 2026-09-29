@@ -8,7 +8,7 @@ Uma empresa interessada em mobilidade elétrica precisa entender como o mercado 
 
 **Pergunta principal:** como evoluiu a adoção de veículos elétricos no Brasil e quais estados e municípios apresentam maior potencial de crescimento?
 
-As perguntas analíticas que orientarão o projeto estão em [docs/business_questions.md](docs/business_questions.md). As fontes inicialmente selecionadas e seu vínculo com cada pergunta estão em [docs/data_sources.md](docs/data_sources.md).
+As perguntas analíticas que orientarão o projeto estão em [docs/business_questions.md](docs/business_questions.md). As fontes inicialmente selecionadas e seu vínculo com cada pergunta estão em [docs/data_sources.md](docs/data_sources.md). As definições das métricas estão em [docs/metrics.md](docs/metrics.md).
 
 ## Etapa atual
 
