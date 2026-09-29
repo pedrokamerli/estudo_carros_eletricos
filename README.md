@@ -1,27 +1,41 @@
-# Projeto Portfólio
+# Brazil Electric Vehicles Data Platform
 
-Este é o repositório do meu projeto de dados para portfólio. Nesta primeira fase, ele guarda apenas a estrutura organizada do projeto.
+Projeto de portfólio sobre o mercado de veículos elétricos no Brasil. Vamos construir uma plataforma de dados passo a passo, aprendendo cada ferramenta somente quando ela resolver um problema real.
 
-## Estrutura
+## Problema de negócio
+
+Uma empresa interessada em mobilidade elétrica precisa entender como o mercado brasileiro está evoluindo, onde a adoção é maior e quais regiões podem representar oportunidades futuras.
+
+**Pergunta principal:** como evoluiu a adoção de veículos elétricos no Brasil e quais estados e municípios apresentam maior potencial de crescimento?
+
+## Etapa atual
+
+**Fase 1 — Setup profissional.** O ambiente Python, o Git, o GitHub e a estrutura inicial estão prontos. Ainda não usamos banco de dados, Spark, Airflow ou outras ferramentas: elas entrarão nas fases adequadas.
+
+## Estrutura inicial
 
 ```text
 Projeto Portfólio/
 ├── data/
-│   ├── raw/          # Dados originais, sem alterações
-│   └── processed/    # Dados preparados
-├── docs/             # Documentação e anotações
+│   ├── bronze/       # Dados recebidos, preservados como chegaram
+│   ├── silver/       # Dados limpos e padronizados (futuro)
+│   └── gold/         # Dados prontos para análise (futuro)
+├── dashboard/        # Materiais do dashboard (futuro)
+├── docs/             # Documentação e decisões do projeto
 ├── notebooks/        # Explorações e estudos
-├── src/              # Código Python
-├── tests/            # Testes do projeto
-├── .gitignore
-└── requirements.txt
+├── src/
+│   ├── ingestion/    # Coleta de dados (futuro)
+│   ├── transformation/# Transformações (futuro)
+│   ├── quality/      # Validações de qualidade (futuro)
+│   └── utils/        # Funções reutilizáveis
+├── tests/            # Testes automatizados
+├── .gitignore        # Arquivos que o Git não deve enviar
+└── requirements.txt  # Bibliotecas Python do projeto
 ```
 
-## PyCharm
+## Como abrir no PyCharm
 
-Abra esta pasta como projeto e use o interpretador localizado em `.venv`.
-
-## Ambiente virtual
+Abra a pasta `D:\Projeto Portfólio` e escolha o interpretador localizado em `.venv`.
 
 No terminal do PyCharm, ative o ambiente com:
 
@@ -29,10 +43,10 @@ No terminal do PyCharm, ative o ambiente com:
 .\.venv\Scripts\Activate.ps1
 ```
 
-As bibliotecas serão incluídas em `requirements.txt` quando forem necessárias.
+As bibliotecas serão registradas em `requirements.txt` quando começarmos a usá-las.
 
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.
-- Manter os dados recebidos em `data/raw` sem alteração manual.
-- Fazer commits pequenos e descritivos.
+- Preservar os dados originais na camada `data/bronze`.
+- Fazer commits pequenos, com mensagens que expliquem a mudança.
