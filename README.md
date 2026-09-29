@@ -8,6 +8,8 @@ Uma empresa interessada em mobilidade elétrica precisa entender como o mercado 
 
 **Pergunta principal:** como evoluiu a adoção de veículos elétricos no Brasil e quais estados e municípios apresentam maior potencial de crescimento?
 
+As perguntas analíticas que orientarão o projeto estão em [docs/business_questions.md](docs/business_questions.md).
+
 ## Etapa atual
 
 **Fase 1 — Setup profissional.** O ambiente Python, o Git, o GitHub e a estrutura inicial estão prontos. Ainda não usamos banco de dados, Spark, Airflow ou outras ferramentas: elas entrarão nas fases adequadas.
