@@ -1,0 +1,26 @@
+# Ambiente Python e configurações locais
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Configurações do PyCharm/IDE
+.idea/
+.vscode/
+
+# Senhas e configurações que não podem ir ao GitHub
+.env
+.env.*
+!.env.example
+
+# Dados locais
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Arquivos do Windows/macOS
+Thumbs.db
+.DS_Store
