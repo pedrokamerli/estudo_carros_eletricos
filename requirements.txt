@@ -1,1 +1,5 @@
-# As dependências serão incluídas conforme as próximas etapas do projeto.
+
+requests
+pandas
+openpyxl
+

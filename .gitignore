@@ -24,3 +24,12 @@ data/processed/*
 # Arquivos do Windows/macOS
 Thumbs.db
 .DS_Store
+
+data/bronze/*
+!data/bronze/.gitkeep
+
+data/silver/*
+!data/silver/.gitkeep
+
+data/gold/*
+!data/gold/.gitkeep
