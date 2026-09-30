@@ -114,6 +114,17 @@ Depois de criar as tabelas `silver` no pgAdmin, execute:
 
 O carregador evita duplicidade: se uma tabela já estiver preenchida, ele não insere novamente e apenas valida a quantidade de linhas e veículos.
 
+## Atualizar as tabelas Gold no PostgreSQL
+
+Eu carrego os dados de mercado fornecidos e reconstruo as tabelas analíticas prontas para o Power BI com os comandos abaixo:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.database.load_market_data_to_postgres
+.\.venv\Scripts\python.exe -m src.database.build_gold_tables
+```
+
+As tabelas Gold são derivadas da Silver. Por isso o segundo comando as recria por completo a cada atualização, sem alterar os dados brutos ou tratados. Os dados de marcas, modelos e emplacamentos fornecidos pelo usuário continuam marcados como origem não confirmada oficialmente.
+
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.
