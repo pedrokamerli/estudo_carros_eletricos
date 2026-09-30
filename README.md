@@ -16,6 +16,7 @@ Uma empresa que avalia expandir sua atuação em mobilidade elétrica precisa en
 - Calculo Pearson e Spearman entre indicadores municipais e adoção de eletrificados; trato os coeficientes como associação descritiva, não causal.
 - Carrego a Silver no PostgreSQL e gero tabelas Gold para estado, município, categoria, capital/interior, evolução, penetração, correlação socioeconômica e oportunidade preliminar.
 - Extraio dos informativos mensais públicos da FENABRAVE os emplacamentos de híbridos e elétricos e os rankings mensais de fabricantes; preservo a fonte e o método de extração em cada registro.
+- Comparo quatro métodos de previsão em um backtest temporal, deixando sete competências de fora do treino e publicando métricas/erros para avaliação antes de qualquer projeção futura.
 - Mantenho a frota SENATRAN (estoque em uma data) separada dos emplacamentos (fluxo durante um período).
 
 ## Recorte e limites atuais
@@ -67,7 +68,7 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m src.run_project
 ```
 
-O comando baixa os meses publicados, registra os meses ainda indisponíveis, coleta os PDFs mensais públicos da FENABRAVE, recria Bronze/Silver/Gold no PostgreSQL e exporta os CSVs agregados. Os arquivos brutos e Parquet não são versionados; os resultados agregados pequenos ficam em `data/portfolio/` e podem ser recriados pela mesma execução. Janeiro/2024 tem extração visual transcrita e revisada por causa da codificação de caracteres do PDF, método explicitado nos dados. Os indicadores da FENABRAVE não são somados aos da ABVE: cada entidade publica conceitos/categorias próprios. O arquivo fornecido pelo usuário e Open Charge Map permanecem separados até sua origem/classificação ser validada.
+O comando baixa os meses publicados, registra os meses ainda indisponíveis, coleta os PDFs mensais públicos da FENABRAVE, recria Bronze/Silver/Gold no PostgreSQL, testa baselines de previsão e exporta os CSVs agregados. Os arquivos brutos e Parquet não são versionados; os resultados agregados pequenos ficam em `data/portfolio/` e podem ser recriados pela mesma execução. Janeiro/2024 tem extração visual transcrita e revisada por causa da codificação de caracteres do PDF, método explicitado nos dados. Os indicadores da FENABRAVE não são somados aos da ABVE: cada entidade publica conceitos/categorias próprios. O arquivo fornecido pelo usuário e Open Charge Map permanecem separados até sua origem/classificação ser validada.
 
 ## Power BI
 

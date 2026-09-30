@@ -24,6 +24,14 @@ EXPORTS = {
         SELECT * FROM gold.ranking_marcas_fenabrave_mensal
         ORDER BY ano_referencia, mes_referencia, categoria_fenabrave, posicao
     """,
+    "backtest_previsao_fenabrave.csv": """
+        SELECT * FROM gold.backtest_previsao_fenabrave
+        ORDER BY categoria_fenabrave, mae
+    """,
+    "backtest_detalhe_previsao_fenabrave.csv": """
+        SELECT * FROM gold.backtest_detalhe_previsao_fenabrave
+        ORDER BY categoria_fenabrave, data_referencia, metodo
+    """,
     "frota_por_estado.csv": """
         SELECT * FROM gold.frota_por_estado
         ORDER BY ano_referencia, mes_referencia, uf

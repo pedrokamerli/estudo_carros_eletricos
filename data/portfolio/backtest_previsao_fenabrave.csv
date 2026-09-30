@@ -1,0 +1,9 @@
+fonte,categoria_fenabrave,segmento_veiculos,metodo,meses_treino,inicio_treino,fim_treino,meses_teste,inicio_teste,fim_teste,mae,rmse,mape_percentual
+FENABRAVE,eletricos,autos_e_comerciais_leves,persistencia_ultimo_mes,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,2704.86,3307.97,14.80
+FENABRAVE,eletricos,autos_e_comerciais_leves,media_movel_3_meses,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,4817.90,5324.42,24.33
+FENABRAVE,eletricos,autos_e_comerciais_leves,tendencia_linear,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,10626.30,12053.02,49.30
+FENABRAVE,eletricos,autos_e_comerciais_leves,ingenuo_sazonal_12_meses,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,13394.29,14288.88,67.26
+FENABRAVE,hibridos,autos_e_comerciais_leves,persistencia_ultimo_mes,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,2533.43,3426.68,8.52
+FENABRAVE,hibridos,autos_e_comerciais_leves,media_movel_3_meses,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,4775.24,5011.76,16.01
+FENABRAVE,hibridos,autos_e_comerciais_leves,tendencia_linear,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,6341.33,7206.55,19.94
+FENABRAVE,hibridos,autos_e_comerciais_leves,ingenuo_sazonal_12_meses,24,2024-02-01,2026-01-01,7,2026-02-01,2026-08-01,14602.00,15140.57,48.14

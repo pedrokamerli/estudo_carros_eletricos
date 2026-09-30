@@ -17,6 +17,7 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 | Indicadores econômicos municipais | Feito: PIB 2023, população do Censo 2022 e renda domiciliar per capita do Censo 2022 | `src/ingestion/download_ibge_municipal_indicators.py`, `data/portfolio/penetracao_municipal_ibge.csv` |
 | Oportunidade municipal preliminar | Feito como filtro exploratório de quartis de PIB, renda e adoção; não é previsão | `gold.oportunidade_municipal_preliminar` |
 | Correlação socioeconômica e adoção | Implementada com Pearson e Spearman para PIB, renda e população versus dois indicadores de adoção; é descritiva, não causal | `gold.correlacao_municipal_socioeconomia_adocao` |
+| Backtest de previsão | Feito: 4 baselines, 24 meses de treino e 7 meses de teste para cada categoria FENABRAVE; resultado carregado em Gold | `gold.backtest_previsao_fenabrave`, `gold.backtest_detalhe_previsao_fenabrave` |
 | Coleta de emplacamentos FENABRAVE | Feito para os boletins mensais públicos de autos e comerciais leves, jan/2024–ago/2026 | `src/ingestion/download_fenabrave_monthly_reports.py` |
 | Silver/Gold FENABRAVE | Feito: 64 linhas de categorias mensais e 960 registros de ranking mensal de fabricantes | `silver.fenabrave_*`, `gold.*_fenabrave_*` |
 | Atualização ponta a ponta | Feito e executado com SENATRAN, IBGE, FENABRAVE, PostgreSQL e exports agregados | `src/run_project.py` |
@@ -29,6 +30,7 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 - IBGE: 5.570 municípios; o cruzamento liga 4.874 localidades com código IBGE na competência SENATRAN mais recente.
 - SENATRAN: agosto e setembro/2026 ainda não aparecem como publicados na página consultada em 30/09/2026.
 - FENABRAVE: 32 competências disponíveis, janeiro/2024 a agosto/2026; 64 linhas de híbridos/elétricos e 960 linhas dos rankings mensais de fabricantes. Janeiro/2024 cobre somente autos, enquanto os relatórios de fevereiro/2024 em diante cobrem autos e comerciais leves. Janeiro foi transcrito visualmente e conferido no PDF, pois a codificação de fonte impede extração textual confiável; segmento e método ficam registrados por linha.
+- Backtest: usa fevereiro/2024–agosto/2026 para manter o segmento autos + comerciais leves; os primeiros 24 meses são treino e os 7 últimos formam um teste walk-forward de um passo à frente. A persistência do último mês teve menor MAPE nos dois grupos (14,80% em “elétricos”; 8,52% em “híbridos”), mas não trato isso como validação suficiente para uma projeção futura.
 - IBGE: PIB 2023, população do Censo 2022 e renda domiciliar per capita do Censo 2022; referências e conceitos ficam explícitos nos nomes das colunas.
 - FENABRAVE: a série responde evolução e crescimento apenas segundo as categorias amplas “híbridos” e “elétricos” do boletim, no recorte de autos e comerciais leves. Rankings de fabricantes são disponibilizados por categoria/mês; não equivalem automaticamente à taxonomia ABVE (BEV/HEV/PHEV).
 - ABVE: há relatórios oficiais mensais e um painel público. A série mensal estruturada ainda precisa ser coletada e conciliada, incluindo a mudança de classificação de 2025. Manter ABVE separada da FENABRAVE até haver reconciliação documentada.
@@ -43,7 +45,7 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 2. Obter acesso autenticado ao portal FENABRAVE para avaliar modelos mais vendidos e confirmar os campos/regras de exportação. Não compartilhar senha no chat; caso necessário, usar o login localmente.
 3. Coletar pontos de recarga com cobertura, data de atualização e licença documentadas. O coletor Open Charge Map requer uma chave API local.
 4. Interpretar correlações com gráficos/distribuições e testar sensibilidade do filtro de oportunidade; associação não prova causa.
-5. Avaliar previsão somente após uma série mensal escolhida e validada, com baseline e separação treino/teste.
+5. Aumentar o histórico comparável e testar o backtest em novas janelas antes de publicar previsão futura. As tabelas de erro estão disponíveis para visualização, mas ainda não há uma projeção futura validada.
 6. Construir o dashboard Power BI e o case visual do portfólio. Os exports agregados já estão em `data/portfolio/`.
 
 ## Regras para o fechamento

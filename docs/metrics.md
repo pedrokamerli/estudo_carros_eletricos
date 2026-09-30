@@ -25,6 +25,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 | PIB per capita aproximado | Produção econômica por habitante usando PIB municipal de 2023 e população do Censo 2022 | `PIB em mil R$ × 1.000 / população` | IBGE |
 | Renda domiciliar per capita média | Rendimento nominal mensal domiciliar per capita médio municipal | Valor publicado pelo IBGE, em reais, referência 2022 | IBGE/SIDRA tabela 10295, variável 13431 |
 | Correlação socioeconômica e adoção | Associação entre cada indicador municipal e uma medida de adoção na competência SENATRAN mais recente | Coeficientes Pearson e Spearman em municípios com ambas as variáveis disponíveis | IBGE + SENATRAN |
+| Erro de previsão no backtest | Diferença entre a previsão e os emplacamentos observados em meses não usados para ajustar a tendência | MAE, RMSE e MAPE reportados por método, categoria e janela de teste | FENABRAVE |
 
 ## Regras para responder às perguntas
 
@@ -60,6 +61,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 
 - O alvo será o total de emplacamentos eletrificados por mês ou por ano, conforme a granularidade da série disponível.
 - Qualquer previsão será separada da análise histórica e mostrará claramente seu período de treino, período de teste e métricas de erro.
+- O backtest atual é exploratório: 24 competências no treino e sete no teste, no modo walk-forward de um passo à frente. Ele compara persistência do último mês, média móvel de 3 meses, sazonal de 12 meses e tendência linear. O resultado do teste não é uma projeção futura e exige validação em novas janelas antes de uso operacional.
 
 ## Critério de qualidade inicial
 
