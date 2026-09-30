@@ -44,6 +44,20 @@ def build_senatran_gold(silver_dataframe: pd.DataFrame) -> dict[str, pd.DataFram
     }
 
 
+def build_fleet_evolution_gold(silver_dataframe: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Crio a evolução nacional e estadual da frota, sem confundir estoque com emplacamentos."""
+    national = silver_dataframe.groupby(
+        ["ano_referencia", "mes_referencia"], as_index=False
+    )["quantidade_veiculos"].sum().sort_values(["ano_referencia", "mes_referencia"])
+    national["crescimento_mensal_percentual"] = national["quantidade_veiculos"].pct_change() * 100
+
+    states = silver_dataframe.groupby(
+        ["ano_referencia", "mes_referencia", "uf"], as_index=False
+    )["quantidade_veiculos"].sum().sort_values(["uf", "ano_referencia", "mes_referencia"])
+    states["crescimento_mensal_percentual"] = states.groupby("uf")["quantidade_veiculos"].pct_change() * 100
+    return national, states
+
+
 def build_market_gold(market_dataframe: pd.DataFrame) -> pd.DataFrame:
     """Crio o ranking mensal de marcas e modelos do dataset fornecido pelo usuário."""
     return market_dataframe.groupby(
@@ -53,6 +67,29 @@ def build_market_gold(market_dataframe: pd.DataFrame) -> pd.DataFrame:
         ["ano_referencia", "mes_referencia", "quantidade_emplacada"],
         ascending=[True, True, False],
     )
+
+
+def build_market_evolution_gold(market_dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Agrego emplacamentos do dataset fornecido, mantendo a origem explícita na tabela Gold."""
+    return market_dataframe.groupby(
+        ["ano_referencia", "mes_referencia", "categoria_eletrificacao"], as_index=False
+    )["quantidade_emplacada"].sum().sort_values(
+        ["ano_referencia", "mes_referencia", "categoria_eletrificacao"]
+    )
+
+
+def build_opportunity_gold(penetration_dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Marco oportunidade preliminar: PIB per capita alto e penetração baixa na mesma base municipal."""
+    valid = penetration_dataframe.dropna(
+        subset=["pib_per_capita_aproximado", "veiculos_eletrificados_por_100_mil_habitantes"]
+    ).copy()
+    high_income_threshold = valid["pib_per_capita_aproximado"].quantile(0.75)
+    low_penetration_threshold = valid["veiculos_eletrificados_por_100_mil_habitantes"].quantile(0.25)
+    valid["oportunidade_preliminar"] = (
+        (valid["pib_per_capita_aproximado"] >= high_income_threshold)
+        & (valid["veiculos_eletrificados_por_100_mil_habitantes"] <= low_penetration_threshold)
+    )
+    return valid
 
 
 def build_municipal_penetration_gold(silver_dataframe: pd.DataFrame, ibge_dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -93,11 +130,20 @@ def main() -> None:
         save_gold_table(dataframe, table_name)
         print(f"Gold criada: {table_name} ({len(dataframe)} linhas)")
 
+    national_evolution, state_evolution = build_fleet_evolution_gold(senatran_dataframe)
+    save_gold_table(national_evolution, "evolucao_frota_nacional")
+    save_gold_table(state_evolution, "evolucao_frota_por_estado")
+    print(f"Gold criada: evolucao_frota_nacional ({len(national_evolution)} linhas)")
+    print(f"Gold criada: evolucao_frota_por_estado ({len(state_evolution)} linhas)")
+
     if MARKET_SILVER_PATH.exists():
         market_dataframe = pd.read_parquet(MARKET_SILVER_PATH)
         ranking = build_market_gold(market_dataframe)
         save_gold_table(ranking, "ranking_marcas_modelos_fornecido")
         print(f"Gold criada: ranking_marcas_modelos_fornecido ({len(ranking)} linhas)")
+        market_evolution = build_market_evolution_gold(market_dataframe)
+        save_gold_table(market_evolution, "emplacamentos_mensais_fornecidos")
+        print(f"Gold criada: emplacamentos_mensais_fornecidos ({len(market_evolution)} linhas)")
 
     if IBGE_SILVER_PATH.exists():
         ibge_dataframe = pd.read_parquet(IBGE_SILVER_PATH)
@@ -105,6 +151,9 @@ def main() -> None:
         save_gold_table(penetration, "penetracao_municipal_ibge")
         matched = int(penetration["codigo_ibge"].notna().sum())
         print(f"Gold criada: penetracao_municipal_ibge ({len(penetration)} linhas; {matched} municípios cruzados)")
+        opportunities = build_opportunity_gold(penetration)
+        save_gold_table(opportunities, "oportunidade_municipal_preliminar")
+        print(f"Gold criada: oportunidade_municipal_preliminar ({len(opportunities)} linhas)")
 
 
 if __name__ == "__main__":

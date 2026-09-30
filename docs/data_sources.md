@@ -35,6 +35,13 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Perguntas atendidas:** 1, 2 e 10.
 - **Atenção:** antes de automatizar, verificaremos se a série histórica está disponível em formato reaproveitável e se a licença permite o uso pretendido.
 
+### Painel oficial da ABVE
+
+- **Fonte:** [ABVE Data — Geral](https://abve.org.br/bi-geral/).
+- **Formato atual:** painel público Power BI incorporado no site da ABVE.
+- **Uso planejado:** validar a série de emplacamentos e categorias divulgadas pela associação; esta métrica continuará separada da frota registrada pela SENATRAN.
+- **Limitação atual:** o painel não oferece CSV público direto. A extração programática exigirá um conector específico para Power BI, que será implementado somente quando o acesso aos dados do painel for validado.
+
 ## Infraestrutura de recarga — fonte a confirmar
 
 - **Referência regulatória:** [veículos elétricos na ANEEL](https://www.gov.br/aneel/pt-br/assuntos/veiculos-eletricos).
