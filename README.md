@@ -59,6 +59,16 @@ A pipeline valida a estrutura de cada arquivo Bronze, identifica a frota eletrif
 
 O relatório de qualidade da fonte é criado em `data/quality/senatran/` a cada execução.
 
+## Coletar a série oficial da SENATRAN
+
+Para baixar os arquivos de combustível publicados de janeiro de 2024 até setembro de 2026, execute:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.ingestion.download_senatran_fuel_history
+```
+
+O script consulta as páginas oficiais da SENATRAN a cada execução. Quando um mês ainda não foi publicado, ele registra a indisponibilidade no manifesto local em vez de criar dados fictícios.
+
 ## Gerar as tabelas Gold
 
 Depois de gerar as tabelas Silver, execute o comando abaixo para criar as respostas analíticas de frota por estado, município, tipo de localidade e categoria de eletrificação:
