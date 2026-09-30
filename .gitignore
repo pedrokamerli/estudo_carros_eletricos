@@ -33,3 +33,7 @@ data/silver/*
 
 data/gold/*
 !data/gold/.gitkeep
+
+# Relatórios locais gerados durante a validação de qualidade
+data/quality/*
+!data/quality/.gitkeep

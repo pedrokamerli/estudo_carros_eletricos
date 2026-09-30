@@ -57,6 +57,8 @@ Com o arquivo bruto da SENATRAN salvo em `data/bronze/senatran/`, execute:
 
 A pipeline valida a estrutura do arquivo Bronze, identifica a frota eletrificada e cria uma tabela Parquet na camada Silver. Os arquivos de dados continuam locais e não são enviados ao GitHub.
 
+O relatório de qualidade da fonte é criado em `data/quality/senatran/` a cada execução.
+
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.

@@ -10,6 +10,7 @@ import pandas as pd
 # Reutilizo regras centralizadas para não classificar o mesmo combustível de formas diferentes.
 from src.utils.capitals import CAPITALS_BY_UF
 from src.utils.electrification import CATEGORY_BY_FUEL
+from src.quality.senatran_quality import assess_bronze_dataframe, save_quality_report
 
 # Uso logs para registrar as etapas executadas pela pipeline.
 LOGGER = logging.getLogger(__name__)
@@ -32,20 +33,13 @@ SILVER_FILE_PATH = (
     / "senatran"
     / "frota_eletrificada_2025_12.parquet"
 )
-
-# Se estas colunas mudarem na fonte, prefiro parar a pipeline em vez de gerar um resultado errado.
-REQUIRED_COLUMNS = {"UF", "Município", "Combustível Veículo", "Qtd. Veículos"}
-
-
-def validate_bronze_dataframe(dataframe: pd.DataFrame) -> None:
-    """Confiro se a fonte possui todas as colunas de que preciso."""
-    # Comparo as colunas esperadas com as colunas realmente encontradas no Excel.
-    missing_columns = REQUIRED_COLUMNS.difference(dataframe.columns)
-
-    if missing_columns:
-        # Deixo a mensagem de erro fácil de entender caso a SENATRAN mude o arquivo.
-        columns_text = ", ".join(sorted(missing_columns))
-        raise ValueError(f"Arquivo SENATRAN sem colunas obrigatórias: {columns_text}")
+QUALITY_REPORT_PATH = (
+    PROJECT_ROOT
+    / "data"
+    / "quality"
+    / "senatran"
+    / "quality_report_2025_12.json"
+)
 
 
 def transform_bronze_to_silver(
@@ -58,9 +52,17 @@ def transform_bronze_to_silver(
         raise FileNotFoundError(f"Arquivo Bronze não encontrado: {raw_file_path}")
 
     LOGGER.info("Lendo arquivo Bronze: %s", raw_file_path.name)
-    # Leio o Excel e valido se sua estrutura continua compatível com a regra criada.
+    # Leio o Excel e avalio sua qualidade antes de criar qualquer dado tratado.
     bronze_dataframe = pd.read_excel(raw_file_path)
-    validate_bronze_dataframe(bronze_dataframe)
+    quality_report = assess_bronze_dataframe(bronze_dataframe)
+    save_quality_report(quality_report, QUALITY_REPORT_PATH)
+
+    # Paro apenas em problemas críticos, como valores nulos ou quantidades inválidas.
+    if not quality_report["aprovado"]:
+        raise ValueError("O arquivo Bronze não passou nas verificações de qualidade.")
+
+    LOGGER.info("Relatório de qualidade criado: %s", QUALITY_REPORT_PATH)
+    LOGGER.info("Veículos sem UF: %s", quality_report["veiculos_sem_uf"])
 
     # Filtro somente os combustíveis que fazem parte da definição de frota eletrificada.
     silver_dataframe = bronze_dataframe.loc[
