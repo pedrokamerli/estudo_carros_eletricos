@@ -60,10 +60,15 @@ def main() -> None:
     """Crio uma dimensão econômica municipal com os anos de referência explícitos."""
     pib = read_sidra_files("pib_municipal_2023_uf_*.json", "pib_corrente_mil_reais_2023")
     population = read_sidra_files("populacao_censo_2022_uf_*.json", "populacao_censo_2022")
-    if pib.empty or population.empty:
+    income = read_sidra_files(
+        "rendimento_per_capita_censo_2022_uf_*.json",
+        "rendimento_domiciliar_per_capita_medio_2022_reais",
+    )
+    if pib.empty or population.empty or income.empty:
         raise FileNotFoundError("Execute primeiro a coleta Bronze do IBGE.")
 
     indicators = pib.merge(population, on=["codigo_ibge", "municipio_ibge"], how="inner")
+    indicators = indicators.merge(income, on=["codigo_ibge", "municipio_ibge"], how="inner")
     indicators = indicators.merge(get_municipality_locations(), on="codigo_ibge", how="left")
     # O SIDRA acrescenta " - UF" ao município; removo isso só da chave usada no cruzamento.
     indicators["municipio_chave"] = indicators["municipio_ibge"].str.replace(
@@ -73,7 +78,10 @@ def main() -> None:
     indicators["pib_per_capita_aproximado"] = (
         indicators["pib_corrente_mil_reais_2023"] * 1_000 / indicators["populacao_censo_2022"]
     )
-    indicators["fonte"] = "IBGE SIDRA: tabelas 5938 (PIB 2023) e 4709 (população 2022)"
+    indicators["fonte"] = (
+        "IBGE SIDRA: tabela 5938 (PIB 2023), 4709 (população 2022) "
+        "e 10295/variável 13431 (renda domiciliar per capita 2022)"
+    )
 
     IBGE_SILVER_PATH.parent.mkdir(parents=True, exist_ok=True)
     indicators.to_parquet(IBGE_SILVER_PATH, index=False)

@@ -79,40 +79,64 @@ def build_market_evolution_gold(market_dataframe: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_opportunity_gold(penetration_dataframe: pd.DataFrame) -> pd.DataFrame:
-    """Marco oportunidade preliminar: PIB per capita alto e penetração baixa na mesma base municipal."""
+    """Marco municípios com PIB e renda altos e baixa penetração como candidatos a investigar."""
     valid = penetration_dataframe.dropna(
-        subset=["pib_per_capita_aproximado", "veiculos_eletrificados_por_100_mil_habitantes"]
+        subset=[
+            "pib_per_capita_aproximado",
+            "rendimento_domiciliar_per_capita_medio_2022_reais",
+            "veiculos_eletrificados_por_100_mil_habitantes",
+        ]
     ).copy()
     high_income_threshold = valid["pib_per_capita_aproximado"].quantile(0.75)
+    high_household_income_threshold = valid[
+        "rendimento_domiciliar_per_capita_medio_2022_reais"
+    ].quantile(0.75)
     low_penetration_threshold = valid["veiculos_eletrificados_por_100_mil_habitantes"].quantile(0.25)
     valid["oportunidade_preliminar"] = (
         (valid["pib_per_capita_aproximado"] >= high_income_threshold)
+        & (valid["rendimento_domiciliar_per_capita_medio_2022_reais"] >= high_household_income_threshold)
         & (valid["veiculos_eletrificados_por_100_mil_habitantes"] <= low_penetration_threshold)
     )
     return valid
 
 
-def build_municipal_penetration_gold(silver_dataframe: pd.DataFrame, ibge_dataframe: pd.DataFrame) -> pd.DataFrame:
-    """Uno a fotografia mais recente da frota aos indicadores econômicos oficiais disponíveis."""
+def build_municipal_penetration_gold(
+    silver_dataframe: pd.DataFrame,
+    total_fleet_dataframe: pd.DataFrame,
+    ibge_dataframe: pd.DataFrame,
+) -> pd.DataFrame:
+    """Uno frota elétrica, frota total e indicadores do IBGE no mês mais recente."""
     latest_period = silver_dataframe[["ano_referencia", "mes_referencia"]].drop_duplicates()
     latest_period = latest_period.sort_values(["ano_referencia", "mes_referencia"]).iloc[-1]
-    latest_fleet = silver_dataframe.loc[
+    latest_electric = silver_dataframe.loc[
         (silver_dataframe["ano_referencia"] == latest_period["ano_referencia"])
         & (silver_dataframe["mes_referencia"] == latest_period["mes_referencia"])
     ].groupby(["uf", "municipio"], as_index=False)["quantidade_veiculos"].sum()
-
+    latest_total = total_fleet_dataframe.loc[
+        (total_fleet_dataframe["ano_referencia"] == latest_period["ano_referencia"])
+        & (total_fleet_dataframe["mes_referencia"] == latest_period["mes_referencia"])
+    ][["uf", "municipio", "quantidade_veiculos"]].rename(
+        columns={"quantidade_veiculos": "frota_total_veiculos"}
+    )
+    latest_fleet = latest_electric.merge(latest_total, on=["uf", "municipio"], how="left")
     latest_fleet["municipio_chave"] = latest_fleet["municipio"].map(normalize_municipality_name)
     # Converto o nome estadual da SENATRAN para a sigla usada pela dimensão oficial do IBGE.
     latest_fleet["uf_ibge"] = latest_fleet["uf"].map(UF_ABBREVIATION_BY_NAME)
     result = latest_fleet.merge(
         ibge_dataframe[
-            ["codigo_ibge", "uf", "municipio_chave", "populacao_censo_2022", "pib_per_capita_aproximado"]
+            [
+                "codigo_ibge", "uf", "municipio_chave", "populacao_censo_2022",
+                "pib_per_capita_aproximado", "rendimento_domiciliar_per_capita_medio_2022_reais",
+            ]
         ].rename(columns={"uf": "uf_ibge"}),
         on=["uf_ibge", "municipio_chave"],
         how="left",
     )
     result["veiculos_eletrificados_por_100_mil_habitantes"] = (
         result["quantidade_veiculos"] / result["populacao_censo_2022"] * 100_000
+    )
+    result["participacao_eletrificada_na_frota_percentual"] = (
+        result["quantidade_veiculos"] / result["frota_total_veiculos"] * 100
     )
     result["ano_referencia_frota"] = latest_period["ano_referencia"]
     result["mes_referencia_frota"] = latest_period["mes_referencia"]
@@ -147,7 +171,11 @@ def main() -> None:
 
     if IBGE_SILVER_PATH.exists():
         ibge_dataframe = pd.read_parquet(IBGE_SILVER_PATH)
-        penetration = build_municipal_penetration_gold(senatran_dataframe, ibge_dataframe)
+        total_fleet_path = PROJECT_ROOT / "data" / "silver" / "senatran" / "frota_total_municipal.parquet"
+        total_fleet_dataframe = pd.read_parquet(total_fleet_path)
+        penetration = build_municipal_penetration_gold(
+            senatran_dataframe, total_fleet_dataframe, ibge_dataframe
+        )
         save_gold_table(penetration, "penetracao_municipal_ibge")
         matched = int(penetration["codigo_ibge"].notna().sum())
         print(f"Gold criada: penetracao_municipal_ibge ({len(penetration)} linhas; {matched} municípios cruzados)")

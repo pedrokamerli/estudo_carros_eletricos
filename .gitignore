@@ -37,3 +37,9 @@ data/gold/*
 # Relatórios locais gerados durante a validação de qualidade
 data/quality/*
 !data/quality/.gitkeep
+
+# Exports agregados pequenos para demonstrar o projeto no portfólio.
+data/portfolio/*
+!data/portfolio/
+!data/portfolio/README.md
+!data/portfolio/*.csv

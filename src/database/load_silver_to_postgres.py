@@ -13,6 +13,7 @@ from src.database.connection import get_connection
 # Encontro os Parquets já tratados pela pipeline antes de enviá-los ao banco.
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 FLEET_PARQUET_PATH = PROJECT_ROOT / "data" / "silver" / "senatran" / "frota_eletrificada.parquet"
+TOTAL_FLEET_PARQUET_PATH = PROJECT_ROOT / "data" / "silver" / "senatran" / "frota_total_municipal.parquet"
 IBGE_PARQUET_PATH = PROJECT_ROOT / "data" / "silver" / "ibge" / "indicadores_municipais.parquet"
 
 FLEET_COLUMNS = [
@@ -20,9 +21,13 @@ FLEET_COLUMNS = [
     "categoria_eletrificacao", "uf_informada", "capital_da_uf",
     "tipo_localidade", "ano_referencia", "mes_referencia", "fonte",
 ]
+TOTAL_FLEET_COLUMNS = [
+    "uf", "municipio", "quantidade_veiculos", "ano_referencia", "mes_referencia", "fonte",
+]
 IBGE_COLUMNS = [
     "codigo_ibge", "municipio", "uf", "populacao_censo_2022",
-    "pib_corrente_mil_reais_2023", "pib_per_capita_aproximado", "fonte",
+    "pib_corrente_mil_reais_2023", "pib_per_capita_aproximado",
+    "rendimento_domiciliar_per_capita_medio_2022_reais", "fonte",
 ]
 
 
@@ -35,19 +40,11 @@ def to_python_value(value: Any) -> Any:
     return value
 
 
-def copy_dataframe(dataframe: pd.DataFrame, table_name: str, columns: list[str]) -> bool:
-    """Copio um DataFrame em lote e reaproveito uma carga já existente sem duplicá-la."""
+def replace_dataframe(dataframe: pd.DataFrame, table_name: str, columns: list[str]) -> None:
+    """Atualizo uma tabela Silver gerada pelo projeto com a versão local mais recente."""
     with get_connection() as connection:
         with connection.cursor() as cursor:
-            cursor.execute(f"SELECT COUNT(*) FROM {table_name};")
-            existing_rows = cursor.fetchone()[0]
-            if existing_rows > 0:
-                print(
-                    f"A tabela {table_name} já possui {existing_rows:,} linhas. "
-                    "Vou apenas validar a carga existente, sem duplicar registros."
-                )
-                return False
-
+            cursor.execute(f"TRUNCATE TABLE {table_name};")
             column_list = ", ".join(columns)
             copy_command = f"COPY {table_name} ({column_list}) FROM STDIN"
             with cursor.copy(copy_command) as copy:
@@ -55,7 +52,67 @@ def copy_dataframe(dataframe: pd.DataFrame, table_name: str, columns: list[str])
                     copy.write_row(tuple(to_python_value(value) for value in row))
 
         # Ao sair do bloco sem erro, a conexão confirma a transação automaticamente.
-    return True
+
+
+def create_total_fleet_table() -> None:
+    """Crio os schemas e as tabelas Silver geradas pelo projeto quando faltarem."""
+    statements = [
+        "CREATE SCHEMA IF NOT EXISTS silver;",
+        "CREATE SCHEMA IF NOT EXISTS gold;",
+        """
+        CREATE TABLE IF NOT EXISTS silver.frota_eletrificada (
+            uf VARCHAR(30) NOT NULL,
+            municipio VARCHAR(100) NOT NULL,
+            combustivel_veiculo VARCHAR(80) NOT NULL,
+            quantidade_veiculos INTEGER NOT NULL CHECK (quantidade_veiculos >= 0),
+            categoria_eletrificacao VARCHAR(50) NOT NULL,
+            uf_informada BOOLEAN NOT NULL,
+            capital_da_uf VARCHAR(100),
+            tipo_localidade VARCHAR(20) NOT NULL,
+            ano_referencia SMALLINT NOT NULL CHECK (ano_referencia BETWEEN 2020 AND 2035),
+            mes_referencia SMALLINT NOT NULL CHECK (mes_referencia BETWEEN 1 AND 12),
+            fonte VARCHAR(30) NOT NULL,
+            CONSTRAINT uq_frota_eletrificada_periodo UNIQUE (
+                uf, municipio, combustivel_veiculo, ano_referencia, mes_referencia
+            )
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS silver.indicadores_municipais_ibge (
+            codigo_ibge CHAR(7) PRIMARY KEY,
+            municipio VARCHAR(100) NOT NULL,
+            uf CHAR(2) NOT NULL,
+            populacao_censo_2022 INTEGER NOT NULL CHECK (populacao_censo_2022 > 0),
+            pib_corrente_mil_reais_2023 NUMERIC(18, 2) NOT NULL
+                CHECK (pib_corrente_mil_reais_2023 >= 0),
+            pib_per_capita_aproximado NUMERIC(14, 2) NOT NULL
+                CHECK (pib_per_capita_aproximado >= 0),
+            rendimento_domiciliar_per_capita_medio_2022_reais NUMERIC(14, 2),
+            fonte VARCHAR(150) NOT NULL,
+            criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS silver.frota_total_municipal (
+            uf VARCHAR(30) NOT NULL,
+            municipio VARCHAR(100) NOT NULL,
+            quantidade_veiculos BIGINT NOT NULL CHECK (quantidade_veiculos >= 0),
+            ano_referencia SMALLINT NOT NULL CHECK (ano_referencia BETWEEN 2020 AND 2035),
+            mes_referencia SMALLINT NOT NULL CHECK (mes_referencia BETWEEN 1 AND 12),
+            fonte VARCHAR(30) NOT NULL,
+            PRIMARY KEY (uf, municipio, ano_referencia, mes_referencia)
+        );
+        """,
+    ]
+    with get_connection() as connection:
+        with connection.cursor() as cursor:
+            for statement in statements:
+                cursor.execute(statement)
+            # Atualizo também instalações anteriores, nas quais a tabela já existia.
+            cursor.execute(
+                "ALTER TABLE silver.indicadores_municipais_ibge "
+                "ADD COLUMN IF NOT EXISTS rendimento_domiciliar_per_capita_medio_2022_reais NUMERIC(14, 2);"
+            )
 
 
 def validate_fleet_load(expected_dataframe: pd.DataFrame) -> None:
@@ -97,8 +154,9 @@ def validate_ibge_load(expected_dataframe: pd.DataFrame) -> None:
 
 
 def main() -> None:
-    """Leio os dois Parquets Silver, carrego cada tabela e valido o resultado final."""
+    """Leio os Parquets Silver, crio as tabelas e publico uma carga reproduzível."""
     fleet_dataframe = pd.read_parquet(FLEET_PARQUET_PATH)
+    total_fleet_dataframe = pd.read_parquet(TOTAL_FLEET_PARQUET_PATH)
     ibge_dataframe = pd.read_parquet(IBGE_PARQUET_PATH).rename(
         columns={"municipio_ibge": "municipio"}
     )
@@ -110,12 +168,18 @@ def main() -> None:
         ibge_dataframe["populacao_censo_2022"].round().astype("Int64")
     )
 
+    create_total_fleet_table()
+
     print("Carregando frota eletrificada da SENATRAN...")
-    copy_dataframe(fleet_dataframe, "silver.frota_eletrificada", FLEET_COLUMNS)
+    replace_dataframe(fleet_dataframe, "silver.frota_eletrificada", FLEET_COLUMNS)
     validate_fleet_load(fleet_dataframe)
 
+    print("Carregando frota total municipal da SENATRAN...")
+    replace_dataframe(total_fleet_dataframe, "silver.frota_total_municipal", TOTAL_FLEET_COLUMNS)
+    print(f"Frota total validada: {len(total_fleet_dataframe):,} linhas.")
+
     print("Carregando indicadores municipais do IBGE...")
-    copy_dataframe(ibge_dataframe, "silver.indicadores_municipais_ibge", IBGE_COLUMNS)
+    replace_dataframe(ibge_dataframe, "silver.indicadores_municipais_ibge", IBGE_COLUMNS)
     validate_ibge_load(ibge_dataframe)
 
     print("Carga Silver no PostgreSQL concluída com sucesso!")

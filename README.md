@@ -1,132 +1,78 @@
-# Brazil Electric Vehicles Data Platform
+# Análise do Mercado de Veículos Elétricos no Brasil
 
-Projeto de portfólio sobre o mercado de veículos elétricos no Brasil. Vamos construir uma plataforma de dados passo a passo, aprendendo cada ferramenta somente quando ela resolver um problema real.
+Este é meu projeto de portfólio para investigar como a mobilidade elétrica está avançando no Brasil, onde a frota se concentra e como a adoção se relaciona com características dos municípios. Eu construo a análise a partir de fontes públicas, registro as limitações de cada dado e organizo o processo para que outra pessoa consiga reproduzi-lo.
 
 ## Problema de negócio
 
-Uma empresa interessada em mobilidade elétrica precisa entender como o mercado brasileiro está evoluindo, onde a adoção é maior e quais regiões podem representar oportunidades futuras.
+Uma empresa que avalia expandir sua atuação em mobilidade elétrica precisa entender onde o mercado já existe, como ele está mudando e quais localidades podem merecer uma análise mais aprofundada. Minha pergunta central é: **como a frota eletrificada evolui no Brasil e onde estão as oportunidades de adoção?**
 
-**Pergunta principal:** como evoluiu a adoção de veículos elétricos no Brasil e quais estados e municípios apresentam maior potencial de crescimento?
+## O que já construí
 
-As perguntas analíticas que orientarão o projeto estão em [docs/business_questions.md](docs/business_questions.md). As fontes inicialmente selecionadas e seu vínculo com cada pergunta estão em [docs/data_sources.md](docs/data_sources.md). As definições das métricas estão em [docs/metrics.md](docs/metrics.md). O recorte de coleta está em [docs/collection_scope.md](docs/collection_scope.md).
+- Coleto arquivos mensais de frota por combustível da SENATRAN e preservo os originais na camada Bronze.
+- Transformo os dados com Python e Pandas para criar a Silver de veículos eletrificados e a frota total municipal.
+- Valido colunas, nulos, duplicidades e quantidades antes de usar os arquivos.
+- Integro população do Censo 2022 e PIB municipal de 2023 do IBGE, cruzando município normalizado e UF e mantendo o código IBGE na dimensão resultante.
+- Integro também a renda domiciliar per capita média municipal do Censo 2022, mantendo-a separada do PIB.
+- Carrego a Silver no PostgreSQL e gero tabelas Gold para estado, município, categoria, capital/interior, evolução, penetração e oportunidade preliminar.
+- Mantenho a frota SENATRAN (estoque em uma data) separada dos emplacamentos (fluxo durante um período).
 
-## Etapa atual
+## Recorte e limites atuais
 
-**Fase 2 — Coleta e tratamento local.** A pipeline identifica automaticamente todos os arquivos mensais de combustível de 2024 a 2026 que estiverem na Bronze. Ainda não usamos banco de dados, Spark, Airflow ou outras ferramentas: elas entrarão nas fases adequadas.
+A série mensal disponível neste ambiente vai de **janeiro de 2024 a julho de 2026**, com 31 competências. A SENATRAN ainda não havia publicado agosto e setembro de 2026 na última consulta registrada. O coletor verifica as páginas oficiais e incorpora novos meses quando forem publicados.
 
-## Estrutura inicial
+O indicador municipal de adoção compara veículos eletrificados com a frota total do município. Também calculo veículos eletrificados por 100 mil habitantes. O PIB é de 2023 e a população é do Censo de 2022; portanto, o PIB per capita combinado é uma aproximação com anos de referência diferentes.
+
+A renda domiciliar per capita vem do Censo 2022 e não é a mesma coisa que PIB per capita. A oportunidade preliminar usa municípios no quartil superior de PIB per capita e renda domiciliar, junto com penetração eletrificada baixa; isso é um filtro exploratório, não uma previsão de demanda.
+
+Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo registro. Por isso, não uso essa base para afirmar que um modelo específico é elétrico. O arquivo de mercado que recebi do usuário também está identificado como origem ainda não confirmada e não substitui dados oficiais de emplacamentos.
+
+## Fontes
+
+- [SENATRAN — frota de veículos](https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran): estoque mensal por localidade e combustível.
+- [IBGE/SIDRA — PIB municipal](https://sidra.ibge.gov.br/tabela/6784): PIB corrente municipal, referência 2023.
+- [IBGE/SIDRA — população do Censo](https://sidra.ibge.gov.br/tabela/4709): população municipal, referência 2022.
+- [IBGE/SIDRA — renda domiciliar per capita](https://sidra.ibge.gov.br/tabela/10295): média municipal do Censo 2022, variável 13431.
+- [ABVE Data](https://abve.org.br/abve-data/): série complementar de vendas e eletrificação; integração automatizada ainda em andamento.
+- [Open Charge Map](https://openchargemap.org/develop/api): fonte complementar de pontos de recarga; a coleta requer uma chave pessoal gratuita.
+
+O inventário, os métodos de acesso e as limitações estão em [docs/data_sources.md](docs/data_sources.md). As métricas estão em [docs/metrics.md](docs/metrics.md), as perguntas em [docs/business_questions.md](docs/business_questions.md) e o status de cada entrega em [docs/project_status.md](docs/project_status.md).
+
+## Tecnologias
+
+Python, Pandas, PyArrow/Parquet, SQL, PostgreSQL, Git/GitHub e Power BI. Uso cada ferramenta para uma parte concreta do fluxo: Python coleta e transforma, Parquet armazena as camadas locais, PostgreSQL organiza as tabelas analíticas e Power BI será usado para comunicar os resultados. Spark e orquestração em nuvem ficam como evolução caso o volume e a execução recorrente justifiquem essa complexidade.
+
+## Como reproduzir no Windows
+
+1. Clone o repositório e abra a pasta no PyCharm.
+2. Crie o ambiente e instale as dependências:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+3. Crie um arquivo `.env` local com os dados de conexão do seu PostgreSQL, seguindo [.env.example](.env.example). Não envie esse arquivo ao GitHub.
+4. Crie o banco `ev_brasil_db` no PostgreSQL. O carregador cria os schemas `silver` e `gold`.
+5. Com o banco acessível e o `.env` configurado, execute o fluxo público completo:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.run_project
+```
+
+O comando baixa os meses publicados, registra os meses ainda indisponíveis, recria Bronze/Silver/Gold no PostgreSQL e exporta os CSVs agregados. Os arquivos brutos e Parquet não são versionados; os resultados agregados pequenos ficam em `data/portfolio/` e podem ser recriados pela mesma execução. As fontes opcionais ABVE/Tupi, o arquivo fornecido pelo usuário e Open Charge Map permanecem separadas até sua coleta/classificação ser validada.
+
+## Power BI
+
+Minha etapa visual será conectar o Power BI ao PostgreSQL (`localhost:5432`, banco `ev_brasil_db`) e usar as tabelas do schema `gold`. Vou começar pela evolução mensal, distribuição por estado, penetração municipal e capital versus interior. As tabelas de marcas/modelos devem ser usadas somente depois que a origem e a classificação de eletrificação estiverem validadas.
+
+## Estrutura
 
 ```text
-Projeto Portfólio/
-├── data/
-│   ├── bronze/       # Dados recebidos, preservados como chegaram
-│   ├── silver/       # Dados limpos e padronizados (futuro)
-│   └── gold/         # Dados prontos para análise (futuro)
-├── dashboard/        # Materiais do dashboard (futuro)
-├── docs/             # Documentação e decisões do projeto
-├── notebooks/        # Explorações e estudos
-├── src/
-│   ├── ingestion/    # Coleta de dados (futuro)
-│   ├── transformation/# Transformações (futuro)
-│   ├── quality/      # Validações de qualidade (futuro)
-│   └── utils/        # Funções reutilizáveis
-├── tests/            # Testes automatizados
-├── .gitignore        # Arquivos que o Git não deve enviar
-└── requirements.txt  # Bibliotecas Python do projeto
+data/       Bronze, Silver, Gold e saídas compartilháveis do portfólio
+docs/       problema, fontes, métricas, qualidade e status
+src/        ingestão, transformações, qualidade e conexão com PostgreSQL
 ```
 
-## Como abrir no PyCharm
+## Meu objetivo
 
-Abra a pasta `D:\Projeto Portfólio` e escolha o interpretador localizado em `.venv`.
-
-No terminal do PyCharm, ative o ambiente com:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-As bibliotecas serão registradas em `requirements.txt` quando começarmos a usá-las.
-
-## Executar a primeira pipeline
-
-Com o arquivo bruto da SENATRAN salvo em `data/bronze/senatran/`, execute:
-
-```powershell
-.\.venv\Scripts\python.exe -m src.run_pipeline
-```
-
-A pipeline valida a estrutura de cada arquivo Bronze, identifica a frota eletrificada e cria uma única tabela Parquet na camada Silver com todos os meses disponíveis. Os arquivos de dados continuam locais e não são enviados ao GitHub.
-
-O relatório de qualidade da fonte é criado em `data/quality/senatran/` a cada execução.
-
-## Coletar a série oficial da SENATRAN
-
-Para baixar os arquivos de combustível publicados de janeiro de 2024 até setembro de 2026, execute:
-
-```powershell
-.\.venv\Scripts\python.exe -m src.ingestion.download_senatran_fuel_history
-```
-
-O script consulta as páginas oficiais da SENATRAN a cada execução. Quando um mês ainda não foi publicado, ele registra a indisponibilidade no manifesto local em vez de criar dados fictícios.
-
-## Gerar as tabelas Gold
-
-Depois de gerar as tabelas Silver, execute o comando abaixo para criar as respostas analíticas de frota por estado, município, tipo de localidade e categoria de eletrificação:
-
-```powershell
-.\.venv\Scripts\python.exe -m src.transformation.silver_to_gold
-```
-
-O dataset mensal de mercado fornecido pelo usuário deve ser transformado antes da Gold de ranking de marcas e modelos:
-
-```powershell
-.\.venv\Scripts\python.exe -m src.transformation.market_dataset_to_silver --input "D:\estudos ciencia de dados\estudo mercaod de carros elétricos\dataset_mercado_ev_brasil.csv"
-```
-
-## Coletar indicadores municipais do IBGE
-
-Para baixar PIB municipal de 2023 e população do Censo de 2022, execute os comandos abaixo. Os anos ficam registrados no nome das colunas para não confundir o contexto econômico com o período da frota.
-
-```powershell
-.\.venv\Scripts\python.exe -m src.ingestion.download_ibge_municipal_indicators
-.\.venv\Scripts\python.exe -m src.transformation.ibge_bronze_to_silver
-.\.venv\Scripts\python.exe -m src.transformation.silver_to_gold
-```
-
-## Coletar eletropostos
-
-Crie gratuitamente uma chave de API na [Open Charge Map](https://openchargemap.org/develop/api). No terminal do PyCharm, informe a chave apenas para a sessão atual e execute a coleta:
-
-```powershell
-$env:OCM_API_KEY = "cole_a_sua_chave_aqui"
-.\.venv\Scripts\python.exe -m src.ingestion.download_open_charge_map
-```
-
-A chave não é salva em arquivos do projeto e não deve ser enviada ao GitHub.
-
-## Carregar a Silver no PostgreSQL
-
-Depois de criar as tabelas `silver` no pgAdmin, execute:
-
-```powershell
-.\.venv\Scripts\python.exe -m src.database.load_silver_to_postgres
-```
-
-O carregador evita duplicidade: se uma tabela já estiver preenchida, ele não insere novamente e apenas valida a quantidade de linhas e veículos.
-
-## Atualizar as tabelas Gold no PostgreSQL
-
-Eu carrego os dados de mercado fornecidos e reconstruo as tabelas analíticas prontas para o Power BI com os comandos abaixo:
-
-```powershell
-.\.venv\Scripts\python.exe -m src.database.load_market_data_to_postgres
-.\.venv\Scripts\python.exe -m src.database.build_gold_tables
-```
-
-As tabelas Gold são derivadas da Silver. Por isso o segundo comando as recria por completo a cada atualização, sem alterar os dados brutos ou tratados. Os dados de marcas, modelos e emplacamentos fornecidos pelo usuário continuam marcados como origem não confirmada oficialmente.
-
-## Regras do projeto
-
-- Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.
-- Preservar os dados originais na camada `data/bronze`.
-- Fazer commits pequenos, com mensagens que expliquem a mudança.
+Quero que este projeto mostre como conduzo um problema de dados do início à análise: entendo a pergunta, localizo fontes, coleto e valido os dados, documento decisões, modelo indicadores e apresento os resultados. As conclusões finais e o dashboard serão acrescentados depois da análise e da validação dos dados.

@@ -1,0 +1,545 @@
+ano_referencia,mes_referencia,marca,modelo,categoria_eletrificacao,total_emplacamentos,origem_oficial_confirmada
+2024,1,GWM,Haval H6,PHEV,740,f
+2024,1,Volvo,XC60,PHEV,704,f
+2024,1,GWM,Haval H6 HEV,HEV,636,f
+2024,1,BYD,Dolphin Mini,BEV,603,f
+2024,1,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,601,f
+2024,1,Geely,EX2,BEV,583,f
+2024,1,BMW,iX3,BEV,571,f
+2024,1,GWM,Ora 03,BEV,566,f
+2024,1,BYD,Dolphin,BEV,526,f
+2024,1,BMW,330e,PHEV,526,f
+2024,1,BYD,Song Plus,PHEV,516,f
+2024,1,Volvo,EX30,BEV,516,f
+2024,1,BYD,Yuan Pro,BEV,504,f
+2024,1,BYD,Seal,BEV,450,f
+2024,1,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,397,f
+2024,1,Toyota,Corolla Sedan,HEV,247,f
+2024,1,Toyota,Corolla Cross,HEV,229,f
+2024,2,BMW,330e,PHEV,788,f
+2024,2,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,780,f
+2024,2,GWM,Haval H6,PHEV,770,f
+2024,2,BYD,Yuan Pro,BEV,731,f
+2024,2,BMW,iX3,BEV,722,f
+2024,2,BYD,Dolphin,BEV,720,f
+2024,2,BYD,Seal,BEV,715,f
+2024,2,GWM,Ora 03,BEV,696,f
+2024,2,Geely,EX2,BEV,632,f
+2024,2,BYD,Song Plus,PHEV,613,f
+2024,2,Volvo,XC60,PHEV,595,f
+2024,2,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,554,f
+2024,2,BYD,Dolphin Mini,BEV,549,f
+2024,2,GWM,Haval H6 HEV,HEV,521,f
+2024,2,Volvo,EX30,BEV,463,f
+2024,2,Toyota,Corolla Cross,HEV,218,f
+2024,2,Toyota,Corolla Sedan,HEV,208,f
+2024,3,BMW,330e,PHEV,657,f
+2024,3,GWM,Haval H6 HEV,HEV,649,f
+2024,3,BMW,iX3,BEV,623,f
+2024,3,BYD,Song Plus,PHEV,595,f
+2024,3,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,594,f
+2024,3,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,590,f
+2024,3,BYD,Yuan Pro,BEV,541,f
+2024,3,Volvo,EX30,BEV,526,f
+2024,3,BYD,Dolphin Mini,BEV,510,f
+2024,3,GWM,Ora 03,BEV,478,f
+2024,3,GWM,Haval H6,PHEV,477,f
+2024,3,BYD,Seal,BEV,468,f
+2024,3,BYD,Dolphin,BEV,412,f
+2024,3,Volvo,XC60,PHEV,392,f
+2024,3,Geely,EX2,BEV,388,f
+2024,3,Toyota,Corolla Cross,HEV,256,f
+2024,3,Toyota,Corolla Sedan,HEV,232,f
+2024,4,Volvo,XC60,PHEV,819,f
+2024,4,BYD,Dolphin Mini,BEV,762,f
+2024,4,BYD,Song Plus,PHEV,740,f
+2024,4,GWM,Ora 03,BEV,716,f
+2024,4,GWM,Haval H6 HEV,HEV,692,f
+2024,4,BMW,iX3,BEV,686,f
+2024,4,BYD,Yuan Pro,BEV,682,f
+2024,4,BYD,Seal,BEV,581,f
+2024,4,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,569,f
+2024,4,BYD,Dolphin,BEV,556,f
+2024,4,Geely,EX2,BEV,542,f
+2024,4,GWM,Haval H6,PHEV,538,f
+2024,4,Volvo,EX30,BEV,526,f
+2024,4,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,510,f
+2024,4,BMW,330e,PHEV,435,f
+2024,4,Toyota,Corolla Sedan,HEV,268,f
+2024,4,Toyota,Corolla Cross,HEV,207,f
+2024,5,GWM,Haval H6,PHEV,724,f
+2024,5,BYD,Song Plus,PHEV,697,f
+2024,5,Volvo,EX30,BEV,668,f
+2024,5,BYD,Seal,BEV,666,f
+2024,5,BMW,iX3,BEV,655,f
+2024,5,BYD,Yuan Pro,BEV,631,f
+2024,5,BMW,330e,PHEV,618,f
+2024,5,Volvo,XC60,PHEV,590,f
+2024,5,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,581,f
+2024,5,GWM,Haval H6 HEV,HEV,552,f
+2024,5,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,547,f
+2024,5,GWM,Ora 03,BEV,479,f
+2024,5,BYD,Dolphin Mini,BEV,478,f
+2024,5,Geely,EX2,BEV,435,f
+2024,5,BYD,Dolphin,BEV,387,f
+2024,5,Toyota,Corolla Cross,HEV,281,f
+2024,5,Toyota,Corolla Sedan,HEV,166,f
+2024,6,Volvo,EX30,BEV,787,f
+2024,6,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,728,f
+2024,6,Geely,EX2,BEV,728,f
+2024,6,BYD,Dolphin,BEV,721,f
+2024,6,GWM,Haval H6,PHEV,712,f
+2024,6,BYD,Dolphin Mini,BEV,691,f
+2024,6,BMW,330e,PHEV,691,f
+2024,6,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,622,f
+2024,6,BMW,iX3,BEV,600,f
+2024,6,Volvo,XC60,PHEV,587,f
+2024,6,BYD,Yuan Pro,BEV,549,f
+2024,6,GWM,Ora 03,BEV,547,f
+2024,6,GWM,Haval H6 HEV,HEV,539,f
+2024,6,BYD,Song Plus,PHEV,442,f
+2024,6,BYD,Seal,BEV,418,f
+2024,6,Toyota,Corolla Cross,HEV,226,f
+2024,6,Toyota,Corolla Sedan,HEV,203,f
+2024,7,BYD,Dolphin,BEV,716,f
+2024,7,GWM,Ora 03,BEV,692,f
+2024,7,BMW,330e,PHEV,685,f
+2024,7,BYD,Yuan Pro,BEV,655,f
+2024,7,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,652,f
+2024,7,GWM,Haval H6,PHEV,635,f
+2024,7,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,603,f
+2024,7,BYD,Seal,BEV,549,f
+2024,7,BMW,iX3,BEV,529,f
+2024,7,Volvo,EX30,BEV,513,f
+2024,7,BYD,Song Plus,PHEV,504,f
+2024,7,BYD,Dolphin Mini,BEV,500,f
+2024,7,Geely,EX2,BEV,476,f
+2024,7,GWM,Haval H6 HEV,HEV,472,f
+2024,7,Volvo,XC60,PHEV,465,f
+2024,7,Toyota,Corolla Sedan,HEV,273,f
+2024,7,Toyota,Corolla Cross,HEV,231,f
+2024,8,Geely,EX2,BEV,757,f
+2024,8,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,753,f
+2024,8,BMW,330e,PHEV,738,f
+2024,8,BYD,Dolphin,BEV,737,f
+2024,8,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,693,f
+2024,8,BYD,Yuan Pro,BEV,629,f
+2024,8,GWM,Ora 03,BEV,626,f
+2024,8,GWM,Haval H6 HEV,HEV,600,f
+2024,8,GWM,Haval H6,PHEV,598,f
+2024,8,BYD,Dolphin Mini,BEV,575,f
+2024,8,BYD,Seal,BEV,559,f
+2024,8,Volvo,EX30,BEV,545,f
+2024,8,Volvo,XC60,PHEV,534,f
+2024,8,BYD,Song Plus,PHEV,520,f
+2024,8,BMW,iX3,BEV,433,f
+2024,8,Toyota,Corolla Sedan,HEV,270,f
+2024,8,Toyota,Corolla Cross,HEV,257,f
+2024,9,BYD,Dolphin Mini,BEV,768,f
+2024,9,Volvo,XC60,PHEV,745,f
+2024,9,BMW,iX3,BEV,717,f
+2024,9,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,703,f
+2024,9,GWM,Ora 03,BEV,668,f
+2024,9,Volvo,EX30,BEV,646,f
+2024,9,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,646,f
+2024,9,BMW,330e,PHEV,628,f
+2024,9,GWM,Haval H6,PHEV,625,f
+2024,9,Geely,EX2,BEV,604,f
+2024,9,BYD,Song Plus,PHEV,588,f
+2024,9,BYD,Yuan Pro,BEV,548,f
+2024,9,GWM,Haval H6 HEV,HEV,523,f
+2024,9,BYD,Dolphin,BEV,522,f
+2024,9,BYD,Seal,BEV,509,f
+2024,9,Toyota,Corolla Cross,HEV,282,f
+2024,9,Toyota,Corolla Sedan,HEV,278,f
+2024,10,BYD,Yuan Pro,BEV,759,f
+2024,10,BMW,330e,PHEV,714,f
+2024,10,Geely,EX2,BEV,708,f
+2024,10,GWM,Ora 03,BEV,689,f
+2024,10,BYD,Seal,BEV,685,f
+2024,10,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,654,f
+2024,10,BYD,Dolphin Mini,BEV,637,f
+2024,10,Volvo,EX30,BEV,585,f
+2024,10,GWM,Haval H6 HEV,HEV,556,f
+2024,10,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,529,f
+2024,10,Volvo,XC60,PHEV,525,f
+2024,10,BYD,Dolphin,BEV,503,f
+2024,10,GWM,Haval H6,PHEV,419,f
+2024,10,BYD,Song Plus,PHEV,401,f
+2024,10,BMW,iX3,BEV,396,f
+2024,10,Toyota,Corolla Cross,HEV,279,f
+2024,10,Toyota,Corolla Sedan,HEV,216,f
+2024,11,BYD,Song Plus,PHEV,799,f
+2024,11,BMW,330e,PHEV,791,f
+2024,11,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,738,f
+2024,11,BYD,Dolphin,BEV,717,f
+2024,11,Volvo,XC60,PHEV,694,f
+2024,11,GWM,Ora 03,BEV,685,f
+2024,11,Geely,EX2,BEV,679,f
+2024,11,BYD,Seal,BEV,671,f
+2024,11,GWM,Haval H6,PHEV,644,f
+2024,11,GWM,Haval H6 HEV,HEV,595,f
+2024,11,BYD,Dolphin Mini,BEV,568,f
+2024,11,BYD,Yuan Pro,BEV,566,f
+2024,11,Volvo,EX30,BEV,469,f
+2024,11,BMW,iX3,BEV,440,f
+2024,11,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,434,f
+2024,11,Toyota,Corolla Cross,HEV,257,f
+2024,11,Toyota,Corolla Sedan,HEV,220,f
+2024,12,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,757,f
+2024,12,GWM,Ora 03,BEV,722,f
+2024,12,GWM,Haval H6,PHEV,710,f
+2024,12,Geely,EX2,BEV,675,f
+2024,12,BMW,iX3,BEV,646,f
+2024,12,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,627,f
+2024,12,BYD,Song Plus,PHEV,605,f
+2024,12,BYD,Dolphin,BEV,593,f
+2024,12,Volvo,XC60,PHEV,579,f
+2024,12,BYD,Dolphin Mini,BEV,544,f
+2024,12,BMW,330e,PHEV,543,f
+2024,12,Volvo,EX30,BEV,532,f
+2024,12,BYD,Yuan Pro,BEV,499,f
+2024,12,BYD,Seal,BEV,488,f
+2024,12,GWM,Haval H6 HEV,HEV,459,f
+2024,12,Toyota,Corolla Cross,HEV,260,f
+2024,12,Toyota,Corolla Sedan,HEV,236,f
+2025,1,BMW,330e,PHEV,1222,f
+2025,1,Volvo,XC60,PHEV,1195,f
+2025,1,GWM,Haval H6 HEV,HEV,1181,f
+2025,1,BYD,Yuan Pro,BEV,1179,f
+2025,1,GWM,Ora 03,BEV,1160,f
+2025,1,Volvo,EX30,BEV,1154,f
+2025,1,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1135,f
+2025,1,Geely,EX2,BEV,1063,f
+2025,1,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,986,f
+2025,1,BYD,Dolphin Mini,BEV,965,f
+2025,1,GWM,Haval H6,PHEV,891,f
+2025,1,BMW,iX3,BEV,808,f
+2025,1,BYD,Seal,BEV,795,f
+2025,1,BYD,Dolphin,BEV,758,f
+2025,1,BYD,Song Plus,PHEV,753,f
+2025,1,Toyota,Corolla Cross,HEV,389,f
+2025,1,Toyota,Corolla Sedan,HEV,372,f
+2025,2,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1254,f
+2025,2,GWM,Haval H6 HEV,HEV,1249,f
+2025,2,BYD,Dolphin Mini,BEV,1195,f
+2025,2,Geely,EX2,BEV,1125,f
+2025,2,BYD,Yuan Pro,BEV,1032,f
+2025,2,BYD,Song Plus,PHEV,1023,f
+2025,2,GWM,Haval H6,PHEV,1003,f
+2025,2,BYD,Seal,BEV,995,f
+2025,2,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,987,f
+2025,2,Volvo,EX30,BEV,960,f
+2025,2,BMW,330e,PHEV,960,f
+2025,2,Volvo,XC60,PHEV,868,f
+2025,2,GWM,Ora 03,BEV,864,f
+2025,2,BMW,iX3,BEV,841,f
+2025,2,BYD,Dolphin,BEV,750,f
+2025,2,Toyota,Corolla Sedan,HEV,447,f
+2025,2,Toyota,Corolla Cross,HEV,388,f
+2025,3,BYD,Yuan Pro,BEV,1133,f
+2025,3,GWM,Haval H6,PHEV,1122,f
+2025,3,GWM,Haval H6 HEV,HEV,1117,f
+2025,3,BYD,Dolphin,BEV,1080,f
+2025,3,BMW,iX3,BEV,1074,f
+2025,3,BYD,Song Plus,PHEV,1065,f
+2025,3,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1053,f
+2025,3,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,945,f
+2025,3,BYD,Dolphin Mini,BEV,865,f
+2025,3,Geely,EX2,BEV,865,f
+2025,3,BMW,330e,PHEV,864,f
+2025,3,BYD,Seal,BEV,863,f
+2025,3,GWM,Ora 03,BEV,843,f
+2025,3,Volvo,XC60,PHEV,790,f
+2025,3,Volvo,EX30,BEV,693,f
+2025,3,Toyota,Corolla Cross,HEV,413,f
+2025,3,Toyota,Corolla Sedan,HEV,300,f
+2025,4,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1274,f
+2025,4,BYD,Dolphin,BEV,1155,f
+2025,4,GWM,Haval H6 HEV,HEV,1153,f
+2025,4,BMW,iX3,BEV,1152,f
+2025,4,BYD,Song Plus,PHEV,1092,f
+2025,4,Volvo,XC60,PHEV,1069,f
+2025,4,Geely,EX2,BEV,1061,f
+2025,4,GWM,Haval H6,PHEV,1020,f
+2025,4,Volvo,EX30,BEV,947,f
+2025,4,BMW,330e,PHEV,940,f
+2025,4,BYD,Dolphin Mini,BEV,936,f
+2025,4,BYD,Yuan Pro,BEV,895,f
+2025,4,BYD,Seal,BEV,776,f
+2025,4,GWM,Ora 03,BEV,766,f
+2025,4,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,707,f
+2025,4,Toyota,Corolla Sedan,HEV,377,f
+2025,4,Toyota,Corolla Cross,HEV,312,f
+2025,5,BYD,Yuan Pro,BEV,1291,f
+2025,5,BYD,Dolphin,BEV,1220,f
+2025,5,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1098,f
+2025,5,BMW,iX3,BEV,1086,f
+2025,5,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1069,f
+2025,5,GWM,Haval H6 HEV,HEV,1047,f
+2025,5,BYD,Dolphin Mini,BEV,979,f
+2025,5,BYD,Song Plus,PHEV,964,f
+2025,5,BMW,330e,PHEV,869,f
+2025,5,Volvo,XC60,PHEV,863,f
+2025,5,Volvo,EX30,BEV,857,f
+2025,5,Geely,EX2,BEV,851,f
+2025,5,GWM,Haval H6,PHEV,780,f
+2025,5,GWM,Ora 03,BEV,733,f
+2025,5,BYD,Seal,BEV,669,f
+2025,5,Toyota,Corolla Cross,HEV,508,f
+2025,5,Toyota,Corolla Sedan,HEV,318,f
+2025,6,BYD,Yuan Pro,BEV,1271,f
+2025,6,GWM,Haval H6 HEV,HEV,1249,f
+2025,6,BYD,Song Plus,PHEV,1194,f
+2025,6,Geely,EX2,BEV,1159,f
+2025,6,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1104,f
+2025,6,Volvo,EX30,BEV,1078,f
+2025,6,GWM,Ora 03,BEV,1043,f
+2025,6,BMW,iX3,BEV,1021,f
+2025,6,BYD,Dolphin,BEV,991,f
+2025,6,Volvo,XC60,PHEV,950,f
+2025,6,BYD,Dolphin Mini,BEV,892,f
+2025,6,GWM,Haval H6,PHEV,887,f
+2025,6,BMW,330e,PHEV,878,f
+2025,6,BYD,Seal,BEV,796,f
+2025,6,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,741,f
+2025,6,Toyota,Corolla Sedan,HEV,428,f
+2025,6,Toyota,Corolla Cross,HEV,290,f
+2025,7,GWM,Haval H6,PHEV,1266,f
+2025,7,Geely,EX2,BEV,1214,f
+2025,7,BYD,Dolphin,BEV,1201,f
+2025,7,GWM,Ora 03,BEV,1055,f
+2025,7,Volvo,EX30,BEV,1043,f
+2025,7,BYD,Song Plus,PHEV,1019,f
+2025,7,BYD,Dolphin Mini,BEV,900,f
+2025,7,BMW,iX3,BEV,896,f
+2025,7,BYD,Yuan Pro,BEV,883,f
+2025,7,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,840,f
+2025,7,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,817,f
+2025,7,BMW,330e,PHEV,808,f
+2025,7,GWM,Haval H6 HEV,HEV,796,f
+2025,7,BYD,Seal,BEV,737,f
+2025,7,Volvo,XC60,PHEV,711,f
+2025,7,Toyota,Corolla Cross,HEV,403,f
+2025,7,Toyota,Corolla Sedan,HEV,375,f
+2025,8,Volvo,XC60,PHEV,1109,f
+2025,8,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1108,f
+2025,8,BYD,Seal,BEV,1098,f
+2025,8,BMW,iX3,BEV,1018,f
+2025,8,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1012,f
+2025,8,BYD,Song Plus,PHEV,1003,f
+2025,8,BYD,Dolphin Mini,BEV,982,f
+2025,8,GWM,Haval H6,PHEV,946,f
+2025,8,BYD,Yuan Pro,BEV,938,f
+2025,8,BMW,330e,PHEV,925,f
+2025,8,Geely,EX2,BEV,915,f
+2025,8,GWM,Haval H6 HEV,HEV,913,f
+2025,8,BYD,Dolphin,BEV,909,f
+2025,8,GWM,Ora 03,BEV,799,f
+2025,8,Volvo,EX30,BEV,729,f
+2025,8,Toyota,Corolla Cross,HEV,465,f
+2025,8,Toyota,Corolla Sedan,HEV,330,f
+2025,9,Geely,EX2,BEV,1350,f
+2025,9,Volvo,XC60,PHEV,1232,f
+2025,9,GWM,Ora 03,BEV,1231,f
+2025,9,BMW,iX3,BEV,1214,f
+2025,9,BYD,Dolphin Mini,BEV,1152,f
+2025,9,BYD,Yuan Pro,BEV,1143,f
+2025,9,BMW,330e,PHEV,1130,f
+2025,9,GWM,Haval H6,PHEV,1093,f
+2025,9,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1060,f
+2025,9,BYD,Dolphin,BEV,1043,f
+2025,9,BYD,Seal,BEV,1036,f
+2025,9,Volvo,EX30,BEV,1005,f
+2025,9,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1004,f
+2025,9,BYD,Song Plus,PHEV,924,f
+2025,9,GWM,Haval H6 HEV,HEV,693,f
+2025,9,Toyota,Corolla Cross,HEV,445,f
+2025,9,Toyota,Corolla Sedan,HEV,321,f
+2025,10,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1286,f
+2025,10,GWM,Ora 03,BEV,1222,f
+2025,10,BMW,330e,PHEV,1190,f
+2025,10,GWM,Haval H6 HEV,HEV,1145,f
+2025,10,BYD,Seal,BEV,1134,f
+2025,10,BMW,iX3,BEV,1116,f
+2025,10,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1056,f
+2025,10,Volvo,XC60,PHEV,1052,f
+2025,10,BYD,Song Plus,PHEV,988,f
+2025,10,BYD,Dolphin,BEV,942,f
+2025,10,Geely,EX2,BEV,879,f
+2025,10,Volvo,EX30,BEV,834,f
+2025,10,BYD,Yuan Pro,BEV,822,f
+2025,10,BYD,Dolphin Mini,BEV,819,f
+2025,10,GWM,Haval H6,PHEV,761,f
+2025,10,Toyota,Corolla Cross,HEV,470,f
+2025,10,Toyota,Corolla Sedan,HEV,440,f
+2025,11,BMW,330e,PHEV,1216,f
+2025,11,BYD,Song Plus,PHEV,1187,f
+2025,11,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1141,f
+2025,11,GWM,Haval H6,PHEV,1125,f
+2025,11,GWM,Haval H6 HEV,HEV,1094,f
+2025,11,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1090,f
+2025,11,BYD,Yuan Pro,BEV,1073,f
+2025,11,BMW,iX3,BEV,1060,f
+2025,11,Volvo,XC60,PHEV,1032,f
+2025,11,GWM,Ora 03,BEV,998,f
+2025,11,Volvo,EX30,BEV,963,f
+2025,11,BYD,Dolphin,BEV,942,f
+2025,11,BYD,Seal,BEV,901,f
+2025,11,BYD,Dolphin Mini,BEV,874,f
+2025,11,Geely,EX2,BEV,732,f
+2025,11,Toyota,Corolla Sedan,HEV,438,f
+2025,11,Toyota,Corolla Cross,HEV,356,f
+2025,12,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1269,f
+2025,12,GWM,Haval H6,PHEV,1267,f
+2025,12,Volvo,EX30,BEV,1141,f
+2025,12,BMW,330e,PHEV,1134,f
+2025,12,GWM,Ora 03,BEV,1103,f
+2025,12,BYD,Dolphin,BEV,1098,f
+2025,12,Geely,EX2,BEV,1095,f
+2025,12,BYD,Dolphin Mini,BEV,1078,f
+2025,12,BMW,iX3,BEV,1058,f
+2025,12,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,990,f
+2025,12,BYD,Song Plus,PHEV,901,f
+2025,12,Volvo,XC60,PHEV,864,f
+2025,12,BYD,Seal,BEV,862,f
+2025,12,BYD,Yuan Pro,BEV,845,f
+2025,12,GWM,Haval H6 HEV,HEV,819,f
+2025,12,Toyota,Corolla Cross,HEV,483,f
+2025,12,Toyota,Corolla Sedan,HEV,357,f
+2026,1,Volvo,EX30,BEV,1854,f
+2026,1,Geely,EX2,BEV,1812,f
+2026,1,BMW,330e,PHEV,1741,f
+2026,1,BYD,Dolphin,BEV,1709,f
+2026,1,GWM,Haval H6,PHEV,1693,f
+2026,1,BYD,Dolphin Mini,BEV,1608,f
+2026,1,GWM,Ora 03,BEV,1580,f
+2026,1,BYD,Seal,BEV,1464,f
+2026,1,Volvo,XC60,PHEV,1439,f
+2026,1,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1418,f
+2026,1,BYD,Song Plus,PHEV,1334,f
+2026,1,GWM,Haval H6 HEV,HEV,1308,f
+2026,1,BYD,Yuan Pro,BEV,1285,f
+2026,1,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1242,f
+2026,1,BMW,iX3,BEV,1185,f
+2026,1,Toyota,Corolla Cross,HEV,576,f
+2026,1,Toyota,Corolla Sedan,HEV,451,f
+2026,2,Volvo,XC60,PHEV,1724,f
+2026,2,GWM,Haval H6 HEV,HEV,1690,f
+2026,2,GWM,Ora 03,BEV,1656,f
+2026,2,Volvo,EX30,BEV,1651,f
+2026,2,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1531,f
+2026,2,BMW,330e,PHEV,1525,f
+2026,2,BYD,Yuan Pro,BEV,1482,f
+2026,2,BYD,Dolphin Mini,BEV,1420,f
+2026,2,BYD,Seal,BEV,1381,f
+2026,2,BYD,Song Plus,PHEV,1351,f
+2026,2,Geely,EX2,BEV,1341,f
+2026,2,BMW,iX3,BEV,1283,f
+2026,2,GWM,Haval H6,PHEV,1235,f
+2026,2,BYD,Dolphin,BEV,1159,f
+2026,2,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1131,f
+2026,2,Toyota,Corolla Sedan,HEV,572,f
+2026,2,Toyota,Corolla Cross,HEV,399,f
+2026,3,BYD,Yuan Pro,BEV,1785,f
+2026,3,BMW,iX3,BEV,1756,f
+2026,3,Volvo,XC60,PHEV,1703,f
+2026,3,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1628,f
+2026,3,GWM,Haval H6,PHEV,1594,f
+2026,3,BMW,330e,PHEV,1568,f
+2026,3,BYD,Dolphin Mini,BEV,1438,f
+2026,3,GWM,Ora 03,BEV,1425,f
+2026,3,GWM,Haval H6 HEV,HEV,1390,f
+2026,3,Volvo,EX30,BEV,1383,f
+2026,3,BYD,Song Plus,PHEV,1338,f
+2026,3,BYD,Seal,BEV,1264,f
+2026,3,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1260,f
+2026,3,Geely,EX2,BEV,1172,f
+2026,3,BYD,Dolphin,BEV,1086,f
+2026,3,Toyota,Corolla Sedan,HEV,552,f
+2026,3,Toyota,Corolla Cross,HEV,497,f
+2026,4,BYD,Yuan Pro,BEV,1906,f
+2026,4,BYD,Seal,BEV,1903,f
+2026,4,BYD,Dolphin Mini,BEV,1766,f
+2026,4,GWM,Haval H6,PHEV,1762,f
+2026,4,Volvo,EX30,BEV,1701,f
+2026,4,Geely,EX2,BEV,1654,f
+2026,4,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1615,f
+2026,4,GWM,Ora 03,BEV,1585,f
+2026,4,BYD,Dolphin,BEV,1570,f
+2026,4,BMW,330e,PHEV,1486,f
+2026,4,BMW,iX3,BEV,1481,f
+2026,4,GWM,Haval H6 HEV,HEV,1457,f
+2026,4,Volvo,XC60,PHEV,1338,f
+2026,4,BYD,Song Plus,PHEV,1257,f
+2026,4,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1144,f
+2026,4,Toyota,Corolla Sedan,HEV,632,f
+2026,4,Toyota,Corolla Cross,HEV,496,f
+2026,5,BMW,330e,PHEV,1904,f
+2026,5,Volvo,EX30,BEV,1765,f
+2026,5,BYD,Dolphin Mini,BEV,1715,f
+2026,5,BYD,Song Plus,PHEV,1696,f
+2026,5,Geely,EX2,BEV,1683,f
+2026,5,BMW,iX3,BEV,1632,f
+2026,5,GWM,Haval H6 HEV,HEV,1533,f
+2026,5,BYD,Yuan Pro,BEV,1514,f
+2026,5,GWM,Haval H6,PHEV,1445,f
+2026,5,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1419,f
+2026,5,BYD,Dolphin,BEV,1417,f
+2026,5,BYD,Seal,BEV,1296,f
+2026,5,Volvo,XC60,PHEV,1240,f
+2026,5,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1125,f
+2026,5,GWM,Ora 03,BEV,1098,f
+2026,5,Toyota,Corolla Cross,HEV,740,f
+2026,5,Toyota,Corolla Sedan,HEV,651,f
+2026,6,Volvo,XC60,PHEV,1962,f
+2026,6,BYD,Seal,BEV,1903,f
+2026,6,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1674,f
+2026,6,BYD,Song Plus,PHEV,1656,f
+2026,6,GWM,Haval H6 HEV,HEV,1553,f
+2026,6,BMW,iX3,BEV,1520,f
+2026,6,Geely,EX2,BEV,1380,f
+2026,6,GWM,Ora 03,BEV,1366,f
+2026,6,GWM,Haval H6,PHEV,1340,f
+2026,6,BYD,Yuan Pro,BEV,1305,f
+2026,6,BYD,Dolphin,BEV,1300,f
+2026,6,BYD,Dolphin Mini,BEV,1148,f
+2026,6,Volvo,EX30,BEV,1148,f
+2026,6,BMW,330e,PHEV,1084,f
+2026,6,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,978,f
+2026,6,Toyota,Corolla Cross,HEV,640,f
+2026,6,Toyota,Corolla Sedan,HEV,558,f
+2026,7,BYD,Dolphin Mini,BEV,1785,f
+2026,7,BYD,Yuan Pro,BEV,1708,f
+2026,7,BYD,Dolphin,BEV,1614,f
+2026,7,GWM,Haval H6,PHEV,1606,f
+2026,7,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1524,f
+2026,7,GWM,Ora 03,BEV,1472,f
+2026,7,Volvo,XC60,PHEV,1468,f
+2026,7,GWM,Haval H6 HEV,HEV,1434,f
+2026,7,BYD,Seal,BEV,1422,f
+2026,7,BYD,Song Plus,PHEV,1381,f
+2026,7,Geely,EX2,BEV,1331,f
+2026,7,BMW,330e,PHEV,1326,f
+2026,7,BMW,iX3,BEV,1234,f
+2026,7,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1233,f
+2026,7,Volvo,EX30,BEV,1119,f
+2026,7,Toyota,Corolla Sedan,HEV,667,f
+2026,7,Toyota,Corolla Cross,HEV,635,f
+2026,8,Volvo,XC60,PHEV,1898,f
+2026,8,BYD,Seal,BEV,1727,f
+2026,8,BMW,iX3,BEV,1694,f
+2026,8,Caoa Chery,Tiggo 5X Pro Hybrid,HEV,1625,f
+2026,8,Volvo,EX30,BEV,1564,f
+2026,8,Geely,EX2,BEV,1554,f
+2026,8,BYD,Song Plus,PHEV,1554,f
+2026,8,BYD,Dolphin Mini,BEV,1361,f
+2026,8,Caoa Chery,Tiggo 8 Pro Plug-In,PHEV,1323,f
+2026,8,GWM,Haval H6,PHEV,1320,f
+2026,8,GWM,Haval H6 HEV,HEV,1271,f
+2026,8,BMW,330e,PHEV,1248,f
+2026,8,BYD,Dolphin,BEV,1223,f
+2026,8,BYD,Yuan Pro,BEV,1190,f
+2026,8,GWM,Ora 03,BEV,936,f
+2026,8,Toyota,Corolla Sedan,HEV,640,f
+2026,8,Toyota,Corolla Cross,HEV,506,f

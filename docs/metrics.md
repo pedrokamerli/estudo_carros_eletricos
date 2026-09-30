@@ -15,12 +15,14 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 | Emplacamentos eletrificados | Veículos eletrificados emplacados no período | soma dos emplacamentos no período | ABVE |
 | Crescimento anual | Variação dos emplacamentos entre dois anos | `(valor atual - valor anterior) / valor anterior × 100` | ABVE |
 | Frota eletrificada | Veículos eletrificados registrados em uma área na data de referência | soma da quantidade por município ou UF | SENATRAN |
+| Participação eletrificada na frota | Fração da frota total municipal classificada como eletrificada na mesma competência | `frota eletrificada / frota total municipal × 100` | SENATRAN |
 | Crescimento da frota | Variação da frota entre duas datas equivalentes | `(frota atual - frota anterior) / frota anterior × 100` | SENATRAN |
 | Penetração eletrificada | Participação dos eletrificados na frota total local | `frota eletrificada / frota total × 100` | SENATRAN |
 | Market share de marca | Participação de uma marca no recorte analisado | `veículos da marca / veículos eletrificados × 100` | SENATRAN ou ABVE |
 | Market share de modelo | Participação de um modelo no recorte analisado | `veículos do modelo / veículos eletrificados × 100` | SENATRAN ou ABVE |
 | Eletrificados por 100 mil habitantes | Intensidade da adoção comparável entre municípios | `frota eletrificada / população × 100.000` | SENATRAN + IBGE |
-| PIB per capita | Produção econômica por habitante | `PIB municipal / população` | IBGE |
+| PIB per capita aproximado | Produção econômica por habitante usando PIB municipal de 2023 e população do Censo 2022 | `PIB em mil R$ × 1.000 / população` | IBGE |
+| Renda domiciliar per capita média | Rendimento nominal mensal domiciliar per capita médio municipal | Valor publicado pelo IBGE, em reais, referência 2022 | IBGE/SIDRA tabela 10295, variável 13431 |
 
 ## Regras para responder às perguntas
 
@@ -34,6 +36,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 
 - Rankings de quantidade usarão a frota eletrificada.
 - Rankings de adoção proporcional usarão penetração eletrificada e eletrificados por 100 mil habitantes.
+- A participação na frota usa numerador e denominador do mesmo município e mês. A frota total inclui as categorias veiculares presentes na base SENATRAN de combustível; não deve ser descrita como participação apenas em automóveis de passeio.
 - A comparação entre capitais e interior dependerá de uma tabela de referência de capitais, que será adicionada quando coletarmos os dados geográficos.
 
 ### Marcas, modelos e categorias
@@ -45,7 +48,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 ### Potencial de mercado e infraestrutura
 
 - A análise de relação econômica começará com correlações e gráficos entre população, PIB per capita e indicadores de adoção; correlação não será tratada como causalidade.
-- O indicador de potencial municipal será criado apenas depois da validação dos dados. Ele combinará condições econômicas e baixa penetração, e sua fórmula será documentada antes de ser usada.
+- O filtro preliminar de oportunidade considera simultaneamente PIB per capita e renda domiciliar per capita no quartil superior da amostra municipal analisada, e veículos eletrificados por 100 mil habitantes no quartil inferior. É exploratório, sensível aos limites da amostra e não estima causalidade nem demanda futura.
 - A pergunta sobre recarga será respondida somente após confirmarmos uma base confiável de eletropostos com localização geográfica.
 
 ### Previsão

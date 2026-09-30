@@ -22,6 +22,7 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 
 - **PIB municipal:** [PIB dos Municípios](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html) e [tabela 6784 do SIDRA](https://sidra.ibge.gov.br/tabela/6784).
 - **População:** estimativas e tabelas municipais do IBGE/SIDRA.
+- **Dados já coletados:** PIB municipal de 2023 (SIDRA 5938, variável 37), população do Censo 2022 (4709, variável 93) e rendimento domiciliar per capita médio do Censo 2022 (10295, variável 13431).
 - **O que oferece:** população, PIB total e PIB per capita por município.
 - **Uso no projeto:** calcular taxas por habitante e investigar a relação entre características econômicas e adoção de veículos eletrificados.
 - **Perguntas atendidas:** 6, 11, 12 e 13.
@@ -65,6 +66,15 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Série complementar:** marca/modelo apenas em meses selecionados. O ZIP de dezembro de 2025 tem cerca de 126 MB e o TXT extraído ocupa cerca de 1,1 GB; baixar todos os meses seria desnecessário para esta etapa.
 - **Automação:** o Python vai validar, transformar e consolidar todos os arquivos pequenos de combustível que forem adicionados à Bronze. O arquivo de marca/modelo só será baixado quando for realmente usado.
 
-## Próxima ação
+## Situação das fontes em 30/09/2026
 
-A próxima fase será escolher um primeiro arquivo da SENATRAN, baixar apenas uma amostra e entender suas colunas. O dado original será preservado na camada `data/bronze`.
+- A página oficial da SENATRAN consultada em 30/09/2026 lista julho de 2026 como a competência mais recente de combustível por UF/município. O coletor procura novos meses em cada execução e grava os meses ausentes no manifesto.
+- A API pública CKAN identifica arquivos RENAVAM com marca/modelo e licença indicada como domínio público. Esses registros não trazem combustível na mesma granularidade; não os uso para declarar eletrificação por modelo sem uma classificação independente.
+- A ABVE publica boletins mensais com totais, tecnologias e recortes geográficos, além do painel ABVE Data. Os conceitos e a classificação mudam entre períodos; a extração automatizada ainda será conciliada antes de virar uma série única.
+- Em setembro de 2026, ABVE/Tupi publicou uma atualização nacional de pontos públicos e semipúblicos referente a agosto de 2026. É uma referência útil para contexto nacional, mas não substitui uma base geolocalizada para estimar demanda por município.
+- Os boletins ABVE consultados em 2026 citam dados de infraestrutura da ABVE/Tupi. O Open Charge Map é uma fonte comunitária complementar que requer API key, limite de chamadas e respeito às licenças de cada fornecedor.
+- O projeto tem coletor Open Charge Map, mas sua execução ainda depende da chave API local do usuário.
+
+## Licença e publicação
+
+O catálogo CKAN do RENAVAM informa domínio público para o conjunto consultado. Mesmo assim, preservarei a URL, data de coleta, competência e atribuição em cada dado derivado. Para ABVE, FENABRAVE e Open Charge Map, seguirei os termos e requisitos de atribuição da fonte antes de publicar cópias integrais. O GitHub receberá código, documentação e exports agregados pequenos; arquivos brutos pesados serão obtidos pelos coletores.

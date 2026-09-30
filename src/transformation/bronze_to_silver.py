@@ -18,6 +18,7 @@ LOGGER = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 BRONZE_SENATRAN_PATH = PROJECT_ROOT / "data" / "bronze" / "senatran"
 SILVER_FILE_PATH = PROJECT_ROOT / "data" / "silver" / "senatran" / "frota_eletrificada.parquet"
+TOTAL_FLEET_SILVER_FILE_PATH = PROJECT_ROOT / "data" / "silver" / "senatran" / "frota_total_municipal.parquet"
 QUALITY_REPORT_PATH = PROJECT_ROOT / "data" / "quality" / "senatran"
 
 # Converto o mês escrito no nome oficial do arquivo para seu número.
@@ -65,8 +66,8 @@ def find_bronze_fuel_files() -> list[Path]:
     return sorted(files, key=get_period_from_file_name)
 
 
-def transform_one_file(raw_file_path: Path) -> pd.DataFrame:
-    """Valido e transformo um único mês da Bronze para o padrão Silver."""
+def read_validated_bronze_file(raw_file_path: Path) -> tuple[int, int, pd.DataFrame]:
+    """Leio e valido uma vez o Excel original para reaproveitar seus dados tratados."""
     year, month = get_period_from_file_name(raw_file_path)
     LOGGER.info("Lendo Bronze: %s", raw_file_path.name)
 
@@ -79,6 +80,13 @@ def transform_one_file(raw_file_path: Path) -> pd.DataFrame:
     if not quality_report["aprovado"]:
         raise ValueError(f"O arquivo {raw_file_path.name} não passou nas verificações de qualidade.")
 
+    return year, month, bronze_dataframe
+
+
+def transform_electrified_dataframe(
+    bronze_dataframe: pd.DataFrame, year: int, month: int
+) -> pd.DataFrame:
+    """Seleciono os combustíveis eletrificados e adiciono período e localização."""
     # Filtro somente os combustíveis que fazem parte da definição de frota eletrificada.
     silver_dataframe = bronze_dataframe.loc[
         bronze_dataframe["Combustível Veículo"].isin(CATEGORY_BY_FUEL.keys())
@@ -111,13 +119,52 @@ def transform_one_file(raw_file_path: Path) -> pd.DataFrame:
     )
 
 
+def transform_total_fleet_dataframe(
+    bronze_dataframe: pd.DataFrame, year: int, month: int
+) -> pd.DataFrame:
+    """Agrego todos os combustíveis para calcular a frota total por município e mês."""
+    total_fleet = bronze_dataframe.groupby(["UF", "Município"], as_index=False)["Qtd. Veículos"].sum()
+    total_fleet = total_fleet.rename(
+        columns={
+            "UF": "uf",
+            "Município": "municipio",
+            "Qtd. Veículos": "quantidade_veiculos",
+        }
+    )
+    total_fleet["ano_referencia"] = year
+    total_fleet["mes_referencia"] = month
+    total_fleet["fonte"] = "SENATRAN"
+    return total_fleet
+
+
+def transform_one_file(raw_file_path: Path) -> pd.DataFrame:
+    """Valido e transformo um único mês da Bronze para a Silver eletrificada."""
+    year, month, bronze_dataframe = read_validated_bronze_file(raw_file_path)
+    return transform_electrified_dataframe(bronze_dataframe, year, month)
+
+
+def transform_total_fleet_file(raw_file_path: Path) -> pd.DataFrame:
+    """Valido e transformo um mês da Bronze para a Silver da frota total."""
+    year, month, bronze_dataframe = read_validated_bronze_file(raw_file_path)
+    return transform_total_fleet_dataframe(bronze_dataframe, year, month)
+
+
+def transform_file_pair(raw_file_path: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Crio as duas tabelas Silver lendo e validando o arquivo de origem uma vez."""
+    year, month, bronze_dataframe = read_validated_bronze_file(raw_file_path)
+    electrified = transform_electrified_dataframe(bronze_dataframe, year, month)
+    total_fleet = transform_total_fleet_dataframe(bronze_dataframe, year, month)
+    return electrified, total_fleet
+
+
 def transform_bronze_to_silver(silver_file_path: Path = SILVER_FILE_PATH) -> pd.DataFrame:
     """Uno todos os meses disponíveis em uma única tabela Silver pronta para análise."""
     bronze_files = find_bronze_fuel_files()
     if not bronze_files:
         raise FileNotFoundError(f"Nenhum arquivo mensal de combustível foi encontrado em: {BRONZE_SENATRAN_PATH}")
 
-    monthly_dataframes = [transform_one_file(raw_file_path) for raw_file_path in bronze_files]
+    transformed_pairs = [transform_file_pair(raw_file_path) for raw_file_path in bronze_files]
+    monthly_dataframes = [pair[0] for pair in transformed_pairs]
     silver_dataframe = pd.concat(monthly_dataframes, ignore_index=True)
     silver_dataframe = silver_dataframe.sort_values(
         ["ano_referencia", "mes_referencia", "uf", "municipio"]
@@ -127,7 +174,17 @@ def transform_bronze_to_silver(silver_file_path: Path = SILVER_FILE_PATH) -> pd.
     silver_file_path.parent.mkdir(parents=True, exist_ok=True)
     silver_dataframe.to_parquet(silver_file_path, index=False)
 
+    # Guardo a frota total no mesmo grão para medir a participação dos eletrificados.
+    total_fleet_dataframes = [pair[1] for pair in transformed_pairs]
+    total_fleet_dataframe = pd.concat(total_fleet_dataframes, ignore_index=True)
+    total_fleet_dataframe = total_fleet_dataframe.sort_values(
+        ["ano_referencia", "mes_referencia", "uf", "municipio"]
+    ).reset_index(drop=True)
+    TOTAL_FLEET_SILVER_FILE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    total_fleet_dataframe.to_parquet(TOTAL_FLEET_SILVER_FILE_PATH, index=False)
+
     LOGGER.info("Meses processados: %s", len(bronze_files))
     LOGGER.info("Registros eletrificados Silver: %s", len(silver_dataframe))
     LOGGER.info("Arquivo Silver criado: %s", silver_file_path)
+    LOGGER.info("Arquivo Silver da frota total criado: %s", TOTAL_FLEET_SILVER_FILE_PATH)
     return silver_dataframe

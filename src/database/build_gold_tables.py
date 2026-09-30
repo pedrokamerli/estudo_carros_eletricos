@@ -8,6 +8,14 @@ from src.database.connection import get_connection
 # Cada tabela Gold é derivada: eu posso recriá-la sempre que a Silver receber dados novos.
 GOLD_STATEMENTS = [
     "CREATE SCHEMA IF NOT EXISTS gold;",
+    "DROP TABLE IF EXISTS gold.frota_total_municipal;",
+    """
+    CREATE TABLE gold.frota_total_municipal AS
+    SELECT ano_referencia, mes_referencia, uf, municipio,
+           SUM(quantidade_veiculos)::BIGINT AS total_veiculos
+    FROM silver.frota_total_municipal
+    GROUP BY ano_referencia, mes_referencia, uf, municipio;
+    """,
     "DROP TABLE IF EXISTS gold.frota_por_estado;",
     """
     CREATE TABLE gold.frota_por_estado AS
@@ -29,11 +37,19 @@ GOLD_STATEMENTS = [
     "DROP TABLE IF EXISTS gold.frota_capital_vs_interior;",
     """
     CREATE TABLE gold.frota_capital_vs_interior AS
-    SELECT ano_referencia, mes_referencia, tipo_localidade,
-           SUM(quantidade_veiculos)::BIGINT AS total_veiculos_eletrificados
-    FROM silver.frota_eletrificada
-    WHERE uf_informada = TRUE
-    GROUP BY ano_referencia, mes_referencia, tipo_localidade;
+    WITH resumo AS (
+        SELECT ano_referencia, mes_referencia, tipo_localidade,
+               SUM(quantidade_veiculos)::BIGINT AS total_veiculos_eletrificados
+        FROM silver.frota_eletrificada
+        WHERE uf_informada = TRUE AND tipo_localidade IN ('capital', 'interior')
+        GROUP BY ano_referencia, mes_referencia, tipo_localidade
+    )
+    SELECT *,
+           ROUND(100.0 * total_veiculos_eletrificados
+                 / NULLIF(SUM(total_veiculos_eletrificados) OVER (
+                     PARTITION BY ano_referencia, mes_referencia
+                 ), 0), 2) AS participacao_percentual
+    FROM resumo;
     """,
     "DROP TABLE IF EXISTS gold.frota_por_categoria_eletrificacao;",
     """
@@ -54,19 +70,60 @@ GOLD_STATEMENTS = [
         GROUP BY ano_referencia, mes_referencia
     ),
     base_com_anterior AS (
-        SELECT *, LAG(total_veiculos_eletrificados) OVER (
-            ORDER BY ano_referencia, mes_referencia
-        ) AS total_mes_anterior
+        SELECT *,
+               LAG(total_veiculos_eletrificados, 1) OVER (
+                   ORDER BY ano_referencia, mes_referencia
+               ) AS total_mes_anterior,
+               LAG(total_veiculos_eletrificados, 12) OVER (
+                   ORDER BY ano_referencia, mes_referencia
+               ) AS total_ano_anterior
         FROM frota_mensal
     )
     SELECT ano_referencia, mes_referencia, total_veiculos_eletrificados,
            total_mes_anterior,
+           total_ano_anterior,
            ROUND(
                100.0 * (total_veiculos_eletrificados - total_mes_anterior)
                / NULLIF(total_mes_anterior, 0), 2
-           ) AS crescimento_percentual_mensal
+           ) AS crescimento_percentual_mensal,
+           ROUND(
+               100.0 * (total_veiculos_eletrificados - total_ano_anterior)
+               / NULLIF(total_ano_anterior, 0), 2
+           ) AS crescimento_percentual_anual
     FROM base_com_anterior;
     """,
+    "DROP TABLE IF EXISTS gold.evolucao_frota_por_estado;",
+    """
+    CREATE TABLE gold.evolucao_frota_por_estado AS
+    WITH frota_mensal AS (
+        SELECT ano_referencia, mes_referencia, uf,
+               SUM(quantidade_veiculos)::BIGINT AS total_veiculos_eletrificados
+        FROM silver.frota_eletrificada
+        WHERE uf_informada = TRUE
+        GROUP BY ano_referencia, mes_referencia, uf
+    ),
+    base_com_anterior AS (
+        SELECT *,
+               LAG(total_veiculos_eletrificados, 1) OVER (
+                   PARTITION BY uf ORDER BY ano_referencia, mes_referencia
+               ) AS total_mes_anterior,
+               LAG(total_veiculos_eletrificados, 12) OVER (
+                   PARTITION BY uf ORDER BY ano_referencia, mes_referencia
+               ) AS total_ano_anterior
+        FROM frota_mensal
+    )
+    SELECT *,
+           ROUND(100.0 * (total_veiculos_eletrificados - total_mes_anterior)
+                 / NULLIF(total_mes_anterior, 0), 2) AS crescimento_percentual_mensal,
+           ROUND(100.0 * (total_veiculos_eletrificados - total_ano_anterior)
+                 / NULLIF(total_ano_anterior, 0), 2) AS crescimento_percentual_anual
+    FROM base_com_anterior;
+    """,
+    "CREATE INDEX IF NOT EXISTS idx_gold_estado_periodo ON gold.frota_por_estado (ano_referencia, mes_referencia);",
+    "CREATE INDEX IF NOT EXISTS idx_gold_municipio_periodo ON gold.frota_por_municipio (ano_referencia, mes_referencia);",
+]
+
+OPTIONAL_MARKET_STATEMENTS = [
     "DROP TABLE IF EXISTS gold.emplacamentos_mensais_fornecidos;",
     """
     CREATE TABLE gold.emplacamentos_mensais_fornecidos AS
@@ -85,8 +142,6 @@ GOLD_STATEMENTS = [
     FROM silver.mercado_ev_fornecido
     GROUP BY ano_referencia, mes_referencia, marca, modelo, categoria_eletrificacao;
     """,
-    "CREATE INDEX IF NOT EXISTS idx_gold_estado_periodo ON gold.frota_por_estado (ano_referencia, mes_referencia);",
-    "CREATE INDEX IF NOT EXISTS idx_gold_municipio_periodo ON gold.frota_por_municipio (ano_referencia, mes_referencia);",
     "CREATE INDEX IF NOT EXISTS idx_gold_ranking_periodo ON gold.ranking_marcas_modelos_fornecido (ano_referencia, mes_referencia);",
 ]
 
@@ -99,22 +154,41 @@ def table_count(table_name: str) -> int:
             return cursor.fetchone()[0]
 
 
+def market_silver_exists() -> bool:
+    """Confiro se a tabela de mercado fornecida existe antes de gerar Gold opcional."""
+    with get_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT to_regclass('silver.mercado_ev_fornecido') IS NOT NULL;")
+            return bool(cursor.fetchone()[0])
+
+
 def main() -> None:
     """Executo toda a modelagem Gold dentro de uma única transação no PostgreSQL."""
+    has_market_data = market_silver_exists()
     with get_connection() as connection:
         with connection.cursor() as cursor:
             for statement in GOLD_STATEMENTS:
                 cursor.execute(statement)
+            if has_market_data:
+                for statement in OPTIONAL_MARKET_STATEMENTS:
+                    cursor.execute(statement)
 
     tables = [
         "gold.frota_por_estado",
+        "gold.frota_total_municipal",
         "gold.frota_por_municipio",
         "gold.frota_capital_vs_interior",
         "gold.frota_por_categoria_eletrificacao",
         "gold.evolucao_frota_nacional",
-        "gold.emplacamentos_mensais_fornecidos",
-        "gold.ranking_marcas_modelos_fornecido",
+        "gold.evolucao_frota_por_estado",
     ]
+    if has_market_data:
+        tables.extend([
+            "gold.emplacamentos_mensais_fornecidos",
+            "gold.ranking_marcas_modelos_fornecido",
+        ])
+    else:
+        print("Fonte de mercado fornecida não carregada; vou gerar as Gold disponíveis de SENATRAN/IBGE.")
     print("Camada Gold atualizada:")
     for table in tables:
         print(f"- {table}: {table_count(table):,} linhas")

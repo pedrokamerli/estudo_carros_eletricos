@@ -35,7 +35,12 @@ def main() -> None:
         population_data = download_sidra_table(table=4709, variable=93, period=2022, uf_code=uf_code)
         population_path = BRONZE_PATH / f"populacao_censo_2022_uf_{uf_code}.json"
         population_path.write_text(json.dumps(population_data, ensure_ascii=False), encoding="utf-8")
-        print(f"UF {uf_code}: PIB 2023 e população 2022 baixados.")
+
+        # A tabela 10295/variável 13431 informa renda domiciliar per capita média do Censo.
+        income_data = download_sidra_table(table=10295, variable=13431, period=2022, uf_code=uf_code)
+        income_path = BRONZE_PATH / f"rendimento_per_capita_censo_2022_uf_{uf_code}.json"
+        income_path.write_text(json.dumps(income_data, ensure_ascii=False), encoding="utf-8")
+        print(f"UF {uf_code}: PIB 2023, população e renda domiciliar 2022 baixados.")
 
 
 if __name__ == "__main__":
