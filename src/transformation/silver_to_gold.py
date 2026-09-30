@@ -7,10 +7,13 @@ from pathlib import Path
 import pandas as pd
 
 from src.quality.silver_quality import assess_senatran_silver
+from src.transformation.ibge_bronze_to_silver import normalize_municipality_name
+from src.utils.capitals import UF_ABBREVIATION_BY_NAME
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SENATRAN_SILVER_PATH = PROJECT_ROOT / "data" / "silver" / "senatran" / "frota_eletrificada.parquet"
 MARKET_SILVER_PATH = PROJECT_ROOT / "data" / "silver" / "market" / "mercado_ev_fornecido.parquet"
+IBGE_SILVER_PATH = PROJECT_ROOT / "data" / "silver" / "ibge" / "indicadores_municipais.parquet"
 GOLD_PATH = PROJECT_ROOT / "data" / "gold"
 
 
@@ -52,6 +55,33 @@ def build_market_gold(market_dataframe: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+def build_municipal_penetration_gold(silver_dataframe: pd.DataFrame, ibge_dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Uno a fotografia mais recente da frota aos indicadores econômicos oficiais disponíveis."""
+    latest_period = silver_dataframe[["ano_referencia", "mes_referencia"]].drop_duplicates()
+    latest_period = latest_period.sort_values(["ano_referencia", "mes_referencia"]).iloc[-1]
+    latest_fleet = silver_dataframe.loc[
+        (silver_dataframe["ano_referencia"] == latest_period["ano_referencia"])
+        & (silver_dataframe["mes_referencia"] == latest_period["mes_referencia"])
+    ].groupby(["uf", "municipio"], as_index=False)["quantidade_veiculos"].sum()
+
+    latest_fleet["municipio_chave"] = latest_fleet["municipio"].map(normalize_municipality_name)
+    # Converto o nome estadual da SENATRAN para a sigla usada pela dimensão oficial do IBGE.
+    latest_fleet["uf_ibge"] = latest_fleet["uf"].map(UF_ABBREVIATION_BY_NAME)
+    result = latest_fleet.merge(
+        ibge_dataframe[
+            ["codigo_ibge", "uf", "municipio_chave", "populacao_censo_2022", "pib_per_capita_aproximado"]
+        ].rename(columns={"uf": "uf_ibge"}),
+        on=["uf_ibge", "municipio_chave"],
+        how="left",
+    )
+    result["veiculos_eletrificados_por_100_mil_habitantes"] = (
+        result["quantidade_veiculos"] / result["populacao_censo_2022"] * 100_000
+    )
+    result["ano_referencia_frota"] = latest_period["ano_referencia"]
+    result["mes_referencia_frota"] = latest_period["mes_referencia"]
+    return result
+
+
 def main() -> None:
     """Valido a Silver antes de gerar qualquer tabela Gold derivada dela."""
     senatran_dataframe = pd.read_parquet(SENATRAN_SILVER_PATH)
@@ -68,6 +98,13 @@ def main() -> None:
         ranking = build_market_gold(market_dataframe)
         save_gold_table(ranking, "ranking_marcas_modelos_fornecido")
         print(f"Gold criada: ranking_marcas_modelos_fornecido ({len(ranking)} linhas)")
+
+    if IBGE_SILVER_PATH.exists():
+        ibge_dataframe = pd.read_parquet(IBGE_SILVER_PATH)
+        penetration = build_municipal_penetration_gold(senatran_dataframe, ibge_dataframe)
+        save_gold_table(penetration, "penetracao_municipal_ibge")
+        matched = int(penetration["codigo_ibge"].notna().sum())
+        print(f"Gold criada: penetracao_municipal_ibge ({len(penetration)} linhas; {matched} municípios cruzados)")
 
 
 if __name__ == "__main__":

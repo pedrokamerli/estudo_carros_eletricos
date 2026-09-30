@@ -83,6 +83,16 @@ O dataset mensal de mercado fornecido pelo usuário deve ser transformado antes 
 .\.venv\Scripts\python.exe -m src.transformation.market_dataset_to_silver --input "D:\estudos ciencia de dados\estudo mercaod de carros elétricos\dataset_mercado_ev_brasil.csv"
 ```
 
+## Coletar indicadores municipais do IBGE
+
+Para baixar PIB municipal de 2023 e população do Censo de 2022, execute os comandos abaixo. Os anos ficam registrados no nome das colunas para não confundir o contexto econômico com o período da frota.
+
+```powershell
+.\.venv\Scripts\python.exe -m src.ingestion.download_ibge_municipal_indicators
+.\.venv\Scripts\python.exe -m src.transformation.ibge_bronze_to_silver
+.\.venv\Scripts\python.exe -m src.transformation.silver_to_gold
+```
+
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.

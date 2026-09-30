@@ -30,3 +30,14 @@ CAPITALS_BY_UF = {
     "SERGIPE": "ARACAJU",
     "TOCANTINS": "PALMAS",
 }
+
+# Reutilizo a mesma lista de estados para cruzar a UF por extenso da SENATRAN com a sigla do IBGE.
+UF_ABBREVIATION_BY_NAME = {
+    "ACRE": "AC", "ALAGOAS": "AL", "AMAPA": "AP", "AMAZONAS": "AM",
+    "BAHIA": "BA", "CEARA": "CE", "DISTRITO FEDERAL": "DF", "ESPIRITO SANTO": "ES",
+    "GOIAS": "GO", "MARANHAO": "MA", "MATO GROSSO": "MT", "MATO GROSSO DO SUL": "MS",
+    "MINAS GERAIS": "MG", "PARA": "PA", "PARAIBA": "PB", "PARANA": "PR",
+    "PERNAMBUCO": "PE", "PIAUI": "PI", "RIO DE JANEIRO": "RJ", "RIO GRANDE DO NORTE": "RN",
+    "RIO GRANDE DO SUL": "RS", "RONDONIA": "RO", "RORAIMA": "RR", "SANTA CATARINA": "SC",
+    "SAO PAULO": "SP", "SERGIPE": "SE", "TOCANTINS": "TO",
+}
