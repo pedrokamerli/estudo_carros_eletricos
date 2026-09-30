@@ -20,6 +20,10 @@ EXPORTS = {
         SELECT * FROM gold.emplacamentos_fenabrave_mensais
         ORDER BY ano_referencia, mes_referencia, categoria_fenabrave
     """,
+    "emplacamentos_abve_mensais_gold.csv": """
+        SELECT * FROM gold.emplacamentos_abve_mensais
+        ORDER BY ano_referencia, mes_referencia
+    """,
     "ranking_marcas_fenabrave_mensal.csv": """
         SELECT * FROM gold.ranking_marcas_fenabrave_mensal
         ORDER BY ano_referencia, mes_referencia, categoria_fenabrave, posicao

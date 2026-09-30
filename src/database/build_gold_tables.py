@@ -155,6 +155,57 @@ GOLD_STATEMENTS = [
      AND anterior_ano.categoria_fenabrave = atual.categoria_fenabrave
      AND anterior_ano.segmento_veiculos = atual.segmento_veiculos;
     """,
+    "DROP TABLE IF EXISTS gold.emplacamentos_abve_mensais;",
+    """
+    CREATE TABLE gold.emplacamentos_abve_mensais AS
+    WITH base AS (
+        SELECT *, MAKE_DATE(ano_referencia, mes_referencia, 1) AS data_referencia
+        FROM silver.abve_emplacamentos_mensais
+    ),
+    defasagens AS (
+        SELECT *,
+               LAG(emplacamentos_total_painel, 1) OVER (
+                   ORDER BY data_referencia
+               ) AS total_mes_anterior,
+               LAG(regra_classificacao, 1) OVER (
+                   ORDER BY data_referencia
+               ) AS regra_mes_anterior,
+               LAG(emplacamentos_total_painel, 12) OVER (
+                   ORDER BY data_referencia
+               ) AS total_ano_anterior,
+               LAG(regra_classificacao, 12) OVER (
+                   ORDER BY data_referencia
+               ) AS regra_ano_anterior
+        FROM base
+    )
+    SELECT ano_referencia, mes_referencia, data_referencia,
+           emplacamentos_total_painel, emplacamentos_bev, emplacamentos_phev,
+           emplacamentos_hev, emplacamentos_hev_flex, emplacamentos_mhev,
+           soma_tecnologias_publicadas, divergencia_total_vs_tecnologias,
+           regra_classificacao,
+           CASE WHEN regra_classificacao = regra_mes_anterior THEN total_mes_anterior END
+               AS emplacamentos_mes_anterior_comparavel,
+           CASE WHEN regra_classificacao = regra_mes_anterior THEN ROUND(
+               100.0 * (emplacamentos_total_painel - total_mes_anterior)
+               / NULLIF(total_mes_anterior, 0), 2
+           ) END AS crescimento_mensal_percentual,
+           CASE WHEN regra_classificacao = regra_ano_anterior THEN total_ano_anterior END
+               AS emplacamentos_mes_ano_anterior_comparavel,
+           CASE WHEN regra_classificacao = regra_ano_anterior THEN ROUND(
+               100.0 * (emplacamentos_total_painel - total_ano_anterior)
+               / NULLIF(total_ano_anterior, 0), 2
+           ) END AS crescimento_anual_percentual,
+           ROUND(100.0 * emplacamentos_bev
+                 / NULLIF(soma_tecnologias_publicadas, 0), 2) AS participacao_bev_percentual,
+           ROUND(100.0 * emplacamentos_phev
+                 / NULLIF(soma_tecnologias_publicadas, 0), 2) AS participacao_phev_percentual,
+           ROUND(100.0 * emplacamentos_hev
+                 / NULLIF(soma_tecnologias_publicadas, 0), 2) AS participacao_hev_percentual,
+           ROUND(100.0 * emplacamentos_hev_flex
+                 / NULLIF(soma_tecnologias_publicadas, 0), 2) AS participacao_hev_flex_percentual,
+           url_fonte, data_captura, metodo_extracao
+    FROM defasagens;
+    """,
     "DROP TABLE IF EXISTS gold.ranking_marcas_fenabrave_mensal;",
     """
     CREATE TABLE gold.ranking_marcas_fenabrave_mensal AS
@@ -232,6 +283,7 @@ def main() -> None:
         "gold.evolucao_frota_nacional",
         "gold.evolucao_frota_por_estado",
         "gold.emplacamentos_fenabrave_mensais",
+        "gold.emplacamentos_abve_mensais",
         "gold.ranking_marcas_fenabrave_mensal",
     ]
     if has_market_data:
