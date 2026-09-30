@@ -26,6 +26,9 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 | Renda domiciliar per capita média | Rendimento nominal mensal domiciliar per capita médio municipal | Valor publicado pelo IBGE, em reais, referência 2022 | IBGE/SIDRA tabela 10295, variável 13431 |
 | Correlação socioeconômica e adoção | Associação entre cada indicador municipal e uma medida de adoção na competência SENATRAN mais recente | Coeficientes Pearson e Spearman em municípios com ambas as variáveis disponíveis | IBGE + SENATRAN |
 | Erro de previsão no backtest | Diferença entre a previsão e os emplacamentos observados em meses não usados para ajustar a tendência | MAE, RMSE e MAPE reportados por método, categoria e janela de teste | FENABRAVE |
+| Pontos públicos/semipúblicos de recarga | Quantidade publicada de pontos de recarga, sem inferir quantidade de estações únicas | Contagens AC, DC e total; conferir que AC + DC = total | ABVE/Tupi |
+| Participação regional da rede de recarga | Percentual da rede nacional atribuído a cada região pela fonte | Percentual publicado; não estimar contagens regionais a partir desse percentual | ABVE/Tupi |
+| Participação de município/UF na rede de recarga | Parcela nacional indicada para cada linha nos rankings publicados | Percentual publicado no ranking top 20; não interpretar como cobertura completa de municípios/UFs | ABVE/Tupi |
 
 ## Regras para responder às perguntas
 
@@ -55,7 +58,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 
 - A análise de relação econômica começará com correlações e gráficos entre população, PIB per capita e indicadores de adoção; correlação não será tratada como causalidade.
 - O filtro preliminar de oportunidade considera simultaneamente PIB per capita e renda domiciliar per capita no quartil superior da amostra municipal analisada, e veículos eletrificados por 100 mil habitantes no quartil inferior. É exploratório, sensível aos limites da amostra e não estima causalidade nem demanda futura.
-- A pergunta sobre recarga será respondida somente após confirmarmos uma base confiável de eletropostos com localização geográfica.
+- Para recarga, o snapshot ABVE/Tupi permite descrever total, tipo AC/DC, participação regional e principais municípios/UFs. Como é um ranking top 20 sem coordenadas completas, não permite calcular cobertura de todos os municípios, distâncias ou necessidade local de expansão. Não inferir contagens regionais a partir das participações percentuais.
 
 ### Previsão
 

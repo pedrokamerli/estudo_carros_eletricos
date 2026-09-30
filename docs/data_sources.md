@@ -53,11 +53,14 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Quebra metodológica:** a ABVE declara uma classificação revisada a partir de janeiro/2025. Na definição vigente, eletrificados leves incluem BEV, PHEV, HEV e HEV Flex, mas não MHEV. Em alguns informes de 2024, MHEV aparece incluído em totais; é preciso reconstruir um recorte comparável antes de calcular crescimento entre períodos.
 - **Cobertura verificada:** o snapshot contém totais mensais de janeiro/2024 a agosto/2026 e tecnologias de janeiro/2025 a agosto/2026. Setembro ainda não tinha fechamento mensal publicado em 30/09/2026. A soma dos totais mensais do painel para jan–ago excede em 16 unidades o acumulado citado em notícia ABVE de 2025 e em 6 unidades o acumulado publicado para 2026; em ago/2025, a soma das quatro tecnologias fica 16 abaixo do total mensal do painel. Preservei esses números separados para conferência. A atualização recorrente continua pendente de um método estável para extrair o painel.
 
-## Infraestrutura de recarga — fonte a confirmar
+## Infraestrutura de recarga — ABVE/Tupi
 
-- **Referência regulatória:** [veículos elétricos na ANEEL](https://www.gov.br/aneel/pt-br/assuntos/veiculos-eletricos).
-- **Objetivo:** identificar uma fonte aberta com localização de eletropostos para responder à pergunta 14.
-- **Status:** **não definida ainda**. O portal de dados abertos da ANEEL é uma fonte oficial importante para o setor elétrico, mas a disponibilidade de uma base nacional de eletropostos precisa ser verificada antes da coleta.
+- **Fonte:** [painel público de eletropostos da ABVE](https://abve.org.br/abve-data/bi-eletropostos/) e [publicação ABVE/Tupi sobre a rede](https://abve.org.br/recarga-rapida-dc-quase-triplica-em-12-meses-e-ja-responde-por-38-da-rede-brasileira/).
+- **Referência:** agosto/2026; publicação de 28/09/2026 e captura do painel em 30/09/2026.
+- **O que foi integrado:** total nacional (AC/DC), participação percentual das cinco regiões e rankings top 20 de municípios e UFs, em `data/portfolio/infraestrutura_recarga_abve_snapshot.csv`.
+- **Pipeline:** `src/transformation/abve_charging_snapshot_to_silver.py` valida escopo, totais, percentuais, datas e metadados; `src/database/load_abve_charging_to_postgres.py` carrega Silver; `src/database/build_gold_tables.py` produz `gold.infraestrutura_recarga_abve`; o export é `data/portfolio/infraestrutura_recarga_abve_gold.csv`.
+- **Limitação:** os rankings são parciais; o painel informa que a rede alcança 1.911 municípios, mas a captura integrada não contém a lista completa nem coordenadas de todos os pontos. Participações regionais não foram convertidas em contagens. Portanto, esta entrega permite comparar a distribuição publicada e os principais polos, mas não calcular cobertura municipal completa, distância até carregadores ou um mapa de todos os eletropostos.
+- **Complemento opcional:** [Open Charge Map](https://www.openchargemap.org/develop/api) oferece API com coordenadas, mas exige chave própria e validação de licença/cobertura dos registros antes de uso analítico.
 
 ## Arquivos recebidos para exploração — origem não confirmada
 
@@ -73,7 +76,7 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 | 3–8: estados, municípios, penetração e interior | SENATRAN | IBGE |
 | 9–10: marcas, modelos e eletrificação | SENATRAN | ABVE |
 | 11–13: economia e potencial municipal | IBGE | SENATRAN |
-| 14: demanda por recarga | Fonte de eletropostos a confirmar | SENATRAN, IBGE |
+| 14: demanda por recarga | ABVE/Tupi (total nacional, participação regional e top 20 municípios/UFs) | SENATRAN, IBGE; cobertura completa depende de base geográfica adicional |
 | 15: previsão de emplacamentos | SENATRAN e/ou ABVE | — |
 
 A série FENABRAVE está implementada como uma fonte independente para as perguntas 1, 2, 8 e 10, com categorias e denominadores próprios; ela não substitui nem é somada à série ABVE.

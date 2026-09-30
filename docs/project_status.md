@@ -21,6 +21,7 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 | Auditoria dos dados fornecidos | Feita: estrutura, cobertura e consistência interna avaliadas; não há fonte documentada e os exports seguem explicitamente não verificados | `docs/provided_data_assessment.md` |
 | Coleta de emplacamentos FENABRAVE | Feito para os boletins mensais públicos de autos e comerciais leves, jan/2024–ago/2026 | `src/ingestion/download_fenabrave_monthly_reports.py` |
 | Série ABVE | Snapshot de 32 totais mensais (jan/2024–ago/2026) e tecnologia em 20 meses (jan/2025–ago/2026); validado em Silver, carregado em PostgreSQL e modelado em Gold; captura ainda manual | `data/portfolio/emplacamentos_abve_mensais.csv`, `silver.abve_emplacamentos_mensais`, `gold.emplacamentos_abve_mensais` |
+| Infraestrutura de recarga ABVE/Tupi | Feito: 46 linhas de snapshot com total nacional, 5 participações regionais e rankings top 20 de municípios/UFs; validado, carregado em Silver/Gold e exportado; captura manual e sem coordenadas completas | `silver.abve_infraestrutura_recarga`, `gold.infraestrutura_recarga_abve`, `data/portfolio/infraestrutura_recarga_abve_gold.csv` |
 | Silver/Gold FENABRAVE | Feito: 64 linhas de categorias mensais e 960 registros de ranking mensal de fabricantes | `silver.fenabrave_*`, `gold.*_fenabrave_*` |
 | Atualização ponta a ponta | Pipeline configurada para SENATRAN, IBGE, FENABRAVE, snapshot ABVE, PostgreSQL e exports; integração ABVE validada em execução direcionada | `src/run_project.py` |
 | Dashboard Power BI | Pendente | Etapa visual do autor |
@@ -38,19 +39,19 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 - ABVE: os painéis públicos incorporados em Power BI e notícias mensais foram verificados. O snapshot tem 32 totais mensais e 20 meses de composição tecnológica, foi transcrito do painel e integrado em Silver/Gold; falta automatizar atualização. A classificação mudou em jan/2025 e o último mês fechado encontrado em 30/09/2026 foi ago/2026. Em ago/2025, a soma das quatro categorias fica 16 unidades abaixo do total mensal no painel; os acumulados do painel excedem os citados nas notícias em 16 unidades para jan–ago/2025 e 6 unidades para jan–ago/2026. Registrei as diferenças sem ajuste inventado.
 - Conferência agregada de agosto/2026: FENABRAVE soma 64.055 “híbridos + elétricos”; a ABVE separa 57.386 eletrificados e 6.669 MHEV, também somando 64.055. Isso dá uma pista de escopo para futura reconciliação, mas **não** prova equivalência entre as categorias por tecnologia.
 - ABVE Silver/Gold: o snapshot passa por validações de 32 meses contínuos, 20 meses com composição, contagens não negativas e conciliação registrada no arquivo; carreguei 32 linhas em `silver.abve_emplacamentos_mensais` e criei `gold.emplacamentos_abve_mensais`. O export para Power BI é `emplacamentos_abve_mensais_gold.csv`. A captura ainda é manual.
-- ABVE/Tupi publicou 29.866 pontos públicos e semipúblicos de recarga com referência a agosto/2026; é um total nacional, não uma base municipal de coordenadas para análise de cobertura local. A ABVE reportou também 57.386 eletrificados leves em agosto/2026 e 328.477 no acumulado janeiro–agosto; uso esses números como validação publicada da série mensal ABVE carregada separadamente.
+- ABVE/Tupi publicou 29.866 pontos públicos e semipúblicos de recarga, referência agosto/2026. Integrei 46 linhas: total nacional, participações das cinco regiões e top 20 de municípios e UFs. O painel diz que a rede alcança 1.911 municípios, mas não expõe no recorte transcrito todos os municípios nem coordenadas; não é possível calcular cobertura completa/distâncias. Veja `docs/data_sources.md` e `docs/metrics.md`.
 - Marcas/modelos SENATRAN: o arquivo de dezembro/2025 foi baixado para Bronze. Ele não contém combustível, então não permite isoladamente identificar modelos eletrificados. Os boletins públicos da FENABRAVE trazem ranking de fabricantes, mas o portal reserva o ranking de modelos para usuário cadastrado.
-- Open Charge Map: o coletor existe, mas depende de uma chave API local e de revisão de cobertura/licença dos registros.
+- Open Charge Map: o coletor opcional existe, mas depende de uma chave API local e de revisão de cobertura/licença dos registros; não é necessário para os indicadores agregados ABVE/Tupi já integrados.
 
 ## Próximas entregas técnicas
 
-1. Automatizar atualização da série ABVE se houver forma pública estável de extrair a grade; a integração atual já valida e carrega o snapshot no PostgreSQL, mantendo a tabela própria e a quebra metodológica em jan/2025. Não preencher setembro/2026 até a fonte publicar o fechamento.
+1. Automatizar atualização dos snapshots ABVE de vendas e recarga se houver forma pública estável de extrair os painéis; as integrações atuais validam e carregam os snapshots, mas ainda exigem transcrição/captura manual. Não preencher setembro/2026 até a fonte publicar o fechamento.
 2. Se eu quiser usar os três CSVs recebidos como evidência do estudo principal, localizar a fonte original, licença, data de extração e definições; sem isso continuam excluídos das conclusões oficiais.
 3. Obter acesso autenticado ao portal FENABRAVE para avaliar modelos mais vendidos e confirmar os campos/regras de exportação. Não compartilhar senha no chat; caso necessário, usar o login localmente.
-4. Coletar pontos de recarga com cobertura, data de atualização e licença documentadas. O coletor Open Charge Map requer uma chave API local.
+4. Para mapa completo de recarga, obter uma fonte com inventário e coordenadas, cobertura e licença documentadas. O snapshot ABVE/Tupi já responde distribuição agregada/top 20; o coletor Open Charge Map requer chave API local.
 5. Interpretar correlações com gráficos/distribuições e testar sensibilidade do filtro de oportunidade; associação não prova causa.
 6. Aumentar o histórico comparável e testar o backtest em novas janelas antes de publicar previsão futura. As tabelas de erro estão disponíveis para visualização, mas ainda não há uma projeção futura validada.
-7. Construir o dashboard Power BI e o case visual do portfólio. Os exports agregados já estão em `data/portfolio/`.
+7. Construir o dashboard Power BI e o case visual do portfólio. Os exports agregados já estão em `data/portfolio/`; esta é a etapa visual reservada ao autor.
 
 ## Regras para o fechamento
 

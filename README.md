@@ -18,6 +18,7 @@ Uma empresa que avalia expandir sua atuação em mobilidade elétrica precisa en
 - Extraio dos informativos mensais públicos da FENABRAVE os emplacamentos de híbridos e elétricos e os rankings mensais de fabricantes; preservo a fonte e o método de extração em cada registro.
 - Comparo quatro métodos de previsão em um backtest temporal, deixando sete competências de fora do treino e publicando métricas/erros para avaliação antes de qualquer projeção futura.
 - Integro um snapshot mensal da ABVE em tabelas Silver e Gold próprias, preservando a quebra metodológica de janeiro/2025 e as divergências publicadas sem ajuste artificial.
+- Integro também um snapshot público da ABVE/Tupi sobre infraestrutura de recarga: total nacional, participação regional e rankings top 20 de municípios e UFs, com referência a agosto/2026.
 - Mantenho a frota SENATRAN (estoque em uma data) separada dos emplacamentos (fluxo durante um período).
 
 ## Recorte e limites atuais
@@ -42,9 +43,10 @@ Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo 
 - [IBGE/SIDRA — renda domiciliar per capita](https://sidra.ibge.gov.br/tabela/10295): média municipal do Censo 2022, variável 13431.
 - [ABVE Data](https://abve.org.br/abve-data/): painel público de vendas e eletrificação; o snapshot é transcrito manualmente e já está integrado em Silver/Gold, sem atualização automática.
 - [ABVE — dados até agosto de 2026](https://abve.org.br/com-57-mil-emplacamentos-em-agosto-eletrificados-abrem-a-corrida-para-o-milhao-em-setembro/): referência de validação publicada (57.386 em agosto; 328.477 em janeiro–agosto), usada como conferência independente da série do painel.
+- [ABVE/Tupi — infraestrutura de recarga](https://abve.org.br/recarga-rapida-dc-quase-triplica-em-12-meses-e-ja-responde-por-38-da-rede-brasileira/): total nacional e distribuição da rede pública/semipública, referência agosto/2026. O [painel de eletropostos](https://abve.org.br/abve-data/bi-eletropostos/) publica recortes regionais e rankings top 20; o projeto preserva esse escopo parcial, não uma lista completa de coordenadas.
 - [FENABRAVE — imprensa e informativos mensais](https://www.fenabrave.org.br/portalv2/home/imprensa): fonte dos totais mensais nas categorias publicadas como “híbridos” e “elétricos” e dos rankings de fabricantes. Os PDFs públicos não trazem o ranking de modelos; esse recorte exige cadastro no portal.
 - [ABVE Data](https://abve.org.br/abve-data/): snapshot mensal em [`data/portfolio/emplacamentos_abve_mensais.csv`](data/portfolio/emplacamentos_abve_mensais.csv), validado e integrado a Silver/Gold. A composição BEV/PHEV/HEV/HEV Flex começa em jan/2025 por mudança metodológica; a captura ainda não se atualiza automaticamente.
-- [Open Charge Map](https://openchargemap.org/develop/api): fonte complementar de pontos de recarga; a coleta requer uma chave pessoal gratuita.
+- [Open Charge Map](https://openchargemap.org/develop/api): possível complemento para coordenadas; coleta requer chave API e revisão de licença/cobertura de cada registro.
 
 O inventário, os métodos de acesso e as limitações estão em [docs/data_sources.md](docs/data_sources.md). Também documentei por que os CSVs recebidos sem origem confirmada ficam isolados em [docs/provided_data_assessment.md](docs/provided_data_assessment.md). As métricas estão em [docs/metrics.md](docs/metrics.md), as perguntas em [docs/business_questions.md](docs/business_questions.md) e o status de cada entrega em [docs/project_status.md](docs/project_status.md).
 
@@ -70,11 +72,11 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m src.run_project
 ```
 
-O comando baixa os meses publicados, registra os meses ainda indisponíveis, coleta os PDFs mensais públicos da FENABRAVE, valida o snapshot ABVE versionado, recria Bronze/Silver/Gold no PostgreSQL, testa baselines de previsão e exporta os CSVs agregados. A captura ABVE precisa ser atualizada manualmente quando a fonte publicar novos dados. Os arquivos brutos e Parquet não são versionados; os resultados agregados pequenos ficam em `data/portfolio/` e podem ser recriados pela mesma execução. Janeiro/2024 tem extração visual transcrita e revisada por causa da codificação de caracteres do PDF, método explicitado nos dados. Os indicadores da FENABRAVE não são somados aos da ABVE: cada entidade publica conceitos/categorias próprios. O arquivo fornecido pelo usuário e Open Charge Map permanecem separados até sua origem/classificação ser validada.
+O comando baixa os meses publicados, registra os meses ainda indisponíveis, coleta os PDFs mensais públicos da FENABRAVE, valida os snapshots ABVE versionados (vendas e recarga), recria Bronze/Silver/Gold no PostgreSQL, testa baselines de previsão e exporta os CSVs agregados. As capturas ABVE precisam ser atualizadas manualmente quando a fonte publicar novos dados. O arquivo bruto e os Parquet não são versionados; snapshots de fonte e resultados agregados pequenos ficam em `data/portfolio/`. Janeiro/2024 tem extração visual transcrita e revisada por causa da codificação de caracteres do PDF, método explicitado nos dados. Os indicadores da FENABRAVE não são somados aos da ABVE: cada entidade publica conceitos/categorias próprios. O arquivo fornecido pelo usuário e Open Charge Map permanecem separados até sua origem/classificação ser validada.
 
 ## Power BI
 
-Minha etapa visual será conectar o Power BI ao PostgreSQL (`localhost:5432`, banco `ev_brasil_db`) e usar as tabelas do schema `gold`. Vou começar pela evolução mensal, distribuição por estado, penetração municipal e capital versus interior. Para emplacamentos, existem tabelas separadas da FENABRAVE e do material fornecido ainda não confirmado; não devo somar fontes nem chamar o arquivo não confirmado de dado oficial. Os rankings públicos prontos são por fabricante; não há ranking de modelos eletrificados validado ainda.
+Minha etapa visual será conectar o Power BI ao PostgreSQL (`localhost:5432`, banco `ev_brasil_db`) e usar as tabelas do schema `gold`. Além da evolução mensal, distribuição por estado, penetração municipal e capital versus interior, posso mostrar a rede de recarga com seus limites de cobertura. Para emplacamentos, existem tabelas separadas da FENABRAVE e do material fornecido ainda não confirmado; não devo somar fontes nem chamar o arquivo não confirmado de dado oficial. Os rankings públicos prontos são por fabricante; não há ranking de modelos eletrificados validado ainda.
 
 ## Estrutura
 

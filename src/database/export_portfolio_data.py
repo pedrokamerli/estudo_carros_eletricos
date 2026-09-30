@@ -24,6 +24,11 @@ EXPORTS = {
         SELECT * FROM gold.emplacamentos_abve_mensais
         ORDER BY ano_referencia, mes_referencia
     """,
+    "infraestrutura_recarga_abve_gold.csv": """
+        SELECT * FROM gold.infraestrutura_recarga_abve
+        ORDER BY CASE nivel_geografico WHEN 'nacional' THEN 1 WHEN 'regiao' THEN 2
+                 WHEN 'estado' THEN 3 ELSE 4 END, posicao NULLS LAST
+    """,
     "ranking_marcas_fenabrave_mensal.csv": """
         SELECT * FROM gold.ranking_marcas_fenabrave_mensal
         ORDER BY ano_referencia, mes_referencia, categoria_fenabrave, posicao

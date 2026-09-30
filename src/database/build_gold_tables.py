@@ -206,6 +206,14 @@ GOLD_STATEMENTS = [
            url_fonte, data_captura, metodo_extracao
     FROM defasagens;
     """,
+    "DROP TABLE IF EXISTS gold.infraestrutura_recarga_abve;",
+    """
+    CREATE TABLE gold.infraestrutura_recarga_abve AS
+    SELECT nivel_geografico, escopo_ranking, regiao, municipio, uf, posicao,
+           pontos_ac, pontos_dc, pontos_total, participacao_nacional_percentual,
+           data_referencia, data_publicacao, data_captura, url_fonte, metodo_extracao
+    FROM silver.abve_infraestrutura_recarga;
+    """,
     "DROP TABLE IF EXISTS gold.ranking_marcas_fenabrave_mensal;",
     """
     CREATE TABLE gold.ranking_marcas_fenabrave_mensal AS
@@ -284,6 +292,7 @@ def main() -> None:
         "gold.evolucao_frota_por_estado",
         "gold.emplacamentos_fenabrave_mensais",
         "gold.emplacamentos_abve_mensais",
+        "gold.infraestrutura_recarga_abve",
         "gold.ranking_marcas_fenabrave_mensal",
     ]
     if has_market_data:
