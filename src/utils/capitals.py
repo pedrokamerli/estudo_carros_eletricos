@@ -1,0 +1,32 @@
+"""Aqui mantenho as capitais no mesmo padrão de texto usado pela SENATRAN."""
+
+# Uso este dicionário para decidir se cada município é capital ou interior.
+CAPITALS_BY_UF = {
+    "ACRE": "RIO BRANCO",
+    "ALAGOAS": "MACEIO",
+    "AMAPA": "MACAPA",
+    "AMAZONAS": "MANAUS",
+    "BAHIA": "SALVADOR",
+    "CEARA": "FORTALEZA",
+    "DISTRITO FEDERAL": "BRASILIA",
+    "ESPIRITO SANTO": "VITORIA",
+    "GOIAS": "GOIANIA",
+    "MARANHAO": "SAO LUIS",
+    "MATO GROSSO": "CUIABA",
+    "MATO GROSSO DO SUL": "CAMPO GRANDE",
+    "MINAS GERAIS": "BELO HORIZONTE",
+    "PARA": "BELEM",
+    "PARAIBA": "JOAO PESSOA",
+    "PARANA": "CURITIBA",
+    "PERNAMBUCO": "RECIFE",
+    "PIAUI": "TERESINA",
+    "RIO DE JANEIRO": "RIO DE JANEIRO",
+    "RIO GRANDE DO NORTE": "NATAL",
+    "RIO GRANDE DO SUL": "PORTO ALEGRE",
+    "RONDONIA": "PORTO VELHO",
+    "RORAIMA": "BOA VISTA",
+    "SANTA CATARINA": "FLORIANOPOLIS",
+    "SAO PAULO": "SAO PAULO",
+    "SERGIPE": "ARACAJU",
+    "TOCANTINS": "PALMAS",
+}

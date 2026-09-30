@@ -47,6 +47,16 @@ No terminal do PyCharm, ative o ambiente com:
 
 As bibliotecas serão registradas em `requirements.txt` quando começarmos a usá-las.
 
+## Executar a primeira pipeline
+
+Com o arquivo bruto da SENATRAN salvo em `data/bronze/senatran/`, execute:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.run_pipeline
+```
+
+A pipeline valida a estrutura do arquivo Bronze, identifica a frota eletrificada e cria uma tabela Parquet na camada Silver. Os arquivos de dados continuam locais e não são enviados ao GitHub.
+
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.

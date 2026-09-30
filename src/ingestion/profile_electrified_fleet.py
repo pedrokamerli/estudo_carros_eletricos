@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
+# Uso esta referência para classificar cada município como capital ou interior.
 CAPITALS_BY_UF = {
     "ACRE": "RIO BRANCO",
     "ALAGOAS": "MACEIO",
@@ -32,7 +33,7 @@ CAPITALS_BY_UF = {
     "TOCANTINS": "PALMAS",
 }
 
-
+# Descubro a raiz do projeto e o caminho do dado Bronze que será analisado.
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 BRONZE_SENATRAN_PATH = PROJECT_ROOT / "data" / "bronze" / "senatran"
 
@@ -49,6 +50,7 @@ ELECTRIC_COMPONENT_FUELS = [
     "GASOLINA/ELETRICO",
 ]
 
+# Guardo híbridos em listas próprias porque seus nomes não contêm ELETRICO.
 HYBRID_FUELS = [
     "HIBRIDO",
 ]
@@ -59,8 +61,10 @@ PLUG_IN_HYBRID_FUELS = [
 
 
 def profile_electrified_fleet() -> None:
+    # Leio o Excel original; todas as análises abaixo acontecem somente na memória.
     dataframe = pd.read_excel(FILE_PATH)
 
+    # Relaciono cada combustível aceito a uma categoria analítica mais fácil de entender.
     category_by_fuel = {}
 
     for fuel in ELECTRIC_COMPONENT_FUELS:
@@ -72,14 +76,17 @@ def profile_electrified_fleet() -> None:
     for fuel in PLUG_IN_HYBRID_FUELS:
         category_by_fuel[fuel] = "Hibrido plug-in"
 
+    # Mantenho somente as linhas que atendem à definição inicial de eletrificação.
     electrified_dataframe = dataframe[
-        dataframe["Combustível Veículo"].isin(category_by_fuel)
+        dataframe["Combustível Veículo"].isin(category_by_fuel.keys())
     ].copy()
 
+    # Adiciono uma coluna com a categoria criada a partir do combustível original.
     electrified_dataframe["Categoria eletrificacao"] = (
         electrified_dataframe["Combustível Veículo"].map(category_by_fuel)
     )
 
+    # Agrupo os registros para somar a frota de cada categoria de eletrificação.
     summary = (
         electrified_dataframe.groupby(
             "Categoria eletrificacao",
@@ -89,12 +96,14 @@ def profile_electrified_fleet() -> None:
         .sort_values("Qtd. Veículos", ascending=False)
     )
 
+    # Somo todas as categorias para chegar ao total nacional da regra atual.
     total_electrified = summary["Qtd. Veículos"].sum()
 
     print("Frota eletrificada por categoria:")
     print(summary.to_string(index=False))
 
     print(f"\nTotal de veículos eletrificados: {total_electrified:,}")
+    # Identifico veículos sem UF para não tratá-los como um estado real no ranking.
     unknown_uf_total = electrified_dataframe.loc[
         electrified_dataframe["UF"] == "Sem Informação",
         "Qtd. Veículos",
@@ -106,10 +115,12 @@ def profile_electrified_fleet() -> None:
     print(f"Quantidade: {unknown_uf_total:,}")
     print(f"Percentual do total: {unknown_uf_percentage:.2f}%")
 
+    # Crio um recorte para geografia, mantendo fora somente os registros sem UF conhecida.
     geographic_dataframe = electrified_dataframe.loc[
         electrified_dataframe["UF"] != "Sem Informação"
     ].copy()
 
+    # Agrupo os municípios de cada UF para criar o ranking estadual.
     state_ranking = (
         geographic_dataframe.groupby("UF", as_index=False)["Qtd. Veículos"]
         .sum()
@@ -120,6 +131,7 @@ def profile_electrified_fleet() -> None:
     print("\nTop 10 estados por frota eletrificada:")
     print(state_ranking.to_string(index=False))
 
+    # Verifico se ainda há municípios sem informação antes de montar o ranking municipal.
     missing_municipality_dataframe = geographic_dataframe.loc[
         geographic_dataframe["Município"].str.contains(
             "SEM INFORMA",
@@ -134,6 +146,7 @@ def profile_electrified_fleet() -> None:
 
     print("\nVeículos sem município informado:")
     print(f"Quantidade: {missing_municipality_total:,}")
+    # Agrupo UF e município juntos para não misturar cidades de mesmo nome em estados diferentes.
     municipality_totals = (
         geographic_dataframe.groupby(
             ["UF", "Município"],
@@ -142,6 +155,7 @@ def profile_electrified_fleet() -> None:
         .sum()
     )
 
+    # Ordeno os municípios e mantenho apenas os dez maiores no ranking exibido.
     municipality_ranking = (
         municipality_totals.sort_values(
             "Qtd. Veículos",
@@ -153,10 +167,12 @@ def profile_electrified_fleet() -> None:
     print("\nTop 10 municípios por frota eletrificada:")
     print(municipality_ranking.to_string(index=False))
 
+    # Busco a capital correspondente a cada UF usando o dicionário do início do arquivo.
     municipality_totals["Capital da UF"] = (
         municipality_totals["UF"].map(CAPITALS_BY_UF)
     )
 
+    # Começo classificando todos como interior e depois marco as capitais.
     municipality_totals["Tipo localidade"] = "Interior"
 
     municipality_totals.loc[
@@ -165,6 +181,7 @@ def profile_electrified_fleet() -> None:
         "Tipo localidade",
     ] = "Capital"
 
+    # Somo capitais e interior para responder à pergunta sobre concentração geográfica.
     capital_vs_interior = (
         municipality_totals.groupby(
             "Tipo localidade",
@@ -174,6 +191,7 @@ def profile_electrified_fleet() -> None:
         .sort_values("Qtd. Veículos", ascending=False)
     )
 
+    # Transformo os totais em participação percentual no conjunto com UF informada.
     capital_vs_interior["Percentual"] = (
         capital_vs_interior["Qtd. Veículos"]
         / capital_vs_interior["Qtd. Veículos"].sum()
@@ -186,4 +204,5 @@ def profile_electrified_fleet() -> None:
 
 
 if __name__ == "__main__":
+    # Rodo o perfil apenas quando este arquivo é executado diretamente.
     profile_electrified_fleet()
