@@ -47,10 +47,11 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 
 ### Painel oficial da ABVE
 
-- **Fonte:** [ABVE Data — Geral](https://abve.org.br/bi-geral/).
-- **Formato atual:** painel público Power BI incorporado no site da ABVE.
-- **Uso planejado:** validar a série de emplacamentos e categorias divulgadas pela associação; esta métrica continuará separada da frota registrada pela SENATRAN.
-- **Limitação atual:** o painel não oferece CSV público direto. A extração programática exigirá um conector específico para Power BI, que será implementado somente quando o acesso aos dados do painel for validado.
+- **Fontes:** [ABVE Data](https://abve.org.br/abve-data/), painel [Geral](https://abve.org.br/abve-data/bi-geral/) e painel de [Geografia da Eletromobilidade](https://abve.org.br/abve-data/bi-geografia-da-eletromobilidade/).
+- **Formato atual:** relatórios Power BI públicos incorporados ao site. Não encontrei link de exportação tabular direta. Li as tabelas acessíveis do painel e registrei um snapshot agregado verificável em [`data/portfolio/emplacamentos_abve_mensais.csv`](../data/portfolio/emplacamentos_abve_mensais.csv); essa captura inicial foi transcrita do visual e não é uma coleta automática recorrente.
+- **Uso:** validar separadamente a série de emplacamentos e categorias divulgadas pela associação; não misturar com a frota registrada pela SENATRAN ou com as categorias da FENABRAVE.
+- **Quebra metodológica:** a ABVE declara uma classificação revisada a partir de janeiro/2025. Na definição vigente, eletrificados leves incluem BEV, PHEV, HEV e HEV Flex, mas não MHEV. Em alguns informes de 2024, MHEV aparece incluído em totais; é preciso reconstruir um recorte comparável antes de calcular crescimento entre períodos.
+- **Cobertura verificada:** o snapshot contém totais mensais de janeiro/2024 a agosto/2026 e tecnologias de janeiro/2025 a agosto/2026. Setembro ainda não tinha fechamento mensal publicado em 30/09/2026. A soma dos totais mensais do painel para jan–ago excede em 16 unidades o acumulado citado em notícia ABVE de 2025 e em 6 unidades o acumulado publicado para 2026; em ago/2025, a soma das quatro tecnologias fica 16 abaixo do total mensal do painel. Preservei esses números separados para conferência. A atualização recorrente continua pendente de um método estável para extrair o painel.
 
 ## Infraestrutura de recarga — fonte a confirmar
 
@@ -87,7 +88,7 @@ A série FENABRAVE está implementada como uma fonte independente para as pergun
 
 - A página oficial da SENATRAN consultada em 30/09/2026 lista julho de 2026 como a competência mais recente de combustível por UF/município. O coletor procura novos meses em cada execução e grava os meses ausentes no manifesto.
 - A API pública CKAN identifica arquivos RENAVAM com marca/modelo e licença indicada como domínio público. Esses registros não trazem combustível na mesma granularidade; não os uso para declarar eletrificação por modelo sem uma classificação independente.
-- A ABVE publica boletins mensais com totais, tecnologias e recortes geográficos, além do painel ABVE Data. Os conceitos e a classificação mudam entre períodos; a extração automatizada ainda será conciliada antes de virar uma série única.
+- A ABVE publica boletins mensais com totais, tecnologias e recortes geográficos, além de painéis públicos Power BI incorporados. A classificação mudou em janeiro/2025; automatizar a captura do texto ou dos visuais sem preservar essa quebra poderia criar uma série enganosa. Setembro/2026 ainda não tinha total mensal fechado publicado em 30/09/2026.
 - Em setembro de 2026, ABVE/Tupi publicou uma atualização nacional de pontos públicos e semipúblicos referente a agosto de 2026. É uma referência útil para contexto nacional, mas não substitui uma base geolocalizada para estimar demanda por município.
 - Os boletins ABVE consultados em 2026 citam dados de infraestrutura da ABVE/Tupi. O Open Charge Map é uma fonte comunitária complementar que requer API key, limite de chamadas e respeito às licenças de cada fornecedor.
 - O projeto tem coletor Open Charge Map, mas sua execução ainda depende da chave API local do usuário.
