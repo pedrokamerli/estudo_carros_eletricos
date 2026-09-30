@@ -93,6 +93,17 @@ Para baixar PIB municipal de 2023 e população do Censo de 2022, execute os com
 .\.venv\Scripts\python.exe -m src.transformation.silver_to_gold
 ```
 
+## Coletar eletropostos
+
+Crie gratuitamente uma chave de API na [Open Charge Map](https://openchargemap.org/develop/api). No terminal do PyCharm, informe a chave apenas para a sessão atual e execute a coleta:
+
+```powershell
+$env:OCM_API_KEY = "cole_a_sua_chave_aqui"
+.\.venv\Scripts\python.exe -m src.ingestion.download_open_charge_map
+```
+
+A chave não é salva em arquivos do projeto e não deve ser enviada ao GitHub.
+
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.
