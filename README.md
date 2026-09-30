@@ -8,11 +8,11 @@ Uma empresa interessada em mobilidade elétrica precisa entender como o mercado 
 
 **Pergunta principal:** como evoluiu a adoção de veículos elétricos no Brasil e quais estados e municípios apresentam maior potencial de crescimento?
 
-As perguntas analíticas que orientarão o projeto estão em [docs/business_questions.md](docs/business_questions.md). As fontes inicialmente selecionadas e seu vínculo com cada pergunta estão em [docs/data_sources.md](docs/data_sources.md). As definições das métricas estão em [docs/metrics.md](docs/metrics.md).
+As perguntas analíticas que orientarão o projeto estão em [docs/business_questions.md](docs/business_questions.md). As fontes inicialmente selecionadas e seu vínculo com cada pergunta estão em [docs/data_sources.md](docs/data_sources.md). As definições das métricas estão em [docs/metrics.md](docs/metrics.md). O recorte de coleta está em [docs/collection_scope.md](docs/collection_scope.md).
 
 ## Etapa atual
 
-**Fase 1 — Setup profissional.** O ambiente Python, o Git, o GitHub e a estrutura inicial estão prontos. Ainda não usamos banco de dados, Spark, Airflow ou outras ferramentas: elas entrarão nas fases adequadas.
+**Fase 2 — Coleta e tratamento local.** A pipeline identifica automaticamente todos os arquivos mensais de combustível de 2024 a 2026 que estiverem na Bronze. Ainda não usamos banco de dados, Spark, Airflow ou outras ferramentas: elas entrarão nas fases adequadas.
 
 ## Estrutura inicial
 
@@ -55,7 +55,7 @@ Com o arquivo bruto da SENATRAN salvo em `data/bronze/senatran/`, execute:
 .\.venv\Scripts\python.exe -m src.run_pipeline
 ```
 
-A pipeline valida a estrutura do arquivo Bronze, identifica a frota eletrificada e cria uma tabela Parquet na camada Silver. Os arquivos de dados continuam locais e não são enviados ao GitHub.
+A pipeline valida a estrutura de cada arquivo Bronze, identifica a frota eletrificada e cria uma única tabela Parquet na camada Silver com todos os meses disponíveis. Os arquivos de dados continuam locais e não são enviados ao GitHub.
 
 O relatório de qualidade da fonte é criado em `data/quality/senatran/` a cada execução.
 
