@@ -58,6 +58,12 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Objetivo:** identificar uma fonte aberta com localização de eletropostos para responder à pergunta 14.
 - **Status:** **não definida ainda**. O portal de dados abertos da ANEEL é uma fonte oficial importante para o setor elétrico, mas a disponibilidade de uma base nacional de eletropostos precisa ser verificada antes da coleta.
 
+## Arquivos recebidos para exploração — origem não confirmada
+
+- Recebi os arquivos `historico_vendas_ev_brasil.csv`, `vendas_ev_brasil_mes_a_mes.csv` e `dataset_mercado_ev_brasil.csv`.
+- Eles não informam fonte, URL, licença ou método de compilação. Além disso, os valores anuais e mensais para modelos comuns não fecham em alguns casos. O arquivo municipal chama população, PIB e frota de estimativas sem registrar ano-base.
+- Mantenho-os isolados e marcados `origem_oficial_confirmada = false`; não os uso para calcular resultados oficiais de mercado. A auditoria detalhada fica em [`docs/provided_data_assessment.md`](provided_data_assessment.md).
+
 ## Mapa de perguntas e fontes
 
 | Perguntas | Fonte principal | Complemento |

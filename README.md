@@ -44,7 +44,7 @@ Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo 
 - [FENABRAVE — imprensa e informativos mensais](https://www.fenabrave.org.br/portalv2/home/imprensa): fonte dos totais mensais nas categorias publicadas como “híbridos” e “elétricos” e dos rankings de fabricantes. Os PDFs públicos não trazem o ranking de modelos; esse recorte exige cadastro no portal.
 - [Open Charge Map](https://openchargemap.org/develop/api): fonte complementar de pontos de recarga; a coleta requer uma chave pessoal gratuita.
 
-O inventário, os métodos de acesso e as limitações estão em [docs/data_sources.md](docs/data_sources.md). As métricas estão em [docs/metrics.md](docs/metrics.md), as perguntas em [docs/business_questions.md](docs/business_questions.md) e o status de cada entrega em [docs/project_status.md](docs/project_status.md).
+O inventário, os métodos de acesso e as limitações estão em [docs/data_sources.md](docs/data_sources.md). Também documentei por que os CSVs recebidos sem origem confirmada ficam isolados em [docs/provided_data_assessment.md](docs/provided_data_assessment.md). As métricas estão em [docs/metrics.md](docs/metrics.md), as perguntas em [docs/business_questions.md](docs/business_questions.md) e o status de cada entrega em [docs/project_status.md](docs/project_status.md).
 
 ## Tecnologias
 

@@ -18,6 +18,7 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 | Oportunidade municipal preliminar | Feito como filtro exploratório de quartis de PIB, renda e adoção; não é previsão | `gold.oportunidade_municipal_preliminar` |
 | Correlação socioeconômica e adoção | Implementada com Pearson e Spearman para PIB, renda e população versus dois indicadores de adoção; é descritiva, não causal | `gold.correlacao_municipal_socioeconomia_adocao` |
 | Backtest de previsão | Feito: 4 baselines, 24 meses de treino e 7 meses de teste para cada categoria FENABRAVE; resultado carregado em Gold | `gold.backtest_previsao_fenabrave`, `gold.backtest_detalhe_previsao_fenabrave` |
+| Auditoria dos dados fornecidos | Feita: estrutura, cobertura e consistência interna avaliadas; não há fonte documentada e os exports seguem explicitamente não verificados | `docs/provided_data_assessment.md` |
 | Coleta de emplacamentos FENABRAVE | Feito para os boletins mensais públicos de autos e comerciais leves, jan/2024–ago/2026 | `src/ingestion/download_fenabrave_monthly_reports.py` |
 | Silver/Gold FENABRAVE | Feito: 64 linhas de categorias mensais e 960 registros de ranking mensal de fabricantes | `silver.fenabrave_*`, `gold.*_fenabrave_*` |
 | Atualização ponta a ponta | Feito e executado com SENATRAN, IBGE, FENABRAVE, PostgreSQL e exports agregados | `src/run_project.py` |
@@ -42,11 +43,12 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 ## Próximas entregas técnicas
 
 1. Coletar e conciliar a série mensal ABVE e documentar a mudança de classificação; mantê-la em tabela própria.
-2. Obter acesso autenticado ao portal FENABRAVE para avaliar modelos mais vendidos e confirmar os campos/regras de exportação. Não compartilhar senha no chat; caso necessário, usar o login localmente.
-3. Coletar pontos de recarga com cobertura, data de atualização e licença documentadas. O coletor Open Charge Map requer uma chave API local.
-4. Interpretar correlações com gráficos/distribuições e testar sensibilidade do filtro de oportunidade; associação não prova causa.
-5. Aumentar o histórico comparável e testar o backtest em novas janelas antes de publicar previsão futura. As tabelas de erro estão disponíveis para visualização, mas ainda não há uma projeção futura validada.
-6. Construir o dashboard Power BI e o case visual do portfólio. Os exports agregados já estão em `data/portfolio/`.
+2. Se eu quiser usar os três CSVs recebidos como evidência do estudo principal, localizar a fonte original, licença, data de extração e definições; sem isso continuam excluídos das conclusões oficiais.
+3. Obter acesso autenticado ao portal FENABRAVE para avaliar modelos mais vendidos e confirmar os campos/regras de exportação. Não compartilhar senha no chat; caso necessário, usar o login localmente.
+4. Coletar pontos de recarga com cobertura, data de atualização e licença documentadas. O coletor Open Charge Map requer uma chave API local.
+5. Interpretar correlações com gráficos/distribuições e testar sensibilidade do filtro de oportunidade; associação não prova causa.
+6. Aumentar o histórico comparável e testar o backtest em novas janelas antes de publicar previsão futura. As tabelas de erro estão disponíveis para visualização, mas ainda não há uma projeção futura validada.
+7. Construir o dashboard Power BI e o case visual do portfólio. Os exports agregados já estão em `data/portfolio/`.
 
 ## Regras para o fechamento
 

@@ -4,6 +4,8 @@ Os CSVs desta pasta são exports agregados das tabelas Gold do PostgreSQL. Eles 
 
 Os arquivos com `dados_fornecidos` no nome vêm de material recebido pelo autor e ainda não têm origem oficial confirmada. Eles não devem ser apresentados como série oficial da ABVE.
 
+A avaliação estrutural e a comparação entre os arquivos anuais/mensais estão em [`docs/provided_data_assessment.md`](../../docs/provided_data_assessment.md). Mesmo sem nulos ou IDs repetidos, esses checks não confirmam a origem dos números.
+
 Entre os exports públicos há tabelas de frota e adoção municipal, correlações descritivas com indicadores do IBGE, emplacamentos mensais e rankings de fabricantes da FENABRAVE. Os relatórios FENABRAVE cobrem janeiro/2024 a agosto/2026, no recorte de autos e comerciais leves; as categorias “híbridos” e “elétricos” são próprias da fonte e não devem ser tratadas como equivalentes à classificação ABVE. Janeiro/2024 foi transcrito visualmente de PDF e esse método aparece nas linhas correspondentes.
 
 Os arquivos `backtest_previsao_fenabrave.csv` e `backtest_detalhe_previsao_fenabrave.csv` comparam quatro baselines usando fevereiro/2024 a janeiro/2026 para treino e fevereiro a agosto/2026 para teste. São erros retrospectivos para avaliar métodos — não previsões futuras validadas.
