@@ -104,6 +104,16 @@ $env:OCM_API_KEY = "cole_a_sua_chave_aqui"
 
 A chave não é salva em arquivos do projeto e não deve ser enviada ao GitHub.
 
+## Carregar a Silver no PostgreSQL
+
+Depois de criar as tabelas `silver` no pgAdmin, execute:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.database.load_silver_to_postgres
+```
+
+O carregador evita duplicidade: se uma tabela já estiver preenchida, ele não insere novamente e apenas valida a quantidade de linhas e veículos.
+
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.
