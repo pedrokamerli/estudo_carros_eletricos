@@ -59,6 +59,20 @@ A pipeline valida a estrutura de cada arquivo Bronze, identifica a frota eletrif
 
 O relatório de qualidade da fonte é criado em `data/quality/senatran/` a cada execução.
 
+## Gerar as tabelas Gold
+
+Depois de gerar as tabelas Silver, execute o comando abaixo para criar as respostas analíticas de frota por estado, município, tipo de localidade e categoria de eletrificação:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.transformation.silver_to_gold
+```
+
+O dataset mensal de mercado fornecido pelo usuário deve ser transformado antes da Gold de ranking de marcas e modelos:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.transformation.market_dataset_to_silver --input "D:\estudos ciencia de dados\estudo mercaod de carros elétricos\dataset_mercado_ev_brasil.csv"
+```
+
 ## Regras do projeto
 
 - Não enviar `.venv`, senhas ou arquivos `.env` ao GitHub.
