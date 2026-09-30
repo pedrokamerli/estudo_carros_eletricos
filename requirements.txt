@@ -4,3 +4,5 @@ pandas
 openpyxl
 pyarrow
 pytest
+psycopg[binary]
+python-dotenv
