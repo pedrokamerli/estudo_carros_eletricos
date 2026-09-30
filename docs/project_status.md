@@ -16,7 +16,10 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 | Cruzamento municipal IBGE | Feito e publicado no PostgreSQL; 4.874 dos 4.914 municípios SENATRAN cruzaram com IBGE | `src/transformation/silver_to_gold.py`, `src/database/load_municipal_insights_to_postgres.py` |
 | Indicadores econômicos municipais | Feito: PIB 2023, população do Censo 2022 e renda domiciliar per capita do Censo 2022 | `src/ingestion/download_ibge_municipal_indicators.py`, `data/portfolio/penetracao_municipal_ibge.csv` |
 | Oportunidade municipal preliminar | Feito como filtro exploratório de quartis de PIB, renda e adoção; não é previsão | `gold.oportunidade_municipal_preliminar` |
-| Atualização ponta a ponta | Feito para SENATRAN, IBGE, PostgreSQL e exports agregados | `src/run_project.py` |
+| Correlação socioeconômica e adoção | Implementada com Pearson e Spearman para PIB, renda e população versus dois indicadores de adoção; é descritiva, não causal | `gold.correlacao_municipal_socioeconomia_adocao` |
+| Coleta de emplacamentos FENABRAVE | Feito para os boletins mensais públicos de autos e comerciais leves, jan/2024–ago/2026 | `src/ingestion/download_fenabrave_monthly_reports.py` |
+| Silver/Gold FENABRAVE | Feito: 64 linhas de categorias mensais e 960 registros de ranking mensal de fabricantes | `silver.fenabrave_*`, `gold.*_fenabrave_*` |
+| Atualização ponta a ponta | Feito e executado com SENATRAN, IBGE, FENABRAVE, PostgreSQL e exports agregados | `src/run_project.py` |
 | Dashboard Power BI | Pendente | Etapa visual do autor |
 
 ## Cobertura atual
@@ -25,21 +28,23 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 - Silver SENATRAN: 440.342 linhas de combustível eletrificado; frota total municipal: 172.783 linhas mensais.
 - IBGE: 5.570 municípios; o cruzamento liga 4.874 localidades com código IBGE na competência SENATRAN mais recente.
 - SENATRAN: agosto e setembro/2026 ainda não aparecem como publicados na página consultada em 30/09/2026.
+- FENABRAVE: 32 competências disponíveis, janeiro/2024 a agosto/2026; 64 linhas de híbridos/elétricos e 960 linhas dos rankings mensais de fabricantes. Janeiro/2024 cobre somente autos, enquanto os relatórios de fevereiro/2024 em diante cobrem autos e comerciais leves. Janeiro foi transcrito visualmente e conferido no PDF, pois a codificação de fonte impede extração textual confiável; segmento e método ficam registrados por linha.
 - IBGE: PIB 2023, população do Censo 2022 e renda domiciliar per capita do Censo 2022; referências e conceitos ficam explícitos nos nomes das colunas.
-- ABVE: há relatórios oficiais mensais e um painel público. A série tabular estruturada ainda precisa ser coletada e conciliada, incluindo a mudança de classificação de 2025. Logo, as perguntas de emplacamentos e market share ainda não estão respondidas pela série mensal validada.
-- ABVE/Tupi publicou 29.866 pontos públicos e semipúblicos de recarga com referência a agosto/2026; é um total nacional, não uma base municipal de coordenadas para análise de cobertura local.
-- Marcas/modelos SENATRAN: o arquivo de dezembro/2025 foi baixado para Bronze. Ele não contém combustível, então não permite isoladamente identificar modelos eletrificados.
+- FENABRAVE: a série responde evolução e crescimento apenas segundo as categorias amplas “híbridos” e “elétricos” do boletim, no recorte de autos e comerciais leves. Rankings de fabricantes são disponibilizados por categoria/mês; não equivalem automaticamente à taxonomia ABVE (BEV/HEV/PHEV).
+- ABVE: há relatórios oficiais mensais e um painel público. A série mensal estruturada ainda precisa ser coletada e conciliada, incluindo a mudança de classificação de 2025. Manter ABVE separada da FENABRAVE até haver reconciliação documentada.
+- Conferência agregada de agosto/2026: FENABRAVE soma 64.055 “híbridos + elétricos”; a ABVE separa 57.386 eletrificados e 6.669 MHEV, também somando 64.055. Isso dá uma pista de escopo para futura reconciliação, mas **não** prova equivalência entre as categorias por tecnologia.
+- ABVE/Tupi publicou 29.866 pontos públicos e semipúblicos de recarga com referência a agosto/2026; é um total nacional, não uma base municipal de coordenadas para análise de cobertura local. A ABVE reportou também 57.386 eletrificados leves em agosto/2026 e 328.477 no acumulado janeiro–agosto; uso esses números como validação publicada, não como uma série ABVE mensal já carregada.
+- Marcas/modelos SENATRAN: o arquivo de dezembro/2025 foi baixado para Bronze. Ele não contém combustível, então não permite isoladamente identificar modelos eletrificados. Os boletins públicos da FENABRAVE trazem ranking de fabricantes, mas o portal reserva o ranking de modelos para usuário cadastrado.
 - Open Charge Map: o coletor existe, mas depende de uma chave API local e de revisão de cobertura/licença dos registros.
 
 ## Próximas entregas técnicas
 
-1. Coletar e conciliar emplacamentos mensais da ABVE com a definição de eletrificado usada em cada ano; o painel e os boletins confirmam os dados, mas a série inteira ainda não foi estruturada no banco.
-2. Integrar o mercado total da FENABRAVE/ANFAVEA para medir participação de mercado com um denominador correspondente.
-3. Definir uma classificação de marca/modelo eletrificado baseada em fonte verificável; não inferir combustível apenas pelo nome do modelo.
-4. Coletar pontos de recarga com cobertura, data de atualização e licença documentadas. O coletor OCM requer uma chave do usuário.
-5. Calcular e documentar relações entre renda, PIB, população e adoção; testar sensibilidade dos municípios de oportunidade antes de interpretar o filtro preliminar.
-6. Avaliar previsão somente depois da série mensal de emplacamentos estar conciliada, com separação treino/teste e baseline.
-7. Construir o dashboard e o case final no portfólio. Os exports agregados já estão em `data/portfolio/`.
+1. Coletar e conciliar a série mensal ABVE e documentar a mudança de classificação; mantê-la em tabela própria.
+2. Obter acesso autenticado ao portal FENABRAVE para avaliar modelos mais vendidos e confirmar os campos/regras de exportação. Não compartilhar senha no chat; caso necessário, usar o login localmente.
+3. Coletar pontos de recarga com cobertura, data de atualização e licença documentadas. O coletor Open Charge Map requer uma chave API local.
+4. Interpretar correlações com gráficos/distribuições e testar sensibilidade do filtro de oportunidade; associação não prova causa.
+5. Avaliar previsão somente após uma série mensal escolhida e validada, com baseline e separação treino/teste.
+6. Construir o dashboard Power BI e o case visual do portfólio. Os exports agregados já estão em `data/portfolio/`.
 
 ## Regras para o fechamento
 

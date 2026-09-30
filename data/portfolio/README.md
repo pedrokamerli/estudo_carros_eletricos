@@ -4,6 +4,8 @@ Os CSVs desta pasta são exports agregados das tabelas Gold do PostgreSQL. Eles 
 
 Os arquivos com `dados_fornecidos` no nome vêm de material recebido pelo autor e ainda não têm origem oficial confirmada. Eles não devem ser apresentados como série oficial da ABVE.
 
+Entre os exports públicos há tabelas de frota e adoção municipal, correlações descritivas com indicadores do IBGE, emplacamentos mensais e rankings de fabricantes da FENABRAVE. Os relatórios FENABRAVE cobrem janeiro/2024 a agosto/2026, no recorte de autos e comerciais leves; as categorias “híbridos” e “elétricos” são próprias da fonte e não devem ser tratadas como equivalentes à classificação ABVE. Janeiro/2024 foi transcrito visualmente de PDF e esse método aparece nas linhas correspondentes.
+
 Para coletar as fontes públicas, atualizar o PostgreSQL e recriar os arquivos, execute `src.run_project`. Para exportar novamente apenas os CSVs a partir de um banco já atualizado, execute:
 
 ```powershell

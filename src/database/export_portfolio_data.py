@@ -16,6 +16,14 @@ EXPORTS = {
         SELECT * FROM gold.evolucao_frota_nacional
         ORDER BY ano_referencia, mes_referencia
     """,
+    "emplacamentos_fenabrave_mensais.csv": """
+        SELECT * FROM gold.emplacamentos_fenabrave_mensais
+        ORDER BY ano_referencia, mes_referencia, categoria_fenabrave
+    """,
+    "ranking_marcas_fenabrave_mensal.csv": """
+        SELECT * FROM gold.ranking_marcas_fenabrave_mensal
+        ORDER BY ano_referencia, mes_referencia, categoria_fenabrave, posicao
+    """,
     "frota_por_estado.csv": """
         SELECT * FROM gold.frota_por_estado
         ORDER BY ano_referencia, mes_referencia, uf
@@ -45,6 +53,10 @@ EXPORTS = {
     "oportunidade_municipal_preliminar.csv": """
         SELECT * FROM gold.oportunidade_municipal_preliminar
         ORDER BY pib_per_capita_aproximado DESC
+    """,
+    "correlacao_municipal_socioeconomia_adocao.csv": """
+        SELECT * FROM gold.correlacao_municipal_socioeconomia_adocao
+        ORDER BY variavel_socioeconomica, indicador_adocao, metodo
     """,
     "emplacamentos_mensais_dados_fornecidos.csv": """
         SELECT * FROM gold.emplacamentos_mensais_fornecidos

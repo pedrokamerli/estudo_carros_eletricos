@@ -14,6 +14,7 @@ from src.database.connection import get_connection
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PENETRATION_PATH = PROJECT_ROOT / "data" / "gold" / "penetracao_municipal_ibge.parquet"
 OPPORTUNITY_PATH = PROJECT_ROOT / "data" / "gold" / "oportunidade_municipal_preliminar.parquet"
+CORRELATION_PATH = PROJECT_ROOT / "data" / "gold" / "correlacao_municipal_socioeconomia_adocao.parquet"
 
 PENETRATION_COLUMNS = [
     "uf", "municipio", "quantidade_veiculos", "frota_total_veiculos", "municipio_chave", "uf_ibge",
@@ -23,6 +24,10 @@ PENETRATION_COLUMNS = [
     "mes_referencia_frota",
 ]
 OPPORTUNITY_COLUMNS = PENETRATION_COLUMNS + ["oportunidade_preliminar"]
+CORRELATION_COLUMNS = [
+    "variavel_socioeconomica", "indicador_adocao", "metodo", "coeficiente_correlacao",
+    "municipios_analisados", "ano_referencia_frota", "mes_referencia_frota",
+]
 
 
 def to_python_value(value: Any) -> Any:
@@ -33,7 +38,7 @@ def to_python_value(value: Any) -> Any:
 
 
 def create_gold_tables() -> None:
-    """Crio as duas tabelas analíticas caso elas ainda não existam."""
+    """Crio tabelas analíticas municipais caso ainda não existam."""
     statements = [
         """
         CREATE TABLE IF NOT EXISTS gold.penetracao_municipal_ibge (
@@ -51,6 +56,18 @@ def create_gold_tables() -> None:
             participacao_eletrificada_na_frota_percentual NUMERIC(12, 6),
             ano_referencia_frota SMALLINT NOT NULL,
             mes_referencia_frota SMALLINT NOT NULL
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS gold.correlacao_municipal_socioeconomia_adocao (
+            variavel_socioeconomica VARCHAR(100) NOT NULL,
+            indicador_adocao VARCHAR(100) NOT NULL,
+            metodo VARCHAR(20) NOT NULL CHECK (metodo IN ('pearson', 'spearman')),
+            coeficiente_correlacao NUMERIC(12, 8),
+            municipios_analisados INTEGER NOT NULL CHECK (municipios_analisados >= 0),
+            ano_referencia_frota SMALLINT NOT NULL,
+            mes_referencia_frota SMALLINT NOT NULL CHECK (mes_referencia_frota BETWEEN 1 AND 12),
+            PRIMARY KEY (variavel_socioeconomica, indicador_adocao, metodo)
         );
         """,
         """
@@ -100,7 +117,7 @@ def replace_table(dataframe: pd.DataFrame, table_name: str, columns: list[str]) 
 
 def main() -> None:
     """Confiro os arquivos Gold locais e publico seus resultados no PostgreSQL."""
-    if not PENETRATION_PATH.exists() or not OPPORTUNITY_PATH.exists():
+    if not PENETRATION_PATH.exists() or not OPPORTUNITY_PATH.exists() or not CORRELATION_PATH.exists():
         raise FileNotFoundError(
             "As análises municipais ainda não existem. Execute primeiro: "
             "python -m src.transformation.silver_to_gold"
@@ -108,6 +125,7 @@ def main() -> None:
 
     penetration_dataframe = pd.read_parquet(PENETRATION_PATH)
     opportunity_dataframe = pd.read_parquet(OPPORTUNITY_PATH)
+    correlation_dataframe = pd.read_parquet(CORRELATION_PATH)
     # O SIDRA chega como float após a combinação das duas tabelas, mas população
     # é uma contagem inteira e a coluna Gold foi definida como INTEGER.
     for dataframe in (penetration_dataframe, opportunity_dataframe):
@@ -117,9 +135,15 @@ def main() -> None:
     create_gold_tables()
     replace_table(penetration_dataframe, "gold.penetracao_municipal_ibge", PENETRATION_COLUMNS)
     replace_table(opportunity_dataframe, "gold.oportunidade_municipal_preliminar", OPPORTUNITY_COLUMNS)
+    replace_table(
+        correlation_dataframe,
+        "gold.correlacao_municipal_socioeconomia_adocao",
+        CORRELATION_COLUMNS,
+    )
 
     print(f"Penetração municipal carregada: {len(penetration_dataframe):,} linhas.")
     print(f"Oportunidades preliminares carregadas: {len(opportunity_dataframe):,} linhas.")
+    print(f"Correlações municipais carregadas: {len(correlation_dataframe):,} indicadores.")
 
 
 if __name__ == "__main__":

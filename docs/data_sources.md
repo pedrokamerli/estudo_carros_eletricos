@@ -36,6 +36,15 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Perguntas atendidas:** 1, 2 e 10.
 - **Atenção:** antes de automatizar, verificaremos se a série histórica está disponível em formato reaproveitável e se a licença permite o uso pretendido.
 
+## Emplacamentos e fabricantes — FENABRAVE
+
+- **Fonte:** [Informativos mensais e área de imprensa](https://www.fenabrave.org.br/portalv2/home/imprensa).
+- **Dados estruturados neste projeto:** categorias mensais “híbridos” e “elétricos”, acumulados publicados no relatório e rankings de 15 fabricantes por categoria. O relatório de janeiro/2024 é somente de autos; fevereiro/2024 a agosto/2026 é autos e comerciais leves, e o campo `segmento_veiculos` mantém essa diferença explícita.
+- **Período coletado:** janeiro/2024 a agosto/2026 (32 relatórios públicos). Setembro/2026 ainda não estava disponível no portal consultado em 30/09/2026.
+- **Processamento:** `src/ingestion/download_fenabrave_monthly_reports.py` coleta PDFs; `src/transformation/fenabrave_reports_to_silver.py` valida os totais e transforma o texto em Parquet; `src/database/load_fenabrave_to_postgres.py` carrega tabelas Silver dedicadas.
+- **Rastreabilidade:** cada registro conserva URL, página e método. Janeiro/2024 usa transcrição visual manual conferida na [página 20 do PDF original](https://www.fenabrave.org.br/portal/files/2024_01_02.pdf), pois a fonte do arquivo impede extração Unicode confiável.
+- **Limites:** estas categorias são as do boletim FENABRAVE e não equivalem necessariamente a BEV/HEV/PHEV da ABVE. Não combinar as séries sem uma reconciliação documentada. O portal indica que rankings de modelos exigem cadastro/login; este fluxo público não obtém tais dados.
+
 ### Painel oficial da ABVE
 
 - **Fonte:** [ABVE Data — Geral](https://abve.org.br/bi-geral/).
@@ -59,6 +68,8 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 | 11–13: economia e potencial municipal | IBGE | SENATRAN |
 | 14: demanda por recarga | Fonte de eletropostos a confirmar | SENATRAN, IBGE |
 | 15: previsão de emplacamentos | SENATRAN e/ou ABVE | — |
+
+A série FENABRAVE está implementada como uma fonte independente para as perguntas 1, 2, 8 e 10, com categorias e denominadores próprios; ela não substitui nem é somada à série ABVE.
 
 ## Recorte temporal e tamanho
 

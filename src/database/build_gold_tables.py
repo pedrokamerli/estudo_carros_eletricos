@@ -121,6 +121,56 @@ GOLD_STATEMENTS = [
     """,
     "CREATE INDEX IF NOT EXISTS idx_gold_estado_periodo ON gold.frota_por_estado (ano_referencia, mes_referencia);",
     "CREATE INDEX IF NOT EXISTS idx_gold_municipio_periodo ON gold.frota_por_municipio (ano_referencia, mes_referencia);",
+    "DROP TABLE IF EXISTS gold.emplacamentos_fenabrave_mensais;",
+    """
+    CREATE TABLE gold.emplacamentos_fenabrave_mensais AS
+    WITH base AS (
+        SELECT *, MAKE_DATE(ano_referencia, mes_referencia, 1) AS data_referencia
+        FROM silver.fenabrave_emplacamentos_mensais
+    )
+    SELECT atual.ano_referencia, atual.mes_referencia, atual.data_referencia,
+           atual.categoria_fenabrave, atual.segmento_veiculos,
+           atual.emplacamentos_mes,
+           ROUND(
+               100.0 * (atual.emplacamentos_mes - anterior.emplacamentos_mes)
+               / NULLIF(anterior.emplacamentos_mes, 0), 2
+           ) AS crescimento_mensal_percentual,
+           anterior_ano.emplacamentos_mes AS emplacamentos_mes_ano_anterior,
+           ROUND(
+               100.0 * (atual.emplacamentos_mes - anterior_ano.emplacamentos_mes)
+               / NULLIF(anterior_ano.emplacamentos_mes, 0), 2
+           ) AS crescimento_anual_percentual,
+           atual.emplacamentos_acumulado_ano,
+           atual.emplacamentos_acumulado_ano_anterior,
+           atual.pagina_pdf,
+           atual.url_fonte,
+           atual.metodo_extracao
+    FROM base AS atual
+    LEFT JOIN base AS anterior
+      ON anterior.data_referencia = atual.data_referencia - INTERVAL '1 month'
+     AND anterior.categoria_fenabrave = atual.categoria_fenabrave
+     AND anterior.segmento_veiculos = atual.segmento_veiculos
+    LEFT JOIN base AS anterior_ano
+      ON anterior_ano.data_referencia = atual.data_referencia - INTERVAL '1 year'
+     AND anterior_ano.categoria_fenabrave = atual.categoria_fenabrave
+     AND anterior_ano.segmento_veiculos = atual.segmento_veiculos;
+    """,
+    "DROP TABLE IF EXISTS gold.ranking_marcas_fenabrave_mensal;",
+    """
+    CREATE TABLE gold.ranking_marcas_fenabrave_mensal AS
+    SELECT marca.ano_referencia, marca.mes_referencia, marca.categoria_fenabrave,
+           marca.posicao, marca.marca, marca.quantidade_emplacada,
+           marca.participacao_percentual AS participacao_percentual_relatorio,
+           ROUND(
+               100.0 * marca.quantidade_emplacada
+               / NULLIF(vendas.emplacamentos_mes, 0), 2
+           ) AS participacao_percentual_calculada,
+           marca.segmento_veiculos, marca.pagina_pdf, marca.url_fonte,
+           marca.metodo_extracao
+    FROM silver.fenabrave_marcas_mensais AS marca
+    JOIN silver.fenabrave_emplacamentos_mensais AS vendas
+      USING (ano_referencia, mes_referencia, categoria_fenabrave, segmento_veiculos);
+    """,
 ]
 
 OPTIONAL_MARKET_STATEMENTS = [
@@ -181,6 +231,8 @@ def main() -> None:
         "gold.frota_por_categoria_eletrificacao",
         "gold.evolucao_frota_nacional",
         "gold.evolucao_frota_por_estado",
+        "gold.emplacamentos_fenabrave_mensais",
+        "gold.ranking_marcas_fenabrave_mensal",
     ]
     if has_market_data:
         tables.extend([

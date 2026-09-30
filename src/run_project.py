@@ -9,9 +9,12 @@ import sys
 PIPELINE_MODULES = [
     "src.ingestion.download_senatran_fuel_history",
     "src.ingestion.download_ibge_municipal_indicators",
+    "src.ingestion.download_fenabrave_monthly_reports",
     "src.transformation.ibge_bronze_to_silver",
+    "src.transformation.fenabrave_reports_to_silver",
     "src.run_pipeline",
     "src.database.load_silver_to_postgres",
+    "src.database.load_fenabrave_to_postgres",
     "src.transformation.silver_to_gold",
     "src.database.build_gold_tables",
     "src.database.load_municipal_insights_to_postgres",

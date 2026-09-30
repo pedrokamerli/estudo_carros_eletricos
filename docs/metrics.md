@@ -12,23 +12,28 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 
 | Indicador | Definição | Fórmula | Fonte prioritária |
 | --- | --- | --- | --- |
-| Emplacamentos eletrificados | Veículos eletrificados emplacados no período | soma dos emplacamentos no período | ABVE |
-| Crescimento anual | Variação dos emplacamentos entre dois anos | `(valor atual - valor anterior) / valor anterior × 100` | ABVE |
+| Emplacamentos eletrificados ABVE | Veículos eletrificados emplacados no período conforme a classificação da ABVE | soma da série mensal; preservar a classificação de cada período | ABVE |
+| Emplacamentos FENABRAVE | Contagens mensais publicadas nas categorias “híbridos” ou “elétricos” para autos e comerciais leves | valor mensal informado no boletim | FENABRAVE |
+| Crescimento anual FENABRAVE | Variação em uma categoria FENABRAVE frente ao mesmo mês do ano anterior | `(valor atual - valor no mesmo mês do ano anterior) / valor no mesmo mês do ano anterior × 100` | FENABRAVE |
 | Frota eletrificada | Veículos eletrificados registrados em uma área na data de referência | soma da quantidade por município ou UF | SENATRAN |
 | Participação eletrificada na frota | Fração da frota total municipal classificada como eletrificada na mesma competência | `frota eletrificada / frota total municipal × 100` | SENATRAN |
 | Crescimento da frota | Variação da frota entre duas datas equivalentes | `(frota atual - frota anterior) / frota anterior × 100` | SENATRAN |
 | Penetração eletrificada | Participação dos eletrificados na frota total local | `frota eletrificada / frota total × 100` | SENATRAN |
-| Market share de marca | Participação de uma marca no recorte analisado | `veículos da marca / veículos eletrificados × 100` | SENATRAN ou ABVE |
+| Market share de marca | Participação de uma marca no recorte analisado | Usar percentual publicado no ranking ou calcular sobre total da mesma categoria, mês, segmento e fonte | FENABRAVE (emplacamentos); SENATRAN/ABVE apenas após validação da classificação |
 | Market share de modelo | Participação de um modelo no recorte analisado | `veículos do modelo / veículos eletrificados × 100` | SENATRAN ou ABVE |
 | Eletrificados por 100 mil habitantes | Intensidade da adoção comparável entre municípios | `frota eletrificada / população × 100.000` | SENATRAN + IBGE |
 | PIB per capita aproximado | Produção econômica por habitante usando PIB municipal de 2023 e população do Censo 2022 | `PIB em mil R$ × 1.000 / população` | IBGE |
 | Renda domiciliar per capita média | Rendimento nominal mensal domiciliar per capita médio municipal | Valor publicado pelo IBGE, em reais, referência 2022 | IBGE/SIDRA tabela 10295, variável 13431 |
+| Correlação socioeconômica e adoção | Associação entre cada indicador municipal e uma medida de adoção na competência SENATRAN mais recente | Coeficientes Pearson e Spearman em municípios com ambas as variáveis disponíveis | IBGE + SENATRAN |
 
 ## Regras para responder às perguntas
 
 ### Evolução e crescimento
 
-- Perguntas 1 e 2 usarão **emplacamentos**, quando a série da ABVE permitir comparação por período.
+- Perguntas 1 e 2 poderão usar as séries ABVE e FENABRAVE em visões separadas. Não somar nem emendar as séries sem reconciliar escopo e classificação.
+- A FENABRAVE publica neste recorte apenas as categorias amplas “híbridos” e “elétricos”; não inferir equivalência direta com BEV, HEV e PHEV da ABVE.
+- O boletim de janeiro/2024 está no segmento “autos”; de fevereiro/2024 em diante, o recorte é “autos e comerciais leves”. Ao comparar meses/anos, filtrar por `segmento_veiculos` para manter o escopo comparável; janeiro/2025 não tem comparação anual compatível com janeiro/2024 nesta série.
+- Em agosto/2026, o total FENABRAVE dessas duas categorias (64.055) coincide com o total ABVE de eletrificados (57.386) mais MHEV (6.669). Tratar isso como uma checagem de consistência agregada e uma hipótese de reconciliação, não como prova de equivalência das categorias individuais.
 - Quando usarmos SENATRAN, o resultado será nomeado como **evolução da frota**, nunca como emplacamentos.
 - Só calcularemos crescimento quando os dois períodos forem comparáveis. Se o valor anterior for zero, a taxa percentual será exibida como não calculável, e não como infinito.
 

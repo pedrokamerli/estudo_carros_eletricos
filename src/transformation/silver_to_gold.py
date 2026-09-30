@@ -100,6 +100,53 @@ def build_opportunity_gold(penetration_dataframe: pd.DataFrame) -> pd.DataFrame:
     return valid
 
 
+def build_municipal_correlation_gold(penetration_dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Calculo associações municipais exploratórias, sem tratá-las como causa ou previsão."""
+    socioeconomic_columns = {
+        "pib_per_capita_aproximado": "PIB per capita aproximado (R$)",
+        "rendimento_domiciliar_per_capita_medio_2022_reais": "Renda domiciliar per capita média (R$)",
+        "populacao_censo_2022": "População do Censo 2022 (pessoas)",
+    }
+    adoption_columns = {
+        "veiculos_eletrificados_por_100_mil_habitantes": "Eletrificados por 100 mil habitantes",
+        "participacao_eletrificada_na_frota_percentual": "Participação eletrificada na frota (%)",
+    }
+    latest = penetration_dataframe[
+        ["ano_referencia_frota", "mes_referencia_frota"]
+    ].drop_duplicates().sort_values(
+        ["ano_referencia_frota", "mes_referencia_frota"]
+    ).iloc[-1]
+    rows: list[dict[str, object]] = []
+
+    for socioeconomic_column, socioeconomic_label in socioeconomic_columns.items():
+        for adoption_column, adoption_label in adoption_columns.items():
+            pair = penetration_dataframe[[socioeconomic_column, adoption_column]].apply(
+                pd.to_numeric, errors="coerce"
+            ).replace([float("inf"), float("-inf")], float("nan")).dropna()
+            for method in ("pearson", "spearman"):
+                if method == "spearman":
+                    # Spearman equivale à correlação de Pearson calculada sobre os postos.
+                    first_rank = pair[socioeconomic_column].rank(method="average")
+                    second_rank = pair[adoption_column].rank(method="average")
+                    coefficient = first_rank.corr(second_rank, method="pearson")
+                else:
+                    coefficient = pair[socioeconomic_column].corr(
+                        pair[adoption_column], method="pearson"
+                    )
+                rows.append(
+                    {
+                        "variavel_socioeconomica": socioeconomic_label,
+                        "indicador_adocao": adoption_label,
+                        "metodo": method,
+                        "coeficiente_correlacao": coefficient,
+                        "municipios_analisados": len(pair),
+                        "ano_referencia_frota": int(latest["ano_referencia_frota"]),
+                        "mes_referencia_frota": int(latest["mes_referencia_frota"]),
+                    }
+                )
+    return pd.DataFrame(rows)
+
+
 def build_municipal_penetration_gold(
     silver_dataframe: pd.DataFrame,
     total_fleet_dataframe: pd.DataFrame,
@@ -182,6 +229,9 @@ def main() -> None:
         opportunities = build_opportunity_gold(penetration)
         save_gold_table(opportunities, "oportunidade_municipal_preliminar")
         print(f"Gold criada: oportunidade_municipal_preliminar ({len(opportunities)} linhas)")
+        correlations = build_municipal_correlation_gold(penetration)
+        save_gold_table(correlations, "correlacao_municipal_socioeconomia_adocao")
+        print(f"Gold criada: correlacao_municipal_socioeconomia_adocao ({len(correlations)} linhas)")
 
 
 if __name__ == "__main__":
