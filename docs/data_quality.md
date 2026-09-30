@@ -19,3 +19,7 @@ Se alguma regra crítica falhar, a pipeline para e não cria uma Silver nova.
 ## Resultado
 
 Cada execução cria um relatório JSON em `data/quality/senatran/`. Ele registra total de linhas, valores nulos, quantidades inválidas e veículos sem UF.
+
+## Fonte de marcas e modelos
+
+O arquivo de marca e modelo é maior que 1 GB. Por isso, a validação o lê em blocos de 250 mil linhas, sem carregar todo o conteúdo na memória. O relatório correspondente verifica estrutura, nulos, quantidades inválidas, UF ausente e total de veículos.
