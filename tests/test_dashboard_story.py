@@ -1,9 +1,13 @@
 """Confiro a matemática das comparações que conto no painel."""
 import unittest
 import pandas as pd
-from src.dashboard.story import comparable_years, percent_change, ranked_share
+from src.dashboard.story import comparable_years, percent_change, ranked_share, identified_cities
 
 class StoryTests(unittest.TestCase):
+    def test_unknown_localities_are_not_ranked_as_cities(self):
+        frame = pd.DataFrame({"municipio":["Sem Informação","CURITIBA",None,"SAO PAULO"],"uf":["Sem Informação","PARANA","PARANA","Sem Informação"]})
+        self.assertEqual(identified_cities(frame).municipio.tolist(),["CURITIBA"])
+        self.assertEqual(len(frame),4)
     def test_partial_year_is_compared_to_same_months(self):
         dates = pd.date_range("2024-01-01","2026-08-01",freq="MS")
         frame = pd.DataFrame({"data_referencia":dates,"tecnologia":"BEV","emplacamentos":10})

@@ -40,6 +40,14 @@ class DashboardTests(unittest.TestCase):
         app.sidebar.radio[0].set_value("6 · Respostas às 15 perguntas").run()
         self.assertEqual(len(app.exception), 0)
         self.assertEqual(len(app.subheader), 15)
+        self.assertFalse(any("Sem Informação lidera" in element.value for element in app.markdown))
+
+    def test_future_scenarios_are_explicitly_not_ml_forecasts(self):
+        app = AppTest.from_file(str(APP),default_timeout=40).run()
+        app.sidebar.radio[0].set_value("5 · O que esperar do futuro").run()
+        self.assertEqual(len(app.exception),0)
+        self.assertTrue(any("Cenários qualitativos" in element.value for element in app.caption))
+        self.assertTrue(any("IEA" in element.value for element in app.markdown))
 
     def test_year_and_technology_filters_render(self):
         app = AppTest.from_file(str(APP), default_timeout=40).run()

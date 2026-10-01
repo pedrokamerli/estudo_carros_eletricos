@@ -9,6 +9,14 @@ def percent_change(current, previous):
         return None
     return 100 * (current / previous - 1)
 
+def identified_cities(frame):
+    """Não apresento registros sem localização como se fossem cidades reais."""
+    unknown = {"", "SEM INFORMACAO", "NAO IDENTIFICADO", "NAN", "NONE"}
+    def known(series):
+        normalized = series.fillna("").astype(str).str.normalize("NFKD").str.encode("ascii", errors="ignore").str.decode("ascii").str.strip().str.upper()
+        return ~normalized.isin(unknown)
+    return frame.loc[known(frame.municipio) & known(frame.uf)].copy()
+
 def comparable_years(frame, technologies=("BEV", "PHEV"), through_month=8):
     """Exijo meses iguais em todos os anos antes de comparar acumulados."""
     selected = frame.loc[frame.tecnologia.isin(technologies)].copy()

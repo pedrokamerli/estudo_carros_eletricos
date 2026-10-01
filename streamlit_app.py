@@ -3,11 +3,19 @@ from pathlib import Path
 import altair as alt
 import pandas as pd
 import streamlit as st
-from src.dashboard.story import QUESTIONS, TECH, comparable_years, percent_change, ranked_share
+from src.dashboard.story import QUESTIONS, TECH, comparable_years, percent_change, ranked_share, identified_cities
 
 DATA = Path(__file__).resolve().parent / "data/portfolio"
 TEAL, ORANGE, BLUE = "#087F8C", "#DF823B", "#395C96"
 st.set_page_config(page_title="A jornada dos elétricos no Brasil", page_icon="🚘", layout="wide")
+# Reduzo títulos no espaço estreito sem esconder textos, filtros ou avisos.
+st.markdown("""<style>
+.block-container {max-width: 1200px; padding-top: 2.5rem;}
+h1 {font-size: 2.2rem !important; line-height: 1.15 !important;}
+h2 {font-size: 1.7rem !important;}
+h3 {font-size: 1.22rem !important;}
+@media(max-width: 640px) {h1 {font-size: 1.85rem !important;} h2 {font-size: 1.4rem !important;}}
+</style>""",unsafe_allow_html=True)
 
 @st.cache_data(show_spinner=False)
 def read_export(name, modified):
@@ -36,6 +44,13 @@ def intro(chapter, title, description, questions):
     st.caption(f"CAPÍTULO {chapter} · PERGUNTAS {questions}")
     st.header(title)
     st.write(description)
+
+def reading(observation, meaning, limit):
+    """Separo o número observado da minha interpretação e do que falta provar."""
+    with st.container(border=True):
+        st.markdown(f"**O que vemos:** {observation}")
+        st.markdown(f"**Por que importa:** {meaning}")
+        st.caption(f"Cuidado na interpretação: {limit}")
 
 def style(chart):
     return chart.configure(locale=alt.Locale(number=alt.NumberLocale(decimal=",",thousands=".",grouping=[3],currency=["R$ ",""],nan="Sem dado"))).configure_view(stroke=None).configure_axis(labelFontSize=12,titleFontSize=12,gridColor="#E8EDF1").configure_legend(title=None,labelFontSize=12,orient="bottom")
@@ -114,8 +129,13 @@ def market():
     b.metric("Com estado identificado",number(latest.total_veiculos_uf_informada))
     c.metric("Sem estado identificado",number(latest.total_veiculos_sem_uf))
     st.caption("SENATRAN · estoque no mês escolhido · definição ampla de eletrificação. A parcela sem estado não é distribuída artificialmente pelo mapa.")
+    st.write("**Pense em uma garagem e uma porta de entrada.** A frota é o que está na garagem naquele mês; os emplacamentos são os veículos que entram no período. São duas medidas diferentes: mais entradas costumam ampliar a frota, mas baixas e alterações cadastrais também mudam seu tamanho.")
     lines(national.assign(Série="Frota existente"),"total_veiculos_eletrificados","Série","A frota aumentou ao longo do período")
     st.caption("Cada ponto é uma fotografia mensal. Não somamos fotografias como carros diferentes. O eixo vertical não começa em zero: ele destaca a evolução.")
+    first,last = national.iloc[0],national.iloc[-1]
+    reading(f"A frota registrada passou de {number(first.total_veiculos_eletrificados)} em jan/2024 para {number(last.total_veiculos_eletrificados)} em ago/2026, alta de {pct(percent_change(last.total_veiculos_eletrificados,first.total_veiculos_eletrificados))}.",
+            "O conjunto de veículos eletrificados em circulação aumentou, criando uma base maior de usuários, serviços e manutenção.",
+            "Esta leitura usa todo o histórico, não o mês selecionado. A definição inclui híbridos sem tomada: não equivale à demanda por carregadores.")
     sales = dates(load("abve_publico_tecnologia_gold.csv"))
     st.subheader("Filtros da comparação de emplacamentos")
     st.caption("Os controles abaixo alteram apenas as vendas e suas comparações anuais. Não mudam a fotografia da frota acima.")
@@ -129,7 +149,7 @@ def market():
     through = st.selectbox("Comparar janeiro até qual mês?",list(range(1,limit+1)),index=min(8,limit)-1,format_func=lambda v:MONTH_NAMES[v-1],help="Com 2026 selecionado, comparo até agosto. Sem 2026, posso comparar os anos completos.")
     plugin = sales.loc[sales.tecnologia.isin(technologies) & sales.data_referencia.dt.year.isin(years)].copy()
     plugin["Tecnologia"] = plugin.tecnologia.map(TECH)
-    lines(plugin,"emplacamentos","Tecnologia","Novos emplacamentos: elétrico puro versus híbrido com tomada")
+    lines(plugin,"emplacamentos","Tecnologia","Como os novos registros variaram mês a mês?")
     st.caption("ABVE · veículos leves BEV/PHEV · jan/2024–ago/2026. MHEV fica fora. O filtro da frota acima não altera este histórico de emplacamentos.")
     mode = st.radio("Como acompanhar a evolução anual?",["Emplacamentos de cada mês","Acumulado desde janeiro"],horizontal=True)
     annual = plugin.loc[plugin.data_referencia.dt.month.le(through)]
@@ -140,11 +160,13 @@ def market():
     if len(comp) >= 2:
         before,after = comp.iloc[-2],comp.iloc[-1]
         st.success(f"1 e 2 · No mesmo intervalo de {through} meses, o recorte passou de {number(before.Emplacamentos)} em {before.Ano} para {number(after.Emplacamentos)} em {after.Ano}: crescimento de {pct(percent_change(after.Emplacamentos,before.Emplacamentos))} entre esses anos.")
+        st.write(f"**Traduzindo:** para cada 100 registros no intervalo de {before.Ano}, houve aproximadamente {number(100*after.Emplacamentos/before.Emplacamentos)} no de {after.Ano}. Isso mede o ritmo dos novos registros, não a porcentagem de brasileiros que compraram um elétrico.")
     else:
         st.info("Selecione dois ou três anos para calcular a variação entre períodos.")
     full = comparable_years(sales.loc[sales.data_referencia.dt.year.le(2025)],technologies,through_month=12)
     st.write(f"**Referência adicional, independente dos anos escolhidos:** nos anos completos, 2025 versus 2024 cresceu **{pct(percent_change(full.iloc[1].Emplacamentos,full.iloc[0].Emplacamentos))}** para as tecnologias selecionadas. Já 2026 é parcial: não comparo oito meses com doze.")
     details(comp,"comparacao_jan_agosto.csv")
+    st.info("Próxima pergunta da história: esse avanço acontece em todo o país? Abra o capítulo 2 para comparar tamanho, crescimento e participação local.")
 
 def geography():
     intro(2,"O mercado é grande em alguns lugares e avança em outros","Quantidade, velocidade de crescimento e participação na frota respondem perguntas diferentes. Depois, vamos comparar capitais e interior.","3 a 7")
@@ -164,9 +186,11 @@ def geography():
     state = st.selectbox("Acompanhar a evolução anual de qual estado?",sorted(states.loc[states.uf.ne("Sem Informação"),"uf"].unique()),index=sorted(states.loc[states.uf.ne("Sem Informação"),"uf"].unique()).index("SAO PAULO"))
     year_lines(states.loc[states.uf.eq(state)],"total_veiculos_eletrificados",f"Frota de {state}: evolução mês a mês em cada ano")
     st.caption("SENATRAN · estoque de veículos. Não acumulo a frota: cada ponto já é o total existente no mês. 2026 termina em agosto; cores identificam os anos.")
-    city = load("penetracao_municipal_ibge.csv")
+    raw_city = load("penetracao_municipal_ibge.csv")
+    city = identified_cities(raw_city)
     st.subheader("5 e 6 · Cidades: tamanho versus participação")
     st.caption("Fotografia municipal fixa: agosto/2026. O filtro mensal acima não altera estas cidades. Fonte: SENATRAN + associação municipal IBGE.")
+    st.caption(f"{len(raw_city)-len(city)} registros agregados sem município/UF identificados ficam fora dos rankings, mas permanecem na base original. Não são cidades.")
     state_city = st.selectbox("Estado dos rankings municipais",["Todos os estados"]+sorted(city.uf.unique()))
     minimum = st.number_input("Evitar taxas enganosas: frota total mínima da cidade",min_value=0,value=10000,step=1000)
     eligible = city.loc[city.frota_total_veiculos.ge(minimum) & (city.uf.eq(state_city) if state_city != "Todos os estados" else True)].copy()
@@ -174,6 +198,7 @@ def geography():
     bars(eligible.nlargest(10,"quantidade_veiculos"),"Cidade / UF","quantidade_veiculos","Onde há mais eletrificados?")
     bars(eligible.nlargest(10,"participacao_eletrificada_na_frota_percentual"),"Cidade / UF","participacao_eletrificada_na_frota_percentual","Onde os eletrificados têm maior peso na frota local?","%")
     st.caption("Participação = eletrificados ÷ frota total local × 100. Frota total inclui todos os tipos de veículos da fonte, não só automóveis. O filtro mínimo vale para os dois rankings.")
+    st.write("**Duas cidades podem contar histórias diferentes:** a maior frota sugere um mercado já volumoso; a maior participação indica que a eletrificação tem mais peso dentro da frota local. Nenhum dos rankings, sozinho, revela onde haverá mais vendas amanhã.")
     cap = dates(load("frota_capital_vs_interior.csv"))
     cap["Localidade"] = cap.tipo_localidade.map({"capital":"Capitais","interior":"Interior"})
     lines(cap,"total_veiculos_eletrificados","Localidade","7 · O interior também participa dessa expansão")
@@ -285,7 +310,31 @@ def opportunities():
         st.caption("© OpenStreetMap contributors · ODbL-1.0 · https://www.openstreetmap.org/copyright. Um objeto não é necessariamente um carregador; ausência no mapa não comprova ausência de recarga.")
 
 def future():
-    intro(5,"Prever é possível. Confiar na previsão exige outro passo","Testamos o passado como se ainda não soubéssemos o resultado. Um modelo complexo só merece confiança se melhorar uma referência simples e representar bem seus erros.","15")
+    intro(5,"O mercado cresceu. O que pode acontecer daqui para frente?","Primeiro interpreto os sinais observados. Depois apresento caminhos possíveis para 2027–2030 e, por último, mostro por que as previsões numéricas ainda exigem cautela.","13 a 15")
+    sales = dates(load("abve_publico_tecnologia_gold.csv"))
+    comp = comparable_years(sales)
+    earlier,later = percent_change(comp.iloc[1].Emplacamentos,comp.iloc[0].Emplacamentos),percent_change(comp.iloc[2].Emplacamentos,comp.iloc[1].Emplacamentos)
+    st.subheader("1 · A leitura preliminar: expansão com aceleração no recorte")
+    reading(f"BEV + PHEV somaram {number(comp.iloc[0].Emplacamentos)}, {number(comp.iloc[1].Emplacamentos)} e {number(comp.iloc[2].Emplacamentos)} em janeiro–agosto de 2024, 2025 e 2026. As altas foram {pct(earlier)} e {pct(later)}, respectivamente.",
+            "O aumento entre 2025 e 2026 foi mais forte que entre 2024 e 2025 nesse mesmo intervalo. Isso é um sinal de expansão dos novos registros de veículos com tomada.",
+            "Dois intervalos de crescimento não estabelecem uma tendência permanente. Emplacamento não mede intenção de compra; preço, renda, crédito e oferta não foram isolados como causas.")
+    st.write("**Minha interpretação:** os dados dão suporte à existência de um mercado em expansão, mas não a repetir a alta recente indefinidamente. Conforme a base aumenta, sustentar a mesma taxa exige acréscimos absolutos cada vez maiores. Frota pode continuar crescendo mesmo quando o ritmo das vendas desacelera.")
+    st.subheader("2 · Três caminhos possíveis para 2027–2030")
+    st.caption("Cenários qualitativos de análise, não resultados do ML, metas ou probabilidades. Não há volumes futuros estimados nesta seção.")
+    scenarios = [
+        ("Expansão com ritmo moderado", "Se a oferta e o acesso à recarga se ampliarem, mas o preço de compra e o crédito continuarem limitando parte dos consumidores, o mercado pode crescer mais devagar do que no salto recente.", "Acompanhar: crescimento em 12 meses, participação BEV/PHEV e expansão fora das capitais."),
+        ("Adoção mais acelerada", "Se modelos mais acessíveis, financiamento e recarga confiável avançarem juntos, a adoção pode alcançar novos públicos e localidades. Isso precisa aparecer nos dados, não apenas em anúncios.", "Acompanhar: redução de preços comparáveis, novas marcas/modelos e vendas distribuídas por mais municípios."),
+        ("Desaceleração ou oscilação", "Se o crédito encarecer, a renda perder força ou houver restrições de oferta e recarga, os registros podem oscilar ou crescer menos. A base de veículos existente não desaparece por causa disso.", "Acompanhar: quedas persistentes no mesmo período do ano anterior e mudanças na composição por tecnologia.")]
+    for title,text,signal in scenarios:
+        with st.container(border=True):
+            st.markdown(f"**{title}**")
+            st.write(text)
+            st.caption(signal)
+    st.markdown("**Contexto externo, não previsão para o Brasil:** a IEA identifica competitividade de preços e políticas públicas como fatores importantes para os caminhos futuros da eletrificação. Uso essa referência para formular hipóteses, não para converter projeções globais em vendas municipais. [Global EV Outlook 2026 — IEA](https://www.iea.org/reports/global-ev-outlook-2026/executive-summary) · consultado em 01/10/2026.")
+    st.subheader("3 · O que essa leitura significa para o projeto?")
+    st.write("Para vendas, vale acompanhar o crescimento em períodos iguais e a concentração por marca. Para recarga, precisamos separar veículos com tomada dos demais híbridos e conhecer o uso real dos pontos. Para cidades candidatas, renda e baixa adoção ajudam a levantar perguntas, mas não substituem pesquisa local. Essas são decisões de investigação, não recomendações de investimento.")
+    st.subheader("4 · Antes de confiar em um número previsto, faço uma prova")
+    st.write("O teste esconde os meses finais e pede ao modelo que tente acertá-los. Depois comparo com uma estratégia simples: repetir o último valor conhecido. Se o modelo não ganha dessa estratégia, sua complexidade não trouxe vantagem comprovada.")
     st.warning("Temos experimentos, não uma previsão de vendas aprovada. Os modelos escolhidos para BEV/PHEV não superaram a referência simples no teste final.")
     performance = load("ml_abve_selecao_modelos.csv")
     comparison = performance.melt(id_vars="tecnologia",value_vars=["wape_teste_medio","wape_persistencia_teste"],var_name="Método",value_name="Erro (%)")
@@ -322,7 +371,7 @@ def answers():
     states = dates(load("evolucao_frota_por_estado.csv"))
     latest = states.loc[states.data_referencia.eq(states.data_referencia.max()) & states.uf.ne("Sem Informação")]
     largest,fastest = latest.nlargest(1,"total_veiculos_eletrificados").iloc[0],latest.nlargest(1,"crescimento_percentual_anual").iloc[0]
-    city = load("penetracao_municipal_ibge.csv")
+    city = identified_cities(load("penetracao_municipal_ibge.csv"))
     leadcity = city.nlargest(1,"quantidade_veiculos").iloc[0]
     penetration = city.loc[city.frota_total_veiculos.ge(10000)].nlargest(1,"participacao_eletrificada_na_frota_percentual").iloc[0]
     models = dates(load("abve_publico_modelo_gold.csv"))
@@ -374,6 +423,7 @@ O período observado é **jan/2024–ago/2026**. Meses posteriores são projeç�
 
 st.title("A jornada dos veículos eletrificados no Brasil")
 st.caption("Como o mercado cresceu, onde avançou e quais oportunidades merecem investigação · jan/2024–ago/2026")
+st.write("Neste projeto, reúno registros públicos para entender a eletrificação no Brasil. A história segue quatro perguntas: **cresceu quanto, avançou onde, quem lidera e o que ainda precisamos verificar sobre o futuro?** Não misturo frota existente, vendas mensais e cenários como se fossem o mesmo indicador.")
 PAGES = {"1 · A história do mercado":market,"2 · Onde a adoção avança":geography,"3 · Quem lidera as vendas":leaders,"4 · Onde investigar oportunidades":opportunities,"5 · O que esperar do futuro":future,"6 · Respostas às 15 perguntas":answers,"7 · Dados e critérios":methodology}
 page = st.sidebar.radio("Siga a história",list(PAGES))
 st.sidebar.caption("Comece no capítulo 1 ou consulte diretamente as 15 respostas no capítulo 6.")

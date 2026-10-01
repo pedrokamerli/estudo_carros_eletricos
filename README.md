@@ -65,6 +65,8 @@ O inventário, os métodos de acesso e as limitações estão em [docs/data_sour
 
 Reorganizei o painel em sete capítulos, com narrativa e respostas explícitas às 15 perguntas. Comparo anos mês a mês e por acumulados do mesmo intervalo; os filtros de anos, tecnologia e mês têm escopo explicado. Incluí rankings de tamanho versus crescimento, participação municipal, capitais versus interior, renda versus adoção e frota versus recarga. Hipóteses e previsões experimentais são diferenciadas de respostas observadas. As tabelas técnicas ficam em seções opcionais e os gráficos têm unidades, legendas, dicas ao passar o mouse e números em formato brasileiro.
 
+Na revisão do painel, separei “o que vejo”, “por que importa” e “o que falta provar”. Retirei localidades sem identificação dos rankings de cidades, preservando os registros nos dados originais. Na seção de futuro, apresento uma análise preliminar de 2024–2026 e três cenários qualitativos para 2027–2030. Esses cenários não são previsões do modelo nem têm probabilidades atribuídas; uso a IEA como contexto externo e mantenho os testes de ML visíveis para explicar por que ainda não aprovo projeções operacionais.
+
 Criei um painel Streamlit para explorar frota, municípios, emplacamentos, marcas/modelos, resultados de ML e o mapa parcial de recarga. Ele lê somente os exports públicos, sem precisar da senha do PostgreSQL e sem disparar coleta/treinamento. É uma prévia complementar; o Power BI continua sendo a entrega visual principal.
 
 ```powershell
