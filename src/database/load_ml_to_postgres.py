@@ -8,6 +8,9 @@ from src.database.connection import get_connection
 
 
 TABLES = {
+    "ml_intervalos_detalhe": ["fonte_alvo", "alvo", "data_referencia"],
+    "ml_intervalos_cobertura": ["fonte_alvo", "alvo"],
+    "ml_intervalos_projecoes": ["fonte_alvo", "alvo", "data_referencia"],
     "perfil_carga_ons_mensal_hora": ["data_referencia", "id_subsistema", "hora"],
     "frota_regional_mensal": ["regiao", "data_referencia"],
     "ml_frota_regional_backtest_detalhe": ["regiao", "etapa", "metodo", "horizonte_meses", "fim_treino"],
@@ -38,7 +41,7 @@ def main():
             nullable = ["crescimento_yoy_percentual"]
         if frame.empty or frame.drop(columns=nullable).isna().any().any() or frame.duplicated(TABLES[name]).any():
             raise ValueError(f"Saída inválida ou duplicada: {name}")
-        for column in ("fim_treino", "data_referencia", "competencia_macro"):
+        for column in ("fim_treino", "data_referencia", "competencia_macro", "fim_calibracao"):
             if column in frame:
                 frame[column] = pd.to_datetime(frame[column], errors="raise").dt.date
         if "fim_treino" in frame and (frame["fim_treino"] >= frame["data_referencia"]).any():
@@ -51,7 +54,7 @@ def main():
                 definitions = []
                 for column in frame:
                     dtype = frame[column].dtype
-                    kind = ("DATE" if column in ("fim_treino", "data_referencia", "competencia_macro") else
+                    kind = ("DATE" if column in ("fim_treino", "data_referencia", "competencia_macro", "fim_calibracao") else
                             "BOOLEAN" if pd.api.types.is_bool_dtype(dtype) else
                             "BIGINT" if pd.api.types.is_integer_dtype(dtype) else
                             "DOUBLE PRECISION" if pd.api.types.is_float_dtype(dtype) else "TEXT")

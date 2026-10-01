@@ -1,0 +1,2 @@
+# Uso estas dependências somente para gerar o relatório explicativo opcional.
+reportlab==4.4.9

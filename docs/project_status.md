@@ -4,6 +4,14 @@ Atualizado em 01/10/2026. Meu recorte observado está fechado em jan/2024–ago/
 
 ## Atualização de dados e ML em 01/10
 
+Nova entrega desta execução: captura pública ABVE de 32 meses nos recortes tecnologia, fabricante/modelo e município, conciliados por mês e tecnologia; integração dos catálogos Inmetro com quarentena para sobreposições; auditoria dos intervalos de um mês em sete alvos, quatro regiões com cobertura insuficiente. As notas anteriores abaixo descrevem o estado anterior; não substituem a nova entrega.
+
+Carreguei e conferi no PostgreSQL 180 linhas ABVE por tecnologia, 7.531 por modelo e 100.051 por município/tecnologia; 1.176 linhas Inmetro (411/364/401 por ciclo), com duas linhas ambíguas de 2026 em quarentena. Os 49 testes mensais de cobertura estão na Gold. PHEV jul/2024 difere em uma unidade do snapshot anterior; mantive ambos e publiquei a conciliação. Os recortes ABVE incluem MHEV; para comparação temporal uso BEV/PHEV explicitamente.
+
+Nesta entrega executei as etapas novas, não a pipeline antiga inteira. Unittest: 52 casos descobertos, 48 passaram e quatro testes de banco ignorados inicialmente; os quatro passaram separadamente. As sete páginas Streamlit renderizaram sem exceção. O relatório explicativo está em `output/pdf/Relatorio_Entrega_Projeto_EV.pdf` e foi revisado visualmente nas seis páginas.
+
+O ciclo Inmetro com quarentena é parcial. Não concluí associação ABVE/Inmetro por versão nem automação da recarga ABVE. Os testes novos verificam decodificação, unidades, nulos, linhas fundidas, conciliação e independência da calibração em relação aos valores do teste. Esta atualização não implica aprovação operacional do ML.
+
 - Coletei 96 observações mensais BCB/SGS e 3.072 perfis mês/hora/subsistema ONS. Coletores com cache, fonte, captura e hash; Silver, Gold e exports integrados.
 - Testei indicadores econômicos na previsão nacional BEV/PHEV: o Ridge com contexto não foi escolhido na validação. Não alego melhora nem causalidade.
 - Avaliei frota mensal nas cinco regiões: Ridge escolhido na validação e melhor que persistência no teste de cada região. Resultado experimental, sem intervalo calibrado ou garantia operacional.

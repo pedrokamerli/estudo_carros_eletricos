@@ -7,6 +7,11 @@ import sys
 
 
 PIPELINE_MODULES = [
+    "src.ingestion.download_inmetro_pbev",
+    "src.transformation.inmetro_to_silver",
+    "src.ingestion.capture_abve_aggregates",
+    "src.transformation.abve_public_to_silver",
+    "src.database.load_public_enrichment",
     "src.ingestion.download_senatran_fuel_history",
     "src.ingestion.download_ibge_municipal_indicators",
     "src.ingestion.download_fenabrave_monthly_reports",
@@ -35,6 +40,7 @@ PIPELINE_MODULES = [
     "src.transformation.silver_to_gold",
     "src.database.build_gold_tables",
     "src.analysis.forecast_regional_fleet",
+    "src.analysis.forecast_intervals",
     "src.database.load_municipal_insights_to_postgres",
     "src.analysis.opportunity_sensitivity",
     "src.database.load_forecast_backtest_to_postgres",

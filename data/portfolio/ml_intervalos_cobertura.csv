@@ -1,0 +1,8 @@
+fonte_alvo,alvo,metodo,n_selecao,n_calibracao,n_teste,nivel_nominal_percentual,cobertura_teste_percentual,amplitude_media,quantil_erro_relativo,fim_calibracao,status
+SENATRAN_frota,Centro-Oeste,persistencia,3,4,7,80,57.14285714285714,13682.08836566947,0.05944133829327512,2026-01-01,cobertura_insuficiente
+SENATRAN_frota,Nordeste,persistencia,3,4,7,80,28.57142857142857,15870.657083157235,0.061133293336367585,2026-01-01,cobertura_insuficiente
+SENATRAN_frota,Norte,persistencia,3,4,7,80,28.57142857142857,4548.347474894924,0.07110316345212245,2026-01-01,cobertura_insuficiente
+SENATRAN_frota,Sudeste,persistencia,3,4,7,80,57.14285714285714,51891.3292840586,0.05829866954561331,2026-01-01,cobertura_insuficiente
+SENATRAN_frota,Sul,persistencia,3,4,7,80,85.71428571428571,20093.366515127775,0.061530020379369804,2026-01-01,cobertura_observada_amostra_pequena_nao_aprovado
+ABVE_emplacamentos,BEV,persistencia,3,4,7,80,85.71428571428571,19631.442969257096,0.5902519619991738,2026-01-01,cobertura_observada_amostra_pequena_nao_aprovado
+ABVE_emplacamentos,PHEV,media_3m,3,4,7,80,100.0,13730.427477779536,0.5366962305986697,2026-01-01,cobertura_observada_amostra_pequena_nao_aprovado

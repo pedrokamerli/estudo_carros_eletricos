@@ -109,8 +109,35 @@ def sales():
         table_download(models.loc[models.fonte_id.eq(source)].sort_values("posicao"), "modelos_lista_publicada.csv")
 
 
+def enrichment():
+    st.subheader("Histórico automático ABVE e catálogo Inmetro")
+    kind = st.selectbox("Base para explorar", ["Modelos ABVE", "Municípios ABVE", "Versões Inmetro"])
+    if kind == "Versões Inmetro":
+        frame = load("inmetro_versoes_eletrificadas.csv")
+        cycle = st.selectbox("Ciclo do catálogo", sorted(frame.ano_ciclo.unique()), index=2)
+        brand = st.selectbox("Marca no Inmetro", ["Todas"] + sorted(frame.marca.unique()))
+        selected = frame.loc[frame.ano_ciclo.eq(cycle)]
+        if brand != "Todas":
+            selected = selected.loc[selected.marca.eq(brand)]
+        st.warning("Catálogo de versões e ensaio padronizado. Autonomia não é uso real; linhas não são emplacamentos. Ciclo 2026 parcial: duas linhas ambíguas estão em quarentena. Ciclo anual não significa versão do catálogo conhecida naquele mês. Sem associação automática ao nome ABVE.")
+        table_download(selected, "catalogo_inmetro_filtrado.csv")
+        return
+    filename = "abve_publico_modelo_gold.csv" if kind == "Modelos ABVE" else "abve_publico_municipio_gold.csv"
+    frame = dates(load(filename))
+    period = st.selectbox("Competência ABVE pública", sorted(frame.data_referencia.dt.strftime("%Y-%m").unique()), index=31)
+    technologies = st.multiselect("Tecnologias do painel", sorted(frame.tecnologia.unique()), default=["BEV", "PHEV"])
+    selected = frame.loc[frame.data_referencia.eq(pd.Timestamp(period + "-01")) & frame.tecnologia.isin(technologies)]
+    st.metric("Emplacamentos neste recorte", number(selected.emplacamentos.sum()))
+    st.caption("32 meses observados. MHEV foi mantido separado. A soma com MHEV difere do total ABVE que exclui essa categoria. Ausência de linha não é automaticamente zero; localidades desconhecidas permanecem na base.")
+    table_download(selected.sort_values("emplacamentos", ascending=False), "abve_publico_recorte.csv")
+    st.info("Modelo e município são agregados separados; esta base não informa o modelo vendido em cada município. BEV/PHEV são o recorte preferido para comparação temporal.")
+
+
 def ml():
-    st.warning("Previsões experimentais, sem intervalos calibrados ou aprovação operacional. Snapshot atual: não possuo versões históricas completas de divulgação.")
+    st.warning("Previsões experimentais, sem aprovação operacional. Os intervalos de um mês foram calibrados em amostra pequena; quatro regiões ficaram abaixo da cobertura nominal. Snapshot atual: não possuo versões históricas completas de divulgação.")
+    st.subheader("Incerteza: protocolo separado de um mês")
+    table_download(load("ml_intervalos_cobertura.csv"), "cobertura_intervalos.csv")
+    st.caption("Seleção: jul–set/2025; calibração: out/2025–jan/2026; teste: fev–ago/2026. Apenas quatro meses de calibração e sete de teste. 80% é nominal, não uma garantia. O método desta análise pode diferir da seleção de três horizontes abaixo.")
     st.subheader("Frota regional: desempenho fora do treino")
     selection = load("ml_frota_regional_selecao_modelos.csv")
     st.bar_chart(selection.set_index("regiao")[["wape_teste_medio", "wape_persistencia_teste"]])
@@ -160,12 +187,14 @@ def status():
     snapshots ABVE integrados; PostgreSQL/Silver/Gold; esquema dimensional;
     experimentos de ML e exports. O estudo observado termina em agosto/2026.
 
+    Também tenho captura automática ABVE de 32 meses por tecnologia, marca/modelo e
+    município; catálogo Inmetro integrado com quarentena; auditoria da incerteza publicada.
+
     Ainda faltam:
 
-    - Extrair e validar tabelas Inmetro por modelo/versão.
-    - Ampliar históricos comparáveis de emplacamentos por localidade/modelo.
-    - Automatizar a captura dos snapshots ABVE, que continua manual.
-    - Calibrar incerteza e ampliar validação antes de recomendar previsões.
+    - Revisar associações entre nomes de modelos ABVE e versões Inmetro; não faço join automático ambíguo.
+    - Monitorar mudanças de layout do painel público ABVE; recarga continua como snapshot manual.
+    - Ampliar validação prospectiva da incerteza antes de recomendar previsões.
     - Construir e validar o dashboard Power BI e suas medidas DAX.
 
     Compra individual, falhas de bateria, autonomia real e depreciação com bateria/km
@@ -180,6 +209,7 @@ st.title("Mercado de veículos eletrificados no Brasil")
 st.caption("Meu laboratório de análise • observações jan/2024–ago/2026 • fontes e definições preservadas")
 PAGES = {"Visão geral": overview, "Estados e municípios": geography,
          "Vendas, marcas e modelos": sales, "ML e previsões": ml,
+         "Novas bases ABVE e Inmetro": enrichment,
          "Recarga e rede elétrica": infrastructure, "Status e fontes": status}
 page = st.sidebar.radio("Explorar projeto", list(PAGES))
 st.sidebar.caption("Estoque de frota ≠ fluxo de emplacamentos. Cada página possui seus próprios filtros.")

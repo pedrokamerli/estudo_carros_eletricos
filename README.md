@@ -8,6 +8,9 @@ Uma empresa que avalia expandir sua atuação em mobilidade elétrica precisa en
 
 ## O que já construí
 
+- Automatizo o painel público de vendas ABVE: 32 meses por tecnologia, fabricante/modelo e município. Concilio as somas por mês/tecnologia antes de carregar o PostgreSQL. Incluo MHEV de forma explícita; para comparação temporal prefiro filtrar BEV/PHEV.
+- Extraio os catálogos anuais PBEV/Inmetro de 2024, 2025 e 2026, preservando modelo, versão, consumo MJ/km e autonomia de ensaio em km. Linhas corrompidas vão para quarentena e o ciclo afetado é marcado como parcial. Não confundo catálogo com vendas nem ensaio com autonomia real.
+- Audito intervalos experimentais de um mês com seleção, calibração e teste separados. Quatro das cinco regiões ficaram abaixo da cobertura nominal de 80%; não aprovo as previsões para uso operacional. Veja os resultados em `data/portfolio/ml_intervalos_cobertura.csv`.
 - Coleto arquivos mensais de frota por combustível da SENATRAN e preservo os originais na camada Bronze.
 - Transformo os dados com Python e Pandas para criar a Silver de veículos eletrificados e a frota total municipal.
 - Valido colunas, nulos, duplicidades e quantidades antes de usar os arquivos.
@@ -39,7 +42,7 @@ Como primeiro resultado, a análise municipal mostra uma associação positiva e
 
 A frota eletrificada nacional SENATRAN de agosto/2026 soma 1.266.671 registros de veículos na definição de combustíveis do projeto, incluindo 148.204 sem UF informada. Mantenho essa parcela no total nacional e separo 1.118.467 com UF conhecida para os recortes geográficos. Esse estoque e sua definição não equivalem ao fluxo de emplacamentos de leves ABVE.
 
-Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo registro. Por isso, não uso essa base para afirmar que um modelo específico é elétrico. Meus primeiros CSVs de mercado foram montados com pesquisa no Gemini e continuam com origem não confirmada; sem referência verificável, não substituem dados oficiais de emplacamentos nem entram no treino principal do ML.
+Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo registro. Por isso, não uso essa base para afirmar que um modelo específico é elétrico. O histórico mensal por modelo agora vem do painel público ABVE, separado dos rankings documentais antigos. Modelo e município são agregados independentes: não identificam o modelo vendido em cada cidade. Meus primeiros CSVs de mercado foram montados com pesquisa no Gemini e continuam com origem não confirmada; não entram no treino principal do ML.
 
 ## Fontes
 
@@ -47,11 +50,12 @@ Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo 
 - [IBGE/SIDRA — PIB municipal](https://sidra.ibge.gov.br/tabela/6784): PIB corrente municipal, referência 2023.
 - [IBGE/SIDRA — população do Censo](https://sidra.ibge.gov.br/tabela/4709): população municipal, referência 2022.
 - [IBGE/SIDRA — renda domiciliar per capita](https://sidra.ibge.gov.br/tabela/10295): média municipal do Censo 2022, variável 13431.
-- [ABVE Data](https://abve.org.br/abve-data/): painel público de vendas e eletrificação; o snapshot é transcrito manualmente e já está integrado em Silver/Gold, sem atualização automática.
+- [ABVE Data](https://abve.org.br/abve-data/bi-geral/): automatizo os agregados públicos de vendas por mês/tecnologia, modelo e município, sem login. Guardo a resposta original em Bronze. A interface interna do painel pode mudar; não é uma API oficialmente contratada. Os snapshots anteriores permanecem para auditoria.
 - [ABVE — dados até agosto de 2026](https://abve.org.br/com-57-mil-emplacamentos-em-agosto-eletrificados-abrem-a-corrida-para-o-milhao-em-setembro/): referência de validação publicada (57.386 em agosto; 328.477 em janeiro–agosto), usada como conferência independente da série do painel.
 - [ABVE/Tupi — infraestrutura de recarga](https://abve.org.br/recarga-rapida-dc-quase-triplica-em-12-meses-e-ja-responde-por-38-da-rede-brasileira/): total nacional e distribuição da rede pública/semipública, referência agosto/2026. O [painel de eletropostos](https://abve.org.br/abve-data/bi-eletropostos/) publica recortes regionais e rankings top 20; o projeto preserva esse escopo parcial, não uma lista completa de coordenadas.
 - [FENABRAVE — imprensa e informativos mensais](https://www.fenabrave.org.br/portalv2/home/imprensa): fonte dos totais mensais nas categorias publicadas como “híbridos” e “elétricos” e dos rankings de fabricantes. Rankings gerais de modelos nos boletins não identificam por si só a motorização. Já tenho rankings documentais de modelos eletrificados para alguns períodos, mas ainda preciso de uma série mensal completa para acompanhar sua evolução.
-- [ABVE Data](https://abve.org.br/abve-data/): snapshot mensal em [`data/portfolio/emplacamentos_abve_mensais.csv`](data/portfolio/emplacamentos_abve_mensais.csv), validado e integrado a Silver/Gold. A composição BEV/PHEV/HEV/HEV Flex começa em jan/2025 por mudança metodológica; a captura ainda não se atualiza automaticamente.
+- [ABVE Data](https://abve.org.br/abve-data/): o snapshot anterior e a nova captura ficam separados. PHEV de julho/2024 difere em uma unidade entre eles; preservo a divergência. Não somo as fontes nem ignoro mudanças na classificação MHEV.
+- [Inmetro/PBEV](https://www.gov.br/inmetro/pt-br/assuntos/regulamentacao/avaliacao-da-conformidade/programa-brasileiro-de-etiquetagem/tabelas-de-eficiencia-energetica/veiculos-automotivos-pbe-veicular): catálogos de versões, sem associação automática ambígua aos nomes ABVE e sem assumir disponibilidade histórica por mês.
 - [Open Charge Map](https://openchargemap.org/develop/api): possível complemento para coordenadas; coleta requer chave API e revisão de licença/cobertura de cada registro.
 - [OpenStreetMap/Overpass](https://wiki.openstreetmap.org/wiki/Overpass_API): camada comunitária de objetos de recarga integrada sem chave pessoal, sob ODbL e com cobertura incompleta.
 
@@ -92,13 +96,13 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m src.run_project
 ```
 
-O comando baixa os meses publicados, registra os meses ainda indisponíveis, coleta os PDFs mensais públicos da FENABRAVE, valida os snapshots ABVE versionados (vendas e recarga), recria Bronze/Silver/Gold no PostgreSQL, testa baselines de previsão e exporta os CSVs agregados. As capturas ABVE precisam ser atualizadas manualmente quando a fonte publicar novos dados. O arquivo bruto e os Parquet não são versionados; snapshots de fonte e resultados agregados pequenos ficam em `data/portfolio/`. Janeiro/2024 tem extração visual transcrita e revisada por causa da codificação de caracteres do PDF, método explicitado nos dados. Os indicadores da FENABRAVE não são somados aos da ABVE: cada entidade publica conceitos/categorias próprios. O arquivo fornecido pelo usuário e Open Charge Map permanecem separados até sua origem/classificação ser validada.
+O comando coleta e valida fontes, carrega PostgreSQL e exporta resultados. Agora inclui Inmetro, agregados públicos ABVE e auditoria de intervalos. Os coletores reaproveitam arquivos para reprodução; para recapturar vendas ABVE uso `python -m src.ingestion.capture_abve_aggregates --refresh`, seguido da transformação e carga. O recorte observado permanece jan/2024–ago/2026. A recarga ABVE/Tupi continua como snapshot manual. PDFs, respostas brutas e Parquet ficam locais; agregados auditáveis ficam em `data/portfolio/`. Não somo ABVE e FENABRAVE; mantenho dados fornecidos sem fonte confirmada separados do treino.
 
 ## Power BI
 
 Preparei o mapa de perguntas, tabelas e cuidados de agregação em [docs/power_bi_handoff.md](docs/power_bi_handoff.md), com consultas SQL conferidas em [sql/consultas_portfolio.sql](sql/consultas_portfolio.sql).
 
-Minha etapa visual será conectar o Power BI ao PostgreSQL (`localhost:5432`, banco `ev_brasil_db`) e usar as tabelas do schema `gold`. Além da evolução mensal, distribuição por estado, penetração municipal e capital versus interior, posso mostrar a rede de recarga com seus limites de cobertura. Para emplacamentos, existem tabelas separadas da FENABRAVE e do material fornecido ainda não confirmado; não devo somar fontes nem chamar o arquivo não confirmado de dado oficial. Tenho rankings mensais de fabricantes e rankings documentais de modelos em `gold.ranking_modelos_noticias`, filtrados por publicação/período. A série mensal completa por modelo ainda está pendente.
+Minha etapa visual será conectar o Power BI ao PostgreSQL (`localhost:5432`, banco `ev_brasil_db`) e usar o schema `gold`. As novas tabelas são `abve_publico_tecnologia`, `abve_publico_modelo`, `abve_publico_municipio`, `inmetro_versoes_eletrificadas` e `ml_intervalos_*`. Uso a data como dimensão; não cruzo fatos municipais e fatos de modelos como se fossem a mesma linha. Os catálogos Inmetro não entram automaticamente como atributos históricos do treino. Power BI, medidas DAX e validação visual ainda são minha entrega final.
 
 ## Estrutura
 

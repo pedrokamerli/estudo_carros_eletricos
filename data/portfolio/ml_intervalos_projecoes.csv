@@ -1,0 +1,8 @@
+fonte_alvo,alvo,metodo,fim_treino,data_referencia,previsto,limite_inferior,limite_superior,nivel_nominal_percentual,status
+SENATRAN_frota,Centro-Oeste,persistencia,2026-08-01,2026-09-01,143776.0,135229.76214554606,152322.2378544539,80,experimental_sem_garantia_temporal
+SENATRAN_frota,Nordeste,persistencia,2026-08-01,2026-09-01,173539.0,162929.9894077001,184148.0105922999,80,experimental_sem_garantia_temporal
+SENATRAN_frota,Norte,persistencia,2026-08-01,2026-09-01,43219.0,40145.99237876272,46292.00762123728,80,experimental_sem_garantia_temporal
+SENATRAN_frota,Sudeste,persistencia,2026-08-01,2026-09-01,554574.0,522243.07363541104,586904.926364589,80,experimental_sem_garantia_temporal
+SENATRAN_frota,Sul,persistencia,2026-08-01,2026-09-01,203359.0,190846.31658567174,215871.68341432826,80,experimental_sem_garantia_temporal
+ABVE_emplacamentos,BEV,persistencia,2026-08-01,2026-09-01,27166.0,11131.215200330444,43200.78479966956,80,experimental_sem_garantia_temporal
+ABVE_emplacamentos,PHEV,media_3m,2026-08-01,2026-09-01,19747.0,9148.85953436807,30345.14046563193,80,experimental_sem_garantia_temporal
