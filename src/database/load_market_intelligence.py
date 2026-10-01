@@ -15,7 +15,10 @@ FILES = ["inteligencia_crescimento_estados","inteligencia_crescimento_regioes",
          "estudo_bauru_mensal","estudo_bauru_comparadores","estudo_bauru_pares_socioeconomicos",
          "recarga_nacional_evidencias","precos_anunciados_evidencias","preco_vs_emplacamentos_estudo_2024",
          "perguntas_evidencias_motor","ml_desafio_backtest_detalhe","ml_desafio_backtest_metricas",
-         "ml_desafio_diagnostico_vies","ml_desafio_selecao_modelos","ml_desafio_projecoes_experimentais"]
+         "ml_desafio_diagnostico_vies","ml_desafio_selecao_modelos","ml_desafio_projecoes_experimentais",
+         "precos_historicos_documentais","bauru_estudo_sintese","ml_registro_prospectivo","ml_avaliacao_prospectiva"]
+if (DATA/"bauru_recarga_inventario.csv").exists():
+    FILES.append("bauru_recarga_inventario")
 
 def main():
     frames = {name:pd.read_csv(DATA/f"{name}.csv") for name in FILES}

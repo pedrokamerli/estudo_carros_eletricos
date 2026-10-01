@@ -140,3 +140,22 @@ src/        ingestão, transformações, qualidade e conexão com PostgreSQL
 ## Meu objetivo
 
 Quero que este projeto mostre como conduzo um problema de dados do início à análise: entendo a pergunta, localizo fontes, coleto e valido os dados, documento decisões, modelo indicadores e apresento os resultados. As conclusões finais e o dashboard serão acrescentados depois da análise e da validação dos dados.
+
+## Meu estudo local e a prova das previsões
+
+Incluí Bauru como estudo de caso porque moro na cidade e percebo a presença dos elétricos no cotidiano. Comparei períodos iguais: foram 256, 326 e 859 novos BEV/PHEV em janeiro–agosto de 2024, 2025 e 2026. A alta de 163,5% em 2026 superou os 136,2% do conjunto de dez cidades paulistas semelhantes em renda e população. Não escolhi esses pares pelo crescimento e não interpreto a comparação como prova causal. Ainda não medi o papel de motoristas de aplicativo, energia solar residencial ou recarga em shoppings.
+
+Ampliei minha amostra para 29 anúncios de preços de BYD/GWM, com data, versão, condição comercial, fonte primária e hash do documento bruto. É um histórico documental de 2024/2025, não uma série mensal FIPE, preço de transação ou preço atual. Não preencho meses sem evidência nem uso esses anúncios esparsos para estimar elasticidade ou depreciação.
+
+Meu Streamlit agora tem capítulos específicos de Bauru e preços. As 15 respostas vêm do motor analítico, evitando manter uma conclusão no código e outra no dashboard. Na recarga regional, comparo novos BEV/PHEV com a rede pública/semipública, sem incluir híbridos sem tomada nesse indicador.
+
+Registrei em 01/10/2026 as projeções de novembro/2026 em `data/registry/previsoes_congeladas_2026_10.json`. Novas execuções preservam esse registro. Ainda não há resultado prospectivo: o valor real precisa ser publicado, coletado e conciliado. A reanálise histórica que melhorou BEV não transforma o modelo em previsão aprovada; PHEV ainda perde para a referência simples.
+
+Preparei um coletor local que consulta recarga OSM e valida a localização pela malha municipal IBGE. Nesta execução, os dois servidores Overpass falharam; não publiquei uma contagem de Bauru. A coleta é opcional para não bloquear o restante do projeto:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.ingestion.download_bauru_charging --refresh
+.\.venv\Scripts\python.exe -m src.database.load_market_intelligence
+```
+
+Incluí também um avaliador que compara as projeções congeladas somente quando o mês termina e há observação na base; sem valor real, não calcula erro. Detalhei entregas, limites, testes e uso no Power BI em [docs/entrega_bauru_precos.md](docs/entrega_bauru_precos.md).

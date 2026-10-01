@@ -50,8 +50,11 @@ PIPELINE_MODULES = [
     # Produzo inteligência depois dos exports conciliados, fora da interface visual.
     "src.ingestion.download_charging_evidence",
     "src.ingestion.download_price_evidence",
+    "src.ingestion.download_price_history",
     "src.analysis.market_intelligence",
     "src.analysis.forecast_challengers",
+    "src.analysis.bauru_case",
+    "src.analysis.evaluate_frozen_predictions",
     "src.analysis.question_evidence",
     "src.database.load_market_intelligence",
 ]

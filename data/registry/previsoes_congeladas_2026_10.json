@@ -1,0 +1,33 @@
+{
+  "registrado_em_utc": "2026-10-01T19:03:19.624156+00:00",
+  "status": "aguardando_observacoes_publicadas_sem_resultado_prospectivo",
+  "limite": "Alvos posteriores ao mês de registro, treino encerrado em agosto/2026. Registro não aprova o modelo; observações futuras ainda precisam ser coletadas e conciliadas.",
+  "previsoes": [
+    {
+      "fonte": "ABVE",
+      "tecnologia": "BEV",
+      "segmento_veiculos": "veiculos_leves_plugin",
+      "metodo": "tendencia_log_6m",
+      "fim_treino": "2026-08-01",
+      "horizonte_meses": 3,
+      "data_referencia": "2026-11-01T00:00:00.000",
+      "emplacamentos_previstos": 41523.954541,
+      "status": "projecao_experimental_sem_intervalo_calibrado",
+      "sha256_entrada": "a684e426dabd617287b761a86e441b0caab0b32369571131cf4356cbeb14c9df",
+      "tipo_avaliacao": "reanalise_exploratoria_teste_ja_conhecido"
+    },
+    {
+      "fonte": "ABVE",
+      "tecnologia": "PHEV",
+      "segmento_veiculos": "veiculos_leves_plugin",
+      "metodo": "ridge",
+      "fim_treino": "2026-08-01",
+      "horizonte_meses": 3,
+      "data_referencia": "2026-11-01T00:00:00.000",
+      "emplacamentos_previstos": 20697.898578,
+      "status": "projecao_experimental_sem_intervalo_calibrado",
+      "sha256_entrada": "a684e426dabd617287b761a86e441b0caab0b32369571131cf4356cbeb14c9df",
+      "tipo_avaliacao": "reanalise_exploratoria_teste_ja_conhecido"
+    }
+  ]
+}

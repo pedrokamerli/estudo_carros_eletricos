@@ -35,3 +35,8 @@ O arquivo `sql/consultas_portfolio.sql` contém quatro consultas conferidas no P
 ## Lacunas que continuam visíveis
 
 Ainda faltam cobertura mensal completa e motorização por versão comparável para modelos, além de um inventário completo de pontos de recarga com coordenadas/cobertura/licença. A base documental de modelos já permite mostrar os rankings dos sete recortes publicados, com quantidades ausentes preservadas; as regras estão em `docs/modelos_por_noticias.md`. Os snapshots ABVE e a transcrição das notícias estão integrados, mas a captura/revisão é manual. Os meses não publicados ficam ausentes; não são preenchidos com valores previstos. Essas limitações devem aparecer no case e no dashboard.
+# Complemento: Bauru, preços e prova futura
+
+Adicionei `gold.bauru_estudo_sintese`, `gold.precos_historicos_documentais` e `gold.ml_registro_prospectivo`. As respostas atualizadas estão em `gold.perguntas_evidencias_motor`; comparações municipais em `gold.estudo_bauru_pares_socioeconomicos`. O inventário local de recarga continua indisponível, não é zero.
+
+Grãos, indicadores e limites constam em [entrega_bauru_precos.md](entrega_bauru_precos.md). Não somar percentuais, preços, estoques mensais ou relacionar fatos de modelos e municípios como se fossem observações conjuntas.

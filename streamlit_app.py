@@ -289,15 +289,16 @@ def opportunities():
     shown = candidates[["municipio","uf","rendimento_domiciliar_per_capita_medio_2022_reais","pib_per_capita_aproximado","veiculos_eletrificados_por_100_mil_habitantes"]].rename(columns={"municipio":"Município","uf":"Estado","rendimento_domiciliar_per_capita_medio_2022_reais":"Renda por pessoa (R$/mês, 2022)","pib_per_capita_aproximado":"PIB por habitante (R$, 2023)","veiculos_eletrificados_por_100_mil_habitantes":"Eletrificados por 100 mil habitantes"})
     st.dataframe(shown,hide_index=True,width="stretch")
     st.caption("Triagem sensível aos cortes: nove cenários variaram de 7 a 30 cidades. Não é probabilidade de compra nem ranking validado de crescimento futuro.")
-    fleet = dates(load("frota_regional_mensal.csv"))
-    fleet = fleet.loc[fleet.data_referencia.eq(fleet.data_referencia.max()) & fleet.regiao.ne("UF não informada")].copy()
-    fleet["Participação (%)"] = 100*fleet.total_veiculos_eletrificados/fleet.total_veiculos_eletrificados.sum()
-    charge = load("infraestrutura_recarga_abve_gold.csv")
-    charge = charge.loc[charge.nivel_geografico.eq("regiao")].rename(columns={"participacao_nacional_percentual":"Participação (%)"})
-    compare = pd.concat([fleet[["regiao","Participação (%)"]].assign(Indicador="Frota eletrificada"),charge[["regiao","Participação (%)"]].assign(Indicador="Pontos de recarga")])
-    bars(compare,"regiao","Participação (%)","14 · Distribuição da frota versus distribuição da recarga","%","Indicador")
-    st.warning("É uma hipótese, não uma medida de déficit. A frota inclui híbridos sem tomada; pontos ABVE/Tupi são públicos/semipúblicos. Faltam capacidade, uso, demanda por hora e coordenadas completas para escolher locais ideais.")
-    st.caption("Agosto/2026 · SENATRAN entre UFs conhecidas; recarga ABVE/Tupi nacional. Uma participação menor de recarga não comprova falta de carregadores.")
+    charge = load("inteligencia_recarga_regional.csv")
+    compare = pd.concat([
+        charge[["regiao","participacao_emplacamentos_percentual"]].rename(columns={"participacao_emplacamentos_percentual":"Participação (%)"}).assign(Indicador="Novos veículos com tomada"),
+        charge[["regiao","participacao_nacional_percentual"]].rename(columns={"participacao_nacional_percentual":"Participação (%)"}).assign(Indicador="Pontos públicos/semipúblicos")])
+    bars(compare,"regiao","Participação (%)","14 · Onde investigar a expansão da recarga?","%","Indicador")
+    priority = charge.iloc[0]
+    reading(f"{priority.regiao}: {pct(priority.participacao_emplacamentos_percentual)} dos novos BEV/PHEV, frente a {pct(priority.participacao_nacional_percentual)} dos pontos. A relação entre essas participações é {priority.indice_participacao_vendas_recarga:.2f}, com 1 indicando equilíbrio de participação.",
+        "Começo a investigação pelas regiões cuja participação nas entradas de carros com tomada supera a participação na rede. Agora excluo híbridos sem tomada dessa comparação.",
+        "Entradas de jan–ago/2026 versus rede em ago/2026; não frota por carregador. Recarga doméstica, potência, funcionamento e uso podem mudar a conclusão. Não é recomendação de investimento.")
+    details(charge,"recarga_prioridades_regionais.csv")
     with st.expander("Ver o mapa comunitário de recarga — cobertura parcial"):
         osm = load("recarga_osm.csv")
         access = st.multiselect("Acesso declarado",sorted(osm.acesso_classificado.unique()),default=["publico_declarado"])
@@ -335,7 +336,7 @@ def future():
     st.write("Para vendas, vale acompanhar o crescimento em períodos iguais e a concentração por marca. Para recarga, precisamos separar veículos com tomada dos demais híbridos e conhecer o uso real dos pontos. Para cidades candidatas, renda e baixa adoção ajudam a levantar perguntas, mas não substituem pesquisa local. Essas são decisões de investigação, não recomendações de investimento.")
     st.subheader("4 · Antes de confiar em um número previsto, faço uma prova")
     st.write("O teste esconde os meses finais e pede ao modelo que tente acertá-los. Depois comparo com uma estratégia simples: repetir o último valor conhecido. Se o modelo não ganha dessa estratégia, sua complexidade não trouxe vantagem comprovada.")
-    st.warning("Temos experimentos, não uma previsão de vendas aprovada. Os modelos escolhidos para BEV/PHEV não superaram a referência simples no teste final.")
+    st.warning("No protocolo original abaixo, BEV/PHEV não superaram a referência. A nova rodada exploratória está separada mais abaixo: não substitui os intervalos nem constitui validação futura.")
     performance = load("ml_abve_selecao_modelos.csv")
     comparison = performance.melt(id_vars="tecnologia",value_vars=["wape_teste_medio","wape_persistencia_teste"],var_name="Método",value_name="Erro (%)")
     comparison["Método"] = comparison["Método"].map({"wape_teste_medio":"Modelo escolhido","wape_persistencia_teste":"Repetir o último mês"})
@@ -363,46 +364,84 @@ def future():
     st.caption("Observado até ago/2026; setembro é projeção, não coleta. Eixo vertical não começa em zero. Uso a série realmente usada no treino: PHEV jul/2024 difere em uma unidade do painel atual.")
     st.info("Precisamos avaliar novos meses sem reajustar a escolha para favorecer o teste. Não estendemos estas faixas a cidades, marcas ou vários anos sem dados e validação adequados.")
     details(coverage[["Alvo","n_calibracao","n_teste","nivel_nominal_percentual","cobertura_teste_percentual"]].rename(columns={"n_calibracao":"Meses de calibração","n_teste":"Meses de teste","nivel_nominal_percentual":"Cobertura esperada (%)","cobertura_teste_percentual":"Cobertura observada (%)"}),"incerteza_explicada.csv")
+    st.subheader("5 · Nova rodada: houve avanço, mas ainda não aprovação")
+    challenge = load("ml_desafio_selecao_modelos.csv")
+    for row in challenge.itertuples():
+        st.write(f"**{TECH[row.tecnologia]}:** erro médio {pct(row.wape_teste_medio)}, contra {pct(row.wape_persistencia_teste)} ao repetir o último mês. Método: {row.metodo}.")
+    st.caption("BEV melhorou frente à referência nesta reanálise; PHEV não. Os meses de teste já eram conhecidos no desenvolvimento. Não reutilizo as faixas do protocolo anterior para estes métodos.")
+    frozen = dates(load("ml_registro_prospectivo.csv"))
+    st.write("**A próxima prova foi registrada antes do resultado:** preservei as projeções para novembro/2026, sem permitir que uma nova execução as reescreva. O treino termina em agosto; o resultado prospectivo ainda não existe. Setembro e outubro não entram como meses futuros neste registro de outubro.")
+    details(frozen,"previsoes_futuras_congeladas.csv")
+    st.caption("O avaliador automático só calcula erro quando o mês termina e existe uma observação publicada na base. Sem valor real, o erro fica vazio — não zero.")
+    details(load("ml_avaliacao_prospectiva.csv"),"avaliacao_prospectiva.csv")
 
 def answers():
     intro(6,"As 15 perguntas: o que os dados permitem dizer","Uma hipótese exploratória não recebe o mesmo peso que uma contagem observada. Quando a evidência ainda não basta, isso fica explícito.","1 a 15")
-    sales = dates(load("abve_publico_tecnologia_gold.csv"))
-    comp = comparable_years(sales)
-    states = dates(load("evolucao_frota_por_estado.csv"))
-    latest = states.loc[states.data_referencia.eq(states.data_referencia.max()) & states.uf.ne("Sem Informação")]
-    largest,fastest = latest.nlargest(1,"total_veiculos_eletrificados").iloc[0],latest.nlargest(1,"crescimento_percentual_anual").iloc[0]
-    city = identified_cities(load("penetracao_municipal_ibge.csv"))
-    leadcity = city.nlargest(1,"quantidade_veiculos").iloc[0]
-    penetration = city.loc[city.frota_total_veiculos.ge(10000)].nlargest(1,"participacao_eletrificada_na_frota_percentual").iloc[0]
-    models = dates(load("abve_publico_modelo_gold.csv"))
-    chosen = models.loc[models.data_referencia.dt.year.eq(2026) & models.tecnologia.isin(["BEV","PHEV"])]
-    brand,model = ranked_share(chosen,["marca"]).iloc[0],ranked_share(chosen,["marca","modelo"]).iloc[0]
-    cap = dates(load("frota_capital_vs_interior.csv"))
-    interior = cap.loc[cap.data_referencia.eq(cap.data_referencia.max()) & cap.tipo_localidade.eq("interior")].iloc[0]
-    _,changes = technology_comparison(sales)
-    tech = max(changes,key=lambda x:x[1])
-    quick = [
-        ("Respondida no recorte",f"BEV + PHEV somaram {number(comp.iloc[0].Emplacamentos)}, {number(comp.iloc[1].Emplacamentos)} e {number(comp.iloc[2].Emplacamentos)} em jan–ago de 2024, 2025 e 2026.",1),
-        ("Respondida no recorte",f"Jan–ago/2026 versus jan–ago/2025: {pct(percent_change(comp.iloc[2].Emplacamentos,comp.iloc[1].Emplacamentos))}. No capítulo 1 também comparo 2025 e 2024 completos.",1),
-        ("Respondida",f"{largest.uf} lidera ago/2026 com {number(largest.total_veiculos_eletrificados)} eletrificados em frota, não vendas.",2),
-        ("Respondida",f"{fastest.uf} lidera o crescimento da frota em 12 meses em ago/2026: {pct(fastest.crescimento_percentual_anual)}. Taxa não é tamanho.",2),
-        ("Respondida",f"{leadcity.municipio} ({leadcity.uf}) lidera a base municipal cruzada: {number(leadcity.quantidade_veiculos)} eletrificados em ago/2026.",2),
-        ("Respondida com filtro",f"Entre cidades com ao menos 10 mil veículos de frota total, {penetration.municipio} lidera com {pct(penetration.participacao_eletrificada_na_frota_percentual)}. O denominador inclui todos os tipos de veículos.",2),
-        ("Respondida no recorte",f"O interior também está presente: {pct(interior.participacao_percentual)} da frota classificada em ago/2026. Trajetória e crescimento em 12 meses estão no capítulo 2.",2),
-        ("Respondida no recorte",f"{brand.marca} lidera BEV + PHEV em jan–ago/2026, com {pct(brand['Participação (%)'])} dos emplacamentos do recorte.",3),
-        ("Respondida no recorte",f"{model.modelo} ({model.marca}) lidera BEV + PHEV em jan–ago/2026, com {number(model.emplacamentos)} emplacamentos.",3),
-        ("Respondida no recorte",f"Entre quatro categorias comparáveis, {tech[0]} cresceu mais em percentual: {pct(tech[1])} em jan–ago/2026 versus 2025. MHEV fica fora.",3),
-        ("Associação, não causalidade","As três variáveis têm associação positiva com eletrificados por habitante: Spearman 0,690 para renda, 0,577 para PIB por habitante e 0,354 para população. Renda/população 2022, PIB 2023 e frota ago/2026.",4),
-        ("Triagem exploratória","O filtro preliminar selecionou 17 municípios com condições favoráveis e adoção relativamente baixa. Veja a lista e os limites no capítulo 4.",4),
-        ("Ainda não comprovada","As 17 cidades orientam pesquisa, mas não preveem qual crescerá mais. Faltam validação futura e fatores locais para afirmar potencial de crescimento.",4),
-        ("Hipótese para investigação","Comparo a participação regional da frota e dos pontos públicos/semipúblicos. A diferença não prova déficit: faltam capacidade, uso, demanda horária e frota exclusivamente conectável.",4),
-        ("Experimental, não aprovada","Podemos gerar projeções, mas os modelos de vendas escolhidos não venceram a referência no teste. As faixas têm poucos exemplos e cobertura insuficiente em quatro regiões.",5)]
-    for i,(question,(status,answer,chapter)) in enumerate(zip(QUESTIONS,quick),1):
+    # Leio respostas produzidas pelo motor para evitar duas versões da análise.
+    evidence = load("perguntas_evidencias_motor.csv").sort_values("pergunta_id")
+    for row in evidence.itertuples():
         with st.container(border=True):
-            st.subheader(f"{i}. {question}")
-            st.caption(f"{status.upper()} · VEJA O CAPÍTULO {chapter}")
-            st.write(answer)
+            st.subheader(f"{row.pergunta_id}. {row.pergunta}")
+            st.caption(row.tipo_evidencia.upper())
+            st.write(row.resposta)
+            st.caption(f"Como interpretar: {row.limite}")
+            with st.expander("Conferir a evidência desta resposta"):
+                details(load(row.arquivo_evidencia),f"evidencia_pergunta_{row.pergunta_id}.csv")
     st.caption("Este mapa usa ago/2026 para frota e jan–ago/2026 para rankings de vendas. Os filtros dos outros capítulos não alteram este resumo.")
+
+def bauru_case():
+    intro(8,"Bauru: da percepção na rua à evidência","Moro em Bauru e percebo mais elétricos no cotidiano. Transformo essa observação em perguntas testáveis: a cidade cresceu? Mais que cidades parecidas? O que sabemos sobre como esses carros carregam?","7, 13 e 14")
+    result = load("bauru_estudo_sintese.csv").iloc[0]
+    a,b,c = st.columns(3)
+    a.metric("BEV/PHEV · jan–ago/2026",number(result.jan_ago_2026))
+    b.metric("Crescimento versus jan–ago/2025",pct(result.crescimento_bauru_percentual))
+    c.metric("Novos registros a mais",number(result.acrescimo_2026_2025))
+    reading(f"Bauru passou de {number(result.jan_ago_2024)} para {number(result.jan_ago_2025)} e {number(result.jan_ago_2026)} emplacamentos em jan–ago de 2024, 2025 e 2026.",
+        "A percepção de expansão tem suporte nos registros: não é apenas impressão visual. Novos registros não equivalem, porém, ao número de motoristas de aplicativo.",
+        "ABVE, veículos leves BEV/PHEV. Não sei por esta base quais marcas/modelos foram vendidos na cidade nem se carregam em casa.")
+    monthly = dates(load("estudo_bauru_mensal.csv"))
+    year_lines(monthly.loc[monthly.municipio_chave.eq("BAURU")],"emplacamentos","Bauru: emplacamentos de cada mês por ano")
+    st.caption("A comparação de crescimento usa somente janeiro–agosto; as linhas também mostram setembro–dezembro de 2024/2025. A série de 2026 termina em agosto.")
+    peers = load("estudo_bauru_pares_socioeconomicos.csv")
+    bars(peers,"municipio_chave","crescimento_percentual","Como Bauru cresceu frente a dez cidades semelhantes?","%")
+    difference = f"{result.diferenca_crescimento_pontos_percentuais:.1f}".replace(".",",")
+    st.write(f"**Bauru cresceu {pct(result.crescimento_bauru_percentual)}; os dez pares, juntos, {pct(result.crescimento_pares_agregado_percentual)}.** Diferença de {difference} pontos percentuais. Somo os registros dos pares antes de calcular a taxa: não faço média simples de percentuais.")
+    st.caption("Pares: cidades não capitais de SP mais próximas em população e renda de 2022, após padronização logarítmica. Não escolhi as cidades pelo resultado de crescimento. Comparação descritiva, não grupo de controle causal.")
+    bars(peers,"municipio_chave","jan_ago_2026","Tamanho importa: quantos registros cada cidade teve no mesmo período?")
+    st.write(f"Bauru ocupa a posição {number(result.posicao_volume_2026)} entre as 11 cidades em volume. Crescimento rápido e mercado maior são coisas diferentes.")
+    st.subheader("Recarga local: o que está comprovado e o que falta verificar")
+    path = DATA/"bauru_recarga_inventario.csv"
+    if path.exists():
+        stations = load(path.name)
+        st.metric("Objetos comunitários mapeados dentro de Bauru",number(len(stations)))
+        st.map(stations.rename(columns={"latitude":"lat","longitude":"lon"})[["lat","lon"]])
+        st.caption(f"Captura: {stations.data_coleta_utc.iloc[0]} · malha IBGE 3506003 · © OpenStreetMap contributors, ODbL-1.0. Não é censo de carregadores ou disponibilidade ao vivo; funcionamento não verificado.")
+        details(stations,"recarga_bauru_verificacao.csv")
+    else:
+        st.info("O inventário local ainda não está disponível: os servidores de mapas falharam na consulta. Isso não significa que Bauru tenha zero carregadores. A malha municipal foi obtida; não publico uma contagem sem captura válida.")
+    st.subheader("Três hipóteses para uma pesquisa local")
+    st.markdown("""- **Motoristas de aplicativo:** levantar uso profissional, quilômetros rodados e tecnologia do carro. A base de emplacamentos não revela profissão.
+- **Energia solar em casa:** perguntar onde recarrega e se há geração própria. Painéis solares na cidade não comprovam recarga solar de cada carro.
+- **Shoppings e outros destinos:** verificar acesso, potência, preço, funcionamento e fila, com data e horário. Um ponto listado não comprova que esteja disponível.""")
+    st.caption("Pesquisa voluntária, sem nome, placa ou endereço residencial. A amostra por conveniência não representa todos os moradores. Ainda não há respostas coletadas.")
+    details(peers,"bauru_comparacao_pares.csv")
+
+
+def prices():
+    intro(9,"Preço de compra: uma peça importante, ainda incompleta","Reúno anúncios das próprias montadoras para documentar oferta e acessibilidade. Um preço só faz sentido junto de data, versão, ano/modelo e condição comercial.","8, 9 e hipóteses de crescimento")
+    frame = load("precos_historicos_documentais.csv")
+    brand = st.selectbox("Montadora dos anúncios",["Todas"]+sorted(frame.marca.unique()))
+    chosen = frame.loc[frame.marca.eq(brand)] if brand != "Todas" else frame
+    a,b = st.columns(2)
+    a.metric("Anúncios documentados neste recorte",number(len(chosen)))
+    b.metric("Marcas neste recorte",number(chosen.marca.nunique()))
+    st.write("**O preço abre uma pergunta, não encerra a análise:** versões mais acessíveis podem alcançar novos públicos, mas para medir seu efeito nas vendas preciso de um histórico comparável e controlar crédito, renda, oferta e mudanças do produto.")
+    shown = chosen[["marca","modelo_versao","ano_modelo","data_anuncio","preco_anunciado_reais","condicao","url_fonte"]].rename(columns={"marca":"Marca","modelo_versao":"Modelo e versão","ano_modelo":"Ano/modelo declarado","data_anuncio":"Data do anúncio","preco_anunciado_reais":"Preço anunciado (R$)","condicao":"Condição comercial","url_fonte":"Fonte primária"})
+    st.dataframe(shown,hide_index=True,width="stretch",column_config={"Fonte primária":st.column_config.LinkColumn("Fonte primária"),"Preço anunciado (R$)":st.column_config.NumberColumn(format="R$ %.0f")})
+    st.caption("BYD: lançamentos de 2024 e tabela publicada em julho/2025; GWM: ofertas da linha ORA em agosto/2025. Ano/modelo ausente fica vazio, não inferido. Estes não são preços atuais de outubro/2026.")
+    st.warning("29 anúncios não são um painel mensal do mercado. Não preencho meses sem evidência, não trato promoção como preço permanente e não uso este recorte para prever depreciação ou elasticidade. Ainda faltam preços comparáveis de outras marcas e meses.")
+    details(chosen,"precos_documentados.csv")
+
 
 def methodology():
     intro(7,"De onde vieram os números?","As fontes medem coisas diferentes. Não somamos dados de entidades distintas como se fossem o mesmo mercado, e mostramos onde os dados terminam.","fontes e critérios")
@@ -424,7 +463,7 @@ O período observado é **jan/2024–ago/2026**. Meses posteriores são projeç�
 st.title("A jornada dos veículos eletrificados no Brasil")
 st.caption("Como o mercado cresceu, onde avançou e quais oportunidades merecem investigação · jan/2024–ago/2026")
 st.write("Neste projeto, reúno registros públicos para entender a eletrificação no Brasil. A história segue quatro perguntas: **cresceu quanto, avançou onde, quem lidera e o que ainda precisamos verificar sobre o futuro?** Não misturo frota existente, vendas mensais e cenários como se fossem o mesmo indicador.")
-PAGES = {"1 · A história do mercado":market,"2 · Onde a adoção avança":geography,"3 · Quem lidera as vendas":leaders,"4 · Onde investigar oportunidades":opportunities,"5 · O que esperar do futuro":future,"6 · Respostas às 15 perguntas":answers,"7 · Dados e critérios":methodology}
+PAGES = {"1 · A história do mercado":market,"2 · Onde a adoção avança":geography,"3 · Quem lidera as vendas":leaders,"4 · Onde investigar oportunidades":opportunities,"5 · O que esperar do futuro":future,"6 · Respostas às 15 perguntas":answers,"7 · Dados e critérios":methodology,"8 · Bauru: estudo de caso":bauru_case,"9 · Preços e acessibilidade":prices}
 page = st.sidebar.radio("Siga a história",list(PAGES))
 st.sidebar.caption("Comece no capítulo 1 ou consulte diretamente as 15 respostas no capítulo 6.")
 guide()

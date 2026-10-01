@@ -1,0 +1,3 @@
+tecnologia,data_referencia,previsto_congelado,observado,erro_absoluto,erro_percentual,status,registrado_em_utc,avaliado_em_utc,limite
+BEV,2026-11-01,41523.954541,,,,aguardando_mes_encerrado_e_observacao,2026-10-01T19:03:19.624156+00:00,2026-10-01T19:13:45.361332+00:00,"Registro prospectivo de um único horizonte/tecnologia, não aprovação operacional. Sem observado não calculo erro; valor zero não recebe erro percentual infinito."
+PHEV,2026-11-01,20697.898578,,,,aguardando_mes_encerrado_e_observacao,2026-10-01T19:03:19.624156+00:00,2026-10-01T19:13:45.361332+00:00,"Registro prospectivo de um único horizonte/tecnologia, não aprovação operacional. Sem observado não calculo erro; valor zero não recebe erro percentual infinito."
