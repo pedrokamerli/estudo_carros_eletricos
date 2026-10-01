@@ -11,7 +11,7 @@ Conecto o Power BI ao PostgreSQL `localhost:5432`, banco `ev_brasil_db`, schema 
 | 5–6: municípios e participação | `frota_por_municipio`, `penetracao_municipal_ibge` | Frota mensal e indicador da última competência; penetração inclui localidades sem registros eletrificados |
 | 7: capital/interior | `frota_capital_vs_interior` | Comparar competências; participação de uma fotografia não prova crescimento |
 | 8: fabricantes | `ranking_marcas_fenabrave_mensal` | Ranking por categoria/mês; filtrar categoria e segmento antes de comparar |
-| 9: modelos eletrificados | Sem tabela oficial validada | CSVs recebidos sem origem confirmada não resolvem esta pergunta |
+| 9: modelos eletrificados | `ranking_modelos_noticias`, `cobertura_rankings_modelos_noticias` | Sete listas ABVE/imprensa e 65 registros; filtrar fonte/período, separar mensal de acumulado; não é série completa |
 | 10: tecnologias | `emplacamentos_abve_mensais` | BEV/PHEV/HEV/HEV Flex a partir de jan/2025; categorias SENATRAN não são equivalências automáticas |
 | 11: economia e adoção | `correlacao_municipal_socioeconomia_adocao`, `penetracao_municipal_ibge` | Correlações descritivas na competência jul/2026, sem inferir causalidade |
 | 12–13: candidatos a oportunidade | `oportunidade_municipal_preliminar`, `sensibilidade_oportunidade` | Filtro econômico/de adoção e nove cenários; não mede demanda nem prevê crescimento municipal |
@@ -33,4 +33,4 @@ O arquivo `sql/consultas_portfolio.sql` contém quatro consultas conferidas no P
 
 ## Lacunas que continuam visíveis
 
-Ainda faltam uma fonte validada de emplacamentos por modelo eletrificado e um inventário completo de pontos de recarga com coordenadas/cobertura/licença. Os snapshots ABVE estão integrados, mas a atualização da captura do painel é manual. Os meses não publicados ficam ausentes; não são preenchidos com valores previstos. Essas limitações devem aparecer no case e no dashboard.
+Ainda faltam cobertura mensal completa e motorização por versão comparável para modelos, além de um inventário completo de pontos de recarga com coordenadas/cobertura/licença. A base documental de modelos já permite mostrar os rankings dos sete recortes publicados, com quantidades ausentes preservadas; as regras estão em `docs/modelos_por_noticias.md`. Os snapshots ABVE e a transcrição das notícias estão integrados, mas a captura/revisão é manual. Os meses não publicados ficam ausentes; não são preenchidos com valores previstos. Essas limitações devem aparecer no case e no dashboard.

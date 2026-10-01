@@ -1,0 +1,66 @@
+fonte_id,posicao,marca,modelo_original,tecnologia_fonte,quantidade_emplacada,observacao_registro
+abve_202401,1,BYD,Dolphin GS 180EV,BEV,1583,Quantidade descrita no texto para Dolphin GS
+abve_202401,2,BYD,Song Plus GS,PHEV,1519,
+abve_202401,3,Toyota,Corolla Cross XRX Hybrid,HEV_FLEX,,Fonte publica somente a posicao
+abve_202401,4,GWM,Haval H6 Prem,HEV,,Fonte publica somente a posicao
+abve_202401,5,BYD,Seal AWD GS 590EV,BEV,,Fonte publica somente a posicao
+abve_202402,1,BYD,Song Plus GS DM,PHEV,,Fonte publica somente a posicao
+abve_202402,2,BYD,Dolphin GS 180 EV,BEV,,Fonte publica somente a posicao
+abve_202402,3,Toyota,Corolla Cross XRX Hybrid,HEV_FLEX,,Fonte publica somente a posicao
+abve_202402,4,BYD,Dolphin Plus 310 EV,BEV,,Fonte publica somente a posicao
+abve_202402,5,GWM,Haval H6 PREM PHEV,PHEV,,Fonte publica somente a posicao
+abve_202404_ytd,1,BYD,SONG PLUS GS DM,PHEV,6568,
+abve_202404_ytd,2,BYD,DOLPHIN MINI GS EV,BEV,5637,
+abve_202404_ytd,3,BYD,DOLPHIN GS 180 EV,BEV,5500,
+abve_202404_ytd,4,GWM,HAVAL H6 PREM,HEV,2331,
+abve_202404_ytd,5,BYD,SEAL AWD GS 590 EV,BEV,1700,
+abve_202405_ytd,1,BYD,SONG PLUS GS DM,PHEV,8127,
+abve_202405_ytd,2,BYD,DOLPHIN MINI GS EV,BEV,7741,
+abve_202405_ytd,3,BYD,DOLPHIN GS 180 EV,BEV,6295,
+abve_202405_ytd,4,Toyota,CCROSS XRX HYBRID,HEV_FLEX,5218,
+abve_202405_ytd,5,GWM,HAVAL H6 PREM,HEV,2916,
+wm_202412,1,BYD,Dolphin Mini,BEV,1852,
+wm_202412,2,BYD,Dolphin,BEV,531,
+wm_202412,3,GWM,ORA 03,BEV,478,
+wm_202412,4,Volvo,EX30,BEV,354,
+wm_202412,5,BYD,Seal,BEV,187,
+wm_202412,6,BYD,Yuan Pro,BEV,130,
+wm_202412,7,Renault,E-Kwid,BEV,90,Preservo o nome usado na lista; nao padronizo para outra versao
+wm_202412,8,JAC,E-JS1,BEV,73,
+wm_202412,9,BYD,Yuan Plus,BEV,72,
+wm_202412,10,JAC,E-JS4,BEV,69,
+wm_202505_ytd,1,BYD,Song Pro,PHEV,10108,
+wm_202505_ytd,2,Fiat,Fastback Hybrid,HIBRIDO_LEVE_CONFORME_TEXTO,9082,Nao somar ao recorte ABVE sem MHEV
+wm_202505_ytd,3,GWM,Haval H6,HEV_PHEV_MISTO,8602,Somente carroceria SUV convencional; fonte distingue versoes HEV e PHEV
+wm_202505_ytd,4,Fiat,Pulse Hybrid,HIBRIDO_LEVE_CONFORME_TEXTO,,Fonte informa volumes por versao; nao invento total direto do modelo
+wm_202505_ytd,5,BYD,King,PHEV,5460,
+wm_202608,1,BYD,Dolphin Mini,BEV,8299,Classificacao corresponde ao recorte da reportagem
+wm_202608,2,BYD,Dolphin,BEV,6740,
+wm_202608,3,Geely,EX2,BEV,5804,
+wm_202608,4,GAC,Aion UT,BEV,978,
+wm_202608,5,GWM,Ora 5,BEV,952,
+wm_202608,6,BYD,Yuan Pro,BEV,707,
+wm_202608,7,MG,MG4,BEV,550,
+wm_202608,8,Geely,EX5,BEV,374,
+wm_202608,9,GWM,Ora 03,BEV,334,
+wm_202608,10,Leapmotor,C10,BEV,290,Classe da lista; nome geral nao discrimina versao BEV e outras motorizacoes
+wm_202608,11,Chevrolet,Captiva EV,BEV,281,
+wm_202608,12,Chevrolet,Spark EUV,BEV,266,
+wm_202608,13,GAC,Aion V,BEV,226,
+wm_202608,14,BYD,Sealion 7,BEV,172,
+wm_202608,15,Leapmotor,B10,BEV,126,Classe da lista; nao atribuir a todas as versoes do modelo
+wm_202608,16,Omoda,E5,BEV,115,
+wm_202608,17,GAC,Aion ES,BEV,105,
+wm_202608,18,BYD,Yuan Plus,BEV,86,
+wm_202608,19,MG,S5,BEV,81,
+wm_202608,20,Volvo,EX40,BEV,72,
+wm_202608,21,Zeekr,7X,BEV,72,
+wm_202608,22,BYD,Seal,BEV,70,
+wm_202608,23,Volvo,EX30,BEV,56,
+wm_202608,24,GAC,Hyptec HT,BEV,34,
+wm_202608,25,Volvo,EX90,BEV,28,
+wm_202608,26,Chevrolet,Blazer,BEV,23,Classe da lista; nome original nao especifica sufixo EV
+wm_202608,27,JAC,E-JS1,BEV,22,
+wm_202608,28,Volvo,EC40,BEV,22,
+wm_202608,29,GAC,Aion Y,BEV,21,
+wm_202608,30,Foton,eView Connect,BEV,21,

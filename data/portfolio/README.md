@@ -1,8 +1,10 @@
 # Dados de demonstração do portfólio
 
-Os CSVs desta pasta são exports agregados das tabelas Gold do PostgreSQL, exceto `emplacamentos_abve_mensais.csv` e `infraestrutura_recarga_abve_snapshot.csv`, que são snapshots fonte transcritos e versionados. Eles permitem que quem visita o repositório explore os principais resultados sem baixar os arquivos brutos da SENATRAN ou instalar o banco.
+Os CSVs desta pasta são exports das tabelas Gold do PostgreSQL, exceto `emplacamentos_abve_mensais.csv`, `infraestrutura_recarga_abve_snapshot.csv`, `rankings_modelos_noticias_snapshot.csv` e `fontes_rankings_modelos_noticias.csv`, que são snapshots/catálogos de fontes transcritos e versionados. Eles permitem que quem visita o repositório explore os principais resultados sem baixar os arquivos brutos da SENATRAN ou instalar o banco.
 
 Os arquivos com `dados_fornecidos` no nome vêm de material recebido pelo autor e ainda não têm origem oficial confirmada. Eles não devem ser apresentados como série oficial da ABVE.
+
+Os arquivos de `modelos_noticias` são outra base: 65 registros documentais em sete listas publicadas pela ABVE ou Webmotors, com 56 quantidades e nove desconhecidas. Os exports Gold de ranking e cobertura preservam fonte, granularidade e intervalo; não representam todos os modelos nem uma série mensal completa. Para um ranking, filtro uma `fonte_id`; não somo listas acumuladas sobrepostas. Veja [`docs/modelos_por_noticias.md`](../../docs/modelos_por_noticias.md).
 
 A avaliação estrutural e a comparação entre os arquivos anuais/mensais estão em [`docs/provided_data_assessment.md`](../../docs/provided_data_assessment.md). Mesmo sem nulos ou IDs repetidos, esses checks não confirmam a origem dos números.
 

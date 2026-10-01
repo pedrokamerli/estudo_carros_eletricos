@@ -4,6 +4,8 @@
 
 Recebi três CSVs com histórico anual de modelos, vendas mensais por modelo e um conjunto municipal de emplacamentos. Mantive-os no projeto como material de exploração, mas **não os trato como fonte oficial** nem os misturo com as séries SENATRAN, FENABRAVE ou ABVE. Não encontrei citação, URL, relatório de origem, licença ou método de coleta nos arquivos.
 
+Em 30/09/2026, confirmei que produzi esses CSVs com uma pesquisa no Gemini. Isso esclarece a ferramenta usada, mas não confirma cada número: ainda faltam as publicações originais e a metodologia. A base de notícias rastreáveis criada depois está separada, documentada em `docs/modelos_por_noticias.md`, sem reaproveitar esses valores como fatos confirmados.
+
 ## O que verifiquei
 
 | Arquivo | Estrutura observada | Limitação principal |

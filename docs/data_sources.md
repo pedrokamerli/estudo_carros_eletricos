@@ -53,6 +53,10 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Quebra metodológica:** a ABVE declara uma classificação revisada a partir de janeiro/2025. Na definição vigente, eletrificados leves incluem BEV, PHEV, HEV e HEV Flex, mas não MHEV. Em alguns informes de 2024, MHEV aparece incluído em totais; é preciso reconstruir um recorte comparável antes de calcular crescimento entre períodos.
 - **Cobertura verificada:** o snapshot contém totais mensais de janeiro/2024 a agosto/2026 e tecnologias de janeiro/2025 a agosto/2026. Setembro ainda não tinha fechamento mensal publicado em 30/09/2026. A soma dos totais mensais do painel para jan–ago excede em 16 unidades o acumulado citado em notícia ABVE de 2025 e em 6 unidades o acumulado publicado para 2026; em ago/2025, a soma das quatro tecnologias fica 16 abaixo do total mensal do painel. Preservei esses números separados para conferência. A atualização recorrente continua pendente de um método estável para extrair o painel.
 
+## Modelos em notícias e publicações
+
+Os rankings documentais de modelos são descritos em [`docs/modelos_por_noticias.md`](modelos_por_noticias.md): quatro publicações primárias ABVE e três reportagens Webmotors, sete recortes/períodos e 65 registros. O catálogo `data/portfolio/fontes_rankings_modelos_noticias.csv` conserva URL, publicador, fornecedor atribuído, data, escopo, granularidade e tipo de período. A Silver/Gold valida a transcrição e mantém quantidades ausentes; isso não confirma uma série mensal completa nem autoriza classificar outras versões a partir do nome geral de um modelo.
+
 ## Infraestrutura de recarga — ABVE/Tupi
 
 - **Fonte:** [painel público de eletropostos da ABVE](https://abve.org.br/abve-data/bi-eletropostos/) e [publicação ABVE/Tupi sobre a rede](https://abve.org.br/recarga-rapida-dc-quase-triplica-em-12-meses-e-ja-responde-por-38-da-rede-brasileira/).
