@@ -57,6 +57,17 @@ Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo 
 
 O inventário, os métodos de acesso e as limitações estão em [docs/data_sources.md](docs/data_sources.md). Também documentei por que os CSVs recebidos sem origem confirmada ficam isolados em [docs/provided_data_assessment.md](docs/provided_data_assessment.md). As métricas estão em [docs/metrics.md](docs/metrics.md), as perguntas em [docs/business_questions.md](docs/business_questions.md) e o status de cada entrega em [docs/project_status.md](docs/project_status.md).
 
+## Prévia interativa local
+
+Criei um painel Streamlit para explorar frota, municípios, emplacamentos, marcas/modelos, resultados de ML e o mapa parcial de recarga. Ele lê somente os exports públicos, sem precisar da senha do PostgreSQL e sem disparar coleta/treinamento. É uma prévia complementar; o Power BI continua sendo a entrega visual principal.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m streamlit run streamlit_app.py
+```
+
+Abro `http://127.0.0.1:8501`. Para renovar os dados, executo `python -m src.run_project` antes de abrir ou recarregar o painel. Para encerrar o servidor, uso Ctrl+C no terminal. A configuração local não publica o serviço na internet.
+
 ## Tecnologias
 
 Também automatizei a coleta de 96 observações econômicas mensais do BCB e da carga horária do ONS, resumida em 3.072 grupos mês/hora/subsistema. Testei contexto econômico nas vendas e previsão de frota nas cinco regiões. O Ridge regional superou persistência neste teste, mas continua experimental; contexto econômico não melhorou a seleção das vendas. Minha análise das nove aplicações, fontes, resultados e limites está em [docs/novas_aplicacoes_ml.md](docs/novas_aplicacoes_ml.md). O esquema estrela e as medidas iniciais para o Power BI estão descritos em [docs/modelo_dimensional_bi.md](docs/modelo_dimensional_bi.md).

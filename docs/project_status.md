@@ -10,6 +10,7 @@ Atualizado em 01/10/2026. Meu recorte observado está fechado em jan/2024–ago/
 - Criei o modelo dimensional BI e medidas DAX iniciais. DAX ainda não executado em PBIX; construção visual continua com o autor.
 - O mapa das nove aplicações de ML distingue entregas, fontes localizadas e dados indisponíveis em `docs/novas_aplicacoes_ml.md`. Não implementei nove modelos com bases inadequadas.
 - Executei o fluxo completo com sucesso em 01/10/2026, incluindo novas fontes, ML regional/econômico, esquema BI e exports. Executei 40 casos unitários com sucesso e os quatro testes BI/PostgreSQL separadamente; as funções legadas exclusivas de pytest não foram executadas.
+- Criei a prévia local Streamlit com seis áreas, filtros e download dos recortes. Ela lê exports públicos sem acesso ao banco e não executa atualizações. As seis páginas passaram pelo teste de renderização, incluindo competência histórica e mapa com filtro vazio. O Power BI ainda é a entrega visual principal pendente.
 
 ## Entregas implementadas
 

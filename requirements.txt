@@ -9,3 +9,4 @@ psycopg[binary]
 python-dotenv
 numpy
 scikit-learn==1.9.1
+streamlit==1.64.0
