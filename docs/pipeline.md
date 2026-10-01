@@ -1,4 +1,14 @@
-# Primeira pipeline local
+# Pipeline local
+
+Meu estudo observado usa janeiro/2024–agosto/2026. Para executar todas as fontes públicas e integrações, uso:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.run_project
+```
+
+Isso inclui SENATRAN, IBGE, FENABRAVE, OSM, BCB e ONS; transformação dos snapshots ABVE; avaliações de ML; PostgreSQL, esquema dimensional BI e exports. Os snapshots ABVE continuam com captura manual. A execução para no primeiro erro e não agenda tarefas recorrentes. BCB e ONS aceitam `--refresh` nos seus coletores para renovar o cache mantendo versões anteriores.
+
+A seção abaixo descreve especificamente a transformação SENATRAN, chamada pelo fluxo completo. As referências do ONS e os limites dos novos experimentos estão em `docs/novas_aplicacoes_ml.md`.
 
 ## Objetivo
 
@@ -36,6 +46,8 @@ Parquet da frota eletrificada (Silver)
 
 ## Como testar as regras
 
+O comando abaixo executa os casos `unittest.TestCase`; ele não executa funções legadas exclusivas de pytest. Os quatro testes de integração BI com PostgreSQL são opcionais e exigem `$env:EV_RUN_BI_INTEGRATION_TESTS='1'`.
+
 ```powershell
-.\.venv\Scripts\python.exe -m pytest
+.\.venv\Scripts\python.exe -m unittest discover -s tests -p 'test_*.py'
 ```

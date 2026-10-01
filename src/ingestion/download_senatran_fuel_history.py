@@ -103,7 +103,7 @@ def download_file(source_url: str, destination_path: Path) -> int:
 
 
 def main() -> None:
-    """Coleto jan/2024 a set/2026 e documento meses ainda não publicados pela SENATRAN."""
+    """Coleto somente jan/2024 a ago/2026, o recorte fechado do meu estudo."""
     BRONZE_PATH.mkdir(parents=True, exist_ok=True)
     links_by_period = {
         (year, month): link
@@ -113,7 +113,7 @@ def main() -> None:
     manifest: list[dict[str, object]] = []
 
     for year in range(2024, 2027):
-        last_month = 9 if year == 2026 else 12
+        last_month = 8 if year == 2026 else 12
         for month in range(1, last_month + 1):
             source_url = links_by_period.get((year, month))
             destination_path = make_destination_path(year, month)

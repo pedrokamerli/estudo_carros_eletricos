@@ -338,6 +338,10 @@ def main() -> None:
     parse_manifest: list[dict[str, object]] = []
 
     for pdf_path in sorted(BRONZE_PATH.glob("20??_??_02.pdf")):
+        year, month = map(int, pdf_path.stem.split("_")[:2])
+        if not (2024, 1) <= (year, month) <= (2026, 8):
+            # Preservo o arquivo Bronze, mas ele não altera meu estudo fechado.
+            continue
         try:
             report_monthly, report_brands, record = parse_report(pdf_path)
             monthly_rows.extend(report_monthly)

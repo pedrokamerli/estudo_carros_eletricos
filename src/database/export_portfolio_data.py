@@ -12,6 +12,21 @@ OUTPUT_PATH = PROJECT_ROOT / "data" / "portfolio"
 
 # Compartilho tabelas pequenas e agregadas, preservando o nome que informa a origem.
 EXPORTS = {
+    "perfil_carga_ons_mensal_hora.csv": "SELECT * FROM gold.perfil_carga_ons_mensal_hora ORDER BY data_referencia, id_subsistema, hora",
+    "contexto_economico_bcb.csv": "SELECT * FROM gold.contexto_economico_bcb ORDER BY data_referencia, codigo_sgs",
+    "frota_regional_mensal.csv": "SELECT * FROM gold.frota_regional_mensal ORDER BY regiao, data_referencia",
+    "ml_macro_detalhe.csv": "SELECT * FROM gold.ml_macro_detalhe ORDER BY tecnologia, etapa, fim_treino, metodo",
+    "ml_macro_metricas.csv": "SELECT * FROM gold.ml_macro_metricas ORDER BY tecnologia, etapa, metodo",
+    "ml_macro_selecao.csv": "SELECT * FROM gold.ml_macro_selecao ORDER BY tecnologia",
+    "ml_frota_regional_backtest_detalhe.csv": "SELECT * FROM gold.ml_frota_regional_backtest_detalhe ORDER BY regiao, etapa, fim_treino, horizonte_meses, metodo",
+    "ml_frota_regional_backtest_metricas.csv": "SELECT * FROM gold.ml_frota_regional_backtest_metricas ORDER BY regiao, etapa, horizonte_meses, metodo",
+    "ml_frota_regional_selecao_modelos.csv": "SELECT * FROM gold.ml_frota_regional_selecao_modelos ORDER BY regiao",
+    "ml_frota_regional_projecoes_experimentais.csv": "SELECT * FROM gold.ml_frota_regional_projecoes_experimentais ORDER BY regiao, data_referencia",
+    "bi_dim_data.csv": "SELECT * FROM bi.dim_data ORDER BY data",
+    "bi_dim_municipio.csv": "SELECT * FROM bi.dim_municipio ORDER BY uf, municipio",
+    "bi_fato_frota_municipal.csv": "SELECT * FROM bi.fato_frota_municipal ORDER BY data_referencia, municipio_id",
+    "bi_fato_emplacamentos_plugin_abve.csv": "SELECT * FROM bi.fato_emplacamentos_plugin_abve ORDER BY data_referencia, tecnologia",
+    "bi_fato_emplacamentos_fenabrave.csv": "SELECT * FROM bi.fato_emplacamentos_fenabrave ORDER BY data_referencia, categoria_fenabrave, segmento_veiculos",
     "recarga_osm.csv": "SELECT * FROM gold.recarga_osm ORDER BY osm_id",
     "abve_plugin_mensais.csv": "SELECT * FROM gold.abve_plugin_mensais ORDER BY tecnologia, data_referencia",
     "ml_abve_backtest_detalhe.csv": "SELECT * FROM gold.ml_abve_backtest_detalhe ORDER BY tecnologia, etapa, fim_treino, horizonte_meses, metodo",

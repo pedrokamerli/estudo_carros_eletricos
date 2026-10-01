@@ -1,0 +1,193 @@
+ano_referencia,mes_referencia,regiao,total_veiculos_eletrificados,data_referencia,crescimento_yoy_percentual,fonte,url_fonte
+2024,1,Centro-Oeste,31707,2024-01-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,2,Centro-Oeste,33288,2024-02-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,3,Centro-Oeste,35069,2024-03-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,4,Centro-Oeste,37171,2024-04-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,5,Centro-Oeste,39164,2024-05-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,6,Centro-Oeste,40958,2024-06-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,7,Centro-Oeste,43107,2024-07-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,8,Centro-Oeste,45258,2024-08-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,9,Centro-Oeste,47024,2024-09-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,10,Centro-Oeste,49342,2024-10-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,11,Centro-Oeste,52187,2024-11-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,12,Centro-Oeste,55977,2024-12-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,1,Centro-Oeste,58315,2025-01-01,83.9183776453149,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,2,Centro-Oeste,60662,2025-02-01,82.23383801970681,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,3,Centro-Oeste,63487,2025-03-01,81.0345319227808,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,4,Centro-Oeste,66256,2025-04-01,78.24648247289554,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,5,Centro-Oeste,69040,2025-05-01,76.28434276376264,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,6,Centro-Oeste,71914,2025-06-01,75.57986229796376,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,7,Centro-Oeste,75088,2025-07-01,74.18980675992297,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,8,Centro-Oeste,78573,2025-08-01,73.61129524062045,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,9,Centro-Oeste,82019,2025-09-01,74.41944538958829,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,10,Centro-Oeste,85891,2025-10-01,74.0727980219691,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,11,Centro-Oeste,89786,2025-11-01,72.04667829152854,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,12,Centro-Oeste,95123,2025-12-01,69.93229362059417,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,1,Centro-Oeste,98704,2026-01-01,69.26005315956442,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,2,Centro-Oeste,102741,2026-02-01,69.3663248821338,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,3,Centro-Oeste,108106,2026-03-01,70.2805298722573,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,4,Centro-Oeste,113507,2026-04-01,71.3158053610239,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,5,Centro-Oeste,119974,2026-05-01,73.77462340672074,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,6,Centro-Oeste,127268,2026-06-01,76.97249492449313,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,7,Centro-Oeste,135323,2026-07-01,80.21920946089922,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,8,Centro-Oeste,143776,2026-08-01,82.98397668410269,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,1,Nordeste,33975,2024-01-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,2,Nordeste,35453,2024-02-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,3,Nordeste,37364,2024-03-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,4,Nordeste,39446,2024-04-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,5,Nordeste,41595,2024-05-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,6,Nordeste,43635,2024-06-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,7,Nordeste,45860,2024-07-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,8,Nordeste,48209,2024-08-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,9,Nordeste,50331,2024-09-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,10,Nordeste,52844,2024-10-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,11,Nordeste,55334,2024-11-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,12,Nordeste,58633,2024-12-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,1,Nordeste,61433,2025-01-01,80.81824871228844,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,2,Nordeste,64086,2025-02-01,80.76326403971454,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,3,Nordeste,66707,2025-03-01,78.53281233272669,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,4,Nordeste,69639,2025-04-01,76.54261522080819,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,5,Nordeste,73362,2025-05-01,76.37216011539849,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,6,Nordeste,76447,2025-06-01,75.1965165578091,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,7,Nordeste,80481,2025-07-01,75.49280418665502,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,8,Nordeste,84419,2025-08-01,75.11045655375553,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,9,Nordeste,88544,2025-09-01,75.92338717688901,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,10,Nordeste,92686,2025-10-01,75.39550374687761,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,11,Nordeste,96674,2025-11-01,74.70994325369573,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,12,Nordeste,102584,2025-12-01,74.95949380041955,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,1,Nordeste,107522,2026-01-01,75.02319600214868,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,2,Nordeste,112209,2026-02-01,75.09128358767904,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,3,Nordeste,118966,2026-03-01,78.34110363230246,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,4,Nordeste,127016,2026-04-01,82.39205043151108,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,5,Nordeste,136452,2026-05-01,85.99820070336142,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,6,Nordeste,146545,2026-06-01,91.69489973445654,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,7,Nordeste,159916,2026-07-01,98.70031435991103,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,8,Nordeste,173539,2026-08-01,105.56865160686576,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,1,Norte,7849,2024-01-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,2,Norte,8215,2024-02-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,3,Norte,8629,2024-03-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,4,Norte,9167,2024-04-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,5,Norte,9636,2024-05-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,6,Norte,10135,2024-06-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,7,Norte,10679,2024-07-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,8,Norte,11267,2024-08-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,9,Norte,11861,2024-09-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,10,Norte,12448,2024-10-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,11,Norte,13130,2024-11-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,12,Norte,13965,2024-12-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,1,Norte,14614,2025-01-01,86.18932348069819,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,2,Norte,15236,2025-02-01,85.46561168594036,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,3,Norte,15950,2025-03-01,84.84181249275697,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,4,Norte,16646,2025-04-01,81.58612414094033,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,5,Norte,17528,2025-05-01,81.90120381901205,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,6,Norte,18330,2025-06-01,80.85841144548593,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,7,Norte,19348,2025-07-01,81.17801292255828,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,8,Norte,20373,2025-08-01,80.82009408005679,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,9,Norte,21459,2025-09-01,80.92066436219542,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,10,Norte,22563,2025-10-01,81.25803341902314,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,11,Norte,23487,2025-11-01,78.88042650418888,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,12,Norte,25157,2025-12-01,80.14321518080916,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,1,Norte,26120,2026-01-01,78.73272204735184,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,2,Norte,27205,2026-02-01,78.55736413756891,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,3,Norte,29158,2026-03-01,82.80877742946709,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,4,Norte,31230,2026-04-01,87.61263967319476,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,5,Norte,33822,2026-05-01,92.95983569146507,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,6,Norte,36531,2026-06-01,99.2962356792144,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,7,Norte,39823,2026-07-01,105.8248914616498,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,8,Norte,43219,2026-08-01,112.13861483335788,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,1,Sudeste,133265,2024-01-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,2,Sudeste,138703,2024-02-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,3,Sudeste,146364,2024-03-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,4,Sudeste,154316,2024-04-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,5,Sudeste,161846,2024-05-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,6,Sudeste,169901,2024-06-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,7,Sudeste,177837,2024-07-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,8,Sudeste,184843,2024-08-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,9,Sudeste,191502,2024-09-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,10,Sudeste,199256,2024-10-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,11,Sudeste,207591,2024-11-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,12,Sudeste,218662,2024-12-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,1,Sudeste,227700,2025-01-01,70.86256706562114,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,2,Sudeste,236649,2025-02-01,70.6156319618177,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,3,Sudeste,246447,2025-03-01,68.37951955398869,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,4,Sudeste,257029,2025-04-01,66.56017522486326,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,5,Sudeste,268684,2025-05-01,66.01213499252377,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,6,Sudeste,280116,2025-06-01,64.87013025232342,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,7,Sudeste,293476,2025-07-01,65.02527595494752,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,8,Sudeste,306288,2025-08-01,65.70170360792673,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,9,Sudeste,320124,2025-09-01,67.1648337876367,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,10,Sudeste,333949,2025-10-01,67.59796442767095,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,11,Sudeste,346423,2025-11-01,66.87765847266982,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,12,Sudeste,366619,2025-12-01,67.66470625897504,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,1,Sudeste,381023,2026-01-01,67.33552920509442,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,2,Sudeste,395243,2026-02-01,67.01655193979268,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,3,Sudeste,416686,2026-03-01,69.07732697091058,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,4,Sudeste,439061,2026-04-01,70.82158044423004,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,5,Sudeste,465377,2026-05-01,73.20607107233776,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,6,Sudeste,493900,2026-06-01,76.31981036427766,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,7,Sudeste,524041,2026-07-01,78.56349411876951,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,8,Sudeste,554574,2026-08-01,81.06292117223006,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,1,Sul,49654,2024-01-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,2,Sul,51692,2024-02-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,3,Sul,54350,2024-03-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,4,Sul,57499,2024-04-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,5,Sul,59578,2024-05-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,6,Sul,62413,2024-06-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,7,Sul,65596,2024-07-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,8,Sul,68712,2024-08-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,9,Sul,71504,2024-09-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,10,Sul,75091,2024-10-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,11,Sul,78650,2024-11-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,12,Sul,82563,2024-12-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,1,Sul,85439,2025-01-01,72.06871551133847,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,2,Sul,88480,2025-02-01,71.16768552193764,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,3,Sul,91631,2025-03-01,68.59429622815088,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,4,Sul,95170,2025-04-01,65.51592201603506,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,5,Sul,99243,2025-05-01,66.5765886736715,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,6,Sul,103069,2025-06-01,65.14027526316633,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,7,Sul,107243,2025-07-01,63.49015183852673,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,8,Sul,111713,2025-08-01,62.581499592502034,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,9,Sul,116864,2025-09-01,63.43701051689416,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,10,Sul,122194,2025-10-01,62.72789015993927,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,11,Sul,127580,2025-11-01,62.21233312142402,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,12,Sul,135430,2025-12-01,64.03231471724622,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,1,Sul,140461,2026-01-01,64.39916197521039,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,2,Sul,145770,2026-02-01,64.749095840868,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,3,Sul,152949,2026-03-01,66.918400977835,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,4,Sul,161313,2026-04-01,69.49984238730693,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,5,Sul,170482,2026-05-01,71.78239271283617,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,6,Sul,180314,2026-06-01,74.9449397976113,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,7,Sul,191678,2026-07-01,78.73241143944128,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,8,Sul,203359,2026-08-01,82.0370055409845,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,1,UF não informada,48096,2024-01-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,2,UF não informada,51873,2024-02-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,3,UF não informada,54766,2024-03-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,4,UF não informada,54280,2024-04-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,5,UF não informada,57482,2024-05-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,6,UF não informada,58176,2024-06-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,7,UF não informada,71657,2024-07-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,8,UF não informada,71249,2024-08-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,9,UF não informada,75179,2024-09-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,10,UF não informada,74533,2024-10-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,11,UF não informada,79587,2024-11-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2024,12,UF não informada,85244,2024-12-01,,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,1,UF não informada,81330,2025-01-01,69.0993013972056,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,2,UF não informada,79370,2025-02-01,53.00830875407245,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,3,UF não informada,86230,2025-03-01,57.45170361172991,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,4,UF não informada,83197,2025-04-01,53.27376565954312,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,5,UF não informada,79704,2025-05-01,38.65905848787448,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,6,UF não informada,82981,2025-06-01,42.637857535753575,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,7,UF não informada,87609,2025-07-01,22.26160737960004,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,8,UF não informada,91481,2025-08-01,28.39618801667392,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,9,UF não informada,93183,2025-09-01,23.94817701751819,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,10,UF não informada,104889,2025-10-01,40.728268015509904,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,11,UF não informada,111196,2025-11-01,39.716285322979886,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2025,12,UF não informada,111238,2025-12-01,30.493641781239745,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,1,UF não informada,107315,2026-01-01,31.95007992130825,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,2,UF não informada,104638,2026-02-01,31.83570618621645,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,3,UF não informada,110463,2026-03-01,28.102748463411807,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,4,UF não informada,122820,2026-04-01,47.62551534310131,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,5,UF não informada,133540,2026-05-01,67.54491618990264,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,6,UF não informada,143873,2026-06-01,73.38065340258612,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,7,UF não informada,150453,2026-07-01,71.73235626476733,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran
+2026,8,UF não informada,148204,2026-08-01,62.005225128715246,SENATRAN,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran

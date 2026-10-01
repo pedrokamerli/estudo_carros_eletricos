@@ -54,12 +54,12 @@ def find_bronze_fuel_files() -> list[Path]:
     files: list[Path] = []
     for raw_file_path in BRONZE_SENATRAN_PATH.glob("*.xlsx"):
         try:
-            year, _ = get_period_from_file_name(raw_file_path)
+            year, month = get_period_from_file_name(raw_file_path)
         except ValueError:
             # Ignoro Excel de outro tipo para evitar misturar fontes diferentes por acidente.
             continue
 
-        if 2024 <= year <= 2026:
+        if (2024, 1) <= (year, month) <= (2026, 8):
             files.append(raw_file_path)
 
     # Ordeno por período para a tabela final já ficar organizada cronologicamente.

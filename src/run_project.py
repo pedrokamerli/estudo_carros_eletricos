@@ -11,6 +11,8 @@ PIPELINE_MODULES = [
     "src.ingestion.download_ibge_municipal_indicators",
     "src.ingestion.download_fenabrave_monthly_reports",
     "src.ingestion.download_osm_charging",
+    "src.ingestion.download_bcb_context",
+    "src.ingestion.download_ons_load",
     "src.transformation.ibge_bronze_to_silver",
     "src.transformation.fenabrave_reports_to_silver",
     "src.transformation.abve_snapshot_to_silver",
@@ -21,6 +23,7 @@ PIPELINE_MODULES = [
     "src.analysis.backtest_fenabrave_forecast",
     "src.analysis.forecast_ml",
     "src.analysis.forecast_abve_plugin",
+    "src.analysis.forecast_macro_abve",
     "src.run_pipeline",
     "src.database.load_silver_to_postgres",
     "src.database.load_fenabrave_to_postgres",
@@ -28,12 +31,15 @@ PIPELINE_MODULES = [
     "src.database.load_abve_charging_to_postgres",
     "src.database.load_news_models_to_postgres",
     "src.database.load_osm_charging_to_postgres",
+    "src.database.load_bcb_to_postgres",
     "src.transformation.silver_to_gold",
     "src.database.build_gold_tables",
+    "src.analysis.forecast_regional_fleet",
     "src.database.load_municipal_insights_to_postgres",
     "src.analysis.opportunity_sensitivity",
     "src.database.load_forecast_backtest_to_postgres",
     "src.database.load_ml_to_postgres",
+    "src.database.build_bi_model",
     "src.database.export_portfolio_data",
 ]
 
@@ -45,7 +51,7 @@ def main() -> None:
         subprocess.run([sys.executable, "-m", module_name], check=True)
 
     print("\nPipeline completa: Silver, Gold e exports do portfólio atualizados.")
-    print("Os meses ainda não publicados pela SENATRAN ficam registrados no manifesto.")
+    print("Meu recorte observado está fechado: janeiro/2024 a agosto/2026.")
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ BASE_URL = "https://www.fenabrave.org.br/portal/files"
 START_YEAR = 2024
 START_MONTH = 1
 END_YEAR = 2026
-END_MONTH = 9
+END_MONTH = 8
 
 
 def report_periods() -> list[tuple[int, int]]:

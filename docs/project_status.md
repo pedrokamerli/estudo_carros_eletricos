@@ -1,6 +1,15 @@
 # Status do projeto
 
-Atualizado em 30/09/2026. Este documento diferencia o que está implementado do que ainda depende de fonte, credencial ou decisão analítica.
+Atualizado em 01/10/2026. Meu recorte observado está fechado em jan/2024–ago/2026. Setembro não é mais pendência. As notas de pesquisa de 30/09 abaixo são históricas, não ampliam esse corte.
+
+## Atualização de dados e ML em 01/10
+
+- Coletei 96 observações mensais BCB/SGS e 3.072 perfis mês/hora/subsistema ONS. Coletores com cache, fonte, captura e hash; Silver, Gold e exports integrados.
+- Testei indicadores econômicos na previsão nacional BEV/PHEV: o Ridge com contexto não foi escolhido na validação. Não alego melhora nem causalidade.
+- Avaliei frota mensal nas cinco regiões: Ridge escolhido na validação e melhor que persistência no teste de cada região. Resultado experimental, sem intervalo calibrado ou garantia operacional.
+- Criei o modelo dimensional BI e medidas DAX iniciais. DAX ainda não executado em PBIX; construção visual continua com o autor.
+- O mapa das nove aplicações de ML distingue entregas, fontes localizadas e dados indisponíveis em `docs/novas_aplicacoes_ml.md`. Não implementei nove modelos com bases inadequadas.
+- Executei o fluxo completo com sucesso em 01/10/2026, incluindo novas fontes, ML regional/econômico, esquema BI e exports. Executei 40 casos unitários com sucesso e os quatro testes BI/PostgreSQL separadamente; as funções legadas exclusivas de pytest não foram executadas.
 
 ## Entregas implementadas
 
@@ -50,7 +59,7 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 
 ## Próximas entregas técnicas
 
-1. Automatizar atualização dos snapshots ABVE de vendas e recarga se houver forma pública estável de extrair os painéis; as integrações atuais validam e carregam os snapshots, mas ainda exigem transcrição/captura manual. Não preencher setembro/2026 até a fonte publicar o fechamento.
+1. Automatizar atualização dos snapshots ABVE de vendas e recarga se houver forma pública estável de extrair os painéis; as integrações atuais validam e carregam os snapshots, mas ainda exigem transcrição/captura manual. Mantenho o recorte observado encerrado em agosto/2026.
 2. Se eu quiser usar os três CSVs recebidos como evidência do estudo principal, localizar a fonte original, licença, data de extração e definições; sem isso continuam excluídos das conclusões oficiais.
 3. Ampliar a base documental de modelos, que já tem sete rankings rastreáveis, para mais competências e versões comparáveis; avaliar fontes diretas/exportações adicionais sem presumir que um login garanta os campos necessários. Não compartilhar senha no chat. Não preencher lacunas a partir dos CSVs produzidos com Gemini sem referência original.
 4. Para mapa completo de recarga, ampliar e avaliar inventário/coordenadas sem assumir cobertura completa de uma base comunitária. ABVE/Tupi responde distribuição agregada/top 20; OSM já está integrado como mapa parcial sem chave pessoal. Open Charge Map segue opcional e requer chave local.

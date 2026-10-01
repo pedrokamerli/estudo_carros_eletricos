@@ -112,4 +112,12 @@ A série FENABRAVE está implementada como uma fonte independente para as pergun
 
 ## Licença e publicação
 
+## Contexto adicional coletado em 01/10/2026
+
+Integrei BCB/SGS (96 observações mensais de IPCA, Selic acumulada e juros PF para veículos) e ONS (3.072 grupos de carga por mês/hora/subsistema). O recorte derivado é jan/2024–ago/2026. Mantenho fonte, captura e hash. ONS usa a licença Creative Commons Atribuição indicada no catálogo; sua carga agregada não identifica consumo de recarga EV. BCB não informa no JSON a data histórica de divulgação, portanto o experimento econômico é retrospectivo sem vintages.
+
+As fontes consultadas, usos permitidos pela granularidade e candidatos ainda não ingeridos estão em [novas_aplicacoes_ml.md](novas_aplicacoes_ml.md). Inmetro, FIPE, ACN-Data e dados de baterias localizados não foram convertidos automaticamente em bases brasileiras de treino.
+
+### Publicação dos dados
+
 O catálogo CKAN do RENAVAM informa domínio público para o conjunto consultado. Mesmo assim, preservarei a URL, data de coleta, competência e atribuição em cada dado derivado. Para ABVE, FENABRAVE e Open Charge Map, seguirei os termos e requisitos de atribuição da fonte antes de publicar cópias integrais. O GitHub receberá código, documentação e exports agregados pequenos; arquivos brutos pesados serão obtidos pelos coletores.

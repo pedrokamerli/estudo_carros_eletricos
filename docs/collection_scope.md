@@ -4,7 +4,7 @@ Quero uma série histórica boa, mas leve o suficiente para estudar e rodar no m
 
 ## O que vou guardar para análise mensal
 
-Vou coletar os arquivos de **combustível por UF e município** da SENATRAN de janeiro de 2024 até o último mês publicado em 2026. Esses arquivos são menores e respondem às perguntas principais do projeto: evolução da frota eletrificada, crescimento, estados, municípios e capitais versus interior.
+Vou coletar os arquivos de **combustível por UF e município** da SENATRAN de janeiro de 2024 até agosto de 2026. Fechei esse recorte em 01/10/2026; setembro não é pendência. Esses arquivos são menores e respondem às perguntas principais do projeto: evolução da frota eletrificada, crescimento, estados, municípios e capitais versus interior.
 
 ## O que não vou baixar em massa
 

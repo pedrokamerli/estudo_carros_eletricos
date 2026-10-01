@@ -27,7 +27,7 @@ Uma empresa que avalia expandir sua atuação em mobilidade elétrica precisa en
 
 ## Recorte e limites atuais
 
-A série mensal SENATRAN disponível neste ambiente vai de **janeiro de 2024 a agosto de 2026**, com 32 competências. Agosto foi encontrado e integrado na atualização de 30/09/2026; setembro ainda não foi encontrado como arquivo publicado. A planilha de agosto tem um rodapé de total nacional que separo somente depois de conciliá-lo com o detalhe, sem alterar a Bronze. Para emplacamentos, os relatórios FENABRAVE e as séries BEV/PHEV ABVE também chegam a agosto/2026. Não preencho setembro com projeções como se fossem dados observados.
+A série mensal SENATRAN do meu estudo vai de **janeiro de 2024 a agosto de 2026**, com 32 competências. Fechei o recorte em agosto; setembro não é mais pendência de coleta. A planilha de agosto tem um rodapé de total nacional que separo somente depois de conciliá-lo com o detalhe, sem alterar a Bronze. FENABRAVE e as séries BEV/PHEV ABVE usam esse mesmo corte. Projeções posteriores ficam explicitamente separadas das observações.
 
 O indicador municipal de adoção compara veículos eletrificados com a frota total do município. Também calculo veículos eletrificados por 100 mil habitantes. O PIB é de 2023 e a população é do Censo de 2022; portanto, o PIB per capita combinado é uma aproximação com anos de referência diferentes.
 
@@ -58,6 +58,8 @@ Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo 
 O inventário, os métodos de acesso e as limitações estão em [docs/data_sources.md](docs/data_sources.md). Também documentei por que os CSVs recebidos sem origem confirmada ficam isolados em [docs/provided_data_assessment.md](docs/provided_data_assessment.md). As métricas estão em [docs/metrics.md](docs/metrics.md), as perguntas em [docs/business_questions.md](docs/business_questions.md) e o status de cada entrega em [docs/project_status.md](docs/project_status.md).
 
 ## Tecnologias
+
+Também automatizei a coleta de 96 observações econômicas mensais do BCB e da carga horária do ONS, resumida em 3.072 grupos mês/hora/subsistema. Testei contexto econômico nas vendas e previsão de frota nas cinco regiões. O Ridge regional superou persistência neste teste, mas continua experimental; contexto econômico não melhorou a seleção das vendas. Minha análise das nove aplicações, fontes, resultados e limites está em [docs/novas_aplicacoes_ml.md](docs/novas_aplicacoes_ml.md). O esquema estrela e as medidas iniciais para o Power BI estão descritos em [docs/modelo_dimensional_bi.md](docs/modelo_dimensional_bi.md).
 
 Python, Pandas, NumPy, scikit-learn, PyMuPDF, PyArrow/Parquet, SQL, PostgreSQL, Git/GitHub e Power BI. Uso cada ferramenta para uma parte concreta do fluxo: Python coleta e transforma, scikit-learn ajusta os modelos de previsão, PyMuPDF extrai texto dos boletins PDF, Parquet armazena as camadas locais, PostgreSQL organiza as tabelas analíticas e Power BI será usado para comunicar os resultados. Spark e orquestração em nuvem ficam como evolução caso o volume e a execução recorrente justifiquem essa complexidade.
 

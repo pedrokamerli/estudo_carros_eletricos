@@ -8,6 +8,15 @@ from src.database.connection import get_connection
 
 
 TABLES = {
+    "perfil_carga_ons_mensal_hora": ["data_referencia", "id_subsistema", "hora"],
+    "frota_regional_mensal": ["regiao", "data_referencia"],
+    "ml_frota_regional_backtest_detalhe": ["regiao", "etapa", "metodo", "horizonte_meses", "fim_treino"],
+    "ml_frota_regional_backtest_metricas": ["regiao", "etapa", "metodo", "horizonte_meses"],
+    "ml_frota_regional_selecao_modelos": ["regiao"],
+    "ml_frota_regional_projecoes_experimentais": ["regiao", "data_referencia"],
+    "ml_macro_detalhe": ["tecnologia", "etapa", "metodo", "fim_treino"],
+    "ml_macro_metricas": ["tecnologia", "etapa", "metodo"],
+    "ml_macro_selecao": ["tecnologia"],
     "ml_backtest_detalhe": ["categoria_fenabrave", "etapa", "metodo", "horizonte_meses", "fim_treino"],
     "ml_backtest_metricas": ["categoria_fenabrave", "etapa", "metodo", "horizonte_meses"],
     "ml_selecao_modelos": ["categoria_fenabrave"],
@@ -25,9 +34,11 @@ def main():
     frames = {name: pd.read_csv(OUTPUT / f"{name}.csv") for name in TABLES}
     for name, frame in frames.items():
         nullable = ["data_publicacao"] if name == "abve_plugin_mensais" else []
+        if name == "frota_regional_mensal":
+            nullable = ["crescimento_yoy_percentual"]
         if frame.empty or frame.drop(columns=nullable).isna().any().any() or frame.duplicated(TABLES[name]).any():
             raise ValueError(f"Saída inválida ou duplicada: {name}")
-        for column in ("fim_treino", "data_referencia"):
+        for column in ("fim_treino", "data_referencia", "competencia_macro"):
             if column in frame:
                 frame[column] = pd.to_datetime(frame[column], errors="raise").dt.date
         if "fim_treino" in frame and (frame["fim_treino"] >= frame["data_referencia"]).any():
@@ -40,17 +51,23 @@ def main():
                 definitions = []
                 for column in frame:
                     dtype = frame[column].dtype
-                    kind = ("DATE" if column in ("fim_treino", "data_referencia") else
+                    kind = ("DATE" if column in ("fim_treino", "data_referencia", "competencia_macro") else
                             "BOOLEAN" if pd.api.types.is_bool_dtype(dtype) else
                             "BIGINT" if pd.api.types.is_integer_dtype(dtype) else
                             "DOUBLE PRECISION" if pd.api.types.is_float_dtype(dtype) else "TEXT")
-                    nullability = "" if name == "abve_plugin_mensais" and column == "data_publicacao" else " NOT NULL"
+                    nullable_columns = (["data_publicacao"] if name == "abve_plugin_mensais" else
+                                        ["crescimento_yoy_percentual"] if name == "frota_regional_mensal" else [])
+                    nullability = "" if column in nullable_columns else " NOT NULL"
                     definitions.append(sql.SQL("{} {}{}").format(sql.Identifier(column), sql.SQL(kind), sql.SQL(nullability)))
                 definitions.append(sql.SQL("PRIMARY KEY ({})").format(
                     sql.SQL(", ").join(map(sql.Identifier, TABLES[name]))))
                 cursor.execute(sql.SQL("CREATE TABLE IF NOT EXISTS {} ({})").format(
                     table, sql.SQL(", ").join(definitions)))
                 cursor.execute(sql.SQL("TRUNCATE TABLE {}").format(table))
+                # Aceito novas colunas de rastreabilidade sem apagar a tabela ou sua chave.
+                # A transação desfaz a atualização inteira caso o novo layout não carregue.
+                for definition in definitions[:-1]:
+                    cursor.execute(sql.SQL("ALTER TABLE {} ADD COLUMN IF NOT EXISTS {}").format(table, definition))
                 with cursor.copy(sql.SQL("COPY {} ({}) FROM STDIN").format(
                         table, sql.SQL(", ").join(map(sql.Identifier, frame.columns)))) as copy:
                     for row in frame.itertuples(index=False, name=None):

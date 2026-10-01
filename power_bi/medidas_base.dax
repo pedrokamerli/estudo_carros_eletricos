@@ -1,0 +1,87 @@
+// Crio cada medida separadamente no Power BI; este arquivo não é um script de importação.
+// Renomeio as tabelas importadas para os nomes usados abaixo, sem prefixo bi_.
+// Uso separadores por vírgula; adapto para ponto e vírgula se meu ambiente exigir.
+// Não validei estas medidas executando um PBIX; preciso conferir os visuais no Desktop.
+
+// Frota é estoque: uso a última competência dentro do período selecionado, nunca a soma dos meses.
+// Retiro apenas filtros de localidade para todas as cidades usarem a mesma competência no visual.
+Frota eletrificada =
+VAR Competencia =
+    CALCULATE (
+        MAX ( fato_frota_municipal[data_referencia] ),
+        REMOVEFILTERS ( dim_municipio )
+    )
+RETURN
+    IF (
+        ISBLANK ( Competencia ),
+        BLANK (),
+        CALCULATE (
+            SUM ( fato_frota_municipal[frota_eletrificada] ),
+            KEEPFILTERS ( fato_frota_municipal[data_referencia] = Competencia )
+        )
+    )
+
+Frota total =
+VAR Competencia =
+    CALCULATE (
+        MAX ( fato_frota_municipal[data_referencia] ),
+        REMOVEFILTERS ( dim_municipio )
+    )
+RETURN
+    IF (
+        ISBLANK ( Competencia ),
+        BLANK (),
+        CALCULATE (
+            SUM ( fato_frota_municipal[frota_total] ),
+            KEEPFILTERS ( fato_frota_municipal[data_referencia] = Competencia )
+        )
+    )
+
+// Formato estas medidas como percentual; não multiplico a razão por 100.
+Participacao eletrificada =
+    DIVIDE ( [Frota eletrificada], [Frota total] )
+
+Frota eletrificada sem UF =
+    CALCULATE ( [Frota eletrificada], KEEPFILTERS ( dim_municipio[uf_informada] = FALSE () ) )
+
+Participacao sem UF =
+    DIVIDE ( [Frota eletrificada sem UF], [Frota eletrificada] )
+
+// População é atributo de referência, não algo que somo uma vez por mês da fato.
+// Uso somente localidades com população conhecida no numerador e denominador.
+Populacao de referencia 2022 =
+    CALCULATE (
+        SUM ( dim_municipio[populacao_censo_2022] ),
+        KEEPFILTERS ( dim_municipio[populacao_censo_2022] > 0 )
+    )
+
+Eletrificados por 100 mil habitantes =
+    DIVIDE (
+        CALCULATE (
+            [Frota eletrificada],
+            KEEPFILTERS ( dim_municipio[populacao_censo_2022] > 0 )
+        ),
+        [Populacao de referencia 2022]
+    ) * 100000
+
+// ABVE aqui é o recorte BEV/PHEV, não todas as tecnologias eletrificadas.
+Emplacamentos plugin ABVE =
+    SUM ( fato_emplacamentos_plugin_abve[emplacamentos_mes] )
+
+Emplacamentos plugin ABVE ano anterior =
+    CALCULATE ( [Emplacamentos plugin ABVE], DATEADD ( dim_data[data], -1, YEAR ) )
+
+Crescimento anual plugin ABVE =
+    DIVIDE (
+        [Emplacamentos plugin ABVE] - [Emplacamentos plugin ABVE ano anterior],
+        [Emplacamentos plugin ABVE ano anterior]
+    )
+
+// Janeiro/2024 FENABRAVE é só autos. Comparo o segmento autos + comerciais leves.
+Emplacamentos FENABRAVE autos e comerciais leves =
+    CALCULATE (
+        SUM ( fato_emplacamentos_fenabrave[emplacamentos_mes] ),
+        KEEPFILTERS ( fato_emplacamentos_fenabrave[segmento_veiculos] = "autos_e_comerciais_leves" )
+    )
+
+// Não existe medida que some as duas fontes: os conceitos e recortes permanecem separados.
