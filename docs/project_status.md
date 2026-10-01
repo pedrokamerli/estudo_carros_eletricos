@@ -4,6 +4,10 @@ Atualizado em 01/10/2026. Meu recorte observado está fechado em jan/2024–ago/
 
 ## Atualização de dados e ML em 01/10
 
+Reorganizei a prévia em sete capítulos narrativos. O capítulo 6 responde às 15 perguntas com estados de evidência explícitos. Incluí filtros didáticos, comparação mensal e acumulada por ano, participação de marcas entre anos, crescimento estadual em 12 meses, capitais/interior, indicadores socioeconômicos e frota/recarga. Eixos, legendas, dicas e números usam linguagem de análise, com tabelas técnicas opcionais. Comparo meses equivalentes e nunca acumulo estoques de frota. O relatório PDF anterior descreve a entrega de dados, não este novo layout.
+
+Validação do novo painel: 11 testes passaram, incluindo as sete páginas, filtros vazios, meses equivalentes, denominador de participação, ranking de um único mês e presença das 15 perguntas. Conferi a comparação anual no navegador, com eixos e legendas em português e números no formato brasileiro.
+
 Nova entrega desta execução: captura pública ABVE de 32 meses nos recortes tecnologia, fabricante/modelo e município, conciliados por mês e tecnologia; integração dos catálogos Inmetro com quarentena para sobreposições; auditoria dos intervalos de um mês em sete alvos, quatro regiões com cobertura insuficiente. As notas anteriores abaixo descrevem o estado anterior; não substituem a nova entrega.
 
 Carreguei e conferi no PostgreSQL 180 linhas ABVE por tecnologia, 7.531 por modelo e 100.051 por município/tecnologia; 1.176 linhas Inmetro (411/364/401 por ciclo), com duas linhas ambíguas de 2026 em quarentena. Os 49 testes mensais de cobertura estão na Gold. PHEV jul/2024 difere em uma unidade do snapshot anterior; mantive ambos e publiquei a conciliação. Os recortes ABVE incluem MHEV; para comparação temporal uso BEV/PHEV explicitamente.

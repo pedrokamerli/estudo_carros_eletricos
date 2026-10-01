@@ -63,6 +63,8 @@ O inventário, os métodos de acesso e as limitações estão em [docs/data_sour
 
 ## Prévia interativa local
 
+Reorganizei o painel em sete capítulos, com narrativa e respostas explícitas às 15 perguntas. Comparo anos mês a mês e por acumulados do mesmo intervalo; os filtros de anos, tecnologia e mês têm escopo explicado. Incluí rankings de tamanho versus crescimento, participação municipal, capitais versus interior, renda versus adoção e frota versus recarga. Hipóteses e previsões experimentais são diferenciadas de respostas observadas. As tabelas técnicas ficam em seções opcionais e os gráficos têm unidades, legendas, dicas ao passar o mouse e números em formato brasileiro.
+
 Criei um painel Streamlit para explorar frota, municípios, emplacamentos, marcas/modelos, resultados de ML e o mapa parcial de recarga. Ele lê somente os exports públicos, sem precisar da senha do PostgreSQL e sem disparar coleta/treinamento. É uma prévia complementar; o Power BI continua sendo a entrega visual principal.
 
 ```powershell
