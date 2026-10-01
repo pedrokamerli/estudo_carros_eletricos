@@ -1,0 +1,2 @@
+# Preservo os bytes do PDF: conversão de quebras de linha invalida offsets internos.
+*.pdf binary
