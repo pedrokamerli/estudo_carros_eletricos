@@ -67,7 +67,7 @@ def validate_series(group):
     return values, dates
 
 
-def evaluate(source):
+def evaluate(source, methods=METHODS, predictor=predict):
     """Avalio um alvo mensal comparável, com seleção antes dos meses de teste."""
     rows, futures = [], []
     for category, group in source.groupby("categoria_fenabrave", sort=True):
@@ -80,8 +80,8 @@ def evaluate(source):
                     target = origin + horizon - 1
                     if target >= end:
                         continue
-                    for method in METHODS:
-                        predicted = predict(values, dates, origin, horizon, method)
+                    for method in methods:
+                        predicted = predictor(values, dates, origin, horizon, method)
                         rows.append(dict(categoria_fenabrave=category, etapa=stage,
                                          metodo=method, horizonte_meses=horizon,
                                          fim_treino=dates[origin - 1].date().isoformat(),
@@ -118,7 +118,7 @@ def evaluate(source):
                                 segmento_veiculos="autos_e_comerciais_leves", metodo=selected,
                                 fim_treino=dates[-1].date().isoformat(), horizonte_meses=horizon,
                                 data_referencia=(dates[-1] + pd.DateOffset(months=horizon)).date().isoformat(),
-                                emplacamentos_previstos=predict(values, dates, len(values), horizon, selected),
+                                emplacamentos_previstos=predictor(values, dates, len(values), horizon, selected),
                                 status="projecao_experimental_sem_intervalo_calibrado"))
     return {"ml_backtest_detalhe": detail, "ml_backtest_metricas": metrics,
             "ml_selecao_modelos": pd.DataFrame(selections),

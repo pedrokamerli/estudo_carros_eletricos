@@ -1,0 +1,36 @@
+{
+  "sha256_entradas": {
+    "abve_publico_tecnologia_gold.csv": "a684e426dabd617287b761a86e441b0caab0b32369571131cf4356cbeb14c9df",
+    "abve_publico_municipio_gold.csv": "af2d9d025f2da5c27c65c0da616679add0bc20b6609ff9126b9876c4f059346a",
+    "abve_publico_modelo_gold.csv": "44d6431272b5979f1cddb40c5708bbdde791bb89e49f6288b7e6bf4fae4a581e",
+    "penetracao_municipal_ibge.csv": "4367c35d1b41caf6a450b6cc067a96dbd7818d0eef372c28bc11a54b1e0585db",
+    "infraestrutura_recarga_abve_gold.csv": "69061261f9537c23542c345a9b5f2192e0e0c51543ce7cf97f6675f98adb2a52",
+    "precos_anunciados_evidencias.csv": "c9ad698e2d2001c3dd79a3b93a79466d77d5596d57ec05e34f3759da60fda8cc",
+    "evidencia_atual.json": "2a966a4d3fd136586451ea845f749834c11391c930e90e9695b4726c5458d6be"
+  },
+  "recorte": "jan/2024–ago/2026; comparações anuais janeiro–agosto; BEV+PHEV",
+  "associacao_renda_controlada": {
+    "n_municipios": 5528,
+    "coeficiente_parcial_spearman": 0.5117310837747836,
+    "controles": "posição da população Censo 2022 e efeitos fixos de UF",
+    "interpretacao": "Associação condicional, não causalidade; indicadores 2022 e adoção ago/2026."
+  },
+  "estudo_bauru": "Uber, recarga em shoppings e solar residencial são hipóteses motivadas pelo relato do autor, não variáveis observadas.",
+  "recarga_evidencia": {
+    "pontos_total": 29866,
+    "pontos_total_2025_08": 16880,
+    "veiculos_plugin_acumulados_2022_2026_08": 639133,
+    "bev_acumulados": 313140,
+    "phev_acumulados": 325993,
+    "pontos_ac": 18469,
+    "pontos_dc": 11397,
+    "pontos_dc_2025_08": 3855,
+    "municipios_com_recarga_provisorio": 1911,
+    "url_fonte": "https://abve.org.br/recarga-rapida-dc-quase-triplica-em-12-meses-e-ja-responde-por-38-da-rede-brasileira/",
+    "data_referencia": "2026-08-31",
+    "data_publicacao": "2026-09-28",
+    "data_captura": "2026-10-01T18:31:42.578199+00:00",
+    "sha256_html": "25d257f482729f7e3d00391c5ee75328cd8f3c9cdd6c4fe33bf8c14f8ca0b56a",
+    "limite": "Frota plug-in publicada é contabilização acumulada desde 2022, não estoque RENAVAM nem utilização dos carregadores."
+  }
+}

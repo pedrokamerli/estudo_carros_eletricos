@@ -1,0 +1,2 @@
+n_municipios,coeficiente_parcial_spearman,controles,interpretacao,escopo
+5528,0.511731,posição da população Censo 2022 e efeitos fixos de UF,"Associação condicional, não causalidade; indicadores 2022 e adoção ago/2026.","Emplacamentos BEV/PHEV ABVE; frota ampla SENATRAN ago/2026 e indicadores IBGE 2022, quando presentes, são medidas separadas. Recarga ABVE/Tupi ago/2026."

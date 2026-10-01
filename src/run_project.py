@@ -47,6 +47,13 @@ PIPELINE_MODULES = [
     "src.database.load_ml_to_postgres",
     "src.database.build_bi_model",
     "src.database.export_portfolio_data",
+    # Produzo inteligência depois dos exports conciliados, fora da interface visual.
+    "src.ingestion.download_charging_evidence",
+    "src.ingestion.download_price_evidence",
+    "src.analysis.market_intelligence",
+    "src.analysis.forecast_challengers",
+    "src.analysis.question_evidence",
+    "src.database.load_market_intelligence",
 ]
 
 

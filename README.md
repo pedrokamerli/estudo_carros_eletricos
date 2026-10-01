@@ -67,6 +67,27 @@ Reorganizei o painel em sete capítulos, com narrativa e respostas explícitas �
 
 Na revisão do painel, separei “o que vejo”, “por que importa” e “o que falta provar”. Retirei localidades sem identificação dos rankings de cidades, preservando os registros nos dados originais. Na seção de futuro, apresento uma análise preliminar de 2024–2026 e três cenários qualitativos para 2027–2030. Esses cenários não são previsões do modelo nem têm probabilidades atribuídas; uso a IEA como contexto externo e mantenho os testes de ML visíveis para explicar por que ainda não aprovo projeções operacionais.
 
+### O motor da análise e meu estudo de Bauru
+
+Acrescentei uma etapa independente do painel que responde às 15 perguntas com arquivos de evidência, identifica a contribuição absoluta de estados e marcas para o crescimento e acompanha a expansão no interior. Escolhi Bauru, onde moro, como estudo de caso: comparo sua evolução com cidades do interior paulista e com dez pares selecionados por população e renda, sem escolher os pares pelo crescimento que tiveram. Meus relatos sobre Uber, solar residencial e recarga em shoppings motivam hipóteses, mas não são tratados como dados de uma pesquisa representativa.
+
+Para investigar recarga, cruzei a participação dos novos emplacamentos BEV/PHEV com a participação dos pontos públicos e semipúblicos ABVE/Tupi. O índice orienta onde pesquisar capacidade e uso, sem contar híbridos sem tomada como demanda de recarga. Também automatizei a extração dos totais nacionais publicados e fiz uma comparação limitada às vinte cidades com pontos informados. Cidade fora desse ranking não recebe zero carregadores.
+
+Comecei uma base documental de preços com seis anúncios primários de versões BYD em 2024. Comparei quatro versões King/Song Pro com os respectivos emplacamentos nacionais em agosto–setembro/2024. É um estudo inicial de preço anunciado e volume, não preço pago, preço atual, FIPE ou elasticidade da demanda. Não atribuo esses modelos às vendas de Bauru: a fonte municipal não fornece esse cruzamento.
+
+Na previsão, mantive o experimento original e acrescentei drift de 12 meses, Holt amortecido e tendência logarítmica de seis meses. Seleciono pela validação temporal e publico erro, viés e comparação com referências. A reanálise melhorou BEV no teste conhecido, mas não PHEV; só meses futuros podem oferecer uma avaliação prospectiva nova. O protocolo e os hashes ficam em `output/analysis/`, e as novas evidências em `data/portfolio/` e nas tabelas `gold.inteligencia_*`, `gold.estudo_bauru_*` e `gold.ml_desafio_*`.
+
+Posso reproduzir esta etapa sem abrir o dashboard:
+
+```powershell
+python -m src.ingestion.download_charging_evidence
+python -m src.ingestion.download_price_evidence
+python -m src.analysis.market_intelligence
+python -m src.analysis.forecast_challengers
+python -m src.analysis.question_evidence
+python -m src.database.load_market_intelligence
+```
+
 Criei um painel Streamlit para explorar frota, municípios, emplacamentos, marcas/modelos, resultados de ML e o mapa parcial de recarga. Ele lê somente os exports públicos, sem precisar da senha do PostgreSQL e sem disparar coleta/treinamento. É uma prévia complementar; o Power BI continua sendo a entrega visual principal.
 
 ```powershell

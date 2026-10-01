@@ -1,0 +1,33 @@
+{
+  "candidatos": [
+    "persistencia",
+    "media_3m",
+    "sazonal_12m",
+    "ridge",
+    "random_forest",
+    "drift_12m",
+    "holt_amortecido",
+    "tendencia_log_6m"
+  ],
+  "holt": {
+    "alpha": 0.6,
+    "beta": 0.2,
+    "phi": 0.8
+  },
+  "treino_inicial_meses": 18,
+  "validacao": "jul/2025–jan/2026",
+  "teste": "fev–ago/2026",
+  "horizontes": [
+    1,
+    2,
+    3
+  ],
+  "selecao": "menor WAPE médio nos três horizontes da validação",
+  "sha256_entrada": "a684e426dabd617287b761a86e441b0caab0b32369571131cf4356cbeb14c9df",
+  "sha256_codigo_desafio": "b3b9272af39ca2f1fa274fa187f94b3e56494ff066c9e32ae3296fa9ca5e44d3",
+  "sha256_codigo_avaliador": "e1ac6209c92ca96bc9ee1769a2fd9ea518d061104f600faf402b76d6ad5c959c",
+  "versao_numpy": "2.5.3",
+  "versao_sklearn": "1.9.1",
+  "limite": "Reanálise exploratória: resultados do teste já conhecidos no desenvolvimento. Sem teste prospectivo novo, sem aprovação operacional e sem intervalos novos.",
+  "fonte_metodo": "https://otexts.com/fpp3/holt.html"
+}
