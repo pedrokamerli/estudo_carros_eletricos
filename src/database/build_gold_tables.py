@@ -64,9 +64,10 @@ GOLD_STATEMENTS = [
     CREATE TABLE gold.evolucao_frota_nacional AS
     WITH frota_mensal AS (
         SELECT ano_referencia, mes_referencia,
-               SUM(quantidade_veiculos)::BIGINT AS total_veiculos_eletrificados
+               SUM(quantidade_veiculos)::BIGINT AS total_veiculos_eletrificados,
+               COALESCE(SUM(quantidade_veiculos) FILTER (WHERE uf_informada), 0)::BIGINT AS total_veiculos_uf_informada,
+               COALESCE(SUM(quantidade_veiculos) FILTER (WHERE NOT uf_informada), 0)::BIGINT AS total_veiculos_sem_uf
         FROM silver.frota_eletrificada
-        WHERE uf_informada = TRUE
         GROUP BY ano_referencia, mes_referencia
     ),
     base_com_anterior AS (
@@ -80,6 +81,7 @@ GOLD_STATEMENTS = [
         FROM frota_mensal
     )
     SELECT ano_referencia, mes_referencia, total_veiculos_eletrificados,
+           total_veiculos_uf_informada, total_veiculos_sem_uf,
            total_mes_anterior,
            total_ano_anterior,
            ROUND(
@@ -278,6 +280,21 @@ def main() -> None:
         with connection.cursor() as cursor:
             for statement in GOLD_STATEMENTS:
                 cursor.execute(statement)
+            # O total nacional inclui UF desconhecida; só os rankings geográficos a excluem.
+            # Confiro todas as competências antes de confirmar a transação.
+            cursor.execute('''
+                WITH esperado AS (
+                    SELECT ano_referencia, mes_referencia, SUM(quantidade_veiculos)::BIGINT AS total
+                    FROM silver.frota_eletrificada GROUP BY ano_referencia, mes_referencia
+                )
+                SELECT COUNT(*) FROM esperado e FULL JOIN gold.evolucao_frota_nacional g
+                    USING (ano_referencia, mes_referencia)
+                WHERE e.total IS DISTINCT FROM g.total_veiculos_eletrificados
+                   OR g.total_veiculos_eletrificados IS DISTINCT FROM
+                      g.total_veiculos_uf_informada + g.total_veiculos_sem_uf
+            ''')
+            if cursor.fetchone()[0]:
+                raise ValueError("Gold nacional não conserva os totais mensais da Silver.")
             if has_market_data:
                 for statement in OPTIONAL_MARKET_STATEMENTS:
                     cursor.execute(statement)

@@ -12,6 +12,12 @@ OUTPUT_PATH = PROJECT_ROOT / "data" / "portfolio"
 
 # Compartilho tabelas pequenas e agregadas, preservando o nome que informa a origem.
 EXPORTS = {
+    "recarga_osm.csv": "SELECT * FROM gold.recarga_osm ORDER BY osm_id",
+    "abve_plugin_mensais.csv": "SELECT * FROM gold.abve_plugin_mensais ORDER BY tecnologia, data_referencia",
+    "ml_abve_backtest_detalhe.csv": "SELECT * FROM gold.ml_abve_backtest_detalhe ORDER BY tecnologia, etapa, fim_treino, horizonte_meses, metodo",
+    "ml_abve_backtest_metricas.csv": "SELECT * FROM gold.ml_abve_backtest_metricas ORDER BY tecnologia, etapa, horizonte_meses, metodo",
+    "ml_abve_selecao_modelos.csv": "SELECT * FROM gold.ml_abve_selecao_modelos ORDER BY tecnologia",
+    "ml_abve_projecoes_experimentais.csv": "SELECT * FROM gold.ml_abve_projecoes_experimentais ORDER BY tecnologia, data_referencia",
     "ranking_modelos_noticias_gold.csv": "SELECT * FROM gold.ranking_modelos_noticias ORDER BY fonte_id, posicao",
     "cobertura_rankings_modelos_noticias.csv": "SELECT * FROM gold.cobertura_rankings_modelos_noticias ORDER BY inicio_periodo, fim_periodo, fonte_id",
     "sensibilidade_oportunidade.csv": "SELECT * FROM gold.sensibilidade_oportunidade ORDER BY percentil_economia, percentil_adocao",

@@ -66,6 +66,28 @@ def find_bronze_fuel_files() -> list[Path]:
     return sorted(files, key=get_period_from_file_name)
 
 
+def separate_verified_total_footer(dataframe: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """Separo somente um rodapé final cujo total concilia com todas as linhas detalhadas."""
+    keys = ["UF", "Município", "Combustível Veículo"]
+    candidates = dataframe[keys].isna().all(axis=1)
+    if not candidates.any():
+        return dataframe, {"rodape_total_separado": False}
+    if candidates.sum() != 1 or not candidates.iloc[-1]:
+        raise ValueError("Linha sem chaves não é um rodapé único final reconhecido.")
+    quantity = pd.to_numeric(dataframe["Qtd. Veículos"], errors="coerce")
+    if quantity.isna().any() or quantity.le(0).any() or quantity.mod(1).ne(0).any():
+        raise ValueError("Não consigo conciliar o rodapé com quantidades inválidas.")
+    detail_total = int(quantity.iloc[:-1].sum())
+    footer_total = int(quantity.iloc[-1])
+    if detail_total != footer_total:
+        raise ValueError("Rodapé não confere com a soma dos registros detalhados.")
+    # Não altero o arquivo Bronze. Excluo o agregado da transformação para não contar duas vezes.
+    return dataframe.iloc[:-1].copy(), {"rodape_total_separado": True,
+                                      "total_rodape": footer_total,
+                                      "total_detalhe": detail_total,
+                                      "conciliacao_rodape_aprovada": True}
+
+
 def read_validated_bronze_file(raw_file_path: Path) -> tuple[int, int, pd.DataFrame]:
     """Leio e valido uma vez o Excel original para reaproveitar seus dados tratados."""
     year, month = get_period_from_file_name(raw_file_path)
@@ -73,7 +95,9 @@ def read_validated_bronze_file(raw_file_path: Path) -> tuple[int, int, pd.DataFr
 
     # Leio o Excel e avalio sua qualidade antes de criar qualquer dado tratado.
     bronze_dataframe = pd.read_excel(raw_file_path)
+    bronze_dataframe, footer_metadata = separate_verified_total_footer(bronze_dataframe)
     quality_report = assess_bronze_dataframe(bronze_dataframe)
+    quality_report.update(footer_metadata)
     report_path = QUALITY_REPORT_PATH / f"quality_report_{year}_{month:02d}.json"
     save_quality_report(quality_report, report_path)
 

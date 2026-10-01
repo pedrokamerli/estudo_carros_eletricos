@@ -5,7 +5,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from src.analysis.forecast_ml import METHODS, features, predict, validate_series
+from src.analysis.forecast_ml import METHODS, evaluate, features, predict, validate_series
 
 
 class ForecastTemporalTests(unittest.TestCase):
@@ -31,6 +31,21 @@ class ForecastTemporalTests(unittest.TestCase):
         frame.loc[3, "emplacamentos_mes"] = -1
         with self.assertRaises(ValueError):
             validate_series(frame)
+
+    def test_test_values_do_not_change_validation_selection(self):
+        # Confirmo também a seleção, não apenas a previsão individual: o teste não escolhe o método.
+        frame = pd.DataFrame({"data_referencia": pd.date_range("2024-01-01", periods=32, freq="MS"),
+                              "emplacamentos_mes": np.arange(32) * 100 + 500,
+                              "categoria_fenabrave": "alvo_teste"})
+        changed = frame.copy()
+        changed.loc[25:, "emplacamentos_mes"] = 999999
+        original_outputs = evaluate(frame)
+        changed_outputs = evaluate(changed)
+        pd.testing.assert_frame_equal(
+            original_outputs["ml_backtest_detalhe"].query("etapa == 'validacao'").reset_index(drop=True),
+            changed_outputs["ml_backtest_detalhe"].query("etapa == 'validacao'").reset_index(drop=True))
+        self.assertEqual(original_outputs["ml_selecao_modelos"].iloc[0]["metodo"],
+                         changed_outputs["ml_selecao_modelos"].iloc[0]["metodo"])
 
 
 if __name__ == "__main__":

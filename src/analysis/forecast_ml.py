@@ -67,11 +67,8 @@ def validate_series(group):
     return values, dates
 
 
-def main():
-    """Escolho na validação, avalio no teste e projeto três meses como experimento."""
-    source = pd.read_parquet(SILVER_PATH)
-    source = source.loc[source["segmento_veiculos"].eq("autos_e_comerciais_leves")].copy()
-    source["data_referencia"] = make_monthly_date(source)
+def evaluate(source):
+    """Avalio um alvo mensal comparável, com seleção antes dos meses de teste."""
     rows, futures = [], []
     for category, group in source.groupby("categoria_fenabrave", sort=True):
         group = group.sort_values("data_referencia")
@@ -123,10 +120,19 @@ def main():
                                 data_referencia=(dates[-1] + pd.DateOffset(months=horizon)).date().isoformat(),
                                 emplacamentos_previstos=predict(values, dates, len(values), horizon, selected),
                                 status="projecao_experimental_sem_intervalo_calibrado"))
+    return {"ml_backtest_detalhe": detail, "ml_backtest_metricas": metrics,
+            "ml_selecao_modelos": pd.DataFrame(selections),
+            "ml_projecoes_experimentais": pd.DataFrame(futures)}
+
+
+def main():
+    """Escolho na validação, avalio no teste e projeto três meses como experimento."""
+    source = pd.read_parquet(SILVER_PATH)
+    source = source.loc[source["segmento_veiculos"].eq("autos_e_comerciais_leves")].copy()
+    source["data_referencia"] = make_monthly_date(source)
+    frames = evaluate(source)
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    for name, dataframe in (("ml_backtest_detalhe", detail), ("ml_backtest_metricas", metrics),
-                            ("ml_selecao_modelos", pd.DataFrame(selections)),
-                            ("ml_projecoes_experimentais", pd.DataFrame(futures))):
+    for name, dataframe in frames.items():
         # Registro a entrada exata e a versão da biblioteca para rastrear o experimento.
         dataframe["fonte"] = "FENABRAVE"
         dataframe["segmento_veiculos"] = "autos_e_comerciais_leves"
@@ -134,7 +140,7 @@ def main():
         dataframe["versao_sklearn"] = sklearn.__version__
         dataframe.to_csv(OUTPUT / f"{name}.csv", index=False, float_format="%.4f")
         print(f"{name}: {len(dataframe)} linhas")
-    print(pd.DataFrame(selections).to_string(index=False))
+    print(frames["ml_selecao_modelos"].to_string(index=False))
 
 
 if __name__ == "__main__":

@@ -53,6 +53,16 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Quebra metodológica:** a ABVE declara uma classificação revisada a partir de janeiro/2025. Na definição vigente, eletrificados leves incluem BEV, PHEV, HEV e HEV Flex, mas não MHEV. Em alguns informes de 2024, MHEV aparece incluído em totais; é preciso reconstruir um recorte comparável antes de calcular crescimento entre períodos.
 - **Cobertura verificada:** o snapshot contém totais mensais de janeiro/2024 a agosto/2026 e tecnologias de janeiro/2025 a agosto/2026. Setembro ainda não tinha fechamento mensal publicado em 30/09/2026. A soma dos totais mensais do painel para jan–ago excede em 16 unidades o acumulado citado em notícia ABVE de 2025 e em 6 unidades o acumulado publicado para 2026; em ago/2025, a soma das quatro tecnologias fica 16 abaixo do total mensal do painel. Preservei esses números separados para conferência. A atualização recorrente continua pendente de um método estável para extrair o painel.
 
+## OpenStreetMap para mapa exploratório
+
+Integrei uma consulta Overpass de `amenity=charging_station` na área do Brasil, sem chave pessoal. A camada separada tem 392 objetos da captura atual, com coordenadas, acesso, URL do objeto, horário real da coleta e licença ODbL. Somente sete objetos têm município declarado. Não é inventário completo, não garante unicidade de locais físicos e não se concilia com o número de pontos ABVE/Tupi. Não uso o snapshot atual como variável histórica mensal do ML. Métodos, cobertura e atribuição estão em `docs/recarga_openstreetmap.md`.
+
+## Série mensal BEV/PHEV para previsão
+
+Completei janeiro–dezembro/2024 com contagens mensais explícitas de publicações ABVE, catalogadas em `data/portfolio/abve_plugin_2024_fontes.csv`. A soma coincide com os fechamentos publicados de 61.615 BEV e 64.009 PHEV. Para setembro/PHEV, preservo 4.869 da notícia daquele mês; a comparação citada em outubro usa 4.896 e fica documentada, sem substituir o número mensal. Janeiro/2024 aparece recapitulando janeiro na publicação de fevereiro.
+
+Uno esse recorte às colunas BEV/PHEV do snapshot já revisado de jan/2025–ago/2026: 32 meses por tecnologia, sem imputar setembro/2026. A captura de 2024 é manual/revisada; a integração é automatizada. A saída `gold.abve_plugin_mensais` mantém URLs, métodos e referências. Datas de publicação de 2025/2026 não são inventadas: ficam ausentes por se tratar de captura do painel atual. Não há arquivo completo de vintages; a avaliação ML é retrospectiva, não simulação perfeita da informação publicada em cada origem.
+
 ## Modelos em notícias e publicações
 
 Os rankings documentais de modelos são descritos em [`docs/modelos_por_noticias.md`](modelos_por_noticias.md): quatro publicações primárias ABVE e três reportagens Webmotors, sete recortes/períodos e 65 registros. O catálogo `data/portfolio/fontes_rankings_modelos_noticias.csv` conserva URL, publicador, fornecedor atribuído, data, escopo, granularidade e tipo de período. A Silver/Gold valida a transcrição e mantém quantidades ausentes; isso não confirma uma série mensal completa nem autoriza classificar outras versões a partir do nome geral de um modelo.
@@ -93,7 +103,7 @@ A série FENABRAVE está implementada como uma fonte independente para as pergun
 
 ## Situação das fontes em 30/09/2026
 
-- A página oficial da SENATRAN consultada em 30/09/2026 lista julho de 2026 como a competência mais recente de combustível por UF/município. O coletor procura novos meses em cada execução e grava os meses ausentes no manifesto.
+- O coletor encontrou agosto/2026 no portal SENATRAN durante a atualização de 30/09/2026; setembro segue ausente no manifesto. A planilha de agosto contém uma linha final sem chaves com o total de todas as motorizações: 135.907.590. Ela confere com a soma do detalhe e é separada antes da transformação, sem alterar a Bronze. Rodapé fora da última posição, não único ou não conciliado interrompe a execução. A Silver permanece com 32 competências, jan/2024–ago/2026.
 - A API pública CKAN identifica arquivos RENAVAM com marca/modelo e licença indicada como domínio público. Esses registros não trazem combustível na mesma granularidade; não os uso para declarar eletrificação por modelo sem uma classificação independente.
 - A ABVE publica boletins mensais com totais, tecnologias e recortes geográficos, além de painéis públicos Power BI incorporados. A classificação mudou em janeiro/2025; automatizar a captura do texto ou dos visuais sem preservar essa quebra poderia criar uma série enganosa. Setembro/2026 ainda não tinha total mensal fechado publicado em 30/09/2026.
 - Em setembro de 2026, ABVE/Tupi publicou uma atualização nacional de pontos públicos e semipúblicos referente a agosto de 2026. É uma referência útil para contexto nacional, mas não substitui uma base geolocalizada para estimar demanda por município.

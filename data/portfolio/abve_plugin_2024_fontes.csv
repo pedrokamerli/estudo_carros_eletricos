@@ -1,0 +1,13 @@
+data_referencia,emplacamentos_bev,emplacamentos_phev,data_publicacao,url_fonte,data_revisao,observacao
+2024-01-01,4358,3910,2024-03-07,https://abve.org.br/bevs-lideram-vendas-pelo-terceiro-mes-seguido/,2026-09-30,Valores mensais de janeiro recapitulados na publicação de fevereiro
+2024-02-01,3639,3594,2024-03-07,https://abve.org.br/bevs-lideram-vendas-pelo-terceiro-mes-seguido/,2026-09-30,Valores mensais nacionais
+2024-03-01,6137,3128,2024-04-08,https://abve.org.br/eletrificados-crescem-145-no-trimestre-e-tem-segundo-melhor-mes-da-historia/,2026-09-30,Valores mensais nacionais
+2024-04-01,6705,3735,2024-05-07,https://abve.org.br/veiculos-plug-in-chegam-a-70-dos-eletrificados-em-abril-e-batem-novo-recorde/,2026-09-30,Valores mensais nacionais
+2024-05-01,5175,3882,2024-06-05,https://abve.org.br/numeros-de-maio-apontam-que-interiorizacao-da-eletromobilidade-avanca-no-brasil/,2026-09-30,Valores mensais nacionais
+2024-06-01,5190,5047,2024-07-03,https://abve.org.br/80-mil-eletrificados-so-no-primeiro-semestre/,2026-09-30,Valores mensais nacionais
+2024-07-01,4703,6659,2024-08-10,https://abve.org.br/vendas-de-eletrificados-em-2024-ja-ultrapassam-total-de-2023/,2026-09-30,Valores mensais nacionais
+2024-08-01,5115,5781,2024-09-04,https://abve.org.br/em-agosto-veiculos-plug-in-completam-um-ano-na-lideranca-dos-eletrificados/,2026-09-30,Valores mensais nacionais
+2024-09-01,4699,4869,2024-10-07,https://abve.org.br/infraestrutura-de-recarga-acelera-no-pais-e-apresenta-crescimento-de-179/,2026-09-30,PHEV mensal 4869; a matéria de outubro cita 4896 como comparação e não substitui este valor
+2024-10-01,6109,5961,2024-11-05,https://abve.org.br/mercado-de-veiculos-eletricos-plug-in-cresce-200-nos-ultimos-12-meses/,2026-09-30,Valores mensais nacionais
+2024-11-01,5417,6922,2024-12-05,https://abve.org.br/recorde-de-vendas-em-novembro-abre-debate-sobre-os-limites-da-eletrificacao-dos-veiculos/,2026-09-30,Texto apresenta divergência no total de eletrificados; preservo contagens explícitas BEV e PHEV
+2024-12-01,4368,10521,2025-01-06,https://abve.org.br/eletrificados-superam-previsoes-passam-de-170-mil-e-batem-todos-os-recordes-em-2024/,2026-09-30,Fechamento anual publicado: BEV 61615 e PHEV 64009

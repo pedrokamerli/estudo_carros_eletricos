@@ -1,13 +1,13 @@
 variavel_socioeconomica,indicador_adocao,metodo,coeficiente_correlacao,municipios_analisados,ano_referencia_frota,mes_referencia_frota
-PIB per capita aproximado (R$),Eletrificados por 100 mil habitantes,pearson,0.29343912,5528,2026,7
-PIB per capita aproximado (R$),Eletrificados por 100 mil habitantes,spearman,0.57204281,5528,2026,7
-PIB per capita aproximado (R$),Participação eletrificada na frota (%),pearson,0.22980671,5528,2026,7
-PIB per capita aproximado (R$),Participação eletrificada na frota (%),spearman,0.38717869,5528,2026,7
-População do Censo 2022 (pessoas),Eletrificados por 100 mil habitantes,pearson,0.31350802,5528,2026,7
-População do Censo 2022 (pessoas),Eletrificados por 100 mil habitantes,spearman,0.35452386,5528,2026,7
-População do Censo 2022 (pessoas),Participação eletrificada na frota (%),pearson,0.30020052,5528,2026,7
-População do Censo 2022 (pessoas),Participação eletrificada na frota (%),spearman,0.43136959,5528,2026,7
-Renda domiciliar per capita média (R$),Eletrificados por 100 mil habitantes,pearson,0.57821395,5528,2026,7
-Renda domiciliar per capita média (R$),Eletrificados por 100 mil habitantes,spearman,0.68628415,5528,2026,7
-Renda domiciliar per capita média (R$),Participação eletrificada na frota (%),pearson,0.41817725,5528,2026,7
-Renda domiciliar per capita média (R$),Participação eletrificada na frota (%),spearman,0.46046018,5528,2026,7
+PIB per capita aproximado (R$),Eletrificados por 100 mil habitantes,pearson,0.29498477,5528,2026,8
+PIB per capita aproximado (R$),Eletrificados por 100 mil habitantes,spearman,0.57683417,5528,2026,8
+PIB per capita aproximado (R$),Participação eletrificada na frota (%),pearson,0.23103904,5528,2026,8
+PIB per capita aproximado (R$),Participação eletrificada na frota (%),spearman,0.38765324,5528,2026,8
+População do Censo 2022 (pessoas),Eletrificados por 100 mil habitantes,pearson,0.31683503,5528,2026,8
+População do Censo 2022 (pessoas),Eletrificados por 100 mil habitantes,spearman,0.35398792,5528,2026,8
+População do Censo 2022 (pessoas),Participação eletrificada na frota (%),pearson,0.30506222,5528,2026,8
+População do Censo 2022 (pessoas),Participação eletrificada na frota (%),spearman,0.43469890,5528,2026,8
+Renda domiciliar per capita média (R$),Eletrificados por 100 mil habitantes,pearson,0.58050772,5528,2026,8
+Renda domiciliar per capita média (R$),Eletrificados por 100 mil habitantes,spearman,0.69011937,5528,2026,8
+Renda domiciliar per capita média (R$),Participação eletrificada na frota (%),pearson,0.42041425,5528,2026,8
+Renda domiciliar per capita média (R$),Participação eletrificada na frota (%),spearman,0.45935437,5528,2026,8

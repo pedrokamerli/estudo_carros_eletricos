@@ -37,3 +37,33 @@ Depois de instalar `requirements.txt` e gerar a Silver:
 Os módulos também fazem parte de `src.run_project`. O PostgreSQL contém `gold.ml_backtest_detalhe`, `gold.ml_backtest_metricas`, `gold.ml_selecao_modelos` e `gold.ml_projecoes_experimentais`. Os quatro CSVs de mesmo nome estão em `data/portfolio/`. No dashboard, mostro o erro do teste junto das projeções e filtro categoria, método, etapa e horizonte antes de agregar.
 
 Os testes temporais verificam que alterar valores futuros não muda uma previsão anterior e que meses faltantes e valores negativos são rejeitados. A abordagem segue a [documentação de previsão com variáveis defasadas do scikit-learn](https://scikit-learn.org/stable/auto_examples/applications/plot_time_series_lagged_features.html) e a [regressão Ridge](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html).
+
+## Minha pesquisa adicional: BEV e PHEV da ABVE
+
+Em 30/09/2026, completei os 12 meses de BEV e PHEV de 2024 por transcrição revisada de publicações primárias da ABVE. As URLs e datas de publicação estão em `data/portfolio/abve_plugin_2024_fontes.csv`. Mantive os números mensais explícitos: setembro/PHEV fica em 4.869, embora a matéria de outubro cite 4.896 como comparação. A soma anual das transcrições confere com o [fechamento publicado](https://abve.org.br/eletrificados-superam-previsoes-passam-de-170-mil-e-batem-todos-os-recordes-em-2024/): 61.615 BEV e 64.009 PHEV. Não corrigi valores para forçar essa igualdade.
+
+Combinei essas transcrições com as colunas BEV/PHEV do snapshot do painel de jan/2025–ago/2026. A Silver e `gold.abve_plugin_mensais` têm 64 registros, 32 por tecnologia. Não misturo BEV/PHEV com MHEV, com o total de eletrificados ou com as categorias FENABRAVE. Isso evita a quebra decorrente da inclusão/exclusão de MHEV no total, mas não garante que a fonte nunca revise números individuais.
+
+Uso o mesmo protocolo e parâmetros do avaliador, sem ajustá-los para vencer neste novo alvo: 18 meses iniciais, validação jul/2025–jan/2026, teste fev–ago/2026 e horizontes 1–3 meses. São 360 linhas retrospectivas, 60 métricas e seis projeções experimentais. Os arquivos/tabelas são `ml_abve_backtest_detalhe`, `ml_abve_backtest_metricas`, `ml_abve_selecao_modelos` e `ml_abve_projecoes_experimentais`.
+
+| Alvo | Escolha na validação | WAPE médio na validação | WAPE médio no teste | Persistência no teste |
+| --- | --- | --- | --- | --- |
+| BEV | Média dos últimos 3 meses | 17,38% | 36,28% | 26,89% |
+| PHEV | Ridge | 14,89% | 32,08% | 23,10% |
+
+Ambas as escolhas perderam para a persistência no teste. Não troco de método depois de olhar esse resultado nem apresento essas projeções como aprovadas para uso operacional. A série cresceu, mas continua curta e passa por forte expansão do mercado; 32 meses não sustentam promessas de precisão para 2–5 anos. Dados de mais modelos, municípios e notícias não são meses adicionais independentes desse alvo nacional.
+
+O backtest é retrospectivo com o snapshot atual: não tenho todas as versões de dados que estavam disponíveis em cada data histórica. As matérias de 2024 têm datas de publicação; o painel de 2025/2026 só tem data da captura. Portanto, o teste comprova separação temporal dos valores no código, não uma simulação perfeita da disponibilidade/revisão das fontes no passado. Essa limitação fica em `tipo_backtest`.
+
+Não uso rankings top 5/top 30 descontínuos nem CSVs produzidos pelo Gemini como série nacional de treino. O mapa OSM atual e os indicadores municipais de referência anual também não viram variáveis históricas mensais automaticamente. Para variáveis externas, preciso conhecer data de disponibilidade e lidar com valores futuros desconhecidos, sem vazamento de informação.
+
+Reproduzo a entrega com:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.transformation.abve_plugin_to_silver
+.\.venv\Scripts\python.exe -m src.analysis.forecast_abve_plugin
+.\.venv\Scripts\python.exe -m src.database.load_ml_to_postgres
+.\.venv\Scripts\python.exe -m src.database.export_portfolio_data
+```
+
+O carregador publica os experimentos FENABRAVE e ABVE juntos; os arquivos anteriores também precisam existir. As etapas estão em `src.run_project`. A seleção de fontes de 2024 é revisada manualmente, enquanto validação, transformação, experimento, carga e export estão automatizados.

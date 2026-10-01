@@ -39,6 +39,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 - O boletim de janeiro/2024 está no segmento “autos”; de fevereiro/2024 em diante, o recorte é “autos e comerciais leves”. Ao comparar meses/anos, filtrar por `segmento_veiculos` para manter o escopo comparável; janeiro/2025 não tem comparação anual compatível com janeiro/2024 nesta série.
 - Em agosto/2026, o total FENABRAVE dessas duas categorias (64.055) coincide com o total ABVE de eletrificados (57.386) mais MHEV (6.669). Tratar isso como uma checagem de consistência agregada e uma hipótese de reconciliação, não como prova de equivalência das categorias individuais.
 - Quando usarmos SENATRAN, o resultado será nomeado como **evolução da frota**, nunca como emplacamentos.
+- O total nacional conserva todos os registros eletrificados da Silver, incluindo os sem UF. A tabela nacional expõe total com UF conhecida e total sem UF separadamente. Rankings geográficos excluem localização desconhecida; essa diferença é qualidade/cobertura, não desaparecimento de veículos.
 - Só calcularemos crescimento quando os dois períodos forem comparáveis. Se o valor anterior for zero, a taxa percentual será exibida como não calculável, e não como infinito.
 
 ### Estados e municípios

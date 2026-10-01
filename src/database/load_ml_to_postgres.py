@@ -12,14 +12,20 @@ TABLES = {
     "ml_backtest_metricas": ["categoria_fenabrave", "etapa", "metodo", "horizonte_meses"],
     "ml_selecao_modelos": ["categoria_fenabrave"],
     "ml_projecoes_experimentais": ["categoria_fenabrave", "data_referencia"],
+    "ml_abve_backtest_detalhe": ["tecnologia", "etapa", "metodo", "horizonte_meses", "fim_treino"],
+    "ml_abve_backtest_metricas": ["tecnologia", "etapa", "metodo", "horizonte_meses"],
+    "ml_abve_selecao_modelos": ["tecnologia"],
+    "ml_abve_projecoes_experimentais": ["tecnologia", "data_referencia"],
+    "abve_plugin_mensais": ["tecnologia", "data_referencia"],
 }
 
 
 def main():
-    """Valido todos os arquivos antes de substituir as quatro tabelas na mesma transação."""
+    """Valido fontes e experimentos antes de substituir as tabelas na mesma transação."""
     frames = {name: pd.read_csv(OUTPUT / f"{name}.csv") for name in TABLES}
     for name, frame in frames.items():
-        if frame.empty or frame.isna().any().any() or frame.duplicated(TABLES[name]).any():
+        nullable = ["data_publicacao"] if name == "abve_plugin_mensais" else []
+        if frame.empty or frame.drop(columns=nullable).isna().any().any() or frame.duplicated(TABLES[name]).any():
             raise ValueError(f"Saída inválida ou duplicada: {name}")
         for column in ("fim_treino", "data_referencia"):
             if column in frame:
@@ -38,7 +44,8 @@ def main():
                             "BOOLEAN" if pd.api.types.is_bool_dtype(dtype) else
                             "BIGINT" if pd.api.types.is_integer_dtype(dtype) else
                             "DOUBLE PRECISION" if pd.api.types.is_float_dtype(dtype) else "TEXT")
-                    definitions.append(sql.SQL("{} {} NOT NULL").format(sql.Identifier(column), sql.SQL(kind)))
+                    nullability = "" if name == "abve_plugin_mensais" and column == "data_publicacao" else " NOT NULL"
+                    definitions.append(sql.SQL("{} {}{}").format(sql.Identifier(column), sql.SQL(kind), sql.SQL(nullability)))
                 definitions.append(sql.SQL("PRIMARY KEY ({})").format(
                     sql.SQL(", ").join(map(sql.Identifier, TABLES[name]))))
                 cursor.execute(sql.SQL("CREATE TABLE IF NOT EXISTS {} ({})").format(
@@ -47,7 +54,7 @@ def main():
                 with cursor.copy(sql.SQL("COPY {} ({}) FROM STDIN").format(
                         table, sql.SQL(", ").join(map(sql.Identifier, frame.columns)))) as copy:
                     for row in frame.itertuples(index=False, name=None):
-                        copy.write_row(tuple(v.item() if hasattr(v, "item") else v for v in row))
+                        copy.write_row(tuple(None if pd.isna(v) else v.item() if hasattr(v, "item") else v for v in row))
                 cursor.execute(sql.SQL("SELECT COUNT(*) FROM {}").format(table))
                 if cursor.fetchone()[0] != len(frame):
                     raise ValueError(f"A contagem carregada não confere: {name}")

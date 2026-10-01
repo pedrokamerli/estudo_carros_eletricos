@@ -18,7 +18,9 @@ Os arquivos `backtest_previsao_fenabrave.csv` e `backtest_detalhe_previsao_fenab
 
 O experimento adicional de ML tem quatro arquivos `ml_*.csv`: detalhe das previsões retrospectivas, métricas por etapa/horizonte, escolha feita na validação e projeções experimentais para os próximos três meses. Compara Ridge e Random Forest com referências simples; escolhe antes do teste e preserva o resultado mesmo quando perde para a referência. Os CSVs conservam fonte, segmento, versão do scikit-learn e hash da Silver. Não misturo validação com teste nem somo diferentes métodos/horizontes como se fossem vendas. Os detalhes e resultados estão em [`docs/machine_learning.md`](../../docs/machine_learning.md).
 
-`sensibilidade_oportunidade.csv` compara nove combinações de percentis e sua sobreposição com a regra original, na mesma amostra municipal. A base de penetração passou a incluir localidades sem registros eletrificados, presentes na frota total da mesma competência. Por isso, as correlações e a lista de oportunidade foram recalculadas: 5.528 localidades associadas ao IBGE, 18 candidatos no corte original e 8–36 nos cenários. São filtros exploratórios, não demanda futura estimada.
+`sensibilidade_oportunidade.csv` compara nove combinações de percentis e sua sobreposição com a regra original, na mesma amostra municipal. A base de penetração inclui localidades sem registros eletrificados, presentes na frota total da mesma competência. Na atualização de ago/2026, as correlações e a lista de oportunidade foram recalculadas: 5.528 localidades associadas ao IBGE, 17 candidatos no corte original e 7–30 nos cenários. São filtros exploratórios, não demanda futura estimada.
+
+`evolucao_frota_nacional.csv` inclui todos os registros eletrificados da Silver, inclusive UF desconhecida, e separa `total_veiculos_uf_informada` de `total_veiculos_sem_uf`. Rankings geográficos excluem a UF desconhecida; por isso sua soma não equivale ao total nacional sem acrescentar essa parcela. Na planilha Bronze de ago/2026, uma última linha traz o total nacional de todas as motorizações: só a separo após conciliação com o detalhe para evitar duplicação.
 
 Para coletar as fontes públicas, atualizar o PostgreSQL e recriar os arquivos, execute `src.run_project`. Para exportar novamente apenas os CSVs a partir de um banco já atualizado, execute:
 
@@ -27,3 +29,7 @@ Para coletar as fontes públicas, atualizar o PostgreSQL e recriar os arquivos, 
 ```
 
 Cada CSV mantém período e/ou fonte na própria tabela. A documentação em `docs/data_sources.md` descreve as fontes e limitações.
+
+`recarga_osm.csv` é uma camada separada de dados OpenStreetMap sob ODbL: 392 objetos mapeados, não 392 carregadores. Preservo atribuição **© OpenStreetMap contributors** e link da licença por registro e no dashboard. A cobertura é comunitária/incompleta e o acesso frequentemente não está informado. Não somo seus objetos com os pontos ABVE/Tupi nem interpreto ausência no mapa como ausência de infraestrutura. Veja [`docs/recarga_openstreetmap.md`](../../docs/recarga_openstreetmap.md) para uso, reprodução e licença.
+
+`abve_plugin_2024_fontes.csv` contém minha transcrição revisada dos valores mensais BEV/PHEV em publicações primárias ABVE, não um export do banco. `abve_plugin_mensais.csv` é a série integrada de 32 meses por tecnologia, disponível também na Gold. Os quatro arquivos `ml_abve_*.csv` avaliam esse alvo separadamente da FENABRAVE: as escolhas feitas na validação perderam para persistência no teste. Projeções continuam experimentais; fontes/captura atuais não equivalem a um histórico de todas as revisões passadas. Não somo esses emplacamentos com os de outras fontes nem uso rankings de modelos como total mensal de treino.

@@ -1,0 +1,65 @@
+data_referencia,tecnologia,emplacamentos_mes,fonte,segmento_veiculos,url_fonte,metodo_extracao,data_revisao,data_publicacao,observacao
+2024-01-01,BEV,4358,ABVE,veiculos_leves_plugin,https://abve.org.br/bevs-lideram-vendas-pelo-terceiro-mes-seguido/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-03-07,Valores mensais de janeiro recapitulados na publicação de fevereiro
+2024-02-01,BEV,3639,ABVE,veiculos_leves_plugin,https://abve.org.br/bevs-lideram-vendas-pelo-terceiro-mes-seguido/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-03-07,Valores mensais nacionais
+2024-03-01,BEV,6137,ABVE,veiculos_leves_plugin,https://abve.org.br/eletrificados-crescem-145-no-trimestre-e-tem-segundo-melhor-mes-da-historia/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-04-08,Valores mensais nacionais
+2024-04-01,BEV,6705,ABVE,veiculos_leves_plugin,https://abve.org.br/veiculos-plug-in-chegam-a-70-dos-eletrificados-em-abril-e-batem-novo-recorde/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-05-07,Valores mensais nacionais
+2024-05-01,BEV,5175,ABVE,veiculos_leves_plugin,https://abve.org.br/numeros-de-maio-apontam-que-interiorizacao-da-eletromobilidade-avanca-no-brasil/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-06-05,Valores mensais nacionais
+2024-06-01,BEV,5190,ABVE,veiculos_leves_plugin,https://abve.org.br/80-mil-eletrificados-so-no-primeiro-semestre/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-07-03,Valores mensais nacionais
+2024-07-01,BEV,4703,ABVE,veiculos_leves_plugin,https://abve.org.br/vendas-de-eletrificados-em-2024-ja-ultrapassam-total-de-2023/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-08-10,Valores mensais nacionais
+2024-08-01,BEV,5115,ABVE,veiculos_leves_plugin,https://abve.org.br/em-agosto-veiculos-plug-in-completam-um-ano-na-lideranca-dos-eletrificados/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-09-04,Valores mensais nacionais
+2024-09-01,BEV,4699,ABVE,veiculos_leves_plugin,https://abve.org.br/infraestrutura-de-recarga-acelera-no-pais-e-apresenta-crescimento-de-179/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-10-07,PHEV mensal 4869; a matéria de outubro cita 4896 como comparação e não substitui este valor
+2024-10-01,BEV,6109,ABVE,veiculos_leves_plugin,https://abve.org.br/mercado-de-veiculos-eletricos-plug-in-cresce-200-nos-ultimos-12-meses/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-11-05,Valores mensais nacionais
+2024-11-01,BEV,5417,ABVE,veiculos_leves_plugin,https://abve.org.br/recorde-de-vendas-em-novembro-abre-debate-sobre-os-limites-da-eletrificacao-dos-veiculos/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-12-05,Texto apresenta divergência no total de eletrificados; preservo contagens explícitas BEV e PHEV
+2024-12-01,BEV,4368,ABVE,veiculos_leves_plugin,https://abve.org.br/eletrificados-superam-previsoes-passam-de-170-mil-e-batem-todos-os-recordes-em-2024/,transcricao_publicacao_mensal_revisada,2026-09-30,2025-01-06,Fechamento anual publicado: BEV 61615 e PHEV 64009
+2025-01-01,BEV,3700,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-02-01,BEV,4492,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-03-01,BEV,4801,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-04-01,BEV,4702,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-05-01,BEV,6969,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-06-01,BEV,5918,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-07-01,BEV,7010,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-08-01,BEV,7624,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-09-01,BEV,8169,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-10-01,BEV,7986,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-11-01,BEV,7263,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-12-01,BEV,11550,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-01-01,BEV,8250,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-02-01,BEV,8703,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-03-01,BEV,14073,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-04-01,BEV,17488,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-05-01,BEV,20974,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-06-01,BEV,21138,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-07-01,BEV,25782,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-08-01,BEV,27166,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2024-01-01,PHEV,3910,ABVE,veiculos_leves_plugin,https://abve.org.br/bevs-lideram-vendas-pelo-terceiro-mes-seguido/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-03-07,Valores mensais de janeiro recapitulados na publicação de fevereiro
+2024-02-01,PHEV,3594,ABVE,veiculos_leves_plugin,https://abve.org.br/bevs-lideram-vendas-pelo-terceiro-mes-seguido/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-03-07,Valores mensais nacionais
+2024-03-01,PHEV,3128,ABVE,veiculos_leves_plugin,https://abve.org.br/eletrificados-crescem-145-no-trimestre-e-tem-segundo-melhor-mes-da-historia/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-04-08,Valores mensais nacionais
+2024-04-01,PHEV,3735,ABVE,veiculos_leves_plugin,https://abve.org.br/veiculos-plug-in-chegam-a-70-dos-eletrificados-em-abril-e-batem-novo-recorde/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-05-07,Valores mensais nacionais
+2024-05-01,PHEV,3882,ABVE,veiculos_leves_plugin,https://abve.org.br/numeros-de-maio-apontam-que-interiorizacao-da-eletromobilidade-avanca-no-brasil/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-06-05,Valores mensais nacionais
+2024-06-01,PHEV,5047,ABVE,veiculos_leves_plugin,https://abve.org.br/80-mil-eletrificados-so-no-primeiro-semestre/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-07-03,Valores mensais nacionais
+2024-07-01,PHEV,6659,ABVE,veiculos_leves_plugin,https://abve.org.br/vendas-de-eletrificados-em-2024-ja-ultrapassam-total-de-2023/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-08-10,Valores mensais nacionais
+2024-08-01,PHEV,5781,ABVE,veiculos_leves_plugin,https://abve.org.br/em-agosto-veiculos-plug-in-completam-um-ano-na-lideranca-dos-eletrificados/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-09-04,Valores mensais nacionais
+2024-09-01,PHEV,4869,ABVE,veiculos_leves_plugin,https://abve.org.br/infraestrutura-de-recarga-acelera-no-pais-e-apresenta-crescimento-de-179/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-10-07,PHEV mensal 4869; a matéria de outubro cita 4896 como comparação e não substitui este valor
+2024-10-01,PHEV,5961,ABVE,veiculos_leves_plugin,https://abve.org.br/mercado-de-veiculos-eletricos-plug-in-cresce-200-nos-ultimos-12-meses/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-11-05,Valores mensais nacionais
+2024-11-01,PHEV,6922,ABVE,veiculos_leves_plugin,https://abve.org.br/recorde-de-vendas-em-novembro-abre-debate-sobre-os-limites-da-eletrificacao-dos-veiculos/,transcricao_publicacao_mensal_revisada,2026-09-30,2024-12-05,Texto apresenta divergência no total de eletrificados; preservo contagens explícitas BEV e PHEV
+2024-12-01,PHEV,10521,ABVE,veiculos_leves_plugin,https://abve.org.br/eletrificados-superam-previsoes-passam-de-170-mil-e-batem-todos-os-recordes-em-2024/,transcricao_publicacao_mensal_revisada,2026-09-30,2025-01-06,Fechamento anual publicado: BEV 61615 e PHEV 64009
+2025-01-01,PHEV,6705,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-02-01,PHEV,5884,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-03-01,PHEV,6944,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-04-01,PHEV,7913,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-05-01,PHEV,7581,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-06-01,PHEV,7347,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-07-01,PHEV,8644,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-08-01,PHEV,8057,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-09-01,PHEV,8194,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-10-01,PHEV,9458,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-11-01,PHEV,9408,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2025-12-01,PHEV,13861,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-01-01,PHEV,8399,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-02-01,PHEV,8393,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-03-01,PHEV,12367,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-04-01,PHEV,13214,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-05-01,PHEV,15821,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-06-01,PHEV,18206,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-07-01,PHEV,20500,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel
+2026-08-01,PHEV,20535,ABVE,veiculos_leves_plugin,https://abve.org.br/abve-data/bi-geral/,snapshot_painel_revisado,2026-09-30,,Snapshot atual; sem histórico de versões do painel

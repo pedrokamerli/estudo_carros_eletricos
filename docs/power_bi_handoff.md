@@ -7,20 +7,21 @@ Conecto o Power BI ao PostgreSQL `localhost:5432`, banco `ev_brasil_db`, schema 
 | Perguntas | Tabelas Gold principais | Cobertura e interpretação |
 | --- | --- | --- |
 | 1–2: evolução e crescimento dos emplacamentos | `emplacamentos_fenabrave_mensais`, `emplacamentos_abve_mensais` | Séries separadas até ago/2026; respeitar segmento e classificação de cada fonte |
-| 3–4: estados e crescimento da frota | `frota_por_estado`, `evolucao_frota_por_estado` | Jan/2024–jul/2026; estoque da SENATRAN |
+| 3–4: estados e crescimento da frota | `frota_por_estado`, `evolucao_frota_por_estado` | Jan/2024–ago/2026; estoque da SENATRAN |
 | 5–6: municípios e participação | `frota_por_municipio`, `penetracao_municipal_ibge` | Frota mensal e indicador da última competência; penetração inclui localidades sem registros eletrificados |
 | 7: capital/interior | `frota_capital_vs_interior` | Comparar competências; participação de uma fotografia não prova crescimento |
 | 8: fabricantes | `ranking_marcas_fenabrave_mensal` | Ranking por categoria/mês; filtrar categoria e segmento antes de comparar |
 | 9: modelos eletrificados | `ranking_modelos_noticias`, `cobertura_rankings_modelos_noticias` | Sete listas ABVE/imprensa e 65 registros; filtrar fonte/período, separar mensal de acumulado; não é série completa |
-| 10: tecnologias | `emplacamentos_abve_mensais` | BEV/PHEV/HEV/HEV Flex a partir de jan/2025; categorias SENATRAN não são equivalências automáticas |
-| 11: economia e adoção | `correlacao_municipal_socioeconomia_adocao`, `penetracao_municipal_ibge` | Correlações descritivas na competência jul/2026, sem inferir causalidade |
+| 10: tecnologias | `emplacamentos_abve_mensais`, `abve_plugin_mensais` | BEV/PHEV têm 32 meses, jan/2024–ago/2026; HEV/HEV Flex no snapshot a partir de jan/2025; não somar as duas tabelas |
+| 11: economia e adoção | `correlacao_municipal_socioeconomia_adocao`, `penetracao_municipal_ibge` | Correlações descritivas na competência ago/2026, sem inferir causalidade |
 | 12–13: candidatos a oportunidade | `oportunidade_municipal_preliminar`, `sensibilidade_oportunidade` | Filtro econômico/de adoção e nove cenários; não mede demanda nem prevê crescimento municipal |
-| 14: recarga | `infraestrutura_recarga_abve` | Rede nacional, participação regional e top 20 municípios/UFs em ago/2026; sem cobertura geográfica completa |
-| 15: capacidade de previsão | `ml_backtest_metricas`, `ml_backtest_detalhe`, `ml_selecao_modelos`, `ml_projecoes_experimentais` | ML comparado com referências simples; projeções experimentais de 1–3 meses, sem intervalo calibrado |
+| 14: recarga | `infraestrutura_recarga_abve`, `recarga_osm` | Agregados ABVE/Tupi em ago/2026 e mapa comunitário separado de 392 objetos; cobertura incompleta, acessos distintos e atribuição ODbL obrigatória |
+| 15: capacidade de previsão | `ml_backtest_metricas`, `ml_backtest_detalhe`, `ml_selecao_modelos`, `ml_projecoes_experimentais`; equivalentes `ml_abve_*` | Alvos ABVE/FENABRAVE separados; escolhas BEV/PHEV perderam para persistência no teste; projeções experimentais de 1–3 meses, sem intervalo calibrado |
 
 ## Como evito distorções no visual
 
 - Frota é estoque: somar todos os meses conta os mesmos veículos várias vezes. Para um cartão de frota atual, filtro a última competência.
+- O total em `evolucao_frota_nacional` inclui veículos sem UF. Mostro essa parcela num indicador de qualidade; rankings de UF/município têm apenas localização conhecida e não devem ser apresentados como cobertura integral do total nacional.
 - Emplacamentos são fluxo: somo meses somente dentro da mesma fonte, categoria, segmento e regra metodológica. Não somo ABVE com FENABRAVE.
 - Na recarga, filtro `nivel_geografico`. Total nacional, regiões, estados e municípios são recortes sobrepostos; não somo esses níveis. As regiões têm participações, não contagens preenchidas.
 - A tabela `penetracao_municipal_ibge` tem frota da última competência e indicadores IBGE de anos anteriores. Campos de referência permanecem visíveis em título/rodapé. Localidades sem código não entram em cruzamentos IBGE.
