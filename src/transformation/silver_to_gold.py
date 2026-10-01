@@ -165,7 +165,16 @@ def build_municipal_penetration_gold(
     ][["uf", "municipio", "quantidade_veiculos"]].rename(
         columns={"quantidade_veiculos": "frota_total_veiculos"}
     )
-    latest_fleet = latest_electric.merge(latest_total, on=["uf", "municipio"], how="left")
+    # Começo pela frota total para incluir localidades sem registros eletrificados.
+    # Só atribuo zero quando o município existe no arquivo completo da mesma competência.
+    orphan = latest_electric.merge(latest_total, on=["uf", "municipio"], how="left", indicator=True)
+    if orphan["_merge"].eq("left_only").any():
+        raise ValueError("Município eletrificado sem frota total na mesma competência.")
+    latest_fleet = latest_total.merge(latest_electric, on=["uf", "municipio"],
+                                      how="left", validate="one_to_one")
+    latest_fleet["quantidade_veiculos"] = latest_fleet["quantidade_veiculos"].fillna(0).astype("int64")
+    if (latest_fleet["frota_total_veiculos"] <= 0).any():
+        raise ValueError("A frota total municipal precisa ser positiva para calcular participação.")
     latest_fleet["municipio_chave"] = latest_fleet["municipio"].map(normalize_municipality_name)
     # Converto o nome estadual da SENATRAN para a sigla usada pela dimensão oficial do IBGE.
     latest_fleet["uf_ibge"] = latest_fleet["uf"].map(UF_ABBREVIATION_BY_NAME)
@@ -178,6 +187,7 @@ def build_municipal_penetration_gold(
         ].rename(columns={"uf": "uf_ibge"}),
         on=["uf_ibge", "municipio_chave"],
         how="left",
+        validate="many_to_one",
     )
     result["veiculos_eletrificados_por_100_mil_habitantes"] = (
         result["quantidade_veiculos"] / result["populacao_censo_2022"] * 100_000

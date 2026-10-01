@@ -15,6 +15,7 @@ PIPELINE_MODULES = [
     "src.transformation.abve_snapshot_to_silver",
     "src.transformation.abve_charging_snapshot_to_silver",
     "src.analysis.backtest_fenabrave_forecast",
+    "src.analysis.forecast_ml",
     "src.run_pipeline",
     "src.database.load_silver_to_postgres",
     "src.database.load_fenabrave_to_postgres",
@@ -23,7 +24,9 @@ PIPELINE_MODULES = [
     "src.transformation.silver_to_gold",
     "src.database.build_gold_tables",
     "src.database.load_municipal_insights_to_postgres",
+    "src.analysis.opportunity_sensitivity",
     "src.database.load_forecast_backtest_to_postgres",
+    "src.database.load_ml_to_postgres",
     "src.database.export_portfolio_data",
 ]
 

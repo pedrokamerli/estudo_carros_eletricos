@@ -46,6 +46,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 - Rankings de quantidade usarão a frota eletrificada.
 - Rankings de adoção proporcional usarão penetração eletrificada e eletrificados por 100 mil habitantes.
 - A participação na frota usa numerador e denominador do mesmo município e mês. A frota total inclui as categorias veiculares presentes na base SENATRAN de combustível; não deve ser descrita como participação apenas em automóveis de passeio.
+- O universo da análise municipal parte da frota total: localidades presentes nessa base, mas ausentes no agrupamento de eletrificados, recebem zero registros eletrificados no recorte. Município fora da base total ou sem associação IBGE não recebe denominador/código inventado. Isso permite investigar também baixa adoção, evitando selecionar apenas localidades com eletrificados.
 - A comparação entre capitais e interior dependerá de uma tabela de referência de capitais, que será adicionada quando coletarmos os dados geográficos.
 
 ### Marcas, modelos e categorias
@@ -58,6 +59,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 
 - A análise de relação econômica começará com correlações e gráficos entre população, PIB per capita e indicadores de adoção; correlação não será tratada como causalidade.
 - O filtro preliminar de oportunidade considera simultaneamente PIB per capita e renda domiciliar per capita no quartil superior da amostra municipal analisada, e veículos eletrificados por 100 mil habitantes no quartil inferior. É exploratório, sensível aos limites da amostra e não estima causalidade nem demanda futura.
+- A tabela `gold.sensibilidade_oportunidade` compara cortes econômicos P70/P75/P80 e de adoção P20/P25/P30, na mesma amostra. Reporta tamanho da lista e Jaccard com a regra original (interseção dividida pela união); se ambas as listas estiverem vazias, Jaccard recebe 1. A lista varia de 8 a 36 municípios na referência julho/2026, com 18 na regra original. Os cortes usam os indicadores publicados na Gold; a execução confere que o cenário P75/P25 reproduz a regra original.
 - Para recarga, o snapshot ABVE/Tupi permite descrever total, tipo AC/DC, participação regional e principais municípios/UFs. Como é um ranking top 20 sem coordenadas completas, não permite calcular cobertura de todos os municípios, distâncias ou necessidade local de expansão. Não inferir contagens regionais a partir das participações percentuais.
 
 ### Previsão
@@ -65,6 +67,7 @@ Este documento define como responderemos às perguntas antes de coletar os dados
 - O alvo será o total de emplacamentos eletrificados por mês ou por ano, conforme a granularidade da série disponível.
 - Qualquer previsão será separada da análise histórica e mostrará claramente seu período de treino, período de teste e métricas de erro.
 - O backtest atual é exploratório: 24 competências no treino e sete no teste, no modo walk-forward de um passo à frente. Ele compara persistência do último mês, média móvel de 3 meses, sazonal de 12 meses e tendência linear. O resultado do teste não é uma projeção futura e exige validação em novas janelas antes de uso operacional.
+- O experimento adicional com scikit-learn compara Ridge e Random Forest a referências simples em horizontes de 1–3 meses. A escolha usa somente validação; o teste posterior avalia a escolha congelada. Reporto WAPE por categoria/etapa/horizonte e publico projeções curtas como experimentais. A metodologia e o resultado estão em `docs/machine_learning.md`; não confundo seu WAPE médio com o MAPE do backtest anterior.
 
 ## Critério de qualidade inicial
 

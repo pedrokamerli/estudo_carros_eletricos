@@ -17,6 +17,7 @@ Uma empresa que avalia expandir sua atuação em mobilidade elétrica precisa en
 - Carrego a Silver no PostgreSQL e gero tabelas Gold para estado, município, categoria, capital/interior, evolução, penetração, correlação socioeconômica e oportunidade preliminar.
 - Extraio dos informativos mensais públicos da FENABRAVE os emplacamentos de híbridos e elétricos e os rankings mensais de fabricantes; preservo a fonte e o método de extração em cada registro.
 - Comparo quatro métodos de previsão em um backtest temporal, deixando sete competências de fora do treino e publicando métricas/erros para avaliação antes de qualquer projeção futura.
+- Avalio Ridge e Random Forest contra três referências simples em horizontes de 1, 2 e 3 meses, separando validação de escolha e teste final. Os modelos ML não foram selecionados; publico o resultado e seis projeções de curto prazo identificadas como experimentais, com erros e limitações em [docs/machine_learning.md](docs/machine_learning.md).
 - Integro um snapshot mensal da ABVE em tabelas Silver e Gold próprias, preservando a quebra metodológica de janeiro/2025 e as divergências publicadas sem ajuste artificial.
 - Integro também um snapshot público da ABVE/Tupi sobre infraestrutura de recarga: total nacional, participação regional e rankings top 20 de municípios e UFs, com referência a agosto/2026.
 - Mantenho a frota SENATRAN (estoque em uma data) separada dos emplacamentos (fluxo durante um período).
@@ -31,7 +32,7 @@ A renda domiciliar per capita vem do Censo 2022 e não é a mesma coisa que PIB 
 
 Nos relatórios FENABRAVE, janeiro/2024 cobre somente autos; a partir de fevereiro/2024, o recorte é autos e comerciais leves. Essa diferença fica numa coluna de cada tabela e precisa ser filtrada ao comparar taxas.
 
-Como primeiro resultado, os rankings municipais mostram uma associação positiva entre renda domiciliar e eletrificados por 100 mil habitantes (Spearman 0,725 em 4.874 municípios, usando a frota de julho/2026). Isso não demonstra causalidade. Em agosto/2026, os totais agregados da FENABRAVE (64.055) também coincidem com a soma publicada pela ABVE entre eletrificados (57.386) e MHEV (6.669); vou usar essa checagem para investigar escopos, sem assumir equivalência nas categorias individuais.
+Como primeiro resultado, a análise municipal mostra uma associação positiva entre renda domiciliar e eletrificados por 100 mil habitantes (Spearman 0,686 em 5.528 localidades cruzadas com IBGE, usando a frota de julho/2026). A base municipal inclui localidades sem registros eletrificados no recorte, usando a frota total da mesma competência como universo. O filtro de oportunidade seleciona 18 municípios no corte original; em nove cenários de percentis, a quantidade varia de 8 a 36. Isso não demonstra causalidade nem estima demanda futura. Em agosto/2026, os totais agregados da FENABRAVE (64.055) também coincidem com a soma publicada pela ABVE entre eletrificados (57.386) e MHEV (6.669); vou usar essa checagem para investigar escopos, sem assumir equivalência nas categorias individuais.
 
 Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo registro. Por isso, não uso essa base para afirmar que um modelo específico é elétrico. O arquivo de mercado que recebi do usuário também está identificado como origem ainda não confirmada e não substitui dados oficiais de emplacamentos.
 
@@ -44,7 +45,7 @@ Os arquivos de marcas e modelos da SENATRAN não informam combustível no mesmo 
 - [ABVE Data](https://abve.org.br/abve-data/): painel público de vendas e eletrificação; o snapshot é transcrito manualmente e já está integrado em Silver/Gold, sem atualização automática.
 - [ABVE — dados até agosto de 2026](https://abve.org.br/com-57-mil-emplacamentos-em-agosto-eletrificados-abrem-a-corrida-para-o-milhao-em-setembro/): referência de validação publicada (57.386 em agosto; 328.477 em janeiro–agosto), usada como conferência independente da série do painel.
 - [ABVE/Tupi — infraestrutura de recarga](https://abve.org.br/recarga-rapida-dc-quase-triplica-em-12-meses-e-ja-responde-por-38-da-rede-brasileira/): total nacional e distribuição da rede pública/semipública, referência agosto/2026. O [painel de eletropostos](https://abve.org.br/abve-data/bi-eletropostos/) publica recortes regionais e rankings top 20; o projeto preserva esse escopo parcial, não uma lista completa de coordenadas.
-- [FENABRAVE — imprensa e informativos mensais](https://www.fenabrave.org.br/portalv2/home/imprensa): fonte dos totais mensais nas categorias publicadas como “híbridos” e “elétricos” e dos rankings de fabricantes. Os PDFs públicos não trazem o ranking de modelos; esse recorte exige cadastro no portal.
+- [FENABRAVE — imprensa e informativos mensais](https://www.fenabrave.org.br/portalv2/home/imprensa): fonte dos totais mensais nas categorias publicadas como “híbridos” e “elétricos” e dos rankings de fabricantes. Rankings gerais de modelos nos boletins não identificam por si só a motorização; ainda preciso de um recorte validado de modelos eletrificados para responder à pergunta 9.
 - [ABVE Data](https://abve.org.br/abve-data/): snapshot mensal em [`data/portfolio/emplacamentos_abve_mensais.csv`](data/portfolio/emplacamentos_abve_mensais.csv), validado e integrado a Silver/Gold. A composição BEV/PHEV/HEV/HEV Flex começa em jan/2025 por mudança metodológica; a captura ainda não se atualiza automaticamente.
 - [Open Charge Map](https://openchargemap.org/develop/api): possível complemento para coordenadas; coleta requer chave API e revisão de licença/cobertura de cada registro.
 
@@ -52,7 +53,7 @@ O inventário, os métodos de acesso e as limitações estão em [docs/data_sour
 
 ## Tecnologias
 
-Python, Pandas, PyMuPDF, PyArrow/Parquet, SQL, PostgreSQL, Git/GitHub e Power BI. Uso cada ferramenta para uma parte concreta do fluxo: Python coleta e transforma, PyMuPDF extrai texto dos boletins PDF, Parquet armazena as camadas locais, PostgreSQL organiza as tabelas analíticas e Power BI será usado para comunicar os resultados. Spark e orquestração em nuvem ficam como evolução caso o volume e a execução recorrente justifiquem essa complexidade.
+Python, Pandas, NumPy, scikit-learn, PyMuPDF, PyArrow/Parquet, SQL, PostgreSQL, Git/GitHub e Power BI. Uso cada ferramenta para uma parte concreta do fluxo: Python coleta e transforma, scikit-learn ajusta os modelos de previsão, PyMuPDF extrai texto dos boletins PDF, Parquet armazena as camadas locais, PostgreSQL organiza as tabelas analíticas e Power BI será usado para comunicar os resultados. Spark e orquestração em nuvem ficam como evolução caso o volume e a execução recorrente justifiquem essa complexidade.
 
 ## Como reproduzir no Windows
 
@@ -75,6 +76,8 @@ py -m venv .venv
 O comando baixa os meses publicados, registra os meses ainda indisponíveis, coleta os PDFs mensais públicos da FENABRAVE, valida os snapshots ABVE versionados (vendas e recarga), recria Bronze/Silver/Gold no PostgreSQL, testa baselines de previsão e exporta os CSVs agregados. As capturas ABVE precisam ser atualizadas manualmente quando a fonte publicar novos dados. O arquivo bruto e os Parquet não são versionados; snapshots de fonte e resultados agregados pequenos ficam em `data/portfolio/`. Janeiro/2024 tem extração visual transcrita e revisada por causa da codificação de caracteres do PDF, método explicitado nos dados. Os indicadores da FENABRAVE não são somados aos da ABVE: cada entidade publica conceitos/categorias próprios. O arquivo fornecido pelo usuário e Open Charge Map permanecem separados até sua origem/classificação ser validada.
 
 ## Power BI
+
+Preparei o mapa de perguntas, tabelas e cuidados de agregação em [docs/power_bi_handoff.md](docs/power_bi_handoff.md), com consultas SQL conferidas em [sql/consultas_portfolio.sql](sql/consultas_portfolio.sql).
 
 Minha etapa visual será conectar o Power BI ao PostgreSQL (`localhost:5432`, banco `ev_brasil_db`) e usar as tabelas do schema `gold`. Além da evolução mensal, distribuição por estado, penetração municipal e capital versus interior, posso mostrar a rede de recarga com seus limites de cobertura. Para emplacamentos, existem tabelas separadas da FENABRAVE e do material fornecido ainda não confirmado; não devo somar fontes nem chamar o arquivo não confirmado de dado oficial. Os rankings públicos prontos são por fabricante; não há ranking de modelos eletrificados validado ainda.
 

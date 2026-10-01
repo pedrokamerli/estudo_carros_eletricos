@@ -43,7 +43,7 @@ Este documento define **onde procurar os dados** antes de iniciarmos qualquer do
 - **Período coletado:** janeiro/2024 a agosto/2026 (32 relatórios públicos). Setembro/2026 ainda não estava disponível no portal consultado em 30/09/2026.
 - **Processamento:** `src/ingestion/download_fenabrave_monthly_reports.py` coleta PDFs; `src/transformation/fenabrave_reports_to_silver.py` valida os totais e transforma o texto em Parquet; `src/database/load_fenabrave_to_postgres.py` carrega tabelas Silver dedicadas.
 - **Rastreabilidade:** cada registro conserva URL, página e método. Janeiro/2024 usa transcrição visual manual conferida na [página 20 do PDF original](https://www.fenabrave.org.br/portal/files/2024_01_02.pdf), pois a fonte do arquivo impede extração Unicode confiável.
-- **Limites:** estas categorias são as do boletim FENABRAVE e não equivalem necessariamente a BEV/HEV/PHEV da ABVE. Não combinar as séries sem uma reconciliação documentada. O portal indica que rankings de modelos exigem cadastro/login; este fluxo público não obtém tais dados.
+- **Limites:** estas categorias são as do boletim FENABRAVE e não equivalem necessariamente a BEV/HEV/PHEV da ABVE. Não combinar as séries sem uma reconciliação documentada. Rankings gerais de modelos dos boletins não trazem classificação de motorização suficiente para identificar todos os eletrificados; este fluxo ainda não produz ranking validado de modelos eletrificados.
 
 ### Painel oficial da ABVE
 

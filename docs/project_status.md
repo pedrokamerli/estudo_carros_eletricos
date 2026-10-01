@@ -13,11 +13,13 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 | PostgreSQL e conexão Python | Feito | `src/database/connection.py`, `src/database/load_silver_to_postgres.py` |
 | Tabelas Gold de frota e evolução | Feito | `src/database/build_gold_tables.py` |
 | Frota total e participação municipal | Feito; frota eletrificada comparada com frota total na mesma competência | `src/transformation/bronze_to_silver.py`, `gold.penetracao_municipal_ibge` |
-| Cruzamento municipal IBGE | Feito e publicado no PostgreSQL; 4.874 dos 4.914 municípios SENATRAN cruzaram com IBGE | `src/transformation/silver_to_gold.py`, `src/database/load_municipal_insights_to_postgres.py` |
+| Cruzamento municipal IBGE | Feito e publicado no PostgreSQL; 5.528 das 5.574 localidades da frota total SENATRAN cruzaram com IBGE, incluindo as sem registros eletrificados | `src/transformation/silver_to_gold.py`, `src/database/load_municipal_insights_to_postgres.py` |
 | Indicadores econômicos municipais | Feito: PIB 2023, população do Censo 2022 e renda domiciliar per capita do Censo 2022 | `src/ingestion/download_ibge_municipal_indicators.py`, `data/portfolio/penetracao_municipal_ibge.csv` |
 | Oportunidade municipal preliminar | Feito como filtro exploratório de quartis de PIB, renda e adoção; não é previsão | `gold.oportunidade_municipal_preliminar` |
+| Sensibilidade de oportunidade | Feito: nove cenários de percentis, 18 municípios no corte original e 8–36 nos cenários; interseção, união e Jaccard publicados | `gold.sensibilidade_oportunidade`, `src/analysis/opportunity_sensitivity.py` |
 | Correlação socioeconômica e adoção | Implementada com Pearson e Spearman para PIB, renda e população versus dois indicadores de adoção; é descritiva, não causal | `gold.correlacao_municipal_socioeconomia_adocao` |
 | Backtest de previsão | Feito: 4 baselines, 24 meses de treino e 7 meses de teste para cada categoria FENABRAVE; resultado carregado em Gold | `gold.backtest_previsao_fenabrave`, `gold.backtest_detalhe_previsao_fenabrave` |
+| Experimento ML e projeções curtas | Ridge e Random Forest comparados com 3 referências simples; validação e teste separados, horizontes 1–3 meses; 330 previsões retrospectivas, 60 métricas e 6 projeções experimentais | `src/analysis/forecast_ml.py`, `gold.ml_*`, `docs/machine_learning.md` |
 | Auditoria dos dados fornecidos | Feita: estrutura, cobertura e consistência interna avaliadas; não há fonte documentada e os exports seguem explicitamente não verificados | `docs/provided_data_assessment.md` |
 | Coleta de emplacamentos FENABRAVE | Feito para os boletins mensais públicos de autos e comerciais leves, jan/2024–ago/2026 | `src/ingestion/download_fenabrave_monthly_reports.py` |
 | Série ABVE | Snapshot de 32 totais mensais (jan/2024–ago/2026) e tecnologia em 20 meses (jan/2025–ago/2026); validado em Silver, carregado em PostgreSQL e modelado em Gold; captura ainda manual | `data/portfolio/emplacamentos_abve_mensais.csv`, `silver.abve_emplacamentos_mensais`, `gold.emplacamentos_abve_mensais` |
@@ -30,7 +32,7 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 
 - SENATRAN: 31 competências, janeiro/2024 a julho/2026, disponíveis localmente.
 - Silver SENATRAN: 440.342 linhas de combustível eletrificado; frota total municipal: 172.783 linhas mensais.
-- IBGE: 5.570 municípios; o cruzamento liga 4.874 localidades com código IBGE na competência SENATRAN mais recente.
+- IBGE: 5.570 municípios; o cruzamento liga 5.528 das 5.574 localidades presentes na frota total da competência SENATRAN mais recente. A análise municipal inclui as localidades sem registros eletrificados; 46 localidades ficam sem associação, sem código inventado.
 - SENATRAN: agosto e setembro/2026 ainda não aparecem como publicados na página consultada em 30/09/2026.
 - FENABRAVE: 32 competências disponíveis, janeiro/2024 a agosto/2026; 64 linhas de híbridos/elétricos e 960 linhas dos rankings mensais de fabricantes. Janeiro/2024 cobre somente autos, enquanto os relatórios de fevereiro/2024 em diante cobrem autos e comerciais leves. Janeiro foi transcrito visualmente e conferido no PDF, pois a codificação de fonte impede extração textual confiável; segmento e método ficam registrados por linha.
 - Backtest: usa fevereiro/2024–agosto/2026 para manter o segmento autos + comerciais leves; os primeiros 24 meses são treino e os 7 últimos formam um teste walk-forward de um passo à frente. A persistência do último mês teve menor MAPE nos dois grupos (14,80% em “elétricos”; 8,52% em “híbridos”), mas não trato isso como validação suficiente para uma projeção futura.
@@ -40,17 +42,17 @@ Atualizado em 30/09/2026. Este documento diferencia o que está implementado do 
 - Conferência agregada de agosto/2026: FENABRAVE soma 64.055 “híbridos + elétricos”; a ABVE separa 57.386 eletrificados e 6.669 MHEV, também somando 64.055. Isso dá uma pista de escopo para futura reconciliação, mas **não** prova equivalência entre as categorias por tecnologia.
 - ABVE Silver/Gold: o snapshot passa por validações de 32 meses contínuos, 20 meses com composição, contagens não negativas e conciliação registrada no arquivo; carreguei 32 linhas em `silver.abve_emplacamentos_mensais` e criei `gold.emplacamentos_abve_mensais`. O export para Power BI é `emplacamentos_abve_mensais_gold.csv`. A captura ainda é manual.
 - ABVE/Tupi publicou 29.866 pontos públicos e semipúblicos de recarga, referência agosto/2026. Integrei 46 linhas: total nacional, participações das cinco regiões e top 20 de municípios e UFs. O painel diz que a rede alcança 1.911 municípios, mas não expõe no recorte transcrito todos os municípios nem coordenadas; não é possível calcular cobertura completa/distâncias. Veja `docs/data_sources.md` e `docs/metrics.md`.
-- Marcas/modelos SENATRAN: o arquivo de dezembro/2025 foi baixado para Bronze. Ele não contém combustível, então não permite isoladamente identificar modelos eletrificados. Os boletins públicos da FENABRAVE trazem ranking de fabricantes, mas o portal reserva o ranking de modelos para usuário cadastrado.
+- Marcas/modelos SENATRAN: o arquivo de dezembro/2025 foi baixado para Bronze. Ele não contém combustível, então não permite isoladamente identificar modelos eletrificados. Os boletins FENABRAVE permitem rankings de fabricantes por categoria; rankings gerais de modelos não resolvem a classificação de motorização. Ainda não há série validada de emplacamentos por modelo eletrificado.
 - Open Charge Map: o coletor opcional existe, mas depende de uma chave API local e de revisão de cobertura/licença dos registros; não é necessário para os indicadores agregados ABVE/Tupi já integrados.
 
 ## Próximas entregas técnicas
 
 1. Automatizar atualização dos snapshots ABVE de vendas e recarga se houver forma pública estável de extrair os painéis; as integrações atuais validam e carregam os snapshots, mas ainda exigem transcrição/captura manual. Não preencher setembro/2026 até a fonte publicar o fechamento.
 2. Se eu quiser usar os três CSVs recebidos como evidência do estudo principal, localizar a fonte original, licença, data de extração e definições; sem isso continuam excluídos das conclusões oficiais.
-3. Obter acesso autenticado ao portal FENABRAVE para avaliar modelos mais vendidos e confirmar os campos/regras de exportação. Não compartilhar senha no chat; caso necessário, usar o login localmente.
+3. Obter fonte validada com modelo e tecnologia de eletrificação no mesmo recorte e período; avaliar também exportações autenticadas FENABRAVE, sem presumir que login garanta os campos necessários. Não compartilhar senha no chat.
 4. Para mapa completo de recarga, obter uma fonte com inventário e coordenadas, cobertura e licença documentadas. O snapshot ABVE/Tupi já responde distribuição agregada/top 20; o coletor Open Charge Map requer chave API local.
-5. Interpretar correlações com gráficos/distribuições e testar sensibilidade do filtro de oportunidade; associação não prova causa.
-6. Aumentar o histórico comparável e testar o backtest em novas janelas antes de publicar previsão futura. As tabelas de erro estão disponíveis para visualização, mas ainda não há uma projeção futura validada.
+5. Mostrar as correlações, distribuições e a sensibilidade do filtro no Power BI. A sensibilidade já foi calculada em nove cenários, sem alterar a regra original para aumentar a lista; associação não prova causa.
+6. Atualizar a avaliação preditiva quando houver novas competências: o experimento ML usa validação e teste separados, com horizontes 1–3 meses, e disponibiliza seis projeções experimentais. Os modelos ML não venceram na validação; a escolha de elétricos também perdeu para a persistência no teste final. Não há previsão operacional aprovada ou intervalo calibrado. Metodologia e métricas estão em `docs/machine_learning.md`.
 7. Construir o dashboard Power BI e o case visual do portfólio. Os exports agregados já estão em `data/portfolio/`; esta é a etapa visual reservada ao autor.
 
 ## Regras para o fechamento

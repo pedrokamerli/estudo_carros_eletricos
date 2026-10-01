@@ -7,3 +7,5 @@ pymupdf
 pytest
 psycopg[binary]
 python-dotenv
+numpy
+scikit-learn==1.9.1

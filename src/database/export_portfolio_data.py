@@ -12,6 +12,11 @@ OUTPUT_PATH = PROJECT_ROOT / "data" / "portfolio"
 
 # Compartilho tabelas pequenas e agregadas, preservando o nome que informa a origem.
 EXPORTS = {
+    "sensibilidade_oportunidade.csv": "SELECT * FROM gold.sensibilidade_oportunidade ORDER BY percentil_economia, percentil_adocao",
+    "ml_backtest_detalhe.csv": "SELECT * FROM gold.ml_backtest_detalhe ORDER BY categoria_fenabrave, etapa, fim_treino, horizonte_meses, metodo",
+    "ml_backtest_metricas.csv": "SELECT * FROM gold.ml_backtest_metricas ORDER BY categoria_fenabrave, etapa, horizonte_meses, metodo",
+    "ml_selecao_modelos.csv": "SELECT * FROM gold.ml_selecao_modelos ORDER BY categoria_fenabrave",
+    "ml_projecoes_experimentais.csv": "SELECT * FROM gold.ml_projecoes_experimentais ORDER BY categoria_fenabrave, data_referencia",
     "evolucao_frota_nacional.csv": """
         SELECT * FROM gold.evolucao_frota_nacional
         ORDER BY ano_referencia, mes_referencia

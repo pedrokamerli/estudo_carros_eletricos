@@ -14,6 +14,10 @@ Entre os exports públicos há tabelas de frota e adoção municipal, correlaç�
 
 Os arquivos `backtest_previsao_fenabrave.csv` e `backtest_detalhe_previsao_fenabrave.csv` comparam quatro baselines usando fevereiro/2024 a janeiro/2026 para treino e fevereiro a agosto/2026 para teste. São erros retrospectivos para avaliar métodos — não previsões futuras validadas.
 
+O experimento adicional de ML tem quatro arquivos `ml_*.csv`: detalhe das previsões retrospectivas, métricas por etapa/horizonte, escolha feita na validação e projeções experimentais para os próximos três meses. Compara Ridge e Random Forest com referências simples; escolhe antes do teste e preserva o resultado mesmo quando perde para a referência. Os CSVs conservam fonte, segmento, versão do scikit-learn e hash da Silver. Não misturo validação com teste nem somo diferentes métodos/horizontes como se fossem vendas. Os detalhes e resultados estão em [`docs/machine_learning.md`](../../docs/machine_learning.md).
+
+`sensibilidade_oportunidade.csv` compara nove combinações de percentis e sua sobreposição com a regra original, na mesma amostra municipal. A base de penetração passou a incluir localidades sem registros eletrificados, presentes na frota total da mesma competência. Por isso, as correlações e a lista de oportunidade foram recalculadas: 5.528 localidades associadas ao IBGE, 18 candidatos no corte original e 8–36 nos cenários. São filtros exploratórios, não demanda futura estimada.
+
 Para coletar as fontes públicas, atualizar o PostgreSQL e recriar os arquivos, execute `src.run_project`. Para exportar novamente apenas os CSVs a partir de um banco já atualizado, execute:
 
 ```powershell
