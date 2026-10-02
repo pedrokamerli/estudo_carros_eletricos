@@ -140,7 +140,7 @@ def main():
     manifest = {"sha256_entradas":{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in lineage_paths},
                 "recorte":"jan/2024–ago/2026; comparações anuais janeiro–agosto; BEV+PHEV",
                 "associacao_renda_controlada":association,
-                "estudo_bauru":"Uber, recarga em shoppings e solar residencial são hipóteses motivadas pelo relato do autor, não variáveis observadas.",
+                "estudo_bauru":"Recarga em shoppings e solar residencial são hipóteses motivadas pelo relato do autor, não variáveis observadas.",
                 "recarga_evidencia":evidence}
     out = ROOT/"output/analysis"
     out.mkdir(parents=True,exist_ok=True)

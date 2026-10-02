@@ -77,13 +77,13 @@ Na revisão do painel, separei “o que vejo”, “por que importa” e “o qu
 
 ### O motor da análise e meu estudo de Bauru
 
-Acrescentei uma etapa independente do painel que responde às 15 perguntas com arquivos de evidência, identifica a contribuição absoluta de estados e marcas para o crescimento e acompanha a expansão no interior. Escolhi Bauru, onde moro, como estudo de caso: comparo sua evolução com cidades do interior paulista e com dez pares selecionados por população e renda, sem escolher os pares pelo crescimento que tiveram. Meus relatos sobre Uber, solar residencial e recarga em shoppings motivam hipóteses, mas não são tratados como dados de uma pesquisa representativa.
+Acrescentei uma etapa independente do painel que responde às 15 perguntas com arquivos de evidência, identifica a contribuição absoluta de estados e marcas para o crescimento e acompanha a expansão no interior. Escolhi Bauru, onde moro, como estudo de caso: comparo sua evolução com cidades do interior paulista e com dez pares selecionados por população e renda, sem escolher os pares pelo crescimento que tiveram. A observação local sobre energia solar e recarga em shoppings serve apenas para formular hipóteses testáveis.
 
 Para investigar recarga, cruzei a participação dos novos emplacamentos BEV/PHEV com a participação dos pontos públicos e semipúblicos ABVE/Tupi. O índice orienta onde pesquisar capacidade e uso, sem contar híbridos sem tomada como demanda de recarga. Também automatizei a extração dos totais nacionais publicados e fiz uma comparação limitada às vinte cidades com pontos informados. Cidade fora desse ranking não recebe zero carregadores.
 
 Comecei uma base documental de preços com seis anúncios primários BYD em 2024 e ampliei-a para 31 anúncios BYD/GWM de 2024/2025, preservando versão, ano/modelo, condição, fonte e hash do documento. É um estudo de preço anunciado e oferta, não preço pago, preço atual, FIPE, depreciação ou elasticidade da demanda.
 
-Também consultei o painel ABVE diretamente com município = Bauru e UF = SP. Obtive 597 linhas de modelo BEV/PHEV desde 2024, 117 modelos e reconciliação sem diferença com o agregado municipal. Agora consigo responder quais modelos aparecem em Bauru, mas não sei quem comprou, se trabalha em aplicativo ou onde recarrega.
+Também consultei o painel ABVE diretamente com município = Bauru e UF = SP. Obtive 597 linhas de modelo BEV/PHEV desde 2024, 117 modelos e reconciliação sem diferença com o agregado municipal. Agora consigo responder quais modelos aparecem em Bauru, mas não sei quem comprou ou onde recarrega.
 
 Para contextualizar a hipótese de recarga doméstica, filtrei o cadastro oficial de geração distribuída da ANEEL para Bauru: 9.934 empreendimentos fotovoltaicos e 79.600,59 kW cadastrados. Uso esse número como contexto de oferta solar municipal, nunca como prova de que os proprietários dos veículos tenham painéis ou recarreguem em casa.
 
@@ -155,7 +155,7 @@ Quero que este projeto mostre como conduzo um problema de dados do início à an
 
 ## Meu estudo local e a prova das previsões
 
-Incluí Bauru como estudo de caso porque moro na cidade e percebo a presença dos elétricos no cotidiano. Comparei períodos iguais: foram 256, 326 e 859 novos BEV/PHEV em janeiro–agosto de 2024, 2025 e 2026. A alta de 163,5% em 2026 superou os 136,2% do conjunto de dez cidades paulistas semelhantes em renda e população. Não escolhi esses pares pelo crescimento e não interpreto a comparação como prova causal. Ainda não medi o papel de motoristas de aplicativo, energia solar residencial ou recarga em shoppings.
+Incluí Bauru como estudo de caso porque moro na cidade e percebo a presença dos elétricos no cotidiano. Comparei períodos iguais: foram 256, 326 e 859 novos BEV/PHEV em janeiro–agosto de 2024, 2025 e 2026. A alta de 163,5% em 2026 superou os 136,2% do conjunto de dez cidades paulistas semelhantes em renda e população. Não escolhi esses pares pelo crescimento e não interpreto a comparação como prova causal. Ainda não medi diretamente a recarga residencial ou o funcionamento dos pontos em shoppings.
 
 Ampliei minha amostra para 31 anúncios de preços de BYD/GWM, com data, versão, condição comercial, fonte primária e hash do documento bruto. É um histórico documental de 2024/2025, não uma série mensal FIPE, preço de transação ou preço atual. Não preencho meses sem evidência nem uso esses anúncios esparsos para estimar elasticidade ou depreciação.
 

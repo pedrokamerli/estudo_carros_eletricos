@@ -25,7 +25,7 @@ def summarize(peers):
         diferenca_crescimento_pontos_percentuais=float(bauru.crescimento_percentual)-growth,n_pares=len(others),
         posicao_volume_2026=int(peers.jan_ago_2026.rank(method="min",ascending=False).loc[bauru.name]),
         escopo="BEV/PHEV, jan–ago de cada ano; dez pares de SP selecionados por renda/população 2022, não pelo crescimento.",
-        limite="Comparação descritiva, não controle causal. Uber, energia solar e recarga em shoppings são hipóteses não medidas; não sei quais modelos foram emplacados em Bauru.")
+        limite="Comparação descritiva, não controle causal. Energia solar e recarga em shoppings são hipóteses não medidas; não sei quais modelos foram emplacados em Bauru.")
 
 
 def freeze_future(projections, path, now):

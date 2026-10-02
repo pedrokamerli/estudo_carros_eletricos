@@ -2,7 +2,7 @@
 
 ## O que fiz e por quê
 
-Comecei pela hipótese local: Bauru parece ter mais carros elétricos nas ruas. Em vez de transformar essa percepção em uma conclusão sobre Uber ou energia solar, comparei os registros oficiais com cidades semelhantes.
+Comecei pela hipótese local: Bauru parece ter mais carros elétricos nas ruas. Em vez de transformar essa percepção em uma conclusão sobre recarga residencial ou energia solar, comparei os registros oficiais com cidades semelhantes.
 
 O motor calcula uma síntese separada do dashboard. Bauru registrou 859 novos BEV/PHEV em jan–ago/2026, frente a 326 em 2025 e 256 em 2024. A alta de 163,5% ficou 27,3 pontos percentuais acima dos 136,2% do conjunto de dez pares. Calculo a taxa dos pares somando seus registros antes de dividir; não faço média simples de taxas. Bauru ocupa a sexta posição em volume entre as onze cidades. Crescimento rápido não significa maior mercado.
 
@@ -12,7 +12,7 @@ A seleção dos pares utiliza população e renda de 2022, padronizadas em escal
 
 Ampliei os seis anúncios de 2024 para 31 observações de duas marcas. As novas fontes são a [tabela oficial BYD de julho/2025](https://www.byd.com/br/noticias-byd-brasil/byd-lanca-dolphin-mini-azul-e-song-pro-com-adas-completo), os [preços promocionais da linha ORA de agosto/2025](https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-lanca-edicao-limitada-do-ora-03-com-autonomia-de-ate-420-km-e-itens-exclusivos) e a [linha ORA publicada em abril/2025](https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-brasil-apresenta-linha-2026-do-ora-03-com-nova-identidade-visual-e-mais-tecnologia). Guardei o HTML original, hash, data da captura, versão e condições. Quando o ano/modelo não foi declarado, deixei vazio.
 
-O painel ABVE também permite consultar município, marca e modelo simultaneamente. Para Bauru/SP obtive 597 linhas BEV/PHEV desde 2024, 117 modelos e reconciliação exata com o agregado municipal. Isso resolve a lacuna de modelos por cidade sem cruzamento artificial. Ainda não informa comprador, uso em aplicativo ou local de recarga.
+O painel ABVE também permite consultar município, marca e modelo simultaneamente. Para Bauru/SP obtive 597 linhas BEV/PHEV desde 2024, 117 modelos e reconciliação exata com o agregado municipal. Isso resolve a lacuna de modelos por cidade sem cruzamento artificial. Ainda não informa comprador ou local de recarga.
 
 Não comparei preços de versões diferentes como se fosse depreciação. Não preenchi meses ausentes, não estimei preço atual e não associei automaticamente essas versões aos emplacamentos municipais. A amostra é útil para documentar oferta; ainda não permite regressão confiável de preço versus vendas.
 
@@ -66,7 +66,7 @@ Não existe tabela de modelos vendidos por município: os fatos de modelo e muni
 1. Obter uma captura local íntegra e verificar funcionamento dos pontos com operadores ou visita.
 2. Ampliar preços comparáveis por versão/mês/marca, com fontes verificáveis.
 3. Coletar observações posteriores e comparar com as projeções congeladas; não ajustar retrospectivamente os valores registrados.
-4. Realizar pesquisa voluntária para medir Uber/aplicativos, recarga em casa, energia solar e destinos. Ainda não coletei respostas.
+4. Realizar pesquisa voluntária para medir recarga em casa, energia solar e destinos. Ainda não coletei respostas.
 5. Montar a entrega visual final no Power BI.
 
 Testei os novos parsers, geografia com áreas vazias, base agregada de comparação, impossibilidade de reescrita do registro, exports reais, avaliação sem inventar observações e as nove páginas Streamlit. A suíte desta entrega contém 34 testes direcionados. Conferi a carga transacional e a contagem das 29 tabelas de inteligência. Não executei novamente a pipeline completa; executei os novos módulos e a carga de inteligência.

@@ -397,7 +397,7 @@ def bauru_case():
     b.metric("Crescimento versus jan–ago/2025",pct(result.crescimento_bauru_percentual))
     c.metric("Novos registros a mais",number(result.acrescimo_2026_2025))
     reading(f"Bauru passou de {number(result.jan_ago_2024)} para {number(result.jan_ago_2025)} e {number(result.jan_ago_2026)} emplacamentos em jan–ago de 2024, 2025 e 2026.",
-        "A percepção de expansão tem suporte nos registros: não é apenas impressão visual. Novos registros não equivalem, porém, ao número de motoristas de aplicativo.",
+        "A percepção de expansão tem suporte nos registros: não é apenas impressão visual. Novos registros não equivalem, porém, ao número de veículos ainda em circulação.",
         "ABVE, veículos leves BEV/PHEV. Não sei por esta base quais marcas/modelos foram vendidos na cidade nem se carregam em casa.")
     monthly = dates(load("estudo_bauru_mensal.csv"))
     year_lines(monthly.loc[monthly.municipio_chave.eq("BAURU")],"emplacamentos","Bauru: emplacamentos de cada mês por ano")
@@ -425,7 +425,7 @@ def bauru_case():
     top_local["Modelo"] = top_local.marca + " · " + top_local.modelo
     bars(top_local,"Modelo","emplacamentos","Top modelos BEV/PHEV em Bauru · 2024–ago/2026")
     st.write("**Agora existe um cruzamento real por cidade e modelo:** consultei o painel ABVE filtrando Bauru/SP e reconciliei 597 linhas de modelo com o agregado municipal, sem diferença. Isso mostra emplacamentos, não carros ainda em circulação.")
-    st.caption("A consulta ABVE não informa comprador, uso em aplicativo, local de recarga ou preço pago. Os nomes e versões seguem a nomenclatura publicada no painel.")
+    st.caption("A consulta ABVE não informa comprador, local de recarga ou preço pago. Os nomes e versões seguem a nomenclatura publicada no painel.")
     evidence = load("bauru_recarga_evidencias.csv")
     details(evidence[["fonte","escopo","estacoes_reportadas","dc_reportadas","potencia_kw","preco_min_reais_kwh","preco_max_reais_kwh","status_reportado","confianca","limite"]],"evidencias_recarga_bauru.csv")
     st.caption("As fontes comunitárias são evidências complementares e podem representar o mesmo local. Não somo os 14 pontos do Seguee com os registros do shopping.")
@@ -438,8 +438,7 @@ def bauru_case():
         st.caption("Este é um indicador de oferta municipal de geração distribuída. Ele não informa quais residências pertencem a donos de elétricos e não prova onde cada veículo recarrega.")
         details(load(solar.name), "contexto_solar_bauru.csv")
     st.subheader("Três hipóteses para uma pesquisa local")
-    st.markdown("""- **Motoristas de aplicativo:** levantar uso profissional, quilômetros rodados e tecnologia do carro. A base de emplacamentos não revela profissão.
-- **Energia solar em casa:** perguntar onde recarrega e se há geração própria. Painéis solares na cidade não comprovam recarga solar de cada carro.
+    st.markdown("""- **Energia solar em casa:** perguntar onde recarrega e se há geração própria. Painéis solares na cidade não comprovam recarga solar de cada carro.
 - **Shoppings e outros destinos:** verificar acesso, potência, preço, funcionamento e fila, com data e horário. Um ponto listado não comprova que esteja disponível.""")
     st.caption("Pesquisa voluntária, sem nome, placa ou endereço residencial. A amostra por conveniência não representa todos os moradores. Ainda não há respostas coletadas.")
     details(peers,"bauru_comparacao_pares.csv")

@@ -17,7 +17,7 @@ def main():
     ranking=plugin.groupby(["marca","modelo","tecnologia"],as_index=False).agg(emplacamentos=("emplacamentos","sum"),meses_com_dado=("data_referencia","nunique"))
     ranking["participacao_percentual"]=100*ranking.emplacamentos/ranking.emplacamentos.sum()
     ranking=ranking.sort_values("emplacamentos",ascending=False)
-    ranking["limite"]="Ranking de emplacamentos ABVE para Bauru; não informa preço, comprador, aplicativo, local de recarga ou frota sobrevivente."
+    ranking["limite"]="Ranking de emplacamentos ABVE para Bauru; não informa preço, comprador, local de recarga ou frota sobrevivente."
     ranking.to_csv(DATA/"bauru_modelos_ranking.csv",index=False)
     city=pd.read_csv(DATA/"abve_publico_municipio_gold.csv")
     city=city.loc[city.municipio.eq("Bauru") & city.tecnologia.isin(["BEV","PHEV"]) & city.ano_referencia.ge(2024)]
