@@ -12,6 +12,8 @@ A seleção dos pares utiliza população e renda de 2022, padronizadas em escal
 
 Ampliei os seis anúncios de 2024 para 39 observações de três marcas. Além das fontes BYD e GWM, incluí a [tabela pública oficial da Mercedes-Benz de fevereiro/2024](https://imprensa.mercedes-benz.com.br/storage/files/90C3pndHyyP2sBABMJriW4IVeAHASelLi59pUAMO.pdf), extraindo somente as oito linhas classificadas como elétricas. Guardei o PDF original, hash, data da captura, versão e condições. Quando o ano/modelo não foi declarado, deixei vazio.
 
+Também gero estatísticas descritivas por marca e tecnologia: quantidade de anúncios, mínimo, mediana e máximo. Esses resumos organizam a comparação de posicionamento, mas não são média de mercado e não permitem estimar depreciação.
+
 O painel ABVE também permite consultar município, marca e modelo simultaneamente. Para Bauru/SP obtive 597 linhas BEV/PHEV desde 2024, 117 modelos e reconciliação exata com o agregado municipal. Isso resolve a lacuna de modelos por cidade sem cruzamento artificial. Ainda não informa comprador ou local de recarga.
 
 Não comparei preços de versões diferentes como se fosse depreciação. Não preenchi meses ausentes, não estimei preço atual e não associei automaticamente essas versões aos emplacamentos municipais. A amostra é útil para documentar oferta; ainda não permite regressão confiável de preço versus vendas.

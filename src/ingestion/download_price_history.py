@@ -60,6 +60,7 @@ def extract_mercedes(pdf_bytes):
     if len(matches) != 8:
         raise ValueError(f"Tabela Mercedes mudou: esperava 8 modelos elétricos, encontrei {len(matches)}.")
     return [dict(marca="Mercedes-Benz", modelo_versao=model.strip(), ano_modelo=year,
+                 tecnologia="BEV",
                  preco_anunciado_reais=parse_price(price), data_anuncio="2024-02-01",
                  condicao="preco_publico_a_partir_tabela_fev_2024") for model, year, price in matches]
 

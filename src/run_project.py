@@ -54,6 +54,7 @@ PIPELINE_MODULES = [
     "src.ingestion.download_abve_bauru_models",
     "src.ingestion.download_price_evidence",
     "src.ingestion.download_price_history",
+    "src.analysis.analyze_price_history",
     "src.analysis.market_intelligence",
     "src.analysis.forecast_challengers",
     "src.analysis.bauru_case",

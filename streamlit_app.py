@@ -452,6 +452,10 @@ def prices():
     a,b = st.columns(2)
     a.metric("Anúncios documentados neste recorte",number(len(chosen)))
     b.metric("Marcas neste recorte",number(chosen.marca.nunique()))
+    summary_path = DATA/"precos_resumo_marca.csv"
+    if summary_path.exists():
+        st.caption("Posicionamento descritivo da amostra por marca — não é preço médio de mercado.")
+        details(load(summary_path.name),"precos_resumo_marca.csv")
     st.write("**O preço abre uma pergunta, não encerra a análise:** versões mais acessíveis podem alcançar novos públicos, mas para medir seu efeito nas vendas preciso de um histórico comparável e controlar crédito, renda, oferta e mudanças do produto.")
     shown = chosen[["marca","modelo_versao","ano_modelo","data_anuncio","preco_anunciado_reais","condicao","url_fonte"]].rename(columns={"marca":"Marca","modelo_versao":"Modelo e versão","ano_modelo":"Ano/modelo declarado","data_anuncio":"Data do anúncio","preco_anunciado_reais":"Preço anunciado (R$)","condicao":"Condição comercial","url_fonte":"Fonte primária"})
     st.dataframe(shown,hide_index=True,width="stretch",column_config={"Fonte primária":st.column_config.LinkColumn("Fonte primária"),"Preço anunciado (R$)":st.column_config.NumberColumn(format="R$ %.0f")})
