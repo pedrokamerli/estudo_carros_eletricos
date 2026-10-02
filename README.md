@@ -73,7 +73,9 @@ Acrescentei uma etapa independente do painel que responde às 15 perguntas com a
 
 Para investigar recarga, cruzei a participação dos novos emplacamentos BEV/PHEV com a participação dos pontos públicos e semipúblicos ABVE/Tupi. O índice orienta onde pesquisar capacidade e uso, sem contar híbridos sem tomada como demanda de recarga. Também automatizei a extração dos totais nacionais publicados e fiz uma comparação limitada às vinte cidades com pontos informados. Cidade fora desse ranking não recebe zero carregadores.
 
-Comecei uma base documental de preços com seis anúncios primários BYD em 2024 e ampliei-a para 29 anúncios BYD/GWM de 2024/2025, preservando versão, ano/modelo, condição, fonte e hash do documento. É um estudo de preço anunciado e oferta, não preço pago, preço atual, FIPE, depreciação ou elasticidade da demanda. Não atribuo esses modelos às vendas de Bauru: a fonte municipal não fornece esse cruzamento.
+Comecei uma base documental de preços com seis anúncios primários BYD em 2024 e ampliei-a para 31 anúncios BYD/GWM de 2024/2025, preservando versão, ano/modelo, condição, fonte e hash do documento. É um estudo de preço anunciado e oferta, não preço pago, preço atual, FIPE, depreciação ou elasticidade da demanda.
+
+Também consultei o painel ABVE diretamente com município = Bauru e UF = SP. Obtive 597 linhas de modelo BEV/PHEV desde 2024, 117 modelos e reconciliação sem diferença com o agregado municipal. Agora consigo responder quais modelos aparecem em Bauru, mas não sei quem comprou, se trabalha em aplicativo ou onde recarrega.
 
 Na previsão, mantive o experimento original e acrescentei drift de 12 meses, Holt amortecido e tendência logarítmica de seis meses. Seleciono pela validação temporal e publico erro, viés e comparação com referências. A reanálise melhorou BEV no teste conhecido, mas não PHEV; só meses futuros podem oferecer uma avaliação prospectiva nova. O protocolo e os hashes ficam em `output/analysis/`, e as novas evidências em `data/portfolio/` e nas tabelas `gold.inteligencia_*`, `gold.estudo_bauru_*` e `gold.ml_desafio_*`.
 
@@ -145,7 +147,7 @@ Quero que este projeto mostre como conduzo um problema de dados do início à an
 
 Incluí Bauru como estudo de caso porque moro na cidade e percebo a presença dos elétricos no cotidiano. Comparei períodos iguais: foram 256, 326 e 859 novos BEV/PHEV em janeiro–agosto de 2024, 2025 e 2026. A alta de 163,5% em 2026 superou os 136,2% do conjunto de dez cidades paulistas semelhantes em renda e população. Não escolhi esses pares pelo crescimento e não interpreto a comparação como prova causal. Ainda não medi o papel de motoristas de aplicativo, energia solar residencial ou recarga em shoppings.
 
-Ampliei minha amostra para 29 anúncios de preços de BYD/GWM, com data, versão, condição comercial, fonte primária e hash do documento bruto. É um histórico documental de 2024/2025, não uma série mensal FIPE, preço de transação ou preço atual. Não preencho meses sem evidência nem uso esses anúncios esparsos para estimar elasticidade ou depreciação.
+Ampliei minha amostra para 31 anúncios de preços de BYD/GWM, com data, versão, condição comercial, fonte primária e hash do documento bruto. É um histórico documental de 2024/2025, não uma série mensal FIPE, preço de transação ou preço atual. Não preencho meses sem evidência nem uso esses anúncios esparsos para estimar elasticidade ou depreciação.
 
 Meu Streamlit agora tem capítulos específicos de Bauru e preços. As 15 respostas vêm do motor analítico, evitando manter uma conclusão no código e outra no dashboard. Na recarga regional, comparo novos BEV/PHEV com a rede pública/semipública, sem incluir híbridos sem tomada nesse indicador.
 

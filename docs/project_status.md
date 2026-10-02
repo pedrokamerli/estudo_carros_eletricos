@@ -4,6 +4,8 @@
 
 O projeto já tem um motor analítico reproduzível, nove capítulos no Streamlit, quinze respostas com evidência/limite separados, PostgreSQL Gold carregado e estudo de Bauru. A entrega desta fase está forte para iniciar o Power BI. O que continua aberto é evidência externa nova, não estrutura do projeto: inventário local de recarga, série de preços comparáveis, respostas de pesquisa local e validação prospectiva do ML.
 
+Em 02/10, resolvi a lacuna de modelos por cidade consultando o próprio painel ABVE com os filtros Bauru/SP. O recorte retornou 597 linhas BEV/PHEV desde 2024, 117 modelos e reconciliação mensal exata com o agregado municipal. Também capturei três diretórios públicos de recarga: Seguee (14 estações reportadas, 11 rápidas, R$ 1,54–2,98/kWh), Carregados (shopping, 6 kW médios, confiança 73%, status comunitário funcionando) e MapaVolt (shopping, 3 kW, confiança 12, revisão pendente). Não somei registros potencialmente duplicados.
+
 Atualizado em 01/10/2026. Meu recorte observado está fechado em jan/2024–ago/2026. Setembro não é mais pendência. As notas de pesquisa de 30/09 abaixo são históricas, não ampliam esse corte.
 
 ## Atualização de dados e ML em 01/10
@@ -103,6 +105,6 @@ O ciclo Inmetro com quarentena é parcial. Não concluí associação ABVE/Inmet
 - Previsões só serão publicadas com separação treino/teste, modelo de referência e métricas de erro.
 # Entrega local, preços e registro futuro — 01/10/2026
 
-Acrescentei síntese de Bauru frente a dez pares, 29 anúncios documentais BYD/GWM, registro imutável de projeções para novembro, avaliador automático e integração das respostas do motor ao Streamlit. Carreguei 25 tabelas de inteligência com contagens conferidas. Não executei novamente a pipeline inteira.
+Acrescentei síntese de Bauru frente a dez pares, 31 anúncios documentais BYD/GWM, registro imutável de projeções para novembro, avaliador automático e integração das respostas do motor ao Streamlit. Carreguei 29 tabelas de inteligência com contagens conferidas. Não executei novamente a pipeline inteira.
 
 O coletor local de recarga foi implementado e recebeu a malha IBGE. A consulta OSM falhou nos dois servidores: não há novo inventário validado de Bauru, nem conclusão de zero carregadores. Faltam funcionamento/utilização, histórico comparável de preços e pesquisa local. O teste prospectivo depende de observações futuras e ainda não ocorreu. Detalhes e uso no Power BI: [entrega_bauru_precos.md](entrega_bauru_precos.md).

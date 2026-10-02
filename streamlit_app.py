@@ -419,6 +419,16 @@ def bauru_case():
         details(stations,"recarga_bauru_verificacao.csv")
     else:
         st.info("O inventário local ainda não está disponível: os servidores de mapas falharam na consulta. Isso não significa que Bauru tenha zero carregadores. A malha municipal foi obtida; não publico uma contagem sem captura válida.")
+    st.subheader("Quais modelos aparecem nos emplacamentos de Bauru?")
+    local_models = load("bauru_modelos_ranking.csv")
+    top_local = local_models.head(12).copy()
+    top_local["Modelo"] = top_local.marca + " · " + top_local.modelo
+    bars(top_local,"Modelo","emplacamentos","Top modelos BEV/PHEV em Bauru · 2024–ago/2026")
+    st.write("**Agora existe um cruzamento real por cidade e modelo:** consultei o painel ABVE filtrando Bauru/SP e reconciliei 597 linhas de modelo com o agregado municipal, sem diferença. Isso mostra emplacamentos, não carros ainda em circulação.")
+    st.caption("A consulta ABVE não informa comprador, uso em aplicativo, local de recarga ou preço pago. Os nomes e versões seguem a nomenclatura publicada no painel.")
+    evidence = load("bauru_recarga_evidencias.csv")
+    details(evidence[["fonte","escopo","estacoes_reportadas","dc_reportadas","potencia_kw","preco_min_reais_kwh","preco_max_reais_kwh","status_reportado","confianca","limite"]],"evidencias_recarga_bauru.csv")
+    st.caption("As fontes comunitárias são evidências complementares e podem representar o mesmo local. Não somo os 14 pontos do Seguee com os registros do shopping.")
     st.subheader("Três hipóteses para uma pesquisa local")
     st.markdown("""- **Motoristas de aplicativo:** levantar uso profissional, quilômetros rodados e tecnologia do carro. A base de emplacamentos não revela profissão.
 - **Energia solar em casa:** perguntar onde recarrega e se há geração própria. Painéis solares na cidade não comprovam recarga solar de cada carro.
@@ -439,7 +449,7 @@ def prices():
     shown = chosen[["marca","modelo_versao","ano_modelo","data_anuncio","preco_anunciado_reais","condicao","url_fonte"]].rename(columns={"marca":"Marca","modelo_versao":"Modelo e versão","ano_modelo":"Ano/modelo declarado","data_anuncio":"Data do anúncio","preco_anunciado_reais":"Preço anunciado (R$)","condicao":"Condição comercial","url_fonte":"Fonte primária"})
     st.dataframe(shown,hide_index=True,width="stretch",column_config={"Fonte primária":st.column_config.LinkColumn("Fonte primária"),"Preço anunciado (R$)":st.column_config.NumberColumn(format="R$ %.0f")})
     st.caption("BYD: lançamentos de 2024 e tabela publicada em julho/2025; GWM: ofertas da linha ORA em agosto/2025. Ano/modelo ausente fica vazio, não inferido. Estes não são preços atuais de outubro/2026.")
-    st.warning("29 anúncios não são um painel mensal do mercado. Não preencho meses sem evidência, não trato promoção como preço permanente e não uso este recorte para prever depreciação ou elasticidade. Ainda faltam preços comparáveis de outras marcas e meses.")
+    st.warning("31 anúncios não são um painel mensal do mercado. Não preencho meses sem evidência, não trato promoção como preço permanente e não uso este recorte para prever depreciação ou elasticidade. Ainda faltam preços comparáveis de outras marcas e meses.")
     details(chosen,"precos_documentados.csv")
 
 

@@ -16,7 +16,9 @@ FILES = ["inteligencia_crescimento_estados","inteligencia_crescimento_regioes",
          "recarga_nacional_evidencias","precos_anunciados_evidencias","preco_vs_emplacamentos_estudo_2024",
          "perguntas_evidencias_motor","ml_desafio_backtest_detalhe","ml_desafio_backtest_metricas",
          "ml_desafio_diagnostico_vies","ml_desafio_selecao_modelos","ml_desafio_projecoes_experimentais",
-         "precos_historicos_documentais","bauru_estudo_sintese","ml_registro_prospectivo","ml_avaliacao_prospectiva"]
+         "precos_historicos_documentais","bauru_estudo_sintese","ml_registro_prospectivo","ml_avaliacao_prospectiva","bauru_modelos_mensal","bauru_modelos_ranking","bauru_modelos_reconciliacao"]
+if (DATA/"bauru_recarga_evidencias.csv").exists():
+    FILES.append("bauru_recarga_evidencias")
 if (DATA/"bauru_recarga_inventario.csv").exists():
     FILES.append("bauru_recarga_inventario")
 

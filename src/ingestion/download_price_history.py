@@ -9,6 +9,7 @@ from src.ingestion.download_price_evidence import ROOT, parse_price
 
 BYD_URL = "https://www.byd.com/br/noticias-byd-brasil/byd-lanca-dolphin-mini-azul-e-song-pro-com-adas-completo"
 GWM_URL = "https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-lanca-edicao-limitada-do-ora-03-com-autonomia-de-ate-420-km-e-itens-exclusivos"
+GWM_APRIL_URL = "https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-brasil-apresenta-linha-2026-do-ora-03-com-nova-identidade-visual-e-mais-tecnologia"
 
 
 def plain(html):
@@ -39,12 +40,22 @@ def extract_gwm(html):
                  preco_anunciado_reais=parse_price(p),data_anuncio="2025-08-07",
                  condicao="promocional_com_bonus_por_tempo_limitado") for m,p in matches]
 
+def extract_gwm_april(html):
+    text = plain(html)
+    if "28 de abril de 2025" not in text or "ORA 03 Skin BEV48" not in text:
+        raise ValueError("Anúncio GWM de abril mudou.")
+    matches = [("Skin BEV48",re.search(r"ORA 03 Skin BEV48 passa a custar R\$\s*([\d.,]+)",text,re.I)),
+               ("GT BEV63",re.search(r"GT BEV63,?\s*R\$\s*([\d.,]+)",text,re.I))]
+    if any(match is None for _,match in matches):
+        raise ValueError("Preços GWM de abril não encontrados.")
+    return [dict(marca="GWM",modelo_versao="ORA 03 "+name,ano_modelo="linha 2026",preco_anunciado_reais=parse_price(match[1]),data_anuncio="2025-04-28",condicao="preco_publicado_linha_2026") for name,match in matches]
+
 
 def main():
     rows = []
     directory = ROOT/"data/bronze/precos_publicados"
     directory.mkdir(parents=True,exist_ok=True)
-    for url,extractor in ((BYD_URL,extract_byd),(GWM_URL,extract_gwm)):
+    for url,extractor in ((BYD_URL,extract_byd),(GWM_URL,extract_gwm),(GWM_APRIL_URL,extract_gwm_april)):
         response = requests.get(url,timeout=40)
         response.raise_for_status()
         digest = hashlib.sha256(response.content).hexdigest()

@@ -10,15 +10,19 @@ A seleção dos pares utiliza população e renda de 2022, padronizadas em escal
 
 ## Preços com rastreabilidade
 
-Ampliei os seis anúncios de 2024 para 29 observações de duas marcas. As novas fontes são a [tabela oficial BYD de julho/2025](https://www.byd.com/br/noticias-byd-brasil/byd-lanca-dolphin-mini-azul-e-song-pro-com-adas-completo) e os [preços promocionais da linha ORA publicados pela GWM em agosto/2025](https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-lanca-edicao-limitada-do-ora-03-com-autonomia-de-ate-420-km-e-itens-exclusivos). Guardei o HTML original, hash, data da captura, versão e condições. Quando o ano/modelo não foi declarado, deixei vazio.
+Ampliei os seis anúncios de 2024 para 31 observações de duas marcas. As novas fontes são a [tabela oficial BYD de julho/2025](https://www.byd.com/br/noticias-byd-brasil/byd-lanca-dolphin-mini-azul-e-song-pro-com-adas-completo), os [preços promocionais da linha ORA de agosto/2025](https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-lanca-edicao-limitada-do-ora-03-com-autonomia-de-ate-420-km-e-itens-exclusivos) e a [linha ORA publicada em abril/2025](https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-brasil-apresenta-linha-2026-do-ora-03-com-nova-identidade-visual-e-mais-tecnologia). Guardei o HTML original, hash, data da captura, versão e condições. Quando o ano/modelo não foi declarado, deixei vazio.
+
+O painel ABVE também permite consultar município, marca e modelo simultaneamente. Para Bauru/SP obtive 597 linhas BEV/PHEV desde 2024, 117 modelos e reconciliação exata com o agregado municipal. Isso resolve a lacuna de modelos por cidade sem cruzamento artificial. Ainda não informa comprador, uso em aplicativo ou local de recarga.
 
 Não comparei preços de versões diferentes como se fosse depreciação. Não preenchi meses ausentes, não estimei preço atual e não associei automaticamente essas versões aos emplacamentos municipais. A amostra é útil para documentar oferta; ainda não permite regressão confiável de preço versus vendas.
 
-## Recarga: entreguei o coletor, não inventei um inventário
+## Recarga: evidência local e limites
 
 Obtive a malha oficial IBGE de Bauru, código 3506003. O coletor procura objetos OSM em uma caixa geográfica e depois verifica cada coordenada dentro do polígono, respeitando áreas vazias. Nós usam coordenadas próprias; vias/relações usam centro aproximado, com essa limitação registrada.
 
-Nesta execução, o primeiro servidor Overpass retornou erro/timeout e o segundo também expirou. Portanto não existe novo CSV local de recarga. A ausência do arquivo não equivale à ausência de carregadores. O coletor reaproveita capturas válidas e só faz nova consulta com `--refresh`. É opcional e não impede a pipeline principal.
+Nesta execução, o primeiro servidor Overpass retornou erro/timeout e o segundo também expirou. Para não parar a pesquisa, coletei três diretórios públicos complementares: Seguee reporta 14 estações, 11 rápidas e preços de R$ 1,54–2,98/kWh; Carregados registra o Bauru Shopping com confiança comunitária de 73%, potência média de 6 kW e status “Funcionando”; MapaVolt registra outro cadastro do shopping com 3 kW, status “Revisar” e confiança 12. Esses registros podem representar o mesmo local, por isso não somo as contagens. Eles são evidência de disponibilidade publicada, não censo, telemetria ou prova de funcionamento contínuo.
+
+A ausência de uma captura OSM municipal não equivale à ausência de carregadores. O coletor reaproveita capturas válidas e só faz nova consulta com `--refresh`. É opcional e não impede a pipeline principal.
 
 Mesmo uma captura bem-sucedida não comprovará funcionamento ou cobertura completa. Para recomendar instalação de carregadores, ainda preciso verificar acesso, potência, preço, funcionamento, uso e recarga doméstica. Identificadores OSM podem representar o mesmo local físico; não os chamo de quantidade de carregadores. A licença ODbL e a atribuição são preservadas.
 
@@ -61,4 +65,4 @@ Não existe tabela de modelos vendidos por município: os fatos de modelo e muni
 4. Realizar pesquisa voluntária para medir Uber/aplicativos, recarga em casa, energia solar e destinos. Ainda não coletei respostas.
 5. Montar a entrega visual final no Power BI.
 
-Testei os novos parsers, geografia com áreas vazias, base agregada de comparação, impossibilidade de reescrita do registro, exports reais, avaliação sem inventar observações e as nove páginas Streamlit. A suíte desta entrega contém 34 testes. Conferi a carga transacional e a contagem das 25 tabelas de inteligência. Não executei novamente a pipeline completa; executei os novos módulos e a carga de inteligência.
+Testei os novos parsers, geografia com áreas vazias, base agregada de comparação, impossibilidade de reescrita do registro, exports reais, avaliação sem inventar observações e as nove páginas Streamlit. A suíte desta entrega contém 34 testes direcionados. Conferi a carga transacional e a contagem das 29 tabelas de inteligência. Não executei novamente a pipeline completa; executei os novos módulos e a carga de inteligência.
