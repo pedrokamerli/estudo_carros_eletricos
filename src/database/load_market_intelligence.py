@@ -23,6 +23,9 @@ if (DATA/"bauru_recarga_inventario.csv").exists():
     FILES.append("bauru_recarga_inventario")
 if (DATA/"bauru_solar_context.csv").exists():
     FILES.append("bauru_solar_context")
+for _name in ("inmetro_catalogo_marca_ano", "inmetro_catalogo_modelo"):
+    if (DATA/f"{_name}.csv").exists():
+        FILES.append(_name)
 
 def main():
     frames = {name:pd.read_csv(DATA/f"{name}.csv") for name in FILES}

@@ -1,0 +1,294 @@
+marca,modelo,anos_catalogados,versoes_catalogadas,autonomia_min_ensaio_km,autonomia_mediana_ensaio_km,autonomia_max_ensaio_km,consumo_mediano_mj_km,limite_uso
+AUDI,A3 Sedan,2024,4,,,,1.875,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,A3 Sportback,2024,4,,,,1.91,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,A6 Avant e-tron,2026,1,474.0,474.0,474.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,A6 e-tron,"2025,2026",2,445.0,445.0,445.0,0.59,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q5 Sportback TFSIe,2024,2,38.0,38.0,38.0,0.94,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q5 TFSIe,2024,2,38.0,38.0,38.0,0.94,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q6 Sportback e-tron Quattro,"2025,2026",3,427.0,427.0,432.0,0.61,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q6 e-tron Quattro,"2025,2026",6,411.0,411.0,424.0,0.64,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q6 e-tron RWD,"2025,2026",2,411.0,411.0,411.0,0.64,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q7,"2024,2025",3,,,,2.96,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q8 Sportback,"2024,2025,2026",4,,,,3.085,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q8 e-tron 55,"2024,2025",3,357.0,357.0,357.0,0.73,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,Q8 e-tron Sportback 55,"2024,2025",4,362.0,362.0,362.0,0.765,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,RS 6 Avant,"2024,2025,2026",5,,,,3.39,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,RS Q8,2024,1,,,,3.68,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,RS e-tron GT,"2024,2025,2026",3,313.0,313.0,348.0,0.79,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,SQ6 Sportback e-tron Quattro,2025,1,428.0,428.0,428.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,SQ8 e-tron Sportback,"2024,2025",2,307.0,307.0,307.0,0.905,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+AUDI,e-tron GT,"2024,2025",2,308.0,308.0,308.0,0.74,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,330e,"2024,2025,2026",4,37.0,61.0,61.0,0.92,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,530e,"2024,2025,2026",5,37.0,70.0,70.0,0.76,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,I5,"2025,2026",2,393.0,400.0,407.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,IX,"2025,2026",3,317.0,498.0,498.0,0.64,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,IX xDrive 40,2024,1,327.0,327.0,327.0,0.62,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,IX xDrive 50,2024,1,528.0,528.0,528.0,0.61,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,X3,"2024,2025,2026",5,31.0,31.0,31.0,1.96,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,X5,"2024,2025,2026",7,54.0,76.0,78.0,0.88,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,X6,"2024,2025,2026",6,,,,2.33,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,X7,"2024,2025,2026",3,,,,2.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,i4,"2024,2025",6,322.0,369.0,422.0,0.605,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,i5,"2024,2025",2,382.0,387.0,392.0,0.625,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,i7,"2024,2025,2026",3,467.0,467.0,479.0,0.65,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,iX,"2024,2025",2,431.0,437.0,443.0,0.725,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,iX1,"2024,2025,2026",6,303.0,324.0,345.0,0.5800000000000001,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,iX2,"2024,2025,2026",3,327.0,327.0,337.0,0.59,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BMW,iX3,"2024,2026",2,381.0,475.5,570.0,0.5549999999999999,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,ATTO 2,2026,2,33.0,54.0,75.0,0.54,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,ATTO 8,2026,1,111.0,111.0,111.0,0.71,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,D1,"2024,2025",4,258.0,258.0,258.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,DOLPHIN,"2024,2025,2026",7,272.0,291.0,330.0,0.49,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,DOLPHIN MINI,"2024,2025,2026",7,224.0,280.0,280.0,0.41,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,ET3,"2024,2025,2026",3,170.0,170.0,170.0,0.71,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,HAN,"2024,2025,2026",3,349.0,349.0,349.0,0.69,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,KING,"2024,2025,2026",6,32.0,56.5,80.0,0.515,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,SEAL,"2024,2025,2026",3,372.0,372.0,372.0,0.62,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,SEALION 7,2026,1,360.0,360.0,360.0,0.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,SHARK,"2025,2026",4,68.0,68.0,68.0,0.91,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,SONG PLUS,"2024,2025,2026",6,28.0,73.0,87.0,0.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,SONG PLUS (MY25),2024,1,68.0,68.0,68.0,0.58,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,SONG PRO,"2024,2025,2026",8,39.0,59.5,72.0,0.585,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,TAN,"2024,2025,2026",4,309.0,430.0,430.0,0.73,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,YUAN PLUS,"2024,2025,2026",7,294.0,294.0,378.0,0.56,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+BYD,YUAN PRO,"2024,2025,2026",3,250.0,250.0,250.0,0.51,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CAOA CHANGAN,AVATR 11,2026,1,497.0,497.0,497.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CAOA CHERY,ARRIZO 6,2024,1,,,,1.63,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CAOA CHERY,ICAR EQ1,"2024,2025",2,198.0,198.0,198.0,0.46,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CAOA CHERY,TIGGO 5X,"2024,2025,2026",8,,,,1.85,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CAOA CHERY,TIGGO 7,"2024,2025,2026",9,60.0,60.0,68.0,1.82,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CAOA CHERY,TIGGO 8,"2024,2025,2026",4,54.0,56.0,70.0,0.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CAOACHANGAN,AVATR 11,2026,1,497.0,497.0,497.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CHEVROLET,BLAZER EV,"2024,2025,2026",3,481.0,481.0,481.0,0.63,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CHEVROLET,BOLT,2024,2,390.0,390.0,390.0,0.48,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CHEVROLET,BOLT EUV,2024,1,377.0,377.0,377.0,0.48,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CHEVROLET,CAPTIVA EV,2026,1,304.0,304.0,304.0,0.62,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CHEVROLET,EQUINOX EV,"2025,2026",2,443.0,443.0,443.0,0.56,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CHEVROLET,SPARK EUV,"2025,2026",2,258.0,258.0,258.0,0.5,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+CITROEN,E-JUMPY,"2024,2025,2026",3,258.0,258.0,289.0,0.75,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+DENZA,B5,"2025,2026",2,74.0,74.0,74.0,0.93,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+DONFENG,SERES 3,2024,1,206.0,206.0,206.0,0.57,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FARIZON,SV,"2025,2026",10,239.0,250.5,262.0,0.88,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FARIZON,V6E,"2025,2026",2,156.0,156.0,156.0,0.72,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FERRARI,296,"2024,2025,2026",6,10.0,10.5,11.0,1.995,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FIAT,500E,"2024,2025,2026",3,227.0,227.0,227.0,0.46,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FIAT,E-SCUDO,"2024,2025",2,258.0,273.5,289.0,0.725,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FIAT,FASTBACK,"2025,2026",4,,,,1.62,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FIAT,PULSE,"2025,2026",4,,,,1.54,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FIAT,TORO,2026,2,,,,2.05,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FORD,E-Transit,"2024,2025,2026",17,193.0,203.0,203.0,1.02,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FORD,Maverick,2024,1,,,,1.44,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FORD,Mustang Mach-E,"2024,2025",2,379.0,379.0,379.0,0.69,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FOTON,ETOANO,2026,2,179.0,188.5,198.0,1.025,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FOTON,EVIEW,2026,2,162.0,174.5,187.0,0.9099999999999999,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FOTON,EVIEW CONNECT,2026,1,202.0,202.0,202.0,0.69,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FOTON,EWONDER,2026,1,189.0,189.0,189.0,0.58,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+FOTON,TUNLAND,"2025,2026",4,,,,2.95,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GAC,AION ES,"2025,2026",2,314.0,314.0,314.0,0.45,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GAC,AION UT,2026,2,253.0,281.5,310.0,0.54,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GAC,AION V,"2025,2026",4,325.0,357.0,389.0,0.545,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GAC,AION Y,"2025,2026",5,318.0,318.0,318.0,0.57,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GAC,GS4,"2025,2026",4,,,,1.64,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GAC,GS9,2026,1,114.0,114.0,114.0,0.74,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GAC,HYPTEC HT,"2025,2026",3,362.0,431.0,431.0,0.53,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GEELY,EX2,2026,2,289.0,289.0,289.0,0.39,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GWM,HAVAL H6,"2024,2025,2026",26,73.0,116.5,126.0,0.745,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GWM,ORA,2026,1,349.0,349.0,349.0,0.49,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GWM,ORA 03,"2024,2025,2026",9,232.0,295.0,319.0,0.52,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GWM,TANK 300,"2025,2026",3,74.0,75.0,75.0,1.09,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+GWM,WEY,"2025,2026",3,128.0,128.0,128.0,0.83,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Geely,EX2,2025,2,289.0,289.0,289.0,0.39,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Geely,EX5,"2025,2026",4,349.0,381.0,413.0,0.46499999999999997,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Geely,EX5 EM-i,2026,2,65.0,88.5,112.0,0.5700000000000001,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HONDA,ACCORD HYBRID,"2024,2025,2026",3,,,,1.26,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HONDA,CIVIC HYBRID,"2024,2025,2026",4,,,,1.21,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HONDA,CR-V,"2025,2026",2,,,,1.65,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HONDA,CR-V HYBRID,2024,1,,,,1.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HONDA,PRELUDE,2026,2,,,,1.24,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HYUNDAI,IONIQ,2024,1,,,,1.09,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HYUNDAI,KONA,2026,2,,,,1.21,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HYUNDAI,KONA EV,2024,1,252.0,252.0,252.0,0.44,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+HYUNDAI,KONA HEV,2024,2,,,,1.11,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Hyundai,IONIQ 5,"2025,2026",6,374.0,374.0,374.0,0.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Hyundai,KONA,2025,2,,,,1.21,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAC,EJV5.5,"2024,2025,2026",3,260.0,260.0,260.0,0.63,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAC,IEV330P,"2024,2025,2026",3,226.0,226.0,226.0,0.75,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAC,e-J7,"2024,2025,2026",3,263.0,263.0,263.0,0.5,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAC,e-JS1,"2024,2025,2026",6,181.0,181.0,181.0,0.5,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAC,e-JS4,"2024,2025",2,307.0,307.0,307.0,0.47,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAECOO,7,"2025,2026",4,79.0,79.0,79.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAGUAR,F-PACE,2024,2,38.0,38.5,39.0,0.97,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JAGUAR,I-PACE,2024,4,298.0,298.0,298.0,0.74,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JEEP,AVENGER,2026,3,,,,1.64,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JEEP,COMMANDER,2026,2,,,,1.94,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JEEP,COMPASS,2024,1,30.0,30.0,30.0,0.8,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JEEP,G CHEROKEE,2024,1,29.0,29.0,29.0,1.07,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JEEP,RENEGADE,2026,3,,,,1.8,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JETOUR,S06 DM,2026,2,70.0,70.0,70.0,0.62,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JETOUR,T1 I-DM,2026,2,88.0,88.0,88.0,0.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+JETOUR,T2 I-DM,2026,3,75.0,75.0,106.0,0.8,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,EV5 2WD,"2024,2025,2026",6,402.0,402.0,402.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,EV5 4WD,2025,1,369.0,369.0,369.0,0.65,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,EV9 GTL,2025,1,434.0,434.0,434.0,0.65,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,NIRO,"2024,2025,2026",11,,,,1.21,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,SPORTAGE,"2024,2025,2026",15,,,,1.78,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,SPORTAGE (2026),2025,3,,,,1.68,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,SPORTAGE 2026),2025,1,,,,1.68,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+KIA,STONIC,2024,4,,,,1.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAMBORGHINI,REVUELTO,2025,1,7.0,7.0,7.0,3.32,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DEFENDER 110,2024,17,33.0,33.0,33.0,2.56,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DEFENDER 110 D350,"2025,2026",7,,,,2.78,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DEFENDER 130,2024,9,,,,2.73,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DEFENDER 130 D350,"2025,2026",4,,,,2.73,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DEFENDER 90,2024,6,,,,2.75,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DEFENDER 90 D350,"2025,2026",3,,,,2.78,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DISCOVERY,"2024,2025,2026",6,,,,2.59,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,DISCOVERY SPORT,2024,4,,,,2.3,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,RANGE ROVER,"2024,2025,2026",24,69.0,71.0,71.0,1.125,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,RANGE ROVER SPORT,"2024,2025,2026",29,69.0,71.0,71.0,1.12,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LAND ROVER,VELAR,"2024,2025,2026",15,38.0,39.0,40.0,1.0,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEAPMOTOR,B10,"2025,2026",2,288.0,288.0,288.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEAPMOTOR,C10,"2025,2026",4,111.0,224.5,338.0,0.63,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,ES300H,2024,1,,,,1.36,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,NX 450H PLUG-IN,"2025,2026",2,55.0,55.5,56.0,0.615,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,NX 450H PLUG-IN (MY26),2025,1,56.0,56.0,56.0,0.61,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,NX350H,"2024,2025,2026",9,,,,1.43,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,RX 450H PLUG-IN,2025,1,58.0,58.0,58.0,0.59,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,RX450H PLUG-IN,2026,1,54.0,54.0,54.0,0.64,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,RX500H,"2025,2026",2,,,,2.0,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,RX500H (MY24),2024,1,,,,2.03,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,RZ,2026,1,357.0,357.0,357.0,0.57,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,UX 300H,"2025,2026",2,,,,1.29,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+LEXUS,UX250H,2024,2,,,,1.33,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MASERATI,GHIBLI,2024,1,,,,2.47,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MASERATI,LEVANTE,2024,1,,,,2.77,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MCLAREN,ARTURA,"2024,2025,2026",5,20.0,23.0,23.0,1.45,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MERCEDES-BENZ,320 E SPRINTER,2026,2,206.0,206.0,206.0,1.09,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MERCEDES-BENZ,AMG G63,2026,1,,,,4.0,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MERCEDES-BENZ,AMG G63 4M,2026,2,,,,3.95,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MERCEDES-BENZ,AMG GT63S EP,2026,2,9.0,9.0,9.0,1.865,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MERCEDES-BENZ,AMG SL63S EP,2026,1,9.0,9.0,9.0,2.27,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MERCEDES-BENZ,GLC300 4M,2026,2,,,,2.11,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MERCEDES-BENZ,GLE450D,2026,2,,,,2.32,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MG,CYBERSTER,"2025,2026",2,342.0,342.0,342.0,0.56,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MG,MG4,"2025,2026",9,279.0,358.0,364.0,0.5,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MG,S5,"2025,2026",4,351.0,351.0,351.0,0.51,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MINI,Aceman,"2025,2026",4,253.0,261.5,270.0,0.49,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MINI,Cooper,"2024,2025,2026",5,161.0,246.0,312.0,0.48,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MINI,Countryman,"2024,2025,2026",5,8.0,320.0,320.0,0.61,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+MINI,JCW-E,"2025,2026",4,306.0,309.0,312.0,0.49,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,320 ESPRINTER,2025,2,206.0,206.0,206.0,1.09,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,A200 AMG LINE,"2024,2025",2,,,,1.645,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG C 63S EP,2025,2,9.0,9.0,9.0,2.205,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG C63S EP,"2024,2026",4,9.0,9.0,9.0,1.8250000000000002,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG CLA35 4M,"2024,2025,2026",3,,,,2.28,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG CLA45S 4M,2025,1,,,,2.98,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG EQE 53,2025,1,406.0,406.0,406.0,0.69,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG EQE53,2024,1,338.0,338.0,338.0,0.8,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG EQS 53 4M,"2024,2025",3,373.0,470.0,472.0,0.72,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG G63,2025,1,,,,4.0,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG G63 4M,2025,1,,,,3.95,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLA35 4M,"2024,2025,2026",3,,,,2.29,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLB 35 4M,2025,1,,,,2.79,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLB35 4M,"2024,2025,2026",3,,,,2.46,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLC 43,2025,4,18.0,18.0,18.0,2.885,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLC 63S EP,2025,1,,,,3.48,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLC43,"2024,2026",5,,,,2.98,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLC63S EP,2026,1,18.0,18.0,18.0,2.98,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLE 53 4M,2025,2,,,,2.36,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLE 63 S CO,2025,1,,,,2.84,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLE53 4M,"2024,2026",2,,,,2.865,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GLE63 S CO,"2024,2026",2,,,,3.465,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG GT63S EP,2025,3,9.0,9.0,9.0,1.96,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG S63 EP,"2025,2026",2,25.0,25.0,25.0,1.8199999999999998,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,AMG SL63S EP,"2024,2025",3,9.0,9.0,25.0,2.27,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,C 200,2025,1,,,,3.17,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,C 300,2025,2,,,,1.775,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,C200,"2024,2026",2,,,,1.76,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,C300,"2024,2026",2,,,,1.88,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,CLA 200,2025,2,,,,2.015,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,CLA200,"2024,2026",4,,,,1.68,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,E300,"2024,2025,2026",4,,,,2.065,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQA 250,"2024,2025",3,304.0,321.0,321.0,0.58,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQB 250,"2024,2025",2,272.0,281.5,291.0,0.665,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQB 250+,2025,1,369.0,369.0,369.0,0.7,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQB 350 4M,"2024,2025",2,272.0,324.0,376.0,0.61,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQB250+,2026,1,376.0,376.0,376.0,0.53,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQC400 4M,2024,1,271.0,271.0,271.0,0.85,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQE 300,"2024,2025",3,338.0,367.0,369.0,0.7,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQE 350,2025,2,411.0,447.5,484.0,0.6699999999999999,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQE300,2024,1,367.0,367.0,367.0,0.7,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQE350,2024,1,406.0,406.0,406.0,0.69,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQS 450,2025,1,472.0,472.0,472.0,0.7,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQS 450 4M,2025,1,,,,1.68,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQS450,2024,1,411.0,411.0,411.0,0.76,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,EQS450 4M,2024,1,470.0,470.0,470.0,0.72,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,G580 EQ,"2024,2025",2,369.0,369.0,369.0,0.88,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLA200,"2024,2025,2026",6,,,,1.83,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLB 200,2025,1,,,,2.01,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLB 220 4M,2025,4,9.0,9.0,9.0,2.2800000000000002,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLB200,2024,1,,,,2.01,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLB220 4M,"2024,2026",3,,,,1.91,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLB250,2026,1,427.0,427.0,427.0,0.57,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLC300 4M,"2024,2025",4,,,,2.105,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLE450D 4M,"2024,2025",6,,,,2.32,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLS 450 4M,"2024,2025",3,58.0,58.0,58.0,2.75,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mercedes-Benz,GLS450 4M,2026,1,,,,2.75,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Mitsubishi,Outlander,"2025,2026",4,58.0,58.0,58.0,0.77,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+NETA,AYA,"2024,2025",4,263.0,263.0,263.0,0.43,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+NETA,X,"2024,2025",6,258.0,317.0,317.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+NISSAN,Ariya,2025,3,333.0,348.0,415.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+NISSAN,Townstar,2024,1,210.0,210.0,210.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Nissan,LEAF,2024,1,192.0,192.0,192.0,0.58,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+OMODA,5,2026,3,,,,1.5,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+OMODA,7,2026,2,60.0,60.0,60.0,0.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+OMODA,E5,"2025,2026",2,345.0,345.0,345.0,0.51,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PEUGEOT,2008,2026,1,,,,1.61,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PEUGEOT,208,2026,1,,,,1.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PEUGEOT,E-208,"2024,2025,2026",3,220.0,220.0,220.0,0.59,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PEUGEOT,E-EXPERT,"2024,2025,2026",3,258.0,258.0,289.0,0.75,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PEUGEOT,E2008,"2024,2026",2,234.0,247.5,261.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PORSCHE,911,"2025,2026",7,,,,2.8,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PORSCHE,CAYENNE,"2024,2025,2026",31,46.0,57.0,493.0,0.98,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PORSCHE,CAYENNE ( Produção Semana 18+/24 ),2024,2,52.0,52.0,52.0,1.04,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PORSCHE,MACAN,"2024,2025,2026",12,435.0,439.5,443.0,0.61,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PORSCHE,PANAMERA,"2024,2025,2026",15,30.0,60.0,63.0,0.96,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PORSCHE,TAYCAN,"2024,2025,2026",30,241.0,415.0,453.0,0.69,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+PORSCHE,TAYCAN (MY25),2024,1,393.0,393.0,393.0,0.62,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Peugeot,E2008,2025,1,261.0,261.0,261.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+RENAULT,E-KWID,2026,2,185.0,185.0,185.0,0.44,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+RENAULT,KANGOO,2026,1,210.0,210.0,210.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+RENAULT,KOLEOS,2026,1,,,,1.7,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+RENAULT,MÉGANE,2026,1,337.0,337.0,337.0,0.51,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Renault,E-KWID,"2024,2025",4,185.0,185.0,185.0,0.44,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Renault,KANGOO,2025,1,210.0,210.0,210.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Renault,Kangoo,2024,1,210.0,210.0,210.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Renault,Mégane,"2024,2025",2,337.0,337.0,337.0,0.51,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Renault,Zoe,2024,1,254.0,254.0,254.0,0.66,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+SUBARU,FORESTER,2024,1,,,,1.79,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+SUBARU,XV,2024,1,,,,1.77,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+SUZUKI,e-Vitara,2026,2,293.0,305.0,317.0,0.56,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+TOYOTA,CAMRY,2024,1,,,,1.27,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+TOYOTA,COROLLA,"2024,2025,2026",8,,,,1.26,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+TOYOTA,COROLLA CROSS,"2024,2025,2026",8,,,,1.335,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+TOYOTA,RAV4,"2024,2025,2026",5,55.0,55.0,55.0,1.43,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+TOYOTA,RAV4H,2024,2,,,,1.32,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+TOYOTA,YARIS CROSS,2026,2,,,,1.23,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,C40,2024,7,353.0,353.0,385.0,0.6,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,EC40,"2024,2025,2026",22,385.0,404.0,404.0,0.59,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,ES90,2026,1,524.0,524.0,524.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,EX30,"2024,2025,2026",18,250.0,335.5,338.0,0.535,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,EX40,"2024,2025,2026",21,364.0,393.0,393.0,0.59,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,EX90,"2025,2026",6,459.0,459.0,459.0,0.68,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,XC40,2024,9,348.0,348.0,367.0,0.62,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,XC60,"2024,2025,2026",29,48.0,48.0,55.0,0.86,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,XC60 (MY25),2024,10,48.0,48.0,48.0,0.86,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,XC90,"2024,2025,2026",39,47.0,47.0,50.0,0.88,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VOLVO,XC90 (MY25),2024,11,47.0,47.0,47.0,0.88,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VW,ID.4,2024,1,370.0,370.0,370.0,0.63,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+VW,ID.BUZZ,2024,1,337.0,337.0,337.0,0.7,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Volkswagen,ID.4,2025,1,370.0,370.0,370.0,0.63,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+Volkswagen,ID.BUZZ,2025,1,337.0,337.0,337.0,0.7,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+ZEEKR,001,"2024,2025,2026",6,426.0,426.0,426.0,0.63,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+ZEEKR,7X,"2025,2026",3,423.0,423.0,491.0,0.64,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.
+ZEEKR,X,"2024,2025,2026",5,304.0,332.0,332.0,0.55,Modelo técnico catalogado; não cruzado automaticamente com emplacamentos.

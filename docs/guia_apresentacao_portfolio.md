@@ -9,7 +9,7 @@
 1. Comece pelo problema de negócio: onde a mobilidade elétrica está avançando e onde vale investigar expansão.
 2. Mostre a arquitetura: Bronze → Silver → Gold → PostgreSQL → Power BI/Streamlit.
 3. Explique a decisão metodológica mais importante: frota é estoque; emplacamento é fluxo; não misturei as duas grandezas.
-4. Apresente Bauru como hipótese local transformada em evidência: crescimento, comparadores, modelos e recarga.
+4. Apresente Bauru como hipótese local transformada em evidência: crescimento, comparadores, modelos, especificações técnicas e recarga.
 5. Mostre o ML com honestidade: backtest separado de teste futuro e comparação contra referência persistente.
 6. Termine com governança: hashes, auditoria de 89 exports, testes automatizados, CI e limitações documentadas.
 

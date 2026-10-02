@@ -482,6 +482,11 @@ O período observado é **jan/2024–ago/2026**. Meses posteriores são projeç�
         st.subheader("Auditoria dos exports publicados")
         st.write(f"A última execução conferiu **{number(len(audit))} arquivos**, todos com leitura válida e sem linhas duplicadas.")
         details(audit[["arquivo","linhas","colunas","periodo_inicio","periodo_fim","valores_numericos_negativos","status"]],"auditoria_exports.csv")
+    inmetro_path = DATA/"inmetro_catalogo_modelo.csv"
+    if inmetro_path.exists():
+        st.subheader("Catálogo técnico dos veículos eletrificados")
+        st.write("O Inmetro acrescenta autonomia e consumo de ensaio por versão. Uso esses dados para descrever o produto, não para inferir vendas ou autonomia real.")
+        details(load(inmetro_path.name).head(30),"inmetro_catalogo_modelo.csv")
     st.markdown("Fontes: [SENATRAN](https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran) · [ABVE](https://abve.org.br/abve-data/bi-geral/) · [IBGE](https://sidra.ibge.gov.br/) · [Inmetro](https://www.gov.br/inmetro/) · [ANEEL](https://dadosabertos.aneel.gov.br/dataset/relacao-de-empreendimentos-de-geracao-distribuida) · [OpenStreetMap](https://www.openstreetmap.org/copyright)")
 
 st.title("A jornada dos veículos eletrificados no Brasil")

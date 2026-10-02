@@ -18,6 +18,7 @@ Para apresentar o projeto em entrevistas, deixei um [guia de apresentação](doc
 
 - Automatizo o painel público de vendas ABVE: 32 meses por tecnologia, fabricante/modelo e município. Concilio as somas por mês/tecnologia antes de carregar o PostgreSQL. Incluo MHEV de forma explícita; para comparação temporal prefiro filtrar BEV/PHEV.
 - Extraio os catálogos anuais PBEV/Inmetro de 2024, 2025 e 2026, preservando modelo, versão, consumo MJ/km e autonomia de ensaio em km. Linhas corrompidas vão para quarentena e o ciclo afetado é marcado como parcial. Não confundo catálogo com vendas nem ensaio com autonomia real.
+- Resumo o catálogo Inmetro em `inmetro_catalogo_marca_ano` e `inmetro_catalogo_modelo`, com quantidade de versões, autonomia e consumo medianos por ciclo. O enriquecimento técnico fica separado dos emplacamentos para evitar cruzamentos artificiais.
 - Audito intervalos experimentais de um mês com seleção, calibração e teste separados. Quatro das cinco regiões ficaram abaixo da cobertura nominal de 80%; não aprovo as previsões para uso operacional. Veja os resultados em `data/portfolio/ml_intervalos_cobertura.csv`.
 - Coleto arquivos mensais de frota por combustível da SENATRAN e preservo os originais na camada Bronze.
 - Transformo os dados com Python e Pandas para criar a Silver de veículos eletrificados e a frota total municipal.

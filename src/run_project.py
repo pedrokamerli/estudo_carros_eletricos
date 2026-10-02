@@ -61,6 +61,7 @@ PIPELINE_MODULES = [
     "src.analysis.evaluate_frozen_predictions",
     "src.analysis.question_evidence",
     "src.analysis.build_executive_summary",
+    "src.analysis.analyze_inmetro_catalog",
     "src.analysis.build_project_audit",
     "src.database.load_market_intelligence",
 ]
