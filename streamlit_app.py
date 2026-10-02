@@ -468,6 +468,7 @@ def methodology():
 - **IBGE:** população/renda 2022 e PIB 2023; não são indicadores atuais de 2026.
 - **Inmetro:** catálogo e ensaios de consumo/autonomia; não vendas nem autonomia real.
 - **ABVE/Tupi e OpenStreetMap:** infraestrutura agregada e mapa comunitário parcial; não são inventário completo.
+- **ANEEL:** geração distribuída por empreendimento; contexto de oferta solar municipal, não vínculo entre painel e veículo.
 
 O período observado é **jan/2024–ago/2026**. Meses posteriores são projeções identificadas. CSVs de pesquisa no Gemini sem referência verificável não entram como dados oficiais no treino principal.""")
     with st.expander("Limitações que afetam a leitura"):
@@ -476,7 +477,13 @@ O período observado é **jan/2024–ago/2026**. Meses posteriores são projeç�
     with st.expander("Para conhecer a implementação"):
         st.write("Python coleta e valida, Parquet guarda as camadas, PostgreSQL organiza as tabelas e Streamlit lê os exports. Abrir o painel não executa coleta nem treino.")
         st.code("python -m src.run_project\npython -m streamlit run streamlit_app.py",language="powershell")
-    st.markdown("Fontes: [SENATRAN](https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran) · [ABVE](https://abve.org.br/abve-data/bi-geral/) · [IBGE](https://sidra.ibge.gov.br/) · [Inmetro](https://www.gov.br/inmetro/) · [OpenStreetMap](https://www.openstreetmap.org/copyright)")
+    audit_path = DATA/"auditoria_exports.csv"
+    if audit_path.exists():
+        audit = load(audit_path.name)
+        st.subheader("Auditoria dos exports publicados")
+        st.write(f"A última execução conferiu **{number(len(audit))} arquivos**, todos com leitura válida e sem linhas duplicadas.")
+        details(audit[["arquivo","linhas","colunas","periodo_inicio","periodo_fim","valores_numericos_negativos","status"]],"auditoria_exports.csv")
+    st.markdown("Fontes: [SENATRAN](https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran) · [ABVE](https://abve.org.br/abve-data/bi-geral/) · [IBGE](https://sidra.ibge.gov.br/) · [Inmetro](https://www.gov.br/inmetro/) · [ANEEL](https://dadosabertos.aneel.gov.br/dataset/relacao-de-empreendimentos-de-geracao-distribuida) · [OpenStreetMap](https://www.openstreetmap.org/copyright)")
 
 st.title("A jornada dos veículos eletrificados no Brasil")
 st.caption("Como o mercado cresceu, onde avançou e quais oportunidades merecem investigação · jan/2024–ago/2026")
