@@ -39,3 +39,23 @@ SELECT EXTRACT(YEAR FROM data_referencia)::int AS ano,
 FROM bi.fato_emplacamentos_plugin_abve
 WHERE EXTRACT(MONTH FROM data_referencia) BETWEEN 1 AND 8
 GROUP BY ano, tecnologia ORDER BY tecnologia, ano;
+
+-- Posicionamento documental de preços por marca: não chamar de preço médio de mercado.
+SELECT marca, anuncios, preco_minimo_reais, preco_mediano_reais,
+       preco_maximo_reais, data_inicio, data_fim
+FROM gold.precos_resumo_marca
+ORDER BY preco_mediano_reais;
+
+-- Bauru: modelos com ficha Inmetro e/ou preço, sem atribuir uma versão que o painel não informa.
+SELECT marca, modelo, tecnologia, emplacamentos,
+       autonomia_mediana_ensaio_km, consumo_mediano_mj_km,
+       preco_mediano_reais, status_inmetro, status_preco
+FROM gold.bauru_modelos_tecnologia_preco
+ORDER BY emplacamentos DESC;
+
+-- Catálogo técnico Inmetro para comparar autonomia e consumo por modelo.
+SELECT marca, modelo, anos_catalogados, versoes_catalogadas,
+       autonomia_min_ensaio_km, autonomia_mediana_ensaio_km,
+       autonomia_max_ensaio_km, consumo_mediano_mj_km
+FROM gold.inmetro_catalogo_modelo
+ORDER BY marca, modelo;

@@ -17,6 +17,8 @@ Conecto o Power BI ao PostgreSQL `localhost:5432`, banco `ev_brasil_db`, schema 
 | 12–13: candidatos a oportunidade | `oportunidade_municipal_preliminar`, `sensibilidade_oportunidade` | Filtro econômico/de adoção e nove cenários; não mede demanda nem prevê crescimento municipal |
 | 14: recarga | `infraestrutura_recarga_abve`, `recarga_osm` | Agregados ABVE/Tupi em ago/2026 e mapa comunitário separado de 392 objetos; cobertura incompleta, acessos distintos e atribuição ODbL obrigatória |
 | 15: capacidade de previsão | `ml_backtest_metricas`, `ml_backtest_detalhe`, `ml_selecao_modelos`, `ml_projecoes_experimentais`; equivalentes `ml_abve_*` | Alvos ABVE/FENABRAVE separados; escolhas BEV/PHEV perderam para persistência no teste; projeções experimentais de 1–3 meses, sem intervalo calibrado |
+| Preços e produto | `precos_historicos_documentais`, `precos_resumo_marca`, `precos_resumo_marca_tecnologia`, `inmetro_catalogo_modelo` | Anúncios e ensaios técnicos; não são transações, FIPE ou autonomia real |
+| Bauru: modelos enriquecidos | `bauru_modelos_tecnologia_preco` | Pareamento conservador por modelo; versões sem chave segura ficam sem especificação/preço |
 
 ## Como evito distorções no visual
 
@@ -30,7 +32,7 @@ Conecto o Power BI ao PostgreSQL `localhost:5432`, banco `ev_brasil_db`, schema 
 
 ## Consultas de apoio
 
-O arquivo `sql/consultas_portfolio.sql` contém quatro consultas conferidas no PostgreSQL: ranking estadual na última competência, comparação de erros, seleção de métodos e projeções experimentais. O campo do ranking é `total_veiculos_eletrificados`.
+O arquivo `sql/consultas_portfolio.sql` contém consultas conferidas no PostgreSQL para ranking estadual, erros do ML, seleção de métodos, projeções, preços, modelos de Bauru e catálogo Inmetro. O campo do ranking é `total_veiculos_eletrificados`.
 
 ## Lacunas que continuam visíveis
 
