@@ -63,7 +63,7 @@ O inventário, os métodos de acesso e as limitações estão em [docs/data_sour
 
 ## Prévia interativa local
 
-Reorganizei o painel em sete capítulos, com narrativa e respostas explícitas às 15 perguntas. Comparo anos mês a mês e por acumulados do mesmo intervalo; os filtros de anos, tecnologia e mês têm escopo explicado. Incluí rankings de tamanho versus crescimento, participação municipal, capitais versus interior, renda versus adoção e frota versus recarga. Hipóteses e previsões experimentais são diferenciadas de respostas observadas. As tabelas técnicas ficam em seções opcionais e os gráficos têm unidades, legendas, dicas ao passar o mouse e números em formato brasileiro.
+Reorganizei o painel em nove capítulos, com narrativa e respostas explícitas às 15 perguntas. Comparo anos mês a mês e por acumulados do mesmo intervalo; os filtros de anos, tecnologia e mês têm escopo explicado. Incluí rankings de tamanho versus crescimento, participação municipal, capitais versus interior, renda versus adoção e novos veículos com tomada versus rede de recarga. Hipóteses e previsões experimentais são diferenciadas de respostas observadas. As tabelas técnicas ficam em seções opcionais e os gráficos têm unidades, legendas, dicas ao passar o mouse e números em formato brasileiro.
 
 Na revisão do painel, separei “o que vejo”, “por que importa” e “o que falta provar”. Retirei localidades sem identificação dos rankings de cidades, preservando os registros nos dados originais. Na seção de futuro, apresento uma análise preliminar de 2024–2026 e três cenários qualitativos para 2027–2030. Esses cenários não são previsões do modelo nem têm probabilidades atribuídas; uso a IEA como contexto externo e mantenho os testes de ML visíveis para explicar por que ainda não aprovo projeções operacionais.
 
@@ -73,7 +73,7 @@ Acrescentei uma etapa independente do painel que responde às 15 perguntas com a
 
 Para investigar recarga, cruzei a participação dos novos emplacamentos BEV/PHEV com a participação dos pontos públicos e semipúblicos ABVE/Tupi. O índice orienta onde pesquisar capacidade e uso, sem contar híbridos sem tomada como demanda de recarga. Também automatizei a extração dos totais nacionais publicados e fiz uma comparação limitada às vinte cidades com pontos informados. Cidade fora desse ranking não recebe zero carregadores.
 
-Comecei uma base documental de preços com seis anúncios primários de versões BYD em 2024. Comparei quatro versões King/Song Pro com os respectivos emplacamentos nacionais em agosto–setembro/2024. É um estudo inicial de preço anunciado e volume, não preço pago, preço atual, FIPE ou elasticidade da demanda. Não atribuo esses modelos às vendas de Bauru: a fonte municipal não fornece esse cruzamento.
+Comecei uma base documental de preços com seis anúncios primários BYD em 2024 e ampliei-a para 29 anúncios BYD/GWM de 2024/2025, preservando versão, ano/modelo, condição, fonte e hash do documento. É um estudo de preço anunciado e oferta, não preço pago, preço atual, FIPE, depreciação ou elasticidade da demanda. Não atribuo esses modelos às vendas de Bauru: a fonte municipal não fornece esse cruzamento.
 
 Na previsão, mantive o experimento original e acrescentei drift de 12 meses, Holt amortecido e tendência logarítmica de seis meses. Seleciono pela validação temporal e publico erro, viés e comparação com referências. A reanálise melhorou BEV no teste conhecido, mas não PHEV; só meses futuros podem oferecer uma avaliação prospectiva nova. O protocolo e os hashes ficam em `output/analysis/`, e as novas evidências em `data/portfolio/` e nas tabelas `gold.inteligencia_*`, `gold.estudo_bauru_*` e `gold.ml_desafio_*`.
 
@@ -88,7 +88,7 @@ python -m src.analysis.question_evidence
 python -m src.database.load_market_intelligence
 ```
 
-Criei um painel Streamlit para explorar frota, municípios, emplacamentos, marcas/modelos, resultados de ML e o mapa parcial de recarga. Ele lê somente os exports públicos, sem precisar da senha do PostgreSQL e sem disparar coleta/treinamento. É uma prévia complementar; o Power BI continua sendo a entrega visual principal.
+Criei um painel Streamlit para explorar frota, municípios, emplacamentos, marcas/modelos, resultados de ML, estudo de Bauru e preços documentais. Ele lê somente os exports públicos, sem precisar da senha do PostgreSQL e sem disparar coleta/treinamento. É uma prévia complementar; o Power BI continua sendo a entrega visual principal.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt

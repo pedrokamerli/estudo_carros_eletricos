@@ -1,5 +1,9 @@
 # Status do projeto
 
+## Estado consolidado em 02/10/2026
+
+O projeto já tem um motor analítico reproduzível, nove capítulos no Streamlit, quinze respostas com evidência/limite separados, PostgreSQL Gold carregado e estudo de Bauru. A entrega desta fase está forte para iniciar o Power BI. O que continua aberto é evidência externa nova, não estrutura do projeto: inventário local de recarga, série de preços comparáveis, respostas de pesquisa local e validação prospectiva do ML.
+
 Atualizado em 01/10/2026. Meu recorte observado está fechado em jan/2024–ago/2026. Setembro não é mais pendência. As notas de pesquisa de 30/09 abaixo são históricas, não ampliam esse corte.
 
 ## Atualização de dados e ML em 01/10
