@@ -73,4 +73,4 @@ Não existe tabela de modelos vendidos por município: os fatos de modelo e muni
 4. Realizar pesquisa voluntária para medir recarga em casa, energia solar e destinos. Ainda não coletei respostas.
 5. Montar a entrega visual final no Power BI.
 
-Testei os novos parsers, geografia com áreas vazias, base agregada de comparação, impossibilidade de reescrita do registro, exports reais, avaliação sem inventar observações e as nove páginas Streamlit. A suíte desta entrega contém 34 testes direcionados. Conferi a carga transacional e a contagem das 29 tabelas de inteligência. Não executei novamente a pipeline completa; executei os novos módulos e a carga de inteligência.
+Testei os novos parsers, geografia com áreas vazias, base agregada de comparação, impossibilidade de reescrita do registro, exports reais, avaliação sem inventar observações, pareamento conservador de modelos e as nove páginas Streamlit. A suíte atual contém 87 testes, com quatro integrações externas ignoradas quando o serviço não está disponível. Conferi a carga transacional e a contagem das tabelas de inteligência, incluindo preços, Inmetro e modelos enriquecidos.

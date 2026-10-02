@@ -105,6 +105,6 @@ O ciclo Inmetro com quarentena é parcial. Não concluí associação ABVE/Inmet
 - Previsões só serão publicadas com separação treino/teste, modelo de referência e métricas de erro.
 # Entrega local, preços e registro futuro — 01/10/2026
 
-Acrescentei síntese de Bauru frente a dez pares, 31 anúncios documentais BYD/GWM, registro imutável de projeções para novembro, avaliador automático e integração das respostas do motor ao Streamlit. Carreguei 29 tabelas de inteligência com contagens conferidas. Não executei novamente a pipeline inteira.
+Acrescentei síntese de Bauru frente a dez pares, 39 anúncios documentais BYD/GWM/Mercedes-Benz, catálogo técnico Inmetro, pareamento conservador de modelos, registro imutável de projeções para novembro, avaliador automático e integração das respostas do motor ao Streamlit. A carga mais recente confere 32 tabelas de inteligência, além dos exports de auditoria e produto. A pipeline completa pode ser reproduzida pelo runbook.
 
 O coletor local de recarga foi implementado e recebeu a malha IBGE. A consulta OSM falhou nos dois servidores: não há novo inventário validado de Bauru, nem conclusão de zero carregadores. Faltam funcionamento/utilização, histórico comparável de preços e pesquisa local. O teste prospectivo depende de observações futuras e ainda não ocorreu. Detalhes e uso no Power BI: [entrega_bauru_precos.md](entrega_bauru_precos.md).
