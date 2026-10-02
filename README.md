@@ -2,11 +2,15 @@
 
 Este é meu projeto de portfólio para investigar como a mobilidade elétrica está avançando no Brasil, onde a frota se concentra e como a adoção se relaciona com características dos municípios. Eu construo a análise a partir de fontes públicas, registro as limitações de cada dado e organizo o processo para que outra pessoa consiga reproduzi-lo.
 
+[![Qualidade do projeto](https://github.com/pedrokamerli/estudo_carros_eletricos/actions/workflows/ci.yml/badge.svg)](https://github.com/pedrokamerli/estudo_carros_eletricos/actions/workflows/ci.yml)
+
 ## Problema de negócio
 
 Uma empresa que avalia expandir sua atuação em mobilidade elétrica precisa entender onde o mercado já existe, como ele está mudando e quais localidades podem merecer uma análise mais aprofundada. Minha pergunta central é: **como a frota eletrificada evolui no Brasil e onde estão as oportunidades de adoção?**
 
 ## O que já construí
+
+O projeto não é apenas um dashboard: ele tem pipeline reproduzível, testes e auditoria dos exports. A cada execução, `src.analysis.build_project_audit` registra linhas, colunas, períodos, duplicidades, nulos, valores negativos, hash e status de cada arquivo publicado. O runbook em [docs/runbook_operacional.md](docs/runbook_operacional.md) explica como repetir a entrega.
 
 - Automatizo o painel público de vendas ABVE: 32 meses por tecnologia, fabricante/modelo e município. Concilio as somas por mês/tecnologia antes de carregar o PostgreSQL. Incluo MHEV de forma explícita; para comparação temporal prefiro filtrar BEV/PHEV.
 - Extraio os catálogos anuais PBEV/Inmetro de 2024, 2025 e 2026, preservando modelo, versão, consumo MJ/km e autonomia de ensaio em km. Linhas corrompidas vão para quarentena e o ciclo afetado é marcado como parcial. Não confundo catálogo com vendas nem ensaio com autonomia real.
