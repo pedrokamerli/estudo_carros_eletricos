@@ -429,6 +429,14 @@ def bauru_case():
     evidence = load("bauru_recarga_evidencias.csv")
     details(evidence[["fonte","escopo","estacoes_reportadas","dc_reportadas","potencia_kw","preco_min_reais_kwh","preco_max_reais_kwh","status_reportado","confianca","limite"]],"evidencias_recarga_bauru.csv")
     st.caption("As fontes comunitárias são evidências complementares e podem representar o mesmo local. Não somo os 14 pontos do Seguee com os registros do shopping.")
+    solar = DATA/"bauru_solar_context.csv"
+    if solar.exists():
+        solar_row = load(solar.name).iloc[0]
+        st.subheader("Contexto de energia solar no município")
+        st.metric("Empreendimentos de geração distribuída em Bauru", number(solar_row.empreendimentos_geracao_distribuida))
+        st.write(f"A base oficial da ANEEL registra **{number(solar_row.empreendimentos_fotovoltaicos)} empreendimentos fotovoltaicos**, somando **{number(solar_row.potencia_fotovoltaica_kw)} kW** cadastrados em Bauru.")
+        st.caption("Este é um indicador de oferta municipal de geração distribuída. Ele não informa quais residências pertencem a donos de elétricos e não prova onde cada veículo recarrega.")
+        details(load(solar.name), "contexto_solar_bauru.csv")
     st.subheader("Três hipóteses para uma pesquisa local")
     st.markdown("""- **Motoristas de aplicativo:** levantar uso profissional, quilômetros rodados e tecnologia do carro. A base de emplacamentos não revela profissão.
 - **Energia solar em casa:** perguntar onde recarrega e se há geração própria. Painéis solares na cidade não comprovam recarga solar de cada carro.

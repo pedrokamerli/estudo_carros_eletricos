@@ -24,6 +24,10 @@ Nesta execução, o primeiro servidor Overpass retornou erro/timeout e o segundo
 
 A ausência de uma captura OSM municipal não equivale à ausência de carregadores. O coletor reaproveita capturas válidas e só faz nova consulta com `--refresh`. É opcional e não impede a pipeline principal.
 
+## Contexto solar municipal
+
+Também baixei o cadastro oficial de geração distribuída da [ANEEL](https://dadosabertos.aneel.gov.br/dataset/relacao-de-empreendimentos-de-geracao-distribuida) e filtrei Bauru/SP. O recorte registra 9.934 empreendimentos fotovoltaicos e 79.600,59 kW cadastrados. Isso mede oferta municipal de geração distribuída; não identifica quais residências pertencem a donos de elétricos e não prova onde cada veículo recarrega.
+
 Mesmo uma captura bem-sucedida não comprovará funcionamento ou cobertura completa. Para recomendar instalação de carregadores, ainda preciso verificar acesso, potência, preço, funcionamento, uso e recarga doméstica. Identificadores OSM podem representar o mesmo local físico; não os chamo de quantidade de carregadores. A licença ODbL e a atribuição são preservadas.
 
 ## Previsões: preservei uma aposta antes do resultado

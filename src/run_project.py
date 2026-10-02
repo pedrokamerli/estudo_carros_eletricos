@@ -50,6 +50,7 @@ PIPELINE_MODULES = [
     # Produzo inteligência depois dos exports conciliados, fora da interface visual.
     "src.ingestion.download_charging_evidence",
     "src.ingestion.download_bauru_directory_evidence",
+    "src.ingestion.download_aneel_solar_context",
     "src.ingestion.download_abve_bauru_models",
     "src.ingestion.download_price_evidence",
     "src.ingestion.download_price_history",

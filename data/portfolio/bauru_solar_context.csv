@@ -1,0 +1,2 @@
+﻿municipio,uf,empreendimentos_geracao_distribuida,empreendimentos_fotovoltaicos,potencia_total_kw,potencia_fotovoltaica_kw,fonte,arquivo_sha256,observacao
+BAURU,SP,9935,9934,79654.35,79600.59,ANEEL - Relação de empreendimentos de geração distribuída,bcc42b4e70cab07e72c9cfd7257b8eddc7f9732b2ab8520cd04bcde9e410dcc1,Contexto municipal de geração distribuída; não identifica proprietários de veículos nem local de recarga.
