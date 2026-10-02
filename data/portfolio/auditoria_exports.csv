@@ -12,6 +12,7 @@ bauru_estudo_sintese.csv,1,13,0,0,0,0,,,1e5bbd768bd20e30ae0766f0df12558502c1bb6e
 bauru_modelos_mensal.csv,64,5,0,0,0,0,2024-01-01,2026-08-01,d8f6d0ca6a0bf027ac79145fb64667c4eb97cff7b30fdea0b8295cba0e586775,OK,Auditoria estrutural; nulos e negativos podem ser legítimos conforme a fonte e o grão.
 bauru_modelos_ranking.csv,117,7,0,0,0,0,,,bb8deb2f0c608bd6ad27dd971d9783f39302053d17cbe9bee472cc2c44950245,OK,Auditoria estrutural; nulos e negativos podem ser legítimos conforme a fonte e o grão.
 bauru_modelos_reconciliacao.csv,64,7,0,0,0,0,,,08ffe1b82dea49f1516a2bd1e2cb38f5dec2fe6e14fc41e1eecc7f85ef023033,OK,Auditoria estrutural; nulos e negativos podem ser legítimos conforme a fonte e o grão.
+bauru_modelos_tecnologia_preco.csv,117,19,464,0,0,0,2024-06-18,2025-08-07,b5fd7d69dafb6f86afd441c271e874119bce9314880fd7750a6b76932421c325,OK,Auditoria estrutural; nulos e negativos podem ser legítimos conforme a fonte e o grão.
 bauru_recarga_evidencias.csv,3,15,9,0,0,6,2026-10-02,2026-10-02,fbe34ed1e02a26da3dc1af9b903c0446a59b646a0b4776fc65049346aae31632,OK,Auditoria estrutural; nulos e negativos podem ser legítimos conforme a fonte e o grão.
 bauru_solar_context.csv,1,9,0,0,0,1,,,763b0c4263e0f569d68a7a16b8110c57dca50d6e812349e5e067cb370002bd05,OK,Auditoria estrutural; nulos e negativos podem ser legítimos conforme a fonte e o grão.
 bi_dim_data.csv,1096,7,0,0,0,0,1970-01-01,2026-12-31,f84880dfae1104dbab33d0954768ff536f383acc4d2208fdc82bf48ceab09cc6,OK,Auditoria estrutural; nulos e negativos podem ser legítimos conforme a fonte e o grão.

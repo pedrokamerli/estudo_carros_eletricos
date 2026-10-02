@@ -29,6 +29,9 @@ for _name in ("inmetro_catalogo_marca_ano", "inmetro_catalogo_modelo"):
 for _name in ("precos_resumo_marca", "precos_resumo_marca_tecnologia"):
     if (DATA/f"{_name}.csv").exists():
         FILES.append(_name)
+if (DATA/"bauru_modelos_tecnologia_preco.csv").exists():
+    FILES.append("bauru_modelos_tecnologia_preco")
+RECREATE = {"bauru_modelos_tecnologia_preco"}
 
 def main():
     frames = {name:pd.read_csv(DATA/f"{name}.csv") for name in FILES}
@@ -46,6 +49,10 @@ def main():
             cursor.execute("CREATE SCHEMA IF NOT EXISTS gold")
             for name,frame in frames.items():
                 table = sql.Identifier("gold",name)
+                if name in RECREATE:
+                    # Tabela nova, derivada e versionada: permite corrigir tipos
+                    # quando um export inicial só continha nulos em uma coluna.
+                    cursor.execute(sql.SQL("DROP TABLE IF EXISTS {} CASCADE").format(table))
                 definitions = []
                 for col in frame:
                     kind = "DATE" if col == "data_referencia" else "BIGINT" if pd.api.types.is_integer_dtype(frame[col]) else "DOUBLE PRECISION" if pd.api.types.is_float_dtype(frame[col]) else "TEXT"

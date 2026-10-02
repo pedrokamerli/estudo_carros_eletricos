@@ -16,6 +16,8 @@ Também gero estatísticas descritivas por marca e tecnologia: quantidade de an�
 
 O painel ABVE também permite consultar município, marca e modelo simultaneamente. Para Bauru/SP obtive 597 linhas BEV/PHEV desde 2024, 117 modelos e reconciliação exata com o agregado municipal. Isso resolve a lacuna de modelos por cidade sem cruzamento artificial. Ainda não informa comprador ou local de recarga.
 
+Para enriquecer a leitura técnica, gerei `bauru_modelos_tecnologia_preco.csv`. O pareamento é conservador no nível de modelo: 101 dos 117 modelos encontraram especificações Inmetro e 19 encontraram preço documental por chave textual compatível. Não atribuo uma versão específica quando o painel ABVE não a identifica exatamente.
+
 Não comparei preços de versões diferentes como se fosse depreciação. Não preenchi meses ausentes, não estimei preço atual e não associei automaticamente essas versões aos emplacamentos municipais. A amostra é útil para documentar oferta; ainda não permite regressão confiável de preço versus vendas.
 
 ## Recarga: evidência local e limites

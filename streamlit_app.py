@@ -426,6 +426,12 @@ def bauru_case():
     bars(top_local,"Modelo","emplacamentos","Top modelos BEV/PHEV em Bauru · 2024–ago/2026")
     st.write("**Agora existe um cruzamento real por cidade e modelo:** consultei o painel ABVE filtrando Bauru/SP e reconciliei 597 linhas de modelo com o agregado municipal, sem diferença. Isso mostra emplacamentos, não carros ainda em circulação.")
     st.caption("A consulta ABVE não informa comprador, local de recarga ou preço pago. Os nomes e versões seguem a nomenclatura publicada no painel.")
+    enriched_path = DATA/"bauru_modelos_tecnologia_preco.csv"
+    if enriched_path.exists():
+        enriched = load(enriched_path.name)
+        st.subheader("Modelos de Bauru com ficha técnica e preço documentado")
+        st.write("Só mostro autonomia, consumo ou preço quando a nomenclatura coincide exatamente. Linhas sem correspondência ficam preservadas para revisão.")
+        details(enriched[["marca","modelo","tecnologia","emplacamentos","autonomia_mediana_ensaio_km","consumo_mediano_mj_km","preco_mediano_reais","status_inmetro","status_preco"]].head(30),"bauru_modelos_tecnologia_preco.csv")
     evidence = load("bauru_recarga_evidencias.csv")
     details(evidence[["fonte","escopo","estacoes_reportadas","dc_reportadas","potencia_kw","preco_min_reais_kwh","preco_max_reais_kwh","status_reportado","confianca","limite"]],"evidencias_recarga_bauru.csv")
     st.caption("As fontes comunitárias são evidências complementares e podem representar o mesmo local. Não somo os 14 pontos do Seguee com os registros do shopping.")

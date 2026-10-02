@@ -87,6 +87,8 @@ Comecei uma base documental de preços com seis anúncios primários BYD em 2024
 
 Também consultei o painel ABVE diretamente com município = Bauru e UF = SP. Obtive 597 linhas de modelo BEV/PHEV desde 2024, 117 modelos e reconciliação sem diferença com o agregado municipal. Agora consigo responder quais modelos aparecem em Bauru, mas não sei quem comprou ou onde recarrega.
 
+Enriqueci esses 117 modelos com autonomia e consumo de ensaio do Inmetro quando o modelo-base pôde ser correspondido com segurança, e com preço anunciado quando também havia uma correspondência de modelo. A versão nunca é inventada: o arquivo registra o nível do pareamento e mantém os casos sem correspondência.
+
 Para contextualizar a hipótese de recarga doméstica, filtrei o cadastro oficial de geração distribuída da ANEEL para Bauru: 9.934 empreendimentos fotovoltaicos e 79.600,59 kW cadastrados. Uso esse número como contexto de oferta solar municipal, nunca como prova de que os proprietários dos veículos tenham painéis ou recarreguem em casa.
 
 Na previsão, mantive o experimento original e acrescentei drift de 12 meses, Holt amortecido e tendência logarítmica de seis meses. Seleciono pela validação temporal e publico erro, viés e comparação com referências. A reanálise melhorou BEV no teste conhecido, mas não PHEV; só meses futuros podem oferecer uma avaliação prospectiva nova. O protocolo e os hashes ficam em `output/analysis/`, e as novas evidências em `data/portfolio/` e nas tabelas `gold.inteligencia_*`, `gold.estudo_bauru_*` e `gold.ml_desafio_*`.

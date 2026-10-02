@@ -59,6 +59,7 @@ PIPELINE_MODULES = [
     "src.analysis.forecast_challengers",
     "src.analysis.bauru_case",
     "src.analysis.analyze_bauru_models",
+    "src.analysis.enrich_bauru_models",
     "src.analysis.evaluate_frozen_predictions",
     "src.analysis.question_evidence",
     "src.analysis.build_executive_summary",
