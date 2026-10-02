@@ -14,6 +14,8 @@ O projeto não é apenas um dashboard: ele tem pipeline reproduzível, testes e 
 
 Também gero um [resumo executivo](docs/resumo_executivo.md) diretamente dos dados publicados. Ele traduz os achados para uma conversa de negócio sem esconder incerteza, hipóteses ou lacunas de evidência.
 
+Para apresentar o projeto em entrevistas, deixei um [guia de apresentação](docs/guia_apresentacao_portfolio.md) com pitch, ordem da narrativa e perguntas técnicas respondidas.
+
 - Automatizo o painel público de vendas ABVE: 32 meses por tecnologia, fabricante/modelo e município. Concilio as somas por mês/tecnologia antes de carregar o PostgreSQL. Incluo MHEV de forma explícita; para comparação temporal prefiro filtrar BEV/PHEV.
 - Extraio os catálogos anuais PBEV/Inmetro de 2024, 2025 e 2026, preservando modelo, versão, consumo MJ/km e autonomia de ensaio em km. Linhas corrompidas vão para quarentena e o ciclo afetado é marcado como parcial. Não confundo catálogo com vendas nem ensaio com autonomia real.
 - Audito intervalos experimentais de um mês com seleção, calibração e teste separados. Quatro das cinco regiões ficaram abaixo da cobertura nominal de 80%; não aprovo as previsões para uso operacional. Veja os resultados em `data/portfolio/ml_intervalos_cobertura.csv`.
