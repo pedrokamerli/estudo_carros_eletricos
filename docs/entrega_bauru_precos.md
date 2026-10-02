@@ -10,7 +10,7 @@ A seleção dos pares utiliza população e renda de 2022, padronizadas em escal
 
 ## Preços com rastreabilidade
 
-Ampliei os seis anúncios de 2024 para 31 observações de duas marcas. As novas fontes são a [tabela oficial BYD de julho/2025](https://www.byd.com/br/noticias-byd-brasil/byd-lanca-dolphin-mini-azul-e-song-pro-com-adas-completo), os [preços promocionais da linha ORA de agosto/2025](https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-lanca-edicao-limitada-do-ora-03-com-autonomia-de-ate-420-km-e-itens-exclusivos) e a [linha ORA publicada em abril/2025](https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-brasil-apresenta-linha-2026-do-ora-03-com-nova-identidade-visual-e-mais-tecnologia). Guardei o HTML original, hash, data da captura, versão e condições. Quando o ano/modelo não foi declarado, deixei vazio.
+Ampliei os seis anúncios de 2024 para 39 observações de três marcas. Além das fontes BYD e GWM, incluí a [tabela pública oficial da Mercedes-Benz de fevereiro/2024](https://imprensa.mercedes-benz.com.br/storage/files/90C3pndHyyP2sBABMJriW4IVeAHASelLi59pUAMO.pdf), extraindo somente as oito linhas classificadas como elétricas. Guardei o PDF original, hash, data da captura, versão e condições. Quando o ano/modelo não foi declarado, deixei vazio.
 
 O painel ABVE também permite consultar município, marca e modelo simultaneamente. Para Bauru/SP obtive 597 linhas BEV/PHEV desde 2024, 117 modelos e reconciliação exata com o agregado municipal. Isso resolve a lacuna de modelos por cidade sem cruzamento artificial. Ainda não informa comprador ou local de recarga.
 

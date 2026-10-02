@@ -455,8 +455,8 @@ def prices():
     st.write("**O preço abre uma pergunta, não encerra a análise:** versões mais acessíveis podem alcançar novos públicos, mas para medir seu efeito nas vendas preciso de um histórico comparável e controlar crédito, renda, oferta e mudanças do produto.")
     shown = chosen[["marca","modelo_versao","ano_modelo","data_anuncio","preco_anunciado_reais","condicao","url_fonte"]].rename(columns={"marca":"Marca","modelo_versao":"Modelo e versão","ano_modelo":"Ano/modelo declarado","data_anuncio":"Data do anúncio","preco_anunciado_reais":"Preço anunciado (R$)","condicao":"Condição comercial","url_fonte":"Fonte primária"})
     st.dataframe(shown,hide_index=True,width="stretch",column_config={"Fonte primária":st.column_config.LinkColumn("Fonte primária"),"Preço anunciado (R$)":st.column_config.NumberColumn(format="R$ %.0f")})
-    st.caption("BYD: lançamentos de 2024 e tabela publicada em julho/2025; GWM: ofertas da linha ORA em agosto/2025. Ano/modelo ausente fica vazio, não inferido. Estes não são preços atuais de outubro/2026.")
-    st.warning("31 anúncios não são um painel mensal do mercado. Não preencho meses sem evidência, não trato promoção como preço permanente e não uso este recorte para prever depreciação ou elasticidade. Ainda faltam preços comparáveis de outras marcas e meses.")
+    st.caption("BYD: lançamentos de 2024 e tabela publicada em julho/2025; GWM: ofertas da linha ORA em abril/agosto de 2025; Mercedes-Benz: tabela pública de fevereiro/2024. Ano/modelo ausente fica vazio, não inferido. Estes não são preços atuais de outubro/2026.")
+    st.warning("39 anúncios não são um painel mensal do mercado. Não preencho meses sem evidência, não trato promoção como preço permanente e não uso este recorte para prever depreciação ou elasticidade. Ainda faltam preços comparáveis de mais marcas e meses.")
     details(chosen,"precos_documentados.csv")
 
 

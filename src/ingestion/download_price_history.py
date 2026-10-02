@@ -5,11 +5,13 @@ from datetime import datetime, timezone
 from html import unescape
 import pandas as pd
 import requests
+import fitz
 from src.ingestion.download_price_evidence import ROOT, parse_price
 
 BYD_URL = "https://www.byd.com/br/noticias-byd-brasil/byd-lanca-dolphin-mini-azul-e-song-pro-com-adas-completo"
 GWM_URL = "https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-lanca-edicao-limitada-do-ora-03-com-autonomia-de-ate-420-km-e-itens-exclusivos"
 GWM_APRIL_URL = "https://www.gwmmotors.com.br/pt/media-center/news/2025/gwm-brasil-apresenta-linha-2026-do-ora-03-com-nova-identidade-visual-e-mais-tecnologia"
+MERCEDES_URL = "https://imprensa.mercedes-benz.com.br/storage/files/90C3pndHyyP2sBABMJriW4IVeAHASelLi59pUAMO.pdf"
 
 
 def plain(html):
@@ -51,6 +53,17 @@ def extract_gwm_april(html):
     return [dict(marca="GWM",modelo_versao="ORA 03 "+name,ano_modelo="linha 2026",preco_anunciado_reais=parse_price(match[1]),data_anuncio="2025-04-28",condicao="preco_publicado_linha_2026") for name,match in matches]
 
 
+def extract_mercedes(pdf_bytes):
+    """Extraio apenas as linhas classificadas como elétricas na tabela oficial."""
+    text = "\n".join(page.get_text() for page in fitz.open(stream=pdf_bytes, filetype="pdf"))
+    matches = re.findall(r"(?m)^(.+?)\n(20\d\d)\n([\d.]+)\nEl.trico", text)
+    if len(matches) != 8:
+        raise ValueError(f"Tabela Mercedes mudou: esperava 8 modelos elétricos, encontrei {len(matches)}.")
+    return [dict(marca="Mercedes-Benz", modelo_versao=model.strip(), ano_modelo=year,
+                 preco_anunciado_reais=parse_price(price), data_anuncio="2024-02-01",
+                 condicao="preco_publico_a_partir_tabela_fev_2024") for model, year, price in matches]
+
+
 def main():
     rows = []
     directory = ROOT/"data/bronze/precos_publicados"
@@ -67,6 +80,15 @@ def main():
             row.update(url_fonte=url,sha256_html=digest,data_captura=datetime.now(timezone.utc).isoformat(),
                 limite="Preço anunciado em data histórica, não preço atual, transação ou FIPE. Amostra não representa o mercado inteiro; não interpolada nem usada como variável mensal do ML.")
         rows.extend(parsed)
+    response = requests.get(MERCEDES_URL, timeout=40)
+    response.raise_for_status()
+    digest = hashlib.sha256(response.content).hexdigest()
+    parsed = extract_mercedes(response.content)
+    (directory/f"{digest}.pdf").write_bytes(response.content)
+    for row in parsed:
+        row.update(url_fonte=MERCEDES_URL, sha256_html=digest, data_captura=datetime.now(timezone.utc).isoformat(),
+                   limite="Preço público a partir de tabela histórica Mercedes-Benz; não é preço atual, transação, FIPE ou série mensal.")
+    rows.extend(parsed)
     old = pd.read_csv(ROOT/"data/portfolio/precos_anunciados_evidencias.csv")
     old["modelo_versao"] = old.modelo_familia+" "+old.versao_declarada
     old["ano_modelo"] = None

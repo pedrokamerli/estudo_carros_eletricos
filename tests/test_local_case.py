@@ -27,8 +27,8 @@ class LocalCaseTests(unittest.TestCase):
     def test_real_price_capture_parses_full_sources(self):
         data = Path(__file__).resolve().parents[1]/"data/portfolio"
         frame = pd.read_csv(data/"precos_historicos_documentais.csv")
-        self.assertEqual(len(frame),31)
-        self.assertEqual(set(frame.marca),{"BYD","GWM"})
+        self.assertEqual(len(frame),39)
+        self.assertEqual(set(frame.marca),{"BYD","GWM","Mercedes-Benz"})
         self.assertTrue(frame.preco_anunciado_reais.gt(0).all())
         self.assertTrue(frame.loc[frame.marca.eq("GWM"),"condicao"].str.contains("promocional").any())
         self.assertFalse(frame[["url_fonte","sha256_html","data_anuncio"]].isna().any().any())
