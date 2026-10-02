@@ -60,6 +60,7 @@ PIPELINE_MODULES = [
     "src.analysis.analyze_bauru_models",
     "src.analysis.evaluate_frozen_predictions",
     "src.analysis.question_evidence",
+    "src.analysis.build_executive_summary",
     "src.analysis.build_project_audit",
     "src.database.load_market_intelligence",
 ]
