@@ -1,0 +1,40 @@
+// Medidas opcionais para as tabelas Gold de produto e preço.
+// Se importar os CSVs, use os nomes das colunas exatamente como aparecem nas tabelas.
+
+Anuncios documentados =
+    COUNTROWS ( precos_historicos_documentais )
+
+Marcas com preço documentado =
+    DISTINCTCOUNT ( precos_historicos_documentais[marca] )
+
+Preço mediano anunciado =
+    MEDIAN ( precos_historicos_documentais[preco_anunciado_reais] )
+
+Preço mínimo anunciado =
+    MIN ( precos_historicos_documentais[preco_anunciado_reais] )
+
+Preço máximo anunciado =
+    MAX ( precos_historicos_documentais[preco_anunciado_reais] )
+
+Modelos Bauru =
+    DISTINCTCOUNT ( bauru_modelos_tecnologia_preco[modelo] )
+
+Emplacamentos Bauru =
+    SUM ( bauru_modelos_tecnologia_preco[emplacamentos] )
+
+Autonomia mediana de ensaio (km) =
+    MEDIAN ( bauru_modelos_tecnologia_preco[autonomia_mediana_ensaio_km] )
+
+Consumo mediano de ensaio (MJ/km) =
+    MEDIAN ( bauru_modelos_tecnologia_preco[consumo_mediano_mj_km] )
+
+Modelos com match Inmetro =
+    CALCULATE (
+        DISTINCTCOUNT ( bauru_modelos_tecnologia_preco[modelo] ),
+        bauru_modelos_tecnologia_preco[status_inmetro] = "modelo_correspondido_sem_versao"
+    )
+
+Cobertura técnica dos modelos =
+    DIVIDE ( [Modelos com match Inmetro], [Modelos Bauru] )
+
+// Não uso preço ou autonomia como filtro de vendas sem mostrar o status do pareamento.

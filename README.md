@@ -16,6 +16,8 @@ Também gero um [resumo executivo](docs/resumo_executivo.md) diretamente dos dad
 
 Para apresentar o projeto em entrevistas, deixei um [guia de apresentação](docs/guia_apresentacao_portfolio.md) com pitch, ordem da narrativa e perguntas técnicas respondidas.
 
+Para a etapa visual, deixei [medidas DAX de produto e preço](power_bi/medidas_produto.dax) e um [roteiro de páginas do Power BI](docs/power_bi_paginas.md).
+
 - Automatizo o painel público de vendas ABVE: 32 meses por tecnologia, fabricante/modelo e município. Concilio as somas por mês/tecnologia antes de carregar o PostgreSQL. Incluo MHEV de forma explícita; para comparação temporal prefiro filtrar BEV/PHEV.
 - Extraio os catálogos anuais PBEV/Inmetro de 2024, 2025 e 2026, preservando modelo, versão, consumo MJ/km e autonomia de ensaio em km. Linhas corrompidas vão para quarentena e o ciclo afetado é marcado como parcial. Não confundo catálogo com vendas nem ensaio com autonomia real.
 - Resumo o catálogo Inmetro em `inmetro_catalogo_marca_ano` e `inmetro_catalogo_modelo`, com quantidade de versões, autonomia e consumo medianos por ciclo. O enriquecimento técnico fica separado dos emplacamentos para evitar cruzamentos artificiais.
